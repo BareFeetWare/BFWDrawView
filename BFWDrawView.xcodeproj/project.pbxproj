@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		E21105711A7E003A0025BDA0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E21105701A7E003A0025BDA0 /* main.m */; };
-		E21105741A7E003A0025BDA0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E21105731A7E003A0025BDA0 /* AppDelegate.m */; };
-		E21105771A7E003A0025BDA0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E21105761A7E003A0025BDA0 /* ViewController.m */; };
 		E211057A1A7E003A0025BDA0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E21105781A7E003A0025BDA0 /* Main.storyboard */; };
 		E211057C1A7E003A0025BDA0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E211057B1A7E003A0025BDA0 /* Images.xcassets */; };
-		E211057F1A7E003A0025BDA0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E211057D1A7E003A0025BDA0 /* LaunchScreen.xib */; };
 		E211058B1A7E003A0025BDA0 /* BFWDrawViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E211058A1A7E003A0025BDA0 /* BFWDrawViewTests.m */; };
+		E21105A21A7E00A10025BDA0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E21105961A7E00A10025BDA0 /* AppDelegate.m */; };
+		E21105A31A7E00A10025BDA0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E21105981A7E00A10025BDA0 /* ViewController.m */; };
+		E21105A41A7E00A10025BDA0 /* BFWAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E211059B1A7E00A10025BDA0 /* BFWAnimationView.m */; };
+		E21105A51A7E00A10025BDA0 /* BFWDrawButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E211059D1A7E00A10025BDA0 /* BFWDrawButton.m */; };
+		E21105A61A7E00A10025BDA0 /* BFWDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = E211059F1A7E00A10025BDA0 /* BFWDrawView.m */; };
+		E21105A71A7E00A10025BDA0 /* UIImage+BareFeetWare.m in Sources */ = {isa = PBXBuildFile; fileRef = E21105A11A7E00A10025BDA0 /* UIImage+BareFeetWare.m */; };
+		E21105AB1A7EC4AF0025BDA0 /* SampleStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E21105AA1A7EC4AF0025BDA0 /* SampleStyleKit.m */; };
+		E21105AD1A7EC4D60025BDA0 /* SampleStyleKit.plist in Resources */ = {isa = PBXBuildFile; fileRef = E21105AC1A7EC4D60025BDA0 /* SampleStyleKit.plist */; };
+		E21105AF1A7ECB3F0025BDA0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E21105AE1A7ECB3F0025BDA0 /* LaunchScreen.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,16 +36,27 @@
 		E211056B1A7E003A0025BDA0 /* BFWDrawView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BFWDrawView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E211056F1A7E003A0025BDA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E21105701A7E003A0025BDA0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		E21105721A7E003A0025BDA0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		E21105731A7E003A0025BDA0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E21105751A7E003A0025BDA0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		E21105761A7E003A0025BDA0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		E21105791A7E003A0025BDA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E211057B1A7E003A0025BDA0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		E211057E1A7E003A0025BDA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		E21105841A7E003A0025BDA0 /* BFWDrawViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BFWDrawViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E21105891A7E003A0025BDA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E211058A1A7E003A0025BDA0 /* BFWDrawViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFWDrawViewTests.m; sourceTree = "<group>"; };
+		E21105951A7E00A10025BDA0 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		E21105961A7E00A10025BDA0 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		E21105971A7E00A10025BDA0 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		E21105981A7E00A10025BDA0 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		E211059A1A7E00A10025BDA0 /* BFWAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWAnimationView.h; sourceTree = "<group>"; };
+		E211059B1A7E00A10025BDA0 /* BFWAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWAnimationView.m; sourceTree = "<group>"; };
+		E211059C1A7E00A10025BDA0 /* BFWDrawButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawButton.h; sourceTree = "<group>"; };
+		E211059D1A7E00A10025BDA0 /* BFWDrawButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawButton.m; sourceTree = "<group>"; };
+		E211059E1A7E00A10025BDA0 /* BFWDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawView.h; sourceTree = "<group>"; };
+		E211059F1A7E00A10025BDA0 /* BFWDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawView.m; sourceTree = "<group>"; };
+		E21105A01A7E00A10025BDA0 /* UIImage+BareFeetWare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BareFeetWare.h"; sourceTree = "<group>"; };
+		E21105A11A7E00A10025BDA0 /* UIImage+BareFeetWare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BareFeetWare.m"; sourceTree = "<group>"; };
+		E21105A91A7EC4AF0025BDA0 /* SampleStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleStyleKit.h; sourceTree = "<group>"; };
+		E21105AA1A7EC4AF0025BDA0 /* SampleStyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleStyleKit.m; sourceTree = "<group>"; };
+		E21105AC1A7EC4D60025BDA0 /* SampleStyleKit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SampleStyleKit.plist; sourceTree = "<group>"; };
+		E21105AE1A7ECB3F0025BDA0 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,13 +98,12 @@
 		E211056D1A7E003A0025BDA0 /* BFWDrawView */ = {
 			isa = PBXGroup;
 			children = (
-				E21105721A7E003A0025BDA0 /* AppDelegate.h */,
-				E21105731A7E003A0025BDA0 /* AppDelegate.m */,
-				E21105751A7E003A0025BDA0 /* ViewController.h */,
-				E21105761A7E003A0025BDA0 /* ViewController.m */,
+				E21105941A7E00A10025BDA0 /* Controller */,
+				E21105991A7E00A10025BDA0 /* View */,
+				E21105A81A7E014C0025BDA0 /* StyleKit */,
 				E21105781A7E003A0025BDA0 /* Main.storyboard */,
+				E21105AE1A7ECB3F0025BDA0 /* LaunchScreen.xib */,
 				E211057B1A7E003A0025BDA0 /* Images.xcassets */,
-				E211057D1A7E003A0025BDA0 /* LaunchScreen.xib */,
 				E211056E1A7E003A0025BDA0 /* Supporting Files */,
 			);
 			path = BFWDrawView;
@@ -117,6 +133,42 @@
 				E21105891A7E003A0025BDA0 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E21105941A7E00A10025BDA0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E21105951A7E00A10025BDA0 /* AppDelegate.h */,
+				E21105961A7E00A10025BDA0 /* AppDelegate.m */,
+				E21105971A7E00A10025BDA0 /* ViewController.h */,
+				E21105981A7E00A10025BDA0 /* ViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E21105991A7E00A10025BDA0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E211059A1A7E00A10025BDA0 /* BFWAnimationView.h */,
+				E211059B1A7E00A10025BDA0 /* BFWAnimationView.m */,
+				E211059C1A7E00A10025BDA0 /* BFWDrawButton.h */,
+				E211059D1A7E00A10025BDA0 /* BFWDrawButton.m */,
+				E211059E1A7E00A10025BDA0 /* BFWDrawView.h */,
+				E211059F1A7E00A10025BDA0 /* BFWDrawView.m */,
+				E21105A01A7E00A10025BDA0 /* UIImage+BareFeetWare.h */,
+				E21105A11A7E00A10025BDA0 /* UIImage+BareFeetWare.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E21105A81A7E014C0025BDA0 /* StyleKit */ = {
+			isa = PBXGroup;
+			children = (
+				E21105A91A7EC4AF0025BDA0 /* SampleStyleKit.h */,
+				E21105AA1A7EC4AF0025BDA0 /* SampleStyleKit.m */,
+				E21105AC1A7EC4D60025BDA0 /* SampleStyleKit.plist */,
+			);
+			path = StyleKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,8 +251,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E21105AF1A7ECB3F0025BDA0 /* LaunchScreen.xib in Resources */,
 				E211057A1A7E003A0025BDA0 /* Main.storyboard in Resources */,
-				E211057F1A7E003A0025BDA0 /* LaunchScreen.xib in Resources */,
+				E21105AD1A7EC4D60025BDA0 /* SampleStyleKit.plist in Resources */,
 				E211057C1A7E003A0025BDA0 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,9 +272,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E21105771A7E003A0025BDA0 /* ViewController.m in Sources */,
-				E21105741A7E003A0025BDA0 /* AppDelegate.m in Sources */,
+				E21105A61A7E00A10025BDA0 /* BFWDrawView.m in Sources */,
+				E21105A21A7E00A10025BDA0 /* AppDelegate.m in Sources */,
+				E21105A51A7E00A10025BDA0 /* BFWDrawButton.m in Sources */,
+				E21105A71A7E00A10025BDA0 /* UIImage+BareFeetWare.m in Sources */,
 				E21105711A7E003A0025BDA0 /* main.m in Sources */,
+				E21105A31A7E00A10025BDA0 /* ViewController.m in Sources */,
+				E21105AB1A7EC4AF0025BDA0 /* SampleStyleKit.m in Sources */,
+				E21105A41A7E00A10025BDA0 /* BFWAnimationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,14 +308,6 @@
 				E21105791A7E003A0025BDA0 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		E211057D1A7E003A0025BDA0 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E211057E1A7E003A0025BDA0 /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
