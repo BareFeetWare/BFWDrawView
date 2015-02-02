@@ -116,20 +116,6 @@ static NSString * const fillColorKey = @"fillColor";
 
 #pragma mark - accessors
 
-- (NSString*)defaultStyleKit
-{
-    return @"CBATabletStyleKit";
-}
-
-- (NSString*)styleKit
-{
-    NSString *styleKit = _styleKit;
-    if (!styleKit) {
-        styleKit = [self defaultStyleKit];
-    }
-    return styleKit;
-}
-
 - (Class)styleKitClass
 {
     return NSClassFromString(self.styleKit);
