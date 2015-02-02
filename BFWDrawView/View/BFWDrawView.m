@@ -10,6 +10,25 @@
 #import "UIImage+BareFeetWare.h"
 #import <QuartzCore/QuartzCore.h>
 
+@implementation NSArray (BFWDraw)
+
+- (NSArray *)arrayByReplacingFirstObjectWithReplaceDict:(NSDictionary *)replaceDict
+{
+    NSArray *replacedArray = self;
+    for (NSString *oldPrefix in replaceDict) {
+        NSString *firstString = [[self firstObject] lowercaseString];
+        if ([firstString isEqualToString:oldPrefix]) {
+            NSString *newPrefix = replaceDict[oldPrefix];
+            NSMutableArray *wordsMutable = [replacedArray mutableCopy];
+            wordsMutable[0] = newPrefix;
+            replacedArray = [wordsMutable copy];
+        }
+    }
+    return replacedArray;
+}
+
+@end
+
 @implementation NSString (BFWDrawView)
 
 - (NSString *)capitalizedFirstString // only capitalizes first character in string
@@ -19,24 +38,35 @@
     return capitalized;
 }
 
+- (BOOL)isUppercase
+{
+    return [self isEqualToString:self.uppercaseString];
+}
+
+- (NSString *)camelToWords
+{
+    NSMutableString *wordString = [[NSMutableString alloc] init];
+    NSString *previousChar = nil;
+    for (NSUInteger charN = 0; charN < self.length; charN++) {
+        NSString *thisChar = [self substringWithRange:NSMakeRange(charN, 1)];
+        NSString *nextChar = charN + 1 < self.length ? [self substringWithRange:NSMakeRange(charN + 1, 1)] : nil;
+        if (charN > 0 && [thisChar isUppercase] && (![previousChar isUppercase] || (nextChar && ![nextChar isUppercase]))) {
+            [wordString appendString:@" "];
+        }
+        [wordString appendString:thisChar];
+        previousChar = thisChar;
+    }
+    return [NSString stringWithString:wordString];
+}
+
 - (NSString *)androidFileName
 {
-    NSString *fileName = self;
-    NSDictionary *replacePrefixDict = @{@"button" : @"btn_",
-                                        @"icon" : @"ic_",
-                                        @"CBA" : @"cba_"};
-    for (NSString *oldPrefix in replacePrefixDict) {
-        if ([fileName hasPrefix:oldPrefix]) {
-            NSString *newPrefix = replacePrefixDict[oldPrefix];
-            fileName = [newPrefix stringByAppendingString:[fileName substringFromIndex:oldPrefix.length]];
-        }
-    }
-    for (NSString* oldString in @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"]) {
-        NSString *newString = [@"_" stringByAppendingString:oldString.lowercaseString];
-        fileName = [fileName stringByReplacingOccurrencesOfString:oldString withString:newString];
-    }
-    fileName = [fileName stringByReplacingOccurrencesOfString:@"__" withString:@"_"];
-    fileName = fileName.lowercaseString;
+    NSArray *words = [[self camelToWords] componentsSeparatedByString:@" "];
+    NSDictionary *replacePrefixDict = @{@"button" : @"btn",
+                                        @"icon" : @"ic"};
+    words = [words arrayByReplacingFirstObjectWithReplaceDict:replacePrefixDict];
+    NSString *fileName = [[words componentsJoinedByString:@"_"] lowercaseString];
+    NSLog(@"%@ -> %@", self, fileName);
     return fileName;
 }
 
