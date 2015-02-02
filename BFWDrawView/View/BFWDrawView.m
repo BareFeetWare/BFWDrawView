@@ -66,7 +66,6 @@
                                         @"icon" : @"ic"};
     words = [words arrayByReplacingFirstObjectWithReplaceDict:replacePrefixDict];
     NSString *fileName = [[words componentsJoinedByString:@"_"] lowercaseString];
-    NSLog(@"%@ -> %@", self, fileName);
     return fileName;
 }
 
