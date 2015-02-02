@@ -77,7 +77,6 @@
 {
     UIColor *color;
     Class styleKitClass = NSClassFromString(styleKit);
-    NSInvocation *invocation;
     SEL selector = NSSelectorFromString(colorName);
     if ([styleKitClass respondsToSelector:selector]) {
         id foundColor = [styleKitClass performSelector:selector];
