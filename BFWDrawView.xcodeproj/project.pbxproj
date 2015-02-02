@@ -7,18 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E20357981A7F5144002BC3F4 /* BFWAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E20357861A7F5144002BC3F4 /* BFWAnimationView.m */; };
+		E20357991A7F5144002BC3F4 /* BFWDrawButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E20357881A7F5144002BC3F4 /* BFWDrawButton.m */; };
+		E203579A1A7F5144002BC3F4 /* BFWDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = E203578A1A7F5144002BC3F4 /* BFWDrawView.m */; };
+		E203579B1A7F5144002BC3F4 /* UIImage+BareFeetWare.m in Sources */ = {isa = PBXBuildFile; fileRef = E203578C1A7F5144002BC3F4 /* UIImage+BareFeetWare.m */; };
+		E203579C1A7F5144002BC3F4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E20357901A7F5144002BC3F4 /* AppDelegate.m */; };
+		E203579D1A7F5144002BC3F4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E20357921A7F5144002BC3F4 /* ViewController.m */; };
+		E203579E1A7F5144002BC3F4 /* SampleStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E20357961A7F5144002BC3F4 /* SampleStyleKit.m */; };
+		E203579F1A7F5144002BC3F4 /* SampleStyleKit.plist in Resources */ = {isa = PBXBuildFile; fileRef = E20357971A7F5144002BC3F4 /* SampleStyleKit.plist */; };
+		E20357A11A7F5187002BC3F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20357A01A7F5187002BC3F4 /* Main.storyboard */; };
 		E21105711A7E003A0025BDA0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E21105701A7E003A0025BDA0 /* main.m */; };
-		E211057A1A7E003A0025BDA0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E21105781A7E003A0025BDA0 /* Main.storyboard */; };
 		E211057C1A7E003A0025BDA0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E211057B1A7E003A0025BDA0 /* Images.xcassets */; };
 		E211058B1A7E003A0025BDA0 /* BFWDrawViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E211058A1A7E003A0025BDA0 /* BFWDrawViewTests.m */; };
-		E21105A21A7E00A10025BDA0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E21105961A7E00A10025BDA0 /* AppDelegate.m */; };
-		E21105A31A7E00A10025BDA0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E21105981A7E00A10025BDA0 /* ViewController.m */; };
-		E21105A41A7E00A10025BDA0 /* BFWAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E211059B1A7E00A10025BDA0 /* BFWAnimationView.m */; };
-		E21105A51A7E00A10025BDA0 /* BFWDrawButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E211059D1A7E00A10025BDA0 /* BFWDrawButton.m */; };
-		E21105A61A7E00A10025BDA0 /* BFWDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = E211059F1A7E00A10025BDA0 /* BFWDrawView.m */; };
-		E21105A71A7E00A10025BDA0 /* UIImage+BareFeetWare.m in Sources */ = {isa = PBXBuildFile; fileRef = E21105A11A7E00A10025BDA0 /* UIImage+BareFeetWare.m */; };
-		E21105AB1A7EC4AF0025BDA0 /* SampleStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E21105AA1A7EC4AF0025BDA0 /* SampleStyleKit.m */; };
-		E21105AD1A7EC4D60025BDA0 /* SampleStyleKit.plist in Resources */ = {isa = PBXBuildFile; fileRef = E21105AC1A7EC4D60025BDA0 /* SampleStyleKit.plist */; };
 		E21105AF1A7ECB3F0025BDA0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E21105AE1A7ECB3F0025BDA0 /* LaunchScreen.xib */; };
 /* End PBXBuildFile section */
 
@@ -33,29 +33,29 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E20357851A7F5144002BC3F4 /* BFWAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWAnimationView.h; sourceTree = "<group>"; };
+		E20357861A7F5144002BC3F4 /* BFWAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWAnimationView.m; sourceTree = "<group>"; };
+		E20357871A7F5144002BC3F4 /* BFWDrawButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawButton.h; sourceTree = "<group>"; };
+		E20357881A7F5144002BC3F4 /* BFWDrawButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawButton.m; sourceTree = "<group>"; };
+		E20357891A7F5144002BC3F4 /* BFWDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawView.h; sourceTree = "<group>"; };
+		E203578A1A7F5144002BC3F4 /* BFWDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawView.m; sourceTree = "<group>"; };
+		E203578B1A7F5144002BC3F4 /* UIImage+BareFeetWare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BareFeetWare.h"; sourceTree = "<group>"; };
+		E203578C1A7F5144002BC3F4 /* UIImage+BareFeetWare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BareFeetWare.m"; sourceTree = "<group>"; };
+		E203578F1A7F5144002BC3F4 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		E20357901A7F5144002BC3F4 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		E20357911A7F5144002BC3F4 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		E20357921A7F5144002BC3F4 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		E20357951A7F5144002BC3F4 /* SampleStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleStyleKit.h; sourceTree = "<group>"; };
+		E20357961A7F5144002BC3F4 /* SampleStyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleStyleKit.m; sourceTree = "<group>"; };
+		E20357971A7F5144002BC3F4 /* SampleStyleKit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SampleStyleKit.plist; sourceTree = "<group>"; };
+		E20357A01A7F5187002BC3F4 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E211056B1A7E003A0025BDA0 /* BFWDrawView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BFWDrawView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E211056F1A7E003A0025BDA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E21105701A7E003A0025BDA0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		E21105791A7E003A0025BDA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E211057B1A7E003A0025BDA0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E21105841A7E003A0025BDA0 /* BFWDrawViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BFWDrawViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E21105891A7E003A0025BDA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E211058A1A7E003A0025BDA0 /* BFWDrawViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFWDrawViewTests.m; sourceTree = "<group>"; };
-		E21105951A7E00A10025BDA0 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		E21105961A7E00A10025BDA0 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E21105971A7E00A10025BDA0 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		E21105981A7E00A10025BDA0 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		E211059A1A7E00A10025BDA0 /* BFWAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWAnimationView.h; sourceTree = "<group>"; };
-		E211059B1A7E00A10025BDA0 /* BFWAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWAnimationView.m; sourceTree = "<group>"; };
-		E211059C1A7E00A10025BDA0 /* BFWDrawButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawButton.h; sourceTree = "<group>"; };
-		E211059D1A7E00A10025BDA0 /* BFWDrawButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawButton.m; sourceTree = "<group>"; };
-		E211059E1A7E00A10025BDA0 /* BFWDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawView.h; sourceTree = "<group>"; };
-		E211059F1A7E00A10025BDA0 /* BFWDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawView.m; sourceTree = "<group>"; };
-		E21105A01A7E00A10025BDA0 /* UIImage+BareFeetWare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BareFeetWare.h"; sourceTree = "<group>"; };
-		E21105A11A7E00A10025BDA0 /* UIImage+BareFeetWare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BareFeetWare.m"; sourceTree = "<group>"; };
-		E21105A91A7EC4AF0025BDA0 /* SampleStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleStyleKit.h; sourceTree = "<group>"; };
-		E21105AA1A7EC4AF0025BDA0 /* SampleStyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleStyleKit.m; sourceTree = "<group>"; };
-		E21105AC1A7EC4D60025BDA0 /* SampleStyleKit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SampleStyleKit.plist; sourceTree = "<group>"; };
 		E21105AE1A7ECB3F0025BDA0 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +77,77 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E20357821A7F5144002BC3F4 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				E20357831A7F5144002BC3F4 /* Draw */,
+				E203578D1A7F5144002BC3F4 /* Sample */,
+				E20357931A7F5144002BC3F4 /* StyleKit */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		E20357831A7F5144002BC3F4 /* Draw */ = {
+			isa = PBXGroup;
+			children = (
+				E20357841A7F5144002BC3F4 /* View */,
+			);
+			path = Draw;
+			sourceTree = "<group>";
+		};
+		E20357841A7F5144002BC3F4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E20357851A7F5144002BC3F4 /* BFWAnimationView.h */,
+				E20357861A7F5144002BC3F4 /* BFWAnimationView.m */,
+				E20357871A7F5144002BC3F4 /* BFWDrawButton.h */,
+				E20357881A7F5144002BC3F4 /* BFWDrawButton.m */,
+				E20357891A7F5144002BC3F4 /* BFWDrawView.h */,
+				E203578A1A7F5144002BC3F4 /* BFWDrawView.m */,
+				E203578B1A7F5144002BC3F4 /* UIImage+BareFeetWare.h */,
+				E203578C1A7F5144002BC3F4 /* UIImage+BareFeetWare.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E203578D1A7F5144002BC3F4 /* Sample */ = {
+			isa = PBXGroup;
+			children = (
+				E203578E1A7F5144002BC3F4 /* Controller */,
+			);
+			path = Sample;
+			sourceTree = "<group>";
+		};
+		E203578E1A7F5144002BC3F4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E203578F1A7F5144002BC3F4 /* AppDelegate.h */,
+				E20357901A7F5144002BC3F4 /* AppDelegate.m */,
+				E20357A01A7F5187002BC3F4 /* Main.storyboard */,
+				E20357911A7F5144002BC3F4 /* ViewController.h */,
+				E20357921A7F5144002BC3F4 /* ViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E20357931A7F5144002BC3F4 /* StyleKit */ = {
+			isa = PBXGroup;
+			children = (
+				E20357941A7F5144002BC3F4 /* View */,
+			);
+			path = StyleKit;
+			sourceTree = "<group>";
+		};
+		E20357941A7F5144002BC3F4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E20357951A7F5144002BC3F4 /* SampleStyleKit.h */,
+				E20357961A7F5144002BC3F4 /* SampleStyleKit.m */,
+				E20357971A7F5144002BC3F4 /* SampleStyleKit.plist */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		E21105621A7E003A0025BDA0 = {
 			isa = PBXGroup;
 			children = (
@@ -98,10 +169,7 @@
 		E211056D1A7E003A0025BDA0 /* BFWDrawView */ = {
 			isa = PBXGroup;
 			children = (
-				E21105941A7E00A10025BDA0 /* Controller */,
-				E21105991A7E00A10025BDA0 /* View */,
-				E21105A81A7E014C0025BDA0 /* StyleKit */,
-				E21105781A7E003A0025BDA0 /* Main.storyboard */,
+				E20357821A7F5144002BC3F4 /* Modules */,
 				E21105AE1A7ECB3F0025BDA0 /* LaunchScreen.xib */,
 				E211057B1A7E003A0025BDA0 /* Images.xcassets */,
 				E211056E1A7E003A0025BDA0 /* Supporting Files */,
@@ -133,42 +201,6 @@
 				E21105891A7E003A0025BDA0 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		E21105941A7E00A10025BDA0 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				E21105951A7E00A10025BDA0 /* AppDelegate.h */,
-				E21105961A7E00A10025BDA0 /* AppDelegate.m */,
-				E21105971A7E00A10025BDA0 /* ViewController.h */,
-				E21105981A7E00A10025BDA0 /* ViewController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		E21105991A7E00A10025BDA0 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				E211059A1A7E00A10025BDA0 /* BFWAnimationView.h */,
-				E211059B1A7E00A10025BDA0 /* BFWAnimationView.m */,
-				E211059C1A7E00A10025BDA0 /* BFWDrawButton.h */,
-				E211059D1A7E00A10025BDA0 /* BFWDrawButton.m */,
-				E211059E1A7E00A10025BDA0 /* BFWDrawView.h */,
-				E211059F1A7E00A10025BDA0 /* BFWDrawView.m */,
-				E21105A01A7E00A10025BDA0 /* UIImage+BareFeetWare.h */,
-				E21105A11A7E00A10025BDA0 /* UIImage+BareFeetWare.m */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		E21105A81A7E014C0025BDA0 /* StyleKit */ = {
-			isa = PBXGroup;
-			children = (
-				E21105A91A7EC4AF0025BDA0 /* SampleStyleKit.h */,
-				E21105AA1A7EC4AF0025BDA0 /* SampleStyleKit.m */,
-				E21105AC1A7EC4D60025BDA0 /* SampleStyleKit.plist */,
-			);
-			path = StyleKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,9 +284,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E21105AF1A7ECB3F0025BDA0 /* LaunchScreen.xib in Resources */,
-				E211057A1A7E003A0025BDA0 /* Main.storyboard in Resources */,
-				E21105AD1A7EC4D60025BDA0 /* SampleStyleKit.plist in Resources */,
+				E203579F1A7F5144002BC3F4 /* SampleStyleKit.plist in Resources */,
 				E211057C1A7E003A0025BDA0 /* Images.xcassets in Resources */,
+				E20357A11A7F5187002BC3F4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,14 +304,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E21105A61A7E00A10025BDA0 /* BFWDrawView.m in Sources */,
-				E21105A21A7E00A10025BDA0 /* AppDelegate.m in Sources */,
-				E21105A51A7E00A10025BDA0 /* BFWDrawButton.m in Sources */,
-				E21105A71A7E00A10025BDA0 /* UIImage+BareFeetWare.m in Sources */,
+				E203579D1A7F5144002BC3F4 /* ViewController.m in Sources */,
 				E21105711A7E003A0025BDA0 /* main.m in Sources */,
-				E21105A31A7E00A10025BDA0 /* ViewController.m in Sources */,
-				E21105AB1A7EC4AF0025BDA0 /* SampleStyleKit.m in Sources */,
-				E21105A41A7E00A10025BDA0 /* BFWAnimationView.m in Sources */,
+				E20357991A7F5144002BC3F4 /* BFWDrawButton.m in Sources */,
+				E20357981A7F5144002BC3F4 /* BFWAnimationView.m in Sources */,
+				E203579C1A7F5144002BC3F4 /* AppDelegate.m in Sources */,
+				E203579E1A7F5144002BC3F4 /* SampleStyleKit.m in Sources */,
+				E203579A1A7F5144002BC3F4 /* BFWDrawView.m in Sources */,
+				E203579B1A7F5144002BC3F4 /* UIImage+BareFeetWare.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,17 +332,6 @@
 			targetProxy = E21105851A7E003A0025BDA0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		E21105781A7E003A0025BDA0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E21105791A7E003A0025BDA0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		E211058C1A7E003A0025BDA0 /* Debug */ = {
@@ -464,6 +485,7 @@
 				E21105901A7E003A0025BDA0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E21105911A7E003A0025BDA0 /* Build configuration list for PBXNativeTarget "BFWDrawViewTests" */ = {
 			isa = XCConfigurationList;
@@ -472,6 +494,7 @@
 				E21105931A7E003A0025BDA0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
