@@ -103,7 +103,7 @@ static NSString * const fillColorKey = @"fillColor";
 
 #pragma mark - init
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -228,6 +228,11 @@ static NSString * const fillColorKey = @"fillColor";
         }
     }
     return _drawInvocation;
+}
+
+- (BOOL)canDraw
+{
+    return self.drawInvocation ? YES : NO;
 }
 
 - (void)drawRect:(CGRect)rect
