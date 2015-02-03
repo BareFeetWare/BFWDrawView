@@ -236,12 +236,13 @@ static NSString * const fillColorKey = @"fillColor";
 }
 
 
-#pragma mark - colors
+#pragma mark - setters
 
 - (void)setFillColor:(UIColor *)fillColor
 {
     if (![_fillColor isEqual:fillColor]) {
         _fillColor = fillColor;
+        [_drawInvocation setArgument:&fillColor atIndex:3];
         [self setNeedsDisplay];
     }
 }
