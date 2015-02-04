@@ -252,6 +252,14 @@ static NSString * const fillColorKey = @"fillColor";
     }
 }
 
+- (void)setName:(NSString *)name
+{
+    if (![_name isEqualToString:name]) {
+        self.drawInvocation = nil;
+        _name = name;
+    }
+}
+
 #pragma mark - image rendering
 
 + (NSMutableDictionary *)imageCache
