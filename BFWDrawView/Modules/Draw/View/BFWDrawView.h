@@ -3,7 +3,8 @@
 //
 //  Created by Tom Brodhurst-Hill on 16/10/12.
 //  Copyright (c) 2012 BareFeetWare. All rights reserved.
-//  Permission granted for use by CBA.
+//  Permission granted for unlimited use, without liability.
+//  with acknowledgement to BareFeetWare.
 //
 
 #import <UIKit/UIKit.h>
