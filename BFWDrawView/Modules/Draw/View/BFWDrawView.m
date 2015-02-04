@@ -11,7 +11,7 @@
 #import "UIImage+BareFeetWare.h"
 #import <QuartzCore/QuartzCore.h>
 
-@implementation NSArray (BFWDraw)
+@implementation NSArray (BFWDrawView)
 
 - (NSArray *)arrayByReplacingFirstObjectWithReplaceDict:(NSDictionary *)replaceDict
 {
