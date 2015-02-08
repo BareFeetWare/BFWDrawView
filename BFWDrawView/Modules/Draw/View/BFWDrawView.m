@@ -208,8 +208,11 @@ static NSString * const fillColorKey = @"fillColor";
 
 - (NSInvocation *)drawInvocation
 {
+    if (!self.styleKitClass) {
+        DLog(@"**** error: Failed to get styleKitClass to draw %@", self.name);
+        return nil;
+    }
     if (!_drawInvocation) {
-        NSAssert(self.styleKitClass, @"**** error: Failed to get styleKitClass to draw %@", self.name);
         NSString *selectorString = [self drawFrameSelectorString];
         CGRect frame = self.drawFrame;
         NSValue *framePointer = [NSValue valueWithPointer:&frame];
@@ -224,7 +227,7 @@ static NSString * const fillColorKey = @"fillColor";
                 _drawInvocation = [self drawInvocationForSelectorString:selectorString argumentPointers:@[framePointer, fillColorPointer]];
             }
             else {
-                NSLog(@"**** error: No method for drawing name: %@", self.name);
+                DLog(@"**** error: No method for drawing name: %@", self.name);
             }
         }
     }
@@ -286,13 +289,19 @@ static NSString * const fillColorKey = @"fillColor";
 
 - (UIImage*)imageFromView
 {
-    NSString *key = [self cacheKey];
-    UIImage *image = [self class].imageCache[key];
-    if (!image) {
-        image = [UIImage imageOfView:self size:self.frame.size];
-        if (image) {
-            [self class].imageCache[key] = image;
+    UIImage *image = nil;
+    if (self.name && self.styleKit) {
+        NSString *key = [self cacheKey];
+        image = [self class].imageCache[key];
+        if (!image) {
+            image = [UIImage imageOfView:self size:self.frame.size];
+            if (image) {
+                [self class].imageCache[key] = image;
+            }
         }
+    }
+    else {
+        DLog(@"**** error: Missing name or styleKit");
     }
     return image;
 }
