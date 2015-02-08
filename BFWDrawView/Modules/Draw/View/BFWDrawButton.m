@@ -3,8 +3,7 @@
 //
 //  Created by Tom Brodhurst-Hill on 4/12/2014.
 //  Copyright (c) 2014 BareFeetWare. All rights reserved.
-//  Permission granted for unlimited use, without liability.
-//  with acknowledgement to BareFeetWare.
+//  Free to use at your own risk, with acknowledgement to BareFeetWare.
 //
 
 #import "BFWDrawButton.h"
@@ -62,45 +61,7 @@
 
 - (void)commonInit
 {
-    _backgroundContentMode = UIViewContentModeRedraw;
-    [self commonSubclassInit];
-}
-
-- (void)commonSubclassInit
-{
     // implement in subclasses
-}
-
-#pragma mark - KVO
-
-- (NSArray *)backgroundUpdateKeyPaths
-{
-    return @[@"contentMode"];
-}
-
-- (void)setValue:(id)value forKeyPath:(NSString *)keyPath
-{
-    [super setValue:value forKeyPath:keyPath];
-    if ([[self backgroundUpdateKeyPaths] containsObject:keyPath]) {
-        [self updateBackground];
-    }
-}
-
-#pragma mark - drawing
-
-- (void)updateBackground
-{
-    for (NSNumber *stateNumber in self.backgroundDrawNameDict) {
-        BFWDrawView *drawView = [[BFWDrawView alloc] initWithFrame:self.bounds];
-        drawView.styleKit = self.styleKit;
-        drawView.name = self.backgroundDrawNameDict[stateNumber];
-        drawView.contentMode = self.backgroundContentMode;
-        UIImage *image = drawView.image;
-        if (image) {
-            UIControlState state = [stateNumber integerValue];
-            [self setBackgroundImage:image forState:state];
-        }
-    }
 }
 
 #pragma mark - accessors
@@ -121,14 +82,6 @@
     return _backgroundDrawViewDict;
 }
 
-- (void)setBackgroundDrawNameDict:(NSMutableDictionary *)backgroundDrawNameDict
-{
-    if (_backgroundDrawNameDict != backgroundDrawNameDict) {
-        _backgroundDrawNameDict = backgroundDrawNameDict;
-        [self updateBackground];
-    }
-}
-
 #pragma mark - accessors for state
 
 - (BFWDrawView *)iconDrawViewForState:(UIControlState)state
@@ -144,13 +97,13 @@
 - (void)setIconDrawView:(BFWDrawView *)drawView forState:(UIControlState)state
 {
     [self.iconDrawViewDict setValueOrRemoveNil:drawView forKey:@(state)];
-    [self setImage:drawView.image forState:UIControlStateNormal];
+    [self setImage:drawView.image forState:state];
 }
 
 - (void)setBackgroundDrawView:(BFWDrawView *)drawView forState:(UIControlState)state
 {
     [self.backgroundDrawViewDict setValueOrRemoveNil:drawView forKey:@(state)];
-    [self setBackgroundImage:drawView.image forState:UIControlStateNormal];
+    [self setBackgroundImage:drawView.image forState:state];
 }
 
 @end

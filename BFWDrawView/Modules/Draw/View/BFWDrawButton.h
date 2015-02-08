@@ -3,8 +3,7 @@
 //
 //  Created by Tom Brodhurst-Hill on 4/12/2014.
 //  Copyright (c) 2014 BareFeetWare. All rights reserved.
-//  Permission granted for unlimited use, without liability.
-//  with acknowledgement to BareFeetWare.
+//  Free to use at your own risk, with acknowledgement to BareFeetWare.
 //
 
 #import <UIKit/UIKit.h>
@@ -13,10 +12,9 @@
 
 @interface BFWDrawButton : UIButton
 
-@property (nonatomic, copy) IBInspectable NSString *styleKit;
+#pragma mark - init
 
-@property (nonatomic, copy) NSDictionary *backgroundDrawNameDict;
-@property (nonatomic, assign) UIViewContentMode backgroundContentMode;
+- (void)commonInit; // called by initWithFrame, initWithCode, prepareForInterfaceBuilder. Optionally implement in sublcasses.
 
 #pragma mark - accessors for state
 
