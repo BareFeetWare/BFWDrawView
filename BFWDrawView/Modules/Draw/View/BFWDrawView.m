@@ -3,8 +3,7 @@
 //
 //  Created by Tom Brodhurst-Hill on 16/10/12.
 //  Copyright (c) 2012 BareFeetWare. All rights reserved.
-//  Permission granted for unlimited use, without liability.
-//  with acknowledgement to BareFeetWare.
+//  Free to use at your own risk, with acknowledgement to BareFeetWare.
 //
 
 #import "BFWDrawView.h"
