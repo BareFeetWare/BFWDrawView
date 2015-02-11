@@ -154,6 +154,15 @@ static NSString * const fillColorKey = @"fillColor";
     return _drawnSize;
 }
 
+- (CGSize)intrinsicContentSize
+{
+    CGSize size = CGSizeMake(UIViewNoIntrinsicMetric, UIViewNoIntrinsicMetric);
+    if (self.drawnSize.width && self.drawnSize.height) {
+        size = self.drawnSize;
+    }
+    return size;
+}
+
 - (CGRect)drawFrame
 {
     CGRect drawFrame = CGRectZero;
