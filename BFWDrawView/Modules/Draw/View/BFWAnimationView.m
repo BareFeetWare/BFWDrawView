@@ -9,7 +9,6 @@
 #import "BFWAnimationView.h"
 
 static CGFloat const fps = 30.0;
-static CGFloat const duration = 3.0;
 
 @interface BFWAnimationView ()
 
@@ -40,6 +39,7 @@ static CGFloat const duration = 3.0;
 
 - (void)commonInit
 {
+    _duration = 3.0; // default seconds
     _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 / fps
                                               target:self
                                             selector:@selector(tick:)
@@ -53,9 +53,16 @@ static CGFloat const duration = 3.0;
     // Get current time (in seconds)
     NSTimeInterval elapsed = [[NSDate date] timeIntervalSinceDate:self.startDate];
     
-    // Get the fractional part of the current time (ensures 0..1 interval)
-    self.animation = (elapsed / duration) - floorf(elapsed / duration);
-    [self setNeedsDisplay];
+    
+    CGFloat complete = elapsed / self.duration;
+    if (self.cycles && complete > self.cycles) {
+        [self.timer invalidate];
+    }
+    else {
+        // Get the fractional part of the current time (ensures 0..1 interval)
+        self.animation = complete - floorf(complete);
+        [self setNeedsDisplay];
+    }
 }
 
 - (NSInvocation *)drawInvocation

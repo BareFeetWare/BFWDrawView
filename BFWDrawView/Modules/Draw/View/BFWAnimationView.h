@@ -13,5 +13,7 @@ IB_DESIGNABLE
 @interface BFWAnimationView : BFWDrawView
 
 @property (nonatomic, assign) IBInspectable CGFloat animation;
+@property (nonatomic, assign) IBInspectable double duration; // default = 3 seconds
+@property (nonatomic, assign) IBInspectable NSUInteger cycles; // 0 = infinite repetitions
 
 @end
