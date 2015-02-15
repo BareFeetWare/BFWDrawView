@@ -330,18 +330,24 @@ static NSString * const fillColorKey = @"fillColor";
                                                    attributes:nil
                                                         error:nil];
     }
+    BOOL success = NO;
     UIImage *image = [self imageAtScale:scale];
-    BOOL success = [UIImagePNGRepresentation(image) writeToFile:savePath atomically:YES];
+    if (image) {
+        success = [UIImagePNGRepresentation(image) writeToFile:savePath atomically:YES];
+    }
     return success;
 }
 
 - (UIImage*)imageAtScale:(CGFloat)scale
 {
-    BOOL isOpaque = NO;
-    UIGraphicsBeginImageContextWithOptions(self.frame.size, isOpaque, scale);
-    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    UIImage *image = nil;
+    if (self.canDraw) {
+        BOOL isOpaque = NO;
+        UIGraphicsBeginImageContextWithOptions(self.frame.size, isOpaque, scale);
+        [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
     return image;
 }
 
