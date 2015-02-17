@@ -117,7 +117,8 @@ static CGFloat const fps = 30.0;
             invocation = [self drawInvocationForSelectorString:selectorString argumentPointers:@[framePointer, fillColorPointer, animationPointer]];
         }
         else {
-            NSLog(@"**** error: No animation method for name: %@", self.name);
+            DLog(@"No animation method for name: %@, so resorting to BFWDrawView implementation", self.name);
+            invocation = [super drawInvocation];
         }
     }
     return invocation;
