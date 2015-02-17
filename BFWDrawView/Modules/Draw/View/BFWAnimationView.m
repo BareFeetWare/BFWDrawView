@@ -14,10 +14,13 @@ static CGFloat const fps = 30.0;
 
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) NSDate *startDate;
+@property (nonatomic, strong) NSDate *pausedDate;
 
 @end
 
 @implementation BFWAnimationView
+
+#pragma mark - init
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -40,12 +43,37 @@ static CGFloat const fps = 30.0;
 - (void)commonInit
 {
     _duration = 3.0; // default seconds
+    _startDate = [NSDate date];
+    [self startTimer]; // TODO: move to after init
+}
+
+#pragma mark - accessors
+
+- (void)setPaused:(BOOL)paused
+{
+    if (_paused != paused) {
+        if (paused) {
+            [self.timer invalidate];
+            self.pausedDate = [NSDate date];
+        }
+        else {
+            NSTimeInterval pausedTimeInterval = [self.pausedDate timeIntervalSinceDate:self.startDate];
+            self.startDate = [self.startDate dateByAddingTimeInterval:pausedTimeInterval];
+            [self startTimer];
+        }
+        _paused = paused;
+    }
+}
+
+#pragma mark - animation
+
+- (void)startTimer
+{
     _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 / fps
                                               target:self
                                             selector:@selector(tick:)
                                             userInfo:nil
                                              repeats:YES];
-    _startDate = [NSDate date];
 }
 
 - (void)tick:(NSTimer*)timer
@@ -55,7 +83,7 @@ static CGFloat const fps = 30.0;
     
     
     CGFloat complete = elapsed / self.duration;
-    if (self.cycles && complete > self.cycles) {
+    if (self.paused || (self.cycles && complete > self.cycles)) {
         [self.timer invalidate];
     }
     else {
@@ -64,6 +92,8 @@ static CGFloat const fps = 30.0;
         [self setNeedsDisplay];
     }
 }
+
+#pragma mark - BFWDrawView
 
 - (NSInvocation *)drawInvocation
 {
