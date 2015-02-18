@@ -71,18 +71,43 @@
 
 @end
 
+@implementation NSInvocation (BFWDrawView)
+
++ (NSInvocation *)invocationForClass:(Class)class
+                            selector:(SEL)selector
+                    argumentPointers:(NSArray *)argumentPointers
+{
+    NSInvocation *invocation;
+    if ([class respondsToSelector:selector]) {
+        NSMethodSignature *methodSignature = [class methodSignatureForSelector:selector];
+        invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+        [invocation setSelector:selector];
+        [invocation setTarget:class];
+        for (NSUInteger argumentN = 0; argumentN < argumentPointers.count; argumentN++) {
+            NSValue *argumentAddress = argumentPointers[argumentN];
+            [invocation setArgument:argumentAddress.pointerValue atIndex:argumentN + 2];
+        }
+    }
+    return invocation;
+}
+
+@end
+
 @implementation UIColor (BFWDrawView)
 
-+ (UIColor *)colorWithName:(NSString *)colorName styleKit:(NSString *)styleKit
++ (UIColor *)colorWithName:(NSString *)colorName
+                  styleKit:(NSString *)styleKit
 {
     UIColor *color;
     Class styleKitClass = NSClassFromString(styleKit);
     SEL selector = NSSelectorFromString(colorName);
-    if ([styleKitClass respondsToSelector:selector]) {
-        id foundColor = [styleKitClass performSelector:selector];
-        if ([foundColor isKindOfClass:[UIColor class]]) {
-            color = (UIColor *)foundColor;
-        }
+    NSInvocation *invocation = [NSInvocation invocationForClass:styleKitClass
+                                                       selector:selector
+                                               argumentPointers:nil];
+    UIColor *foundColor;
+    [invocation getReturnValue:&foundColor];
+    if ([foundColor isKindOfClass:[UIColor class]]) {
+        color = foundColor;
     }
     return color;
 }
@@ -197,23 +222,6 @@ static NSString * const fillColorKey = @"fillColor";
     return selectorString;
 }
 
-- (NSInvocation *)drawInvocationForSelectorString:(NSString *)selectorString argumentPointers:(NSArray *)argumentPointers
-{
-    NSInvocation *invocation;
-    SEL selector = NSSelectorFromString(selectorString);
-    if ([self.styleKitClass respondsToSelector:selector]) {
-        NSMethodSignature *methodSignature = [self.styleKitClass methodSignatureForSelector:selector];
-        invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
-        [invocation setSelector:selector];
-        [invocation setTarget:self.styleKitClass];
-        for (NSUInteger argumentN = 0; argumentN < argumentPointers.count; argumentN++) {
-            NSValue *argumentAddress = argumentPointers[argumentN];
-            [invocation setArgument:argumentAddress.pointerValue atIndex:argumentN + 2];
-        }
-    }
-    return invocation;
-}
-
 - (NSInvocation *)drawInvocation
 {
     if (!self.styleKitClass) {
@@ -224,15 +232,21 @@ static NSString * const fillColorKey = @"fillColor";
         NSString *selectorString = [self drawFrameSelectorString];
         CGRect frame = self.drawFrame;
         NSValue *framePointer = [NSValue valueWithPointer:&frame];
-        if ([self.styleKitClass respondsToSelector:NSSelectorFromString(selectorString)]) {
-            _drawInvocation = [self drawInvocationForSelectorString:selectorString argumentPointers:@[framePointer]];
+        SEL selector = NSSelectorFromString(selectorString);
+        if ([self.styleKitClass respondsToSelector:selector]) {
+            _drawInvocation = [NSInvocation invocationForClass:self.styleKitClass
+                                                      selector:selector
+                                              argumentPointers:@[framePointer]];
         }
         else {
             selectorString = [selectorString stringByAppendingString:@"fillColor:"];
-            if ([self.styleKitClass respondsToSelector:NSSelectorFromString(selectorString)]) {
+            SEL selector = NSSelectorFromString(selectorString);
+            if ([self.styleKitClass respondsToSelector:selector]) {
                 UIColor *fillColor = self.fillColor;
                 NSValue *fillColorPointer = [NSValue valueWithPointer:&fillColor];
-                _drawInvocation = [self drawInvocationForSelectorString:selectorString argumentPointers:@[framePointer, fillColorPointer]];
+                _drawInvocation = [NSInvocation invocationForClass:self.styleKitClass
+                                                          selector:selector
+                                                  argumentPointers:@[framePointer, fillColorPointer]];
             }
             else {
                 DLog(@"**** error: No method for drawing name: %@", self.name);
@@ -385,7 +399,8 @@ static NSString * const fillColorKey = @"fillColor";
                 UIColor *useFillColor = fillColor;
                 NSString *fillColorString = derivedDict[fillColorKey];
                 if (fillColorString) {
-                    useFillColor = [UIColor colorWithName:fillColorString styleKit:styleKit];
+                    useFillColor = [UIColor colorWithName:fillColorString
+                                                 styleKit:styleKit];
                 }
                 if (size.width && size.height) {
                     BFWDrawView *drawView = [[BFWDrawView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];

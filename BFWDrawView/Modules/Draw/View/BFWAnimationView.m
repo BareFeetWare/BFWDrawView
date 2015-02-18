@@ -106,7 +106,9 @@ static CGFloat const fps = 30.0;
     NSString *selectorString = [NSString stringWithFormat:@"draw%@WithFrame:animation:", [self.name capitalizedFirstString]];
     SEL selector = NSSelectorFromString(selectorString);
     if ([self.styleKitClass respondsToSelector:selector]) {
-        invocation = [self drawInvocationForSelectorString:selectorString argumentPointers:@[framePointer, animationPointer]];
+        invocation = [NSInvocation invocationForClass:self.styleKitClass
+                                             selector:selector
+                                     argumentPointers:@[framePointer, animationPointer]];
     }
     else {
         NSString *selectorString = [NSString stringWithFormat:@"draw%@WithFrame:fillColor:animation:", [self.name capitalizedFirstString]];
@@ -114,7 +116,9 @@ static CGFloat const fps = 30.0;
         if ([self.styleKitClass respondsToSelector:selector]) {
             UIColor *fillColor = self.fillColor;
             NSValue *fillColorPointer = [NSValue valueWithPointer:&fillColor];
-            invocation = [self drawInvocationForSelectorString:selectorString argumentPointers:@[framePointer, fillColorPointer, animationPointer]];
+            invocation = [NSInvocation invocationForClass:self.styleKitClass
+                                                 selector:selector
+                                         argumentPointers:@[framePointer, fillColorPointer, animationPointer]];
         }
         else {
             DLog(@"No animation method for name: %@, so resorting to BFWDrawView implementation", self.name);

@@ -20,6 +20,21 @@
 
 @end
 
+@interface NSInvocation (BFWDrawView)
+
++ (NSInvocation *)invocationForClass:(Class)aClass
+                            selector:(SEL)selector
+                    argumentPointers:(NSArray *)argumentPointers;
+
+@end
+
+@interface UIColor (BFWDrawView)
+
++ (UIColor *)colorWithName:(NSString *)colorName
+                  styleKit:(NSString *)styleKit;
+
+@end
+
 IB_DESIGNABLE
 
 @interface BFWDrawView : UIView
@@ -38,8 +53,6 @@ IB_DESIGNABLE
 @property (nonatomic, readonly) NSString *drawFrameSelectorString;
 @property (nonatomic, readonly) CGRect drawFrame;
 @property (nonatomic, strong) NSInvocation *drawInvocation;
-
-- (NSInvocation *)drawInvocationForSelectorString:(NSString *)selectorString argumentPointers:(NSArray *)argumentPointers;
 
 #pragma mark - image output methods
 
