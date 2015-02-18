@@ -105,9 +105,13 @@
                                                        selector:selector
                                                argumentPointers:nil];
     UIColor *foundColor;
+    [invocation invoke];
     [invocation getReturnValue:&foundColor];
     if ([foundColor isKindOfClass:[UIColor class]]) {
         color = foundColor;
+    }
+    else {
+        DLog(@"failed to find color name: %@", colorName);
     }
     return color;
 }
@@ -224,7 +228,8 @@ static NSString * const fillColorKey = @"fillColor";
 
 - (NSInvocation *)drawInvocation
 {
-    if (!self.styleKitClass) {
+    Class class = self.styleKitClass;
+    if (!class) {
         DLog(@"**** error: Failed to get styleKitClass to draw %@", self.name);
         return nil;
     }
@@ -233,18 +238,18 @@ static NSString * const fillColorKey = @"fillColor";
         CGRect frame = self.drawFrame;
         NSValue *framePointer = [NSValue valueWithPointer:&frame];
         SEL selector = NSSelectorFromString(selectorString);
-        if ([self.styleKitClass respondsToSelector:selector]) {
-            _drawInvocation = [NSInvocation invocationForClass:self.styleKitClass
+        if ([class respondsToSelector:selector]) {
+            _drawInvocation = [NSInvocation invocationForClass:class
                                                       selector:selector
                                               argumentPointers:@[framePointer]];
         }
         else {
             selectorString = [selectorString stringByAppendingString:@"fillColor:"];
             SEL selector = NSSelectorFromString(selectorString);
-            if ([self.styleKitClass respondsToSelector:selector]) {
+            if ([class respondsToSelector:selector]) {
                 UIColor *fillColor = self.fillColor;
                 NSValue *fillColorPointer = [NSValue valueWithPointer:&fillColor];
-                _drawInvocation = [NSInvocation invocationForClass:self.styleKitClass
+                _drawInvocation = [NSInvocation invocationForClass:class
                                                           selector:selector
                                                   argumentPointers:@[framePointer, fillColorPointer]];
             }
