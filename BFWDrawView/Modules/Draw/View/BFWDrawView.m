@@ -520,21 +520,23 @@ static NSString * const fillColorKey = @"fillColor";
 {
     for (NSString *styleKit in styleKitArray) {
         NSDictionary *parameterDict = [self parameterDictForStyleKit:styleKit];
-        for (NSString *drawingName in [parameterDict[sizesKey] allKeys]) {
-            NSString *sizeString = parameterDict[sizesKey][drawingName];
-            if (sizeString) {
-                CGSize size = CGSizeFromString(sizeString);
-                if (size.width && size.height) {
-                    BFWDrawView *drawView = [[BFWDrawView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-                    drawView.name = drawingName;
-                    drawView.styleKit = styleKit;
-                    drawView.fillColor = fillColor;
-                    NSString *fileName = isAndroid ? [drawingName androidFileName] : drawingName;
-                    [drawView writeImagesToDirectory:directoryPath
-                                       pathScaleDict:pathScaleDict
-                                                size:size
-                                            fileName:fileName];
-                }
+        NSArray *drawingNames = [[NSClassFromString(styleKit) drawParameterDict] allKeys];
+        for (NSString *drawingName in drawingNames) {
+            BFWDrawView *drawView = [[BFWDrawView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
+            drawView.name = drawingName;
+            drawView.styleKit = styleKit;
+            CGSize size = drawView.drawnSize;
+            if (!size.width || !size.height) {
+                DLog(@"missing size for drawing: %@", drawingName);
+            }
+            else {
+                drawView.frame = CGRectMake(0, 0, size.width, size.height);
+                drawView.fillColor = fillColor;
+                NSString *fileName = isAndroid ? [drawingName androidFileName] : drawingName;
+                [drawView writeImagesToDirectory:directoryPath
+                                   pathScaleDict:pathScaleDict
+                                            size:size
+                                        fileName:fileName];
             }
         }
         for (NSString *drawingName in parameterDict[derivedKey]) {
