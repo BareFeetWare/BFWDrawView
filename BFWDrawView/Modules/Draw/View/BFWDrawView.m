@@ -252,6 +252,7 @@
 @end
 
 static NSString * const sizesKey = @"sizes";
+static NSString * const sizesByPrefixKey = @"sizesByPrefix";
 static NSString * const derivedKey = @"derived";
 static NSString * const baseKey = @"base";
 static NSString * const sizeKey = @"size";
@@ -306,6 +307,19 @@ static NSString * const fillColorKey = @"fillColor";
 {
     if (_drawnSize.width == 0.0 && _drawnSize.height == 0.0) {
         NSString *sizeString = self.parameterDict[sizesKey][self.name];
+        if (!sizeString) {
+            NSDictionary *sizeByPrefixDict = self.parameterDict[sizesByPrefixKey];
+            NSArray *sortedKeys = [sizeByPrefixDict.allKeys sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
+                // sort from longest to shortest so more specific (longer) match is found first
+                return obj1.length > obj2.length ? NSOrderedAscending : NSOrderedDescending;
+            }];
+            for (NSString *prefix in sortedKeys) {
+                if ([self.name hasPrefix:prefix]) {
+                    sizeString = sizeByPrefixDict[prefix];
+                    break;
+                }
+            }
+        }
         _drawnSize = sizeString ? CGSizeFromString(sizeString) : self.frame.size;
     }
     return _drawnSize;
