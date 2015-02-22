@@ -9,6 +9,7 @@
 #import "BFWDrawView.h"
 #import "UIImage+BareFeetWare.h"
 #import <QuartzCore/QuartzCore.h>
+#import <objc/objc-runtime.h>
 
 @implementation NSArray (BFWDrawView)
 
@@ -31,11 +32,18 @@
 
 @implementation NSString (BFWDrawView)
 
-- (NSString *)capitalizedFirstString // only capitalizes first character in string
+- (NSString *)uppercaseFirstCharacter // only uppercase first character in string
 {
-    NSString *capitalized = [[self substringToIndex:1] uppercaseString];
-    capitalized = [capitalized stringByAppendingString:[self substringFromIndex:1]];
-    return capitalized;
+    NSString *uppercaseFirstString = [[self substringToIndex:1] uppercaseString];
+    uppercaseFirstString = [uppercaseFirstString stringByAppendingString:[self substringFromIndex:1]];
+    return uppercaseFirstString;
+}
+
+- (NSString *)lowercaseFirstCharacter // only lowercase first character in string
+{
+    NSString *lowercaseFirstString = [[self substringToIndex:1] lowercaseString];
+    lowercaseFirstString = [lowercaseFirstString stringByAppendingString:[self substringFromIndex:1]];
+    return lowercaseFirstString;
 }
 
 - (BOOL)isUppercase
@@ -57,6 +65,28 @@
         previousChar = thisChar;
     }
     return [NSString stringWithString:wordString];
+}
+
+- (NSArray *)methodNameComponents
+{
+    static NSString * const withString = @"With";
+    
+    NSArray *parameters = nil;
+    if ([self hasSuffix:@":"]) {
+        NSArray *parameterComponents = [self componentsSeparatedByString:@":"];
+        NSArray *withComponents = [parameterComponents.firstObject componentsSeparatedByString:withString];
+        NSString *methodBaseName = [[withComponents subarrayWithRange:NSMakeRange(0, withComponents.count - 1)] componentsJoinedByString:withString];
+        NSString *firstParameter = [withComponents.lastObject lowercaseFirstCharacter];
+        NSMutableArray *mutableParameters = [[NSMutableArray alloc] init];
+        [mutableParameters addObject:methodBaseName];
+        [mutableParameters addObject:firstParameter];
+        [mutableParameters addObjectsFromArray:[parameterComponents subarrayWithRange:NSMakeRange(1, parameterComponents.count - 2)]];
+        parameters = [mutableParameters copy];
+    }
+    else {
+        parameters = @[self];
+    }
+    return parameters;
 }
 
 - (NSString *)androidFileName
@@ -89,6 +119,105 @@
         }
     }
     return invocation;
+}
+
+@end
+
+@implementation NSObject (BFWDrawView)
+
+#pragma mark - Introspection
+
++ (NSArray *)methodNames
+{
+    NSMutableArray *methodNames = [[NSMutableArray alloc] init];
+    int unsigned methodCount;
+    Method *methods = class_copyMethodList(objc_getMetaClass([NSStringFromClass([self class]) UTF8String]), &methodCount);
+    for (int i = 0; i < methodCount; i++) {
+        Method method = methods[i];
+        NSString *methodName = NSStringFromSelector(method_getName(method));
+        [methodNames addObject:methodName];
+    }
+    return [methodNames copy];
+}
+
++ (NSDictionary *)classMethodValueDict
+{
+    static NSString * const classType = @"@";
+    static NSString * const voidType = @"v";
+    
+    NSMutableDictionary *methodDict = [[NSMutableDictionary alloc] init];
+    int unsigned methodCount;
+    Method *methods = class_copyMethodList(objc_getMetaClass([NSStringFromClass([self class]) UTF8String]), &methodCount);
+    for (int i = 0; i < methodCount; i++) {
+        Method method = methods[i];
+        NSString *methodName = NSStringFromSelector(method_getName(method));
+        char *returnType = method_copyReturnType(method);
+        NSString *typeString = [NSString stringWithUTF8String:returnType];
+        free((void*)returnType);
+        id returnValue;
+        if ([typeString isEqualToString:classType]) {
+            // Danger: calling method may have side effects
+            NSInvocation *invocation = [NSInvocation invocationForClass:[self class]
+                                                               selector:NSSelectorFromString(methodName) // TODO: more direct way
+                                                       argumentPointers:nil];
+            [invocation invoke];
+            [invocation getReturnValue:&returnValue];
+        }
+        else if ([typeString isEqualToString:voidType]) {
+            returnValue= [NSNull null];
+            NSLog(@"void type = %s", returnType);
+        }
+        else {
+            DLog(@"**** unexpected returnType = %s", returnType);
+        }
+        if (returnValue) {
+            methodDict[methodName] = returnValue;
+        }
+    }
+    free(methods);
+    return [methodDict copy];
+}
+
++ (NSDictionary *)methodParametersDict
+{
+    NSMutableDictionary *methodParametersDict = [[NSMutableDictionary alloc] init];
+    NSDictionary *methodValueDict = [[self class] classMethodValueDict];
+    for (NSString *methodName in methodValueDict) {
+        NSArray *methodNameComponents = [methodName methodNameComponents];
+        methodParametersDict[methodName] = [methodNameComponents subarrayWithRange:NSMakeRange(1, methodNameComponents.count - 1)];
+    }
+    return [methodParametersDict copy];
+}
+
+#pragma mark - Introspection for StyleKit classes produced by PaintCode
+
++ (NSDictionary *)colorDict
+{
+    NSMutableDictionary *colorDict = [[NSMutableDictionary alloc] init];
+    NSDictionary *methodValueDict = [[self class] classMethodValueDict];
+    for (NSString *methodName in methodValueDict) {
+        id returnValue = methodValueDict[methodName];
+        if ([returnValue isKindOfClass:[UIColor class]]) {
+            colorDict[methodName] = returnValue;
+        }
+    }
+    return [colorDict copy];
+}
+
++ (NSDictionary *)drawParameterDict
+{
+    static NSString * const drawPrefix = @"draw";
+    NSMutableDictionary *methodParametersDict = [[NSMutableDictionary alloc] init];
+    NSDictionary *methodValueDict = [[self class] classMethodValueDict];
+    for (NSString *methodName in methodValueDict) {
+        id returnValue = methodValueDict[methodName];
+        if ([returnValue isKindOfClass:[NSNull class]] && [methodName hasPrefix:drawPrefix]) {
+            NSArray *methodNameComponents = [methodName methodNameComponents];
+            NSString *drawName = [[methodNameComponents.firstObject substringFromIndex:drawPrefix.length] lowercaseFirstCharacter];
+            methodParametersDict[drawName] = [methodNameComponents subarrayWithRange:NSMakeRange(1, methodNameComponents.count - 1)];
+        }
+    }
+    return [methodParametersDict copy];
 }
 
 @end
@@ -171,7 +300,6 @@ static NSString * const fillColorKey = @"fillColor";
     return [[self class] parameterDictForStyleKit:self.styleKit];
 }
 
-
 #pragma mark - frame calculations
 
 - (CGSize)drawnSize
@@ -222,7 +350,7 @@ static NSString * const fillColorKey = @"fillColor";
 
 - (NSString *)drawFrameSelectorString
 {
-    NSString *selectorString = [NSString stringWithFormat:@"draw%@WithFrame:", [self.name capitalizedFirstString]];
+    NSString *selectorString = [NSString stringWithFormat:@"draw%@WithFrame:", [self.name uppercaseFirstCharacter]];
     return selectorString;
 }
 
