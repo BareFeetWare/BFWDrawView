@@ -165,7 +165,6 @@
         }
         else if ([typeString isEqualToString:voidType]) {
             returnValue= [NSNull null];
-            NSLog(@"void type = %s", returnType);
         }
         else {
             DLog(@"**** unexpected returnType = %s", returnType);
