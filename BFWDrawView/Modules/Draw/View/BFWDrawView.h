@@ -35,6 +35,14 @@
 
 @end
 
+@interface NSObject (BFWDrawView)
+
+#pragma mark - Introspection for StyleKit classes produced by PaintCode
+
++ (NSString *)colorsXmlString;
+
+@end
+
 IB_DESIGNABLE
 
 @interface BFWDrawView : UIView

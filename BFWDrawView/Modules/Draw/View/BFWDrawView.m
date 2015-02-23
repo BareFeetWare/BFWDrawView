@@ -123,6 +123,54 @@
 
 @end
 
+@implementation UIColor (BFWDrawView)
+
++ (UIColor *)colorWithName:(NSString *)colorName
+                  styleKit:(NSString *)styleKit
+{
+    UIColor *color;
+    Class styleKitClass = NSClassFromString(styleKit);
+    SEL selector = NSSelectorFromString(colorName);
+    NSInvocation *invocation = [NSInvocation invocationForClass:styleKitClass
+                                                       selector:selector
+                                               argumentPointers:nil];
+    UIColor *foundColor;
+    [invocation invoke];
+    [invocation getReturnValue:&foundColor];
+    if ([foundColor isKindOfClass:[UIColor class]]) {
+        color = foundColor;
+    }
+    else {
+        DLog(@"failed to find color name: %@", colorName);
+    }
+    return color;
+}
+
+- (NSString *)hexString
+{
+    if (self == [UIColor whiteColor]) {
+        // Special case, as white doesn't fall into the RGB color space
+        return @"ffffff";
+    }
+    
+    CGFloat red;
+    CGFloat blue;
+    CGFloat green;
+    CGFloat alpha;
+    
+    [self getRed:&red green:&green blue:&blue alpha:&alpha];
+    
+    int redDec = (int)(red * 255.0);
+    int greenDec = (int)(green * 255.0);
+    int blueDec = (int)(blue * 255.0);
+    
+    NSString *hexString = [NSString stringWithFormat:@"%02x%02x%02x", (unsigned int)redDec, (unsigned int)greenDec, (unsigned int)blueDec];
+    
+    return hexString;
+}
+
+@end
+
 @implementation NSObject (BFWDrawView)
 
 #pragma mark - Introspection
@@ -203,6 +251,21 @@
     return [colorDict copy];
 }
 
++ (NSString *)colorsXmlString
+{
+    NSMutableArray *components = [[NSMutableArray alloc] init];
+    [components addObject:@"<resources>"];
+    NSDictionary *colorDict = [self colorDict];
+    for (NSString *colorName in colorDict) {
+        UIColor *color = colorDict[colorName];
+        NSString *colorHex = [color hexString];
+        NSString *colorString = [NSString stringWithFormat:@"    <color name=\"%@\">#%@</color>", colorName, colorHex];
+        [components addObject:colorString];
+    }
+    [components addObject:@"</resources>"];
+    return [components componentsJoinedByString:@"\n"];
+}
+
 + (NSDictionary *)drawParameterDict
 {
     static NSString * const drawPrefix = @"draw";
@@ -217,31 +280,6 @@
         }
     }
     return [methodParametersDict copy];
-}
-
-@end
-
-@implementation UIColor (BFWDrawView)
-
-+ (UIColor *)colorWithName:(NSString *)colorName
-                  styleKit:(NSString *)styleKit
-{
-    UIColor *color;
-    Class styleKitClass = NSClassFromString(styleKit);
-    SEL selector = NSSelectorFromString(colorName);
-    NSInvocation *invocation = [NSInvocation invocationForClass:styleKitClass
-                                                       selector:selector
-                                               argumentPointers:nil];
-    UIColor *foundColor;
-    [invocation invoke];
-    [invocation getReturnValue:&foundColor];
-    if ([foundColor isKindOfClass:[UIColor class]]) {
-        color = foundColor;
-    }
-    else {
-        DLog(@"failed to find color name: %@", colorName);
-    }
-    return color;
 }
 
 @end
