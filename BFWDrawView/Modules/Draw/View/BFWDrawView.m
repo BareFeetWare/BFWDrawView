@@ -75,13 +75,15 @@
     if ([self hasSuffix:@":"]) {
         NSArray *parameterComponents = [self componentsSeparatedByString:@":"];
         NSArray *withComponents = [parameterComponents.firstObject componentsSeparatedByString:withString];
-        NSString *methodBaseName = [[withComponents subarrayWithRange:NSMakeRange(0, withComponents.count - 1)] componentsJoinedByString:withString];
-        NSString *firstParameter = [withComponents.lastObject lowercaseFirstCharacter];
-        NSMutableArray *mutableParameters = [[NSMutableArray alloc] init];
-        [mutableParameters addObject:methodBaseName];
-        [mutableParameters addObject:firstParameter];
-        [mutableParameters addObjectsFromArray:[parameterComponents subarrayWithRange:NSMakeRange(1, parameterComponents.count - 2)]];
-        parameters = [mutableParameters copy];
+        if (withComponents.count) {
+            NSString *methodBaseName = [[withComponents subarrayWithRange:NSMakeRange(0, withComponents.count - 1)] componentsJoinedByString:withString];
+            NSString *firstParameter = [withComponents.lastObject lowercaseFirstCharacter];
+            NSMutableArray *mutableParameters = [[NSMutableArray alloc] init];
+            [mutableParameters addObject:methodBaseName];
+            [mutableParameters addObject:firstParameter];
+            [mutableParameters addObjectsFromArray:[parameterComponents subarrayWithRange:NSMakeRange(1, parameterComponents.count - 2)]];
+            parameters = [mutableParameters copy];
+        }
     }
     else {
         parameters = @[self];
@@ -185,6 +187,7 @@
         NSString *methodName = NSStringFromSelector(method_getName(method));
         [methodNames addObject:methodName];
     }
+    free(methods);
     return [methodNames copy];
 }
 
@@ -201,7 +204,6 @@
         NSString *methodName = NSStringFromSelector(method_getName(method));
         char *returnType = method_copyReturnType(method);
         NSString *typeString = [NSString stringWithUTF8String:returnType];
-        free((void*)returnType);
         id returnValue;
         if ([typeString isEqualToString:classType]) {
             // Danger: calling method may have side effects
@@ -220,6 +222,7 @@
         if (returnValue) {
             methodDict[methodName] = returnValue;
         }
+        free(returnType);
     }
     free(methods);
     return [methodDict copy];
@@ -231,7 +234,9 @@
     NSDictionary *methodValueDict = [[self class] classMethodValueDict];
     for (NSString *methodName in methodValueDict) {
         NSArray *methodNameComponents = [methodName methodNameComponents];
-        methodParametersDict[methodName] = [methodNameComponents subarrayWithRange:NSMakeRange(1, methodNameComponents.count - 1)];
+        if (methodNameComponents.count) {
+            methodParametersDict[methodName] = [methodNameComponents subarrayWithRange:NSMakeRange(1, methodNameComponents.count - 1)];
+        }
     }
     return [methodParametersDict copy];
 }
@@ -276,7 +281,9 @@
         if ([returnValue isKindOfClass:[NSNull class]] && [methodName hasPrefix:drawPrefix]) {
             NSArray *methodNameComponents = [methodName methodNameComponents];
             NSString *drawName = [[methodNameComponents.firstObject substringFromIndex:drawPrefix.length] lowercaseFirstCharacter];
-            methodParametersDict[drawName] = [methodNameComponents subarrayWithRange:NSMakeRange(1, methodNameComponents.count - 1)];
+            if (methodNameComponents.count) {
+                methodParametersDict[drawName] = [methodNameComponents subarrayWithRange:NSMakeRange(1, methodNameComponents.count - 1)];
+            }
         }
     }
     return [methodParametersDict copy];
