@@ -258,17 +258,21 @@
 
 + (NSString *)colorsXmlString
 {
-    NSMutableArray *components = [[NSMutableArray alloc] init];
-    [components addObject:@"<resources>"];
+    NSString *colorsXmlString = nil;
     NSDictionary *colorDict = [self colorDict];
-    for (NSString *colorName in colorDict) {
-        UIColor *color = colorDict[colorName];
-        NSString *colorHex = [color hexString];
-        NSString *colorString = [NSString stringWithFormat:@"    <color name=\"%@\">#%@</color>", colorName, colorHex];
-        [components addObject:colorString];
+    if (colorDict.count) {
+        NSMutableArray *components = [[NSMutableArray alloc] init];
+        [components addObject:@"<resources>"];
+        for (NSString *colorName in colorDict) {
+            UIColor *color = colorDict[colorName];
+            NSString *colorHex = [color hexString];
+            NSString *colorString = [NSString stringWithFormat:@"    <color name=\"%@\">#%@</color>", colorName, colorHex];
+            [components addObject:colorString];
+        }
+        [components addObject:@"</resources>"];
+        colorsXmlString = [components componentsJoinedByString:@"\n"];
     }
-    [components addObject:@"</resources>"];
-    return [components componentsJoinedByString:@"\n"];
+    return colorsXmlString;
 }
 
 + (NSDictionary *)drawParameterDict
