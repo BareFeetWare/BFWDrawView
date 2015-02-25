@@ -16,7 +16,8 @@
 
 @interface NSString (BFWDrawView)
 
-- (NSString *)capitalizedFirstString; // only capitalizes first character in string
+- (NSString *)uppercaseFirstCharacter; // only uppercase first character in string
+- (NSString *)lowercaseFirstCharacter; // only lowercase first character in string
 
 @end
 

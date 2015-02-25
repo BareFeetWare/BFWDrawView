@@ -103,7 +103,7 @@ static CGFloat const fps = 30.0;
     NSValue *framePointer = [NSValue valueWithPointer:&frame];
     CGFloat animation = self.animation;
     NSValue *animationPointer = [NSValue valueWithPointer:&animation];
-    NSString *selectorString = [NSString stringWithFormat:@"draw%@WithFrame:animation:", [self.name capitalizedFirstString]];
+    NSString *selectorString = [NSString stringWithFormat:@"draw%@WithFrame:animation:", [self.name uppercaseFirstCharacter]];
     SEL selector = NSSelectorFromString(selectorString);
     if ([self.styleKitClass respondsToSelector:selector]) {
         invocation = [NSInvocation invocationForClass:self.styleKitClass
@@ -111,7 +111,7 @@ static CGFloat const fps = 30.0;
                                      argumentPointers:@[framePointer, animationPointer]];
     }
     else {
-        NSString *selectorString = [NSString stringWithFormat:@"draw%@WithFrame:fillColor:animation:", [self.name capitalizedFirstString]];
+        NSString *selectorString = [NSString stringWithFormat:@"draw%@WithFrame:fillColor:animation:", [self.name uppercaseFirstCharacter]];
         SEL selector = NSSelectorFromString(selectorString);
         if ([self.styleKitClass respondsToSelector:selector]) {
             UIColor *fillColor = self.fillColor;
