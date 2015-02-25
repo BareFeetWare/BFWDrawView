@@ -9,7 +9,7 @@
 #import "BFWDrawView.h"
 #import "UIImage+BareFeetWare.h"
 #import <QuartzCore/QuartzCore.h>
-#import <objc/objc-runtime.h>
+#import <objc/runtime.h>
 
 @implementation NSArray (BFWDrawView)
 
