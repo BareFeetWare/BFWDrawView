@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "NSString+BFW.h"
 
 @interface BFWDrawViewTests : XCTestCase
 
@@ -25,16 +26,34 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
-}
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testPlist {
+    NSString *className = NSStringFromClass([self class]);
+    className = [className stringByReplacingOccurrencesOfString:@"+" withString:@"_"];
+    NSString *plistPath = [[NSBundle bundleForClass:[self class]] pathForResource:className ofType:@"plist"];
+    NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+    NSDictionary *selectorExpectationDict = plistDict[@"selectorExpectations"];
+    for (NSString *selectorName in selectorExpectationDict) {
+        NSArray *expectations = selectorExpectationDict[selectorName];
+        for (NSDictionary *expectation in expectations) {
+            id selfValue = expectation[@"self"];
+            SEL selector = NSSelectorFromString(selectorName);
+            BOOL responds = [selfValue respondsToSelector:selector];
+            XCTAssert(responds, @"%@ does not respond to %@", selfValue, selectorName);
+            if (responds) {
+                NSMethodSignature *methodSignature = [selfValue methodSignatureForSelector:selector];
+                NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+                [invocation setSelector:selector];
+                [invocation setTarget:selfValue];
+                [invocation invoke];
+                id __unsafe_unretained tempReturnValue;
+                [invocation getReturnValue:&tempReturnValue];
+                id testReturnValue = tempReturnValue;
+                id expectReturnValue = expectation[@"return"];
+                NSLog(@"testing [%@ %@] isEqualTo: %@", selfValue, selectorName, expectReturnValue);
+                XCTAssertEqualObjects(expectReturnValue, testReturnValue, @"Pass %@", selectorName);
+            }
+        }
+    }
 }
 
 @end

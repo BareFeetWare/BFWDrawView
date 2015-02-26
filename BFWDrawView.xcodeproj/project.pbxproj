@@ -19,8 +19,7 @@
 		E20ED1111A9F24B50045FA69 /* NSObject+BFWStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E20ED1101A9F24B50045FA69 /* NSObject+BFWStyleKit.m */; };
 		E20ED1171A9F24CC0045FA69 /* NSInvocation+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E20ED1141A9F24CC0045FA69 /* NSInvocation+BFW.m */; };
 		E20ED1181A9F24CC0045FA69 /* NSString+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E20ED1161A9F24CC0045FA69 /* NSString+BFW.m */; };
-		E20ED11C1A9F24F30045FA69 /* NSString+BFW_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E20ED11A1A9F24F30045FA69 /* NSString+BFW_Tests.m */; };
-		E20ED11D1A9F24F30045FA69 /* NSString_BFW_Tests.plist in Resources */ = {isa = PBXBuildFile; fileRef = E20ED11B1A9F24F30045FA69 /* NSString_BFW_Tests.plist */; };
+		E20ED11F1A9FC43D0045FA69 /* NSString_BFW_Tests.plist in Resources */ = {isa = PBXBuildFile; fileRef = E20ED11E1A9FC43D0045FA69 /* NSString_BFW_Tests.plist */; };
 		E21105711A7E003A0025BDA0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E21105701A7E003A0025BDA0 /* main.m */; };
 		E211057C1A7E003A0025BDA0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E211057B1A7E003A0025BDA0 /* Images.xcassets */; };
 		E211058B1A7E003A0025BDA0 /* BFWDrawViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E211058A1A7E003A0025BDA0 /* BFWDrawViewTests.m */; };
@@ -60,8 +59,7 @@
 		E20ED1141A9F24CC0045FA69 /* NSInvocation+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSInvocation+BFW.m"; sourceTree = "<group>"; };
 		E20ED1151A9F24CC0045FA69 /* NSString+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BFW.h"; sourceTree = "<group>"; };
 		E20ED1161A9F24CC0045FA69 /* NSString+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BFW.m"; sourceTree = "<group>"; };
-		E20ED11A1A9F24F30045FA69 /* NSString+BFW_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BFW_Tests.m"; sourceTree = "<group>"; };
-		E20ED11B1A9F24F30045FA69 /* NSString_BFW_Tests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NSString_BFW_Tests.plist; sourceTree = "<group>"; };
+		E20ED11E1A9FC43D0045FA69 /* NSString_BFW_Tests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NSString_BFW_Tests.plist; sourceTree = "<group>"; };
 		E211056B1A7E003A0025BDA0 /* BFWDrawView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BFWDrawView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E211056F1A7E003A0025BDA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E21105701A7E003A0025BDA0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -105,7 +103,6 @@
 			children = (
 				E20ED1121A9F24CC0045FA69 /* Model */,
 				E20357841A7F5144002BC3F4 /* View */,
-				E20ED1191A9F24F30045FA69 /* Test */,
 			);
 			path = Draw;
 			sourceTree = "<group>";
@@ -176,15 +173,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		E20ED1191A9F24F30045FA69 /* Test */ = {
-			isa = PBXGroup;
-			children = (
-				E20ED11A1A9F24F30045FA69 /* NSString+BFW_Tests.m */,
-				E20ED11B1A9F24F30045FA69 /* NSString_BFW_Tests.plist */,
-			);
-			path = Test;
-			sourceTree = "<group>";
-		};
 		E21105621A7E003A0025BDA0 = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				E211058A1A7E003A0025BDA0 /* BFWDrawViewTests.m */,
+				E20ED11E1A9FC43D0045FA69 /* NSString_BFW_Tests.plist */,
 				E21105881A7E003A0025BDA0 /* Supporting Files */,
 			);
 			path = BFWDrawViewTests;
@@ -323,7 +312,6 @@
 				E21105AF1A7ECB3F0025BDA0 /* LaunchScreen.xib in Resources */,
 				E203579F1A7F5144002BC3F4 /* SampleStyleKit.plist in Resources */,
 				E211057C1A7E003A0025BDA0 /* Images.xcassets in Resources */,
-				E20ED11D1A9F24F30045FA69 /* NSString_BFW_Tests.plist in Resources */,
 				E20357A11A7F5187002BC3F4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -332,6 +320,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E20ED11F1A9FC43D0045FA69 /* NSString_BFW_Tests.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,7 +334,6 @@
 				E203579D1A7F5144002BC3F4 /* ViewController.m in Sources */,
 				E21105711A7E003A0025BDA0 /* main.m in Sources */,
 				E20ED1111A9F24B50045FA69 /* NSObject+BFWStyleKit.m in Sources */,
-				E20ED11C1A9F24F30045FA69 /* NSString+BFW_Tests.m in Sources */,
 				E20357991A7F5144002BC3F4 /* BFWDrawButton.m in Sources */,
 				E20ED10E1A9F24860045FA69 /* UIImage+BFW.m in Sources */,
 				E20357981A7F5144002BC3F4 /* BFWAnimationView.m in Sources */,
