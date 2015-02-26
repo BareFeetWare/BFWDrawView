@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>selectorExpectations</key>
+	<dict>
+		<key>uppercaseFirstCharacter</key>
+		<array>
+			<dict>
+				<key>self</key>
+				<string>hello</string>
+				<key>return</key>
+				<string>Hello</string>
+			</dict>
+			<dict>
+				<key>self</key>
+				<string>ALLUPPER</string>
+				<key>return</key>
+				<string>ALLUPPER</string>
+			</dict>
+		</array>
+		<key>lowercaseFirstCharacter</key>
+		<array>
+			<dict>
+				<key>self</key>
+				<string>Hello</string>
+				<key>return</key>
+				<string>hello</string>
+			</dict>
+			<dict>
+				<key>self</key>
+				<string>alllower</string>
+				<key>return</key>
+				<string>alllower</string>
+			</dict>
+			<dict>
+				<key>self</key>
+				<string>DrawMethod</string>
+				<key>return</key>
+				<string>drawMethod</string>
+			</dict>
+		</array>
+		<key>androidFileName</key>
+		<array>
+			<dict>
+				<key>self</key>
+				<string>ButtonRoundSomething</string>
+				<key>return</key>
+				<string>btn_round_something</string>
+			</dict>
+			<dict>
+				<key>self</key>
+				<string>IconOfSomething</string>
+				<key>return</key>
+				<string>ic_of_something</string>
+			</dict>
+		</array>
+	</dict>
+</dict>
+</plist>
