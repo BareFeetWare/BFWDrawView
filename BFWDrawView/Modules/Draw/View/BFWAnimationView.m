@@ -12,9 +12,11 @@ static CGFloat const fps = 30.0;
 
 @interface BFWAnimationView ()
 
-@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, weak) NSTimer *timer; // NSRunLoop holds a strong reference
 @property (nonatomic, strong) NSDate *startDate;
 @property (nonatomic, strong) NSDate *pausedDate;
+@property (nonatomic, assign) NSTimeInterval pausedTimeInterval;
+@property (nonatomic, assign) BOOL finished;
 
 @end
 
@@ -43,57 +45,74 @@ static CGFloat const fps = 30.0;
 - (void)commonInit
 {
     _duration = 3.0; // default seconds
-    _startDate = [NSDate date];
-    [self startTimer]; // TODO: move to after init
 }
 
 #pragma mark - accessors
 
+- (BOOL)paused
+{
+    return self.pausedDate != nil;
+}
+
 - (void)setPaused:(BOOL)paused
 {
-    if (_paused != paused) {
+    if (self.paused != paused) {
         if (paused) {
-            [self.timer invalidate];
             self.pausedDate = [NSDate date];
+            [self.timer invalidate];
+            self.timer = nil;
         }
         else {
-            NSTimeInterval pausedTimeInterval = [self.pausedDate timeIntervalSinceDate:self.startDate];
-            self.startDate = [self.startDate dateByAddingTimeInterval:pausedTimeInterval];
-            [self startTimer];
+            if (self.startDate) {
+                NSTimeInterval morePausedTimeInterval = [[NSDate date] timeIntervalSinceDate:self.pausedDate];
+                self.pausedTimeInterval += morePausedTimeInterval;
+            }
+            self.pausedDate = nil;
+            [self startTimerIfNeeded];
         }
-        _paused = paused;
     }
 }
 
 #pragma mark - animation
 
-- (void)startTimer
+- (void)startTimerIfNeeded
 {
-    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 / fps
-                                              target:self
-                                            selector:@selector(tick:)
-                                            userInfo:nil
-                                             repeats:YES];
+    if (!self.timer && !self.paused && !self.finished) {
+        if (!self.startDate) {
+            self.startDate = [NSDate date];
+        }
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 / fps
+                                                      target:self
+                                                    selector:@selector(tick:)
+                                                    userInfo:nil
+                                                     repeats:YES];
+    }
 }
 
 - (void)tick:(NSTimer*)timer
 {
-    // Get current time (in seconds)
-    NSTimeInterval elapsed = [[NSDate date] timeIntervalSinceDate:self.startDate];
-    
+    NSTimeInterval elapsed = [[NSDate date] timeIntervalSinceDate:self.startDate] - self.pausedTimeInterval;
     
     CGFloat complete = elapsed / self.duration;
-    if (self.paused || (self.cycles && complete > self.cycles)) {
+    self.finished = (self.cycles && complete > self.cycles);
+    if (self.paused || self.finished) {
         [self.timer invalidate];
+        self.timer = nil;
     }
     else {
         // Get the fractional part of the current time (ensures 0..1 interval)
         self.animation = complete - floorf(complete);
-        [self setNeedsDisplay];
     }
+    [self setNeedsDisplay];
 }
 
 #pragma mark - BFWDrawView
+
+- (void)drawRect:(CGRect)rect
+{
+    [self startTimerIfNeeded];
+    [super drawRect:rect];
+}
 
 - (NSInvocation *)drawInvocation
 {
