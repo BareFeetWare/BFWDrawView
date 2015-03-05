@@ -126,6 +126,17 @@ static NSString * const fillColorKey = @"fillColor";
     return drawFrame;
 }
 
+#pragma mark - layout
+
+- (void)layoutSubviews
+{
+    // layoutSubviews is called is constraints change. Since new constraints might resize this view, we need to redraw.
+    // TODO: only redraw if size actually changed
+    self.drawInvocation = nil;
+    [self setNeedsDisplay];
+    [super layoutSubviews];
+}
+
 #pragma mark - drawing
 
 - (NSString *)drawFrameSelectorString
