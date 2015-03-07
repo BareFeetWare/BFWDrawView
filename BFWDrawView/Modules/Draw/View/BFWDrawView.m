@@ -130,7 +130,7 @@ static NSString * const fillColorKey = @"fillColor";
 
 - (void)layoutSubviews
 {
-    // layoutSubviews is called is constraints change. Since new constraints might resize this view, we need to redraw.
+    // layoutSubviews is called when constraints change. Since new constraints might resize this view, we need to redraw.
     // TODO: only redraw if size actually changed
     self.drawInvocation = nil;
     [self setNeedsDisplay];
