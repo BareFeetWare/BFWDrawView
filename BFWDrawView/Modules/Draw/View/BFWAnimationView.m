@@ -73,6 +73,12 @@ static CGFloat const fps = 30.0;
     }
 }
 
+- (void)setAnimation:(CGFloat)animation
+{
+    _animation = animation;
+    [self setNeedsDisplay];
+}
+
 #pragma mark - animation
 
 - (void)startTimerIfNeeded
@@ -98,12 +104,12 @@ static CGFloat const fps = 30.0;
     if (self.paused || self.finished) {
         [self.timer invalidate];
         self.timer = nil;
+        [self setNeedsDisplay]; // ensure it draws final frame
     }
     else {
         // Get the fractional part of the current time (ensures 0..1 interval)
         self.animation = complete - floorf(complete);
     }
-    [self setNeedsDisplay];
 }
 
 #pragma mark - BFWDrawView
