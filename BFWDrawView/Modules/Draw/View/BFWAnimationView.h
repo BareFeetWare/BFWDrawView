@@ -17,4 +17,6 @@ IB_DESIGNABLE
 @property (nonatomic, assign) IBInspectable NSUInteger cycles; // 0 = infinite repetitions
 @property (nonatomic, assign) IBInspectable BOOL paused;
 
+- (void)restart;
+
 @end

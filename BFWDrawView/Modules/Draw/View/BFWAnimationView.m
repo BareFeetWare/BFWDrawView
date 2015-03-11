@@ -81,6 +81,16 @@ static CGFloat const fps = 30.0;
 
 #pragma mark - animation
 
+- (void)restart
+{
+    self.pausedDate = nil;
+    [self.timer invalidate];
+    self.timer = nil;
+    self.finished = NO;
+    self.startDate = nil;
+    [self startTimerIfNeeded];
+}
+
 - (void)startTimerIfNeeded
 {
     if (!self.timer && !self.paused && !self.finished) {
