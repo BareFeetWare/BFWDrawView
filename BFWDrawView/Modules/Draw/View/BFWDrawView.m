@@ -106,7 +106,7 @@ static NSString * const fillColorKey = @"fillColor";
     if (self.contentMode == UIViewContentModeCenter) {
         drawFrame = CGRectMake((self.frame.size.width - self.drawnSize.width) / 2, (self.frame.size.height - self.drawnSize.height) / 2, self.drawnSize.width, self.drawnSize.height);
     }
-    else if (self.contentMode == UIViewContentModeScaleAspectFit || self.contentMode == UIViewContentModeScaleAspectFill || self.contentMode == UIViewContentModeScaleToFill) {
+    else if (self.contentMode == UIViewContentModeScaleAspectFit || self.contentMode == UIViewContentModeScaleAspectFill) {
         CGFloat widthScale = self.frame.size.width / self.drawnSize.width;
         CGFloat heightScale = self.frame.size.height / self.drawnSize.height;
         CGFloat scale;
@@ -120,8 +120,20 @@ static NSString * const fillColorKey = @"fillColor";
         drawFrame.origin.x = (self.frame.size.width - drawFrame.size.width) / 2.0;
         drawFrame.origin.y = (self.frame.size.height - drawFrame.size.height) / 2.0;
     }
+    else if (self.contentMode == UIViewContentModeScaleToFill || self.contentMode == UIViewContentModeRedraw) {
+        drawFrame = self.bounds;
+    }
     else {
         drawFrame = CGRectMake(0, 0, self.drawnSize.width, self.drawnSize.height);
+        if (self.contentMode == UIViewContentModeTopLeft) {
+            // leave as-is
+        }
+        if (self.contentMode == UIViewContentModeTopRight || self.contentMode == UIViewContentModeBottomRight || self.contentMode == UIViewContentModeRight) {
+            drawFrame.origin.x = self.bounds.size.width - self.drawnSize.width;
+        }
+        if (self.contentMode == UIViewContentModeBottomLeft || self.contentMode == UIViewContentModeBottomRight || self.contentMode == UIViewContentModeBottom) {
+            drawFrame.origin.y = self.bounds.size.height - self.drawnSize.height;
+        }
     }
     return drawFrame;
 }
