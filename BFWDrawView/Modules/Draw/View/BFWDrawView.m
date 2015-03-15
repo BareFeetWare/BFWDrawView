@@ -71,7 +71,7 @@ static NSString * const fillColorKey = @"fillColor";
 
 - (CGSize)drawnSize
 {
-    if (_drawnSize.width == 0.0 && _drawnSize.height == 0.0) {
+    if (CGSizeEqualToSize(_drawnSize, CGSizeZero)) {
         NSString *sizeString = self.parameterDict[sizesKey][self.name];
         if (!sizeString) {
             NSDictionary *sizeByPrefixDict = self.parameterDict[sizesByPrefixKey];
@@ -94,7 +94,7 @@ static NSString * const fillColorKey = @"fillColor";
 - (CGSize)intrinsicContentSize
 {
     CGSize size = CGSizeMake(UIViewNoIntrinsicMetric, UIViewNoIntrinsicMetric);
-    if (self.drawnSize.width && self.drawnSize.height) {
+    if (!CGSizeEqualToSize(self.drawnSize, CGSizeZero)) {
         size = self.drawnSize;
     }
     return size;
@@ -305,7 +305,7 @@ static NSString * const fillColorKey = @"fillColor";
             drawView.name = drawingName;
             drawView.styleKit = styleKit;
             CGSize size = drawView.drawnSize;
-            if (!size.width || !size.height) {
+            if (CGSizeEqualToSize(size, CGSizeZero)) {
                 DLog(@"missing size for drawing: %@", drawingName);
             }
             else {
@@ -329,7 +329,7 @@ static NSString * const fillColorKey = @"fillColor";
                 if (fillColorString) {
                     useFillColor = [styleKitClass colorWithName:fillColorString];
                 }
-                if (size.width && size.height) {
+                if (!CGSizeEqualToSize(size, CGSizeZero)) {
                     BFWDrawView *drawView = [[BFWDrawView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
                     drawView.name = baseName;
                     drawView.styleKit = styleKit;
