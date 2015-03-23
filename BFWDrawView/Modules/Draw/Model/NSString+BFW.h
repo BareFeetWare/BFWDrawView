@@ -11,6 +11,6 @@
 
 - (NSString *)uppercaseFirstCharacter; // only uppercase first character in string
 - (NSString *)lowercaseFirstCharacter; // only lowercase first character in string
-- (NSString *)androidFileName;
+- (NSString *)camelToWords; // convert camelCase to separate words
 
 @end

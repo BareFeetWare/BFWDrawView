@@ -143,6 +143,24 @@
 
 #pragma mark - Introspection for StyleKit classes produced by PaintCode
 
++ (NSBundle *)bundle
+{
+#if TARGET_INTERFACE_BUILDER // rendering in storyboard using IBDesignable
+    NSBundle *bundle = [NSBundle bundleForClass:self];
+#else
+    NSBundle *bundle = [NSBundle mainBundle];
+#endif
+    return bundle;
+}
+
++ (NSDictionary *)parameterDict
+{
+    NSString *styleKit = NSStringFromClass([self class]);
+    NSString *path = [[self bundle] pathForResource:styleKit ofType:@"plist"];
+    NSDictionary *parameterDict = [NSDictionary dictionaryWithContentsOfFile:path];
+    return parameterDict;
+}
+
 + (NSDictionary *)colorDict
 {
     NSMutableDictionary *colorDict = [[NSMutableDictionary alloc] init];

@@ -7,6 +7,8 @@
 //
 
 #import "BFWAnimationView.h"
+#import "NSString+BFW.h"
+#import "NSInvocation+BFW.h"
 
 static CGFloat const fps = 30.0;
 
@@ -156,7 +158,6 @@ static CGFloat const fps = 30.0;
                                          argumentPointers:@[framePointer, fillColorPointer, animationPointer]];
         }
         else {
-            DLog(@"No animation method for name: %@, so resorting to BFWDrawView implementation", self.name);
             invocation = [super drawInvocation];
         }
     }

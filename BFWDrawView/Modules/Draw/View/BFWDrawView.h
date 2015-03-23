@@ -14,35 +14,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NSString (BFWDrawView)
-
-- (NSString *)uppercaseFirstCharacter; // only uppercase first character in string
-- (NSString *)lowercaseFirstCharacter; // only lowercase first character in string
-
-@end
-
-@interface NSInvocation (BFWDrawView)
-
-+ (NSInvocation *)invocationForClass:(Class)aClass
-                            selector:(SEL)selector
-                    argumentPointers:(NSArray *)argumentPointers;
-
-@end
-
-@interface UIColor (BFWDrawView)
-
-+ (UIColor *)colorWithName:(NSString *)colorName
-                  styleKit:(NSString *)styleKit;
-
-@end
-
-@interface NSObject (BFWDrawView)
-
-#pragma mark - Introspection for StyleKit classes produced by PaintCode
-
-+ (NSString *)colorsXmlString;
-
-@end
+extern NSString * const sizesKey;
+extern NSString * const sizesByPrefixKey;
 
 IB_DESIGNABLE
 
@@ -65,10 +38,7 @@ IB_DESIGNABLE
 
 #pragma mark - image output methods
 
-+ (void)writeAllImagesToDirectory:(NSString *)directoryPath
-                        styleKits:(NSArray *)styleKitArray
-                    pathScaleDict:(NSDictionary *)pathScaleDict
-                        fillColor:(UIColor *)fillColor
-                          android:(BOOL)isAndroid;
+- (BOOL)writeImageAtScale:(CGFloat)scale
+                   toFile:(NSString*)savePath;
 
 @end

@@ -24,6 +24,7 @@
 		E211057C1A7E003A0025BDA0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E211057B1A7E003A0025BDA0 /* Images.xcassets */; };
 		E211058B1A7E003A0025BDA0 /* BFWDrawViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E211058A1A7E003A0025BDA0 /* BFWDrawViewTests.m */; };
 		E21105AF1A7ECB3F0025BDA0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E21105AE1A7ECB3F0025BDA0 /* LaunchScreen.xib */; };
+		E2EBB3211ABFDE2E00C3787F /* BFWDrawExport.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EBB3201ABFDE2E00C3787F /* BFWDrawExport.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,8 @@
 		E21105891A7E003A0025BDA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E211058A1A7E003A0025BDA0 /* BFWDrawViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFWDrawViewTests.m; sourceTree = "<group>"; };
 		E21105AE1A7ECB3F0025BDA0 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		E2EBB31F1ABFDE2E00C3787F /* BFWDrawExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawExport.h; sourceTree = "<group>"; };
+		E2EBB3201ABFDE2E00C3787F /* BFWDrawExport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawExport.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +119,8 @@
 				E20357881A7F5144002BC3F4 /* BFWDrawButton.m */,
 				E20357891A7F5144002BC3F4 /* BFWDrawView.h */,
 				E203578A1A7F5144002BC3F4 /* BFWDrawView.m */,
+				E2EBB31F1ABFDE2E00C3787F /* BFWDrawExport.h */,
+				E2EBB3201ABFDE2E00C3787F /* BFWDrawExport.m */,
 				E20ED10C1A9F24860045FA69 /* UIImage+BFW.h */,
 				E20ED10D1A9F24860045FA69 /* UIImage+BFW.m */,
 				E20ED10F1A9F24B50045FA69 /* NSObject+BFWStyleKit.h */,
@@ -336,6 +341,7 @@
 				E20ED1111A9F24B50045FA69 /* NSObject+BFWStyleKit.m in Sources */,
 				E20357991A7F5144002BC3F4 /* BFWDrawButton.m in Sources */,
 				E20ED10E1A9F24860045FA69 /* UIImage+BFW.m in Sources */,
+				E2EBB3211ABFDE2E00C3787F /* BFWDrawExport.m in Sources */,
 				E20357981A7F5144002BC3F4 /* BFWAnimationView.m in Sources */,
 				E203579C1A7F5144002BC3F4 /* AppDelegate.m in Sources */,
 				E203579E1A7F5144002BC3F4 /* SampleStyleKit.m in Sources */,

@@ -7,24 +7,6 @@
 
 #import "NSString+BFW.h"
 
-@implementation NSArray (BFW)
-
-- (NSArray *)arrayByReplacingFirstObjectWithReplaceDict:(NSDictionary *)replaceDict
-{
-    NSArray *replacedArray = self;
-    for (NSString *oldPrefix in replaceDict) {
-        NSString *firstString = [[self firstObject] lowercaseString];
-        if ([firstString isEqualToString:oldPrefix]) {
-            NSString *newPrefix = replaceDict[oldPrefix];
-            NSMutableArray *wordsMutable = [replacedArray mutableCopy];
-            wordsMutable[0] = newPrefix;
-            replacedArray = [wordsMutable copy];
-        }
-    }
-    return replacedArray;
-}
-
-@end
 
 @implementation NSString (BFW)
 
@@ -61,16 +43,6 @@
         previousChar = thisChar;
     }
     return [NSString stringWithString:wordString];
-}
-
-- (NSString *)androidFileName
-{
-    NSArray *words = [[self camelToWords] componentsSeparatedByString:@" "];
-    NSDictionary *replacePrefixDict = @{@"button" : @"btn",
-                                        @"icon" : @"ic"};
-    words = [words arrayByReplacingFirstObjectWithReplaceDict:replacePrefixDict];
-    NSString *fileName = [[words componentsJoinedByString:@"_"] lowercaseString];
-    return fileName;
 }
 
 @end

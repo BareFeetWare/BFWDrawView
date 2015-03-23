@@ -17,6 +17,7 @@
 
 #pragma mark - Introspection for StyleKit classes produced by PaintCode
 
++ (NSDictionary *)parameterDict;
 + (NSDictionary *)drawParameterDict;
 + (NSString *)colorsXmlString;
 + (UIColor *)colorWithName:(NSString *)colorName;

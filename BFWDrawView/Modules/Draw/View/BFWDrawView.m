@@ -17,12 +17,8 @@
 
 @end
 
-static NSString * const sizesKey = @"sizes";
-static NSString * const sizesByPrefixKey = @"sizesByPrefix";
-static NSString * const derivedKey = @"derived";
-static NSString * const baseKey = @"base";
-static NSString * const sizeKey = @"size";
-static NSString * const fillColorKey = @"fillColor";
+NSString * const sizesKey = @"sizes";
+NSString * const sizesByPrefixKey = @"sizesByPrefix";
 
 @implementation BFWDrawView
 
@@ -45,36 +41,15 @@ static NSString * const fillColorKey = @"fillColor";
     return NSClassFromString(self.styleKit);
 }
 
-+ (NSBundle *)bundle
-{
-#if TARGET_INTERFACE_BUILDER // rendering in storyboard using IBDesignable
-    NSBundle *bundle = [NSBundle bundleForClass:self];
-#else
-    NSBundle *bundle = [NSBundle mainBundle];
-#endif
-    return bundle;
-}
-
-+ (NSDictionary *)parameterDictForStyleKit:(NSString *)styleKit
-{
-    NSString *path = [[self bundle] pathForResource:styleKit ofType:@"plist"];
-    NSDictionary *parameterDict = [NSDictionary dictionaryWithContentsOfFile:path];
-    return parameterDict;
-}
-
-- (NSDictionary *)parameterDict
-{
-    return [[self class] parameterDictForStyleKit:self.styleKit];
-}
-
 #pragma mark - frame calculations
 
 - (CGSize)drawnSize
 {
     if (CGSizeEqualToSize(_drawnSize, CGSizeZero)) {
-        NSString *sizeString = self.parameterDict[sizesKey][self.name];
+        NSDictionary *parameterDict = [self.styleKitClass parameterDict];
+        NSString *sizeString = parameterDict[sizesKey][self.name];
         if (!sizeString) {
-            NSDictionary *sizeByPrefixDict = self.parameterDict[sizesByPrefixKey];
+            NSDictionary *sizeByPrefixDict = parameterDict[sizesByPrefixKey];
             NSArray *sortedKeys = [sizeByPrefixDict.allKeys sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
                 // sort from longest to shortest so more specific (longer) match is found first
                 return obj1.length > obj2.length ? NSOrderedAscending : NSOrderedDescending;
@@ -272,7 +247,8 @@ static NSString * const fillColorKey = @"fillColor";
 
 #pragma mark - image output methods
 
-- (BOOL)writeImageAtScale:(CGFloat)scale toFile:(NSString*)savePath
+- (BOOL)writeImageAtScale:(CGFloat)scale
+                   toFile:(NSString*)savePath
 {
     NSString *directoryPath = [savePath stringByDeletingLastPathComponent];
     if (![[NSFileManager defaultManager] fileExistsAtPath:directoryPath]) {
@@ -300,86 +276,6 @@ static NSString * const fillColorKey = @"fillColor";
         UIGraphicsEndImageContext();
     }
     return image;
-}
-
-+ (void)writeAllImagesToDirectory:(NSString *)directoryPath
-                        styleKits:(NSArray *)styleKitArray
-                    pathScaleDict:(NSDictionary *)pathScaleDict
-                        fillColor:(UIColor *)fillColor
-                          android:(BOOL)isAndroid
-{
-    for (NSString *styleKit in styleKitArray) {
-        NSDictionary *parameterDict = [self parameterDictForStyleKit:styleKit];
-        Class styleKitClass = NSClassFromString(styleKit);
-        NSArray *drawingNames = [[styleKitClass drawParameterDict] allKeys];
-        for (NSString *drawingName in drawingNames) {
-            BFWDrawView *drawView = [[BFWDrawView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
-            drawView.name = drawingName;
-            drawView.styleKit = styleKit;
-            CGSize size = drawView.drawnSize;
-            if (CGSizeEqualToSize(size, CGSizeZero)) {
-                DLog(@"missing size for drawing: %@", drawingName);
-            }
-            else {
-                drawView.frame = CGRectMake(0, 0, size.width, size.height);
-                drawView.fillColor = fillColor;
-                NSString *fileName = isAndroid ? [drawingName androidFileName] : drawingName;
-                [drawView writeImagesToDirectory:directoryPath
-                                   pathScaleDict:pathScaleDict
-                                            size:size
-                                        fileName:fileName];
-            }
-        }
-        for (NSString *drawingName in parameterDict[derivedKey]) {
-            NSDictionary *derivedDict = parameterDict[derivedKey][drawingName];
-            NSString *baseName = derivedDict[baseKey];
-            NSString *sizeString = derivedDict[sizeKey] ? derivedDict[sizeKey] : parameterDict[sizesKey][baseName];
-            if (sizeString) {
-                CGSize size = CGSizeFromString(sizeString);
-                UIColor *useFillColor = fillColor;
-                NSString *fillColorString = derivedDict[fillColorKey];
-                if (fillColorString) {
-                    useFillColor = [styleKitClass colorWithName:fillColorString];
-                }
-                if (!CGSizeEqualToSize(size, CGSizeZero)) {
-                    BFWDrawView *drawView = [[BFWDrawView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-                    drawView.name = baseName;
-                    drawView.styleKit = styleKit;
-                    drawView.fillColor = useFillColor;
-                    drawView.contentMode = UIViewContentModeScaleAspectFit;
-                    NSString *fileName = isAndroid ? [drawingName androidFileName] : drawingName;
-                    [drawView writeImagesToDirectory:directoryPath
-                                       pathScaleDict:pathScaleDict
-                                                size:size
-                                            fileName:fileName];
-                }
-            }
-        }
-    }
-}
-
-- (void)writeImagesToDirectory:(NSString *)directoryPath
-                 pathScaleDict:(NSDictionary *)pathScaleDict
-                          size:(CGSize)size
-                      fileName:(NSString *)fileName
-{
-    for (NSString *path in pathScaleDict) {
-        NSNumber *scaleNumber = pathScaleDict[path];
-        CGFloat scale = [scaleNumber floatValue];
-        NSString *relativePath;
-        if ([path containsString:@"%@"]) {
-            relativePath = [NSString stringWithFormat:path, fileName];
-        }
-        else {
-            relativePath = [path stringByAppendingPathComponent:fileName];
-        }
-        NSString *filePath = [directoryPath stringByAppendingPathComponent:relativePath];
-        filePath = [filePath stringByAppendingPathExtension:@"png"];
-        BOOL success = [self writeImageAtScale:scale toFile:filePath];
-        if (!success) {
-            NSLog(@"failed to write %@", relativePath);
-        }
-    }
 }
 
 @end
