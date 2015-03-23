@@ -7,7 +7,7 @@
 
 #import "BFWDrawExport.h"
 #import "NSObject+BFWStyleKit.h"
-#import "BFWDrawView.h"
+#import "BFWAnimationView.h"
 #import "NSString+BFW.h"
 
 @implementation NSArray (BFW)
@@ -47,6 +47,7 @@ static NSString * const baseKey = @"base";
 static NSString * const sizeKey = @"size";
 static NSString * const fillColorKey = @"fillColor";
 static NSString * const derivedKey = @"derived";
+static NSString * const animationKey = @"animation";
 
 @implementation BFWDrawExport
 
@@ -61,7 +62,7 @@ static NSString * const derivedKey = @"derived";
         NSDictionary *parameterDict = [styleKitClass parameterDict];
         NSArray *drawingNames = [[styleKitClass drawParameterDict] allKeys];
         for (NSString *drawingName in drawingNames) {
-            BFWDrawView *drawView = [[BFWDrawView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
+            BFWAnimationView *drawView = [[BFWAnimationView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
             drawView.name = drawingName;
             drawView.styleKit = styleKit;
             CGSize size = drawView.drawnSize;
@@ -91,10 +92,14 @@ static NSString * const derivedKey = @"derived";
                     useFillColor = [styleKitClass colorWithName:fillColorString];
                 }
                 if (!CGSizeEqualToSize(size, CGSizeZero)) {
-                    BFWDrawView *drawView = [[BFWDrawView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+                    BFWAnimationView *drawView = [[BFWAnimationView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
                     drawView.name = baseName;
                     drawView.styleKit = styleKit;
                     drawView.fillColor = useFillColor;
+                    NSNumber *animationNumber = derivedDict[animationKey];
+                    if (animationNumber) {
+                        drawView.animation = animationNumber.doubleValue;
+                    }
                     drawView.contentMode = UIViewContentModeScaleAspectFit;
                     NSString *fileName = isAndroid ? [drawingName androidFileName] : drawingName;
                     [self writeImagesFromDrawView:drawView
