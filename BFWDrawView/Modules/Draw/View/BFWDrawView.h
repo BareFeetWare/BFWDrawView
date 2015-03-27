@@ -6,12 +6,6 @@
 //  Free to use at your own risk, with acknowledgement to BareFeetWare.
 //
 
-#ifdef DEBUG
-#    define DLog(...) NSLog(__VA_ARGS__)
-#else
-#    define DLog(...) /* Disable Debug logging for release builds */
-#endif
-
 #import <UIKit/UIKit.h>
 
 extern NSString * const sizesKey;
