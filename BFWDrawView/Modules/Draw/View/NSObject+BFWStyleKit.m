@@ -50,7 +50,7 @@
 {
     if (self == [UIColor whiteColor]) {
         // Special case, as white doesn't fall into the RGB color space
-        return @"ffffff";
+        return @"ffffffff";
     }
     
     CGFloat red;
@@ -60,11 +60,12 @@
     
     [self getRed:&red green:&green blue:&blue alpha:&alpha];
     
-    int redDec = (int)(red * 255.0);
-    int greenDec = (int)(green * 255.0);
-    int blueDec = (int)(blue * 255.0);
+    NSUInteger redInt = red * 255.0;
+    NSUInteger greenInt = green * 255.0;
+    NSUInteger blueInt = blue * 255.0;
+    NSUInteger alphaInt = alpha * 255.0;
     
-    NSString *hexString = [NSString stringWithFormat:@"%02x%02x%02x", (unsigned int)redDec, (unsigned int)greenDec, (unsigned int)blueDec];
+    NSString *hexString = [NSString stringWithFormat:@"%02lx%02lx%02lx%02lx", (unsigned long)alphaInt, (unsigned long)redInt, (unsigned long)greenInt, (unsigned long)blueInt];
     
     return hexString;
 }
