@@ -14,13 +14,15 @@
 
 #pragma mark - init
 
-- (void)commonInit; // called by initWithFrame, initWithCode, prepareForInterfaceBuilder. Optionally implement in sublcasses.
+- (void)commonInit; // called by initWithFrame, initWithCode, prepareForInterfaceBuilder. Optionally implement in subclasses.
 
 #pragma mark - accessors for state
 
 - (BFWDrawView *)iconDrawViewForState:(UIControlState)state;
 - (BFWDrawView *)backgroundDrawViewForState:(UIControlState)state;
-- (void)setIconDrawView:(BFWDrawView *)drawView forState:(UIControlState)state;
-- (void)setBackgroundDrawView:(BFWDrawView *)drawView forState:(UIControlState)state;
+- (void)setIconDrawView:(BFWDrawView *)drawView
+               forState:(UIControlState)state;
+- (void)setBackgroundDrawView:(BFWDrawView *)drawView
+                     forState:(UIControlState)state;
 
 @end

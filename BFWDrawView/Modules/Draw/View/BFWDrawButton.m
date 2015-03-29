@@ -25,8 +25,8 @@
 
 @interface BFWDrawButton ()
 
-@property (nonatomic, strong) NSMutableDictionary *iconDrawViewDict;
-@property (nonatomic, strong) NSMutableDictionary *backgroundDrawViewDict;
+@property (nonatomic, strong) NSMutableDictionary *iconDrawViewForStateDict;
+@property (nonatomic, strong) NSMutableDictionary *backgroundDrawViewForStateDict;
 
 @end
 
@@ -38,7 +38,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        if (frame.size.width > 0.0 && frame.size.height > 0.0) {
+        if (!CGSizeEqualToSize(frame.size, CGSizeZero)) {
             [self commonInit];
         }
     }
@@ -61,49 +61,52 @@
 
 - (void)commonInit
 {
-    // implement in subclasses
+    // implement in subclasses if required
 }
 
 #pragma mark - accessors
 
-- (NSMutableDictionary *)iconDrawViewDict
+- (NSMutableDictionary *)iconDrawViewForStateDict
 {
-    if (!_iconDrawViewDict) {
-        _iconDrawViewDict = [[NSMutableDictionary alloc] init];
+    if (!_iconDrawViewForStateDict) {
+        _iconDrawViewForStateDict = [[NSMutableDictionary alloc] init];
     }
-    return _iconDrawViewDict;
+    return _iconDrawViewForStateDict;
 }
 
-- (NSMutableDictionary *)backgroundDrawViewDict
+- (NSMutableDictionary *)backgroundDrawViewForStateDict
 {
-    if (!_backgroundDrawViewDict) {
-        _backgroundDrawViewDict = [[NSMutableDictionary alloc] init];
+    if (!_backgroundDrawViewForStateDict) {
+        _backgroundDrawViewForStateDict = [[NSMutableDictionary alloc] init];
     }
-    return _backgroundDrawViewDict;
+    return _backgroundDrawViewForStateDict;
 }
 
 #pragma mark - accessors for state
 
 - (BFWDrawView *)iconDrawViewForState:(UIControlState)state
 {
-    return self.iconDrawViewDict[@(state)];
+    return self.iconDrawViewForStateDict[@(state)];
 }
 
 - (BFWDrawView *)backgroundDrawViewForState:(UIControlState)state
 {
-    return self.backgroundDrawViewDict[@(state)];
+    return self.backgroundDrawViewForStateDict[@(state)];
 }
 
-- (void)setIconDrawView:(BFWDrawView *)drawView forState:(UIControlState)state
+- (void)setIconDrawView:(BFWDrawView *)drawView
+               forState:(UIControlState)state
 {
-    [self.iconDrawViewDict setValueOrRemoveNil:drawView forKey:@(state)];
+    [self.iconDrawViewForStateDict setValueOrRemoveNil:drawView
+                                             forKey:@(state)];
     [self setImage:drawView.image forState:state];
 }
 
-- (void)setBackgroundDrawView:(BFWDrawView *)drawView forState:(UIControlState)state
+- (void)setBackgroundDrawView:(BFWDrawView *)drawView
+                     forState:(UIControlState)state
 {
-    [self.backgroundDrawViewDict setValueOrRemoveNil:drawView forKey:@(state)];
-    [self setBackgroundImage:drawView.image forState:state];
+    [self.backgroundDrawViewForStateDict setValueOrRemoveNil:drawView
+                                                   forKey:@(state)];
 }
 
 @end
