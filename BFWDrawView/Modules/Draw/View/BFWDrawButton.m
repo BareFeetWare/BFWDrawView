@@ -109,4 +109,35 @@
                                                    forKey:@(state)];
 }
 
+- (void)makeBackgroundDrawViewsFromStateNameDict:(NSDictionary *)stateNameDict
+                                        styleKit:(NSString *)styleKit
+{
+    self.backgroundDrawViewForStateDict = nil;
+    for (NSNumber *stateNumber in stateNameDict) {
+        BFWDrawView *background = [[BFWDrawView alloc] initWithFrame:self.bounds];
+        background.name = stateNameDict[stateNumber];
+        background.styleKit = styleKit;
+        background.contentMode = UIViewContentModeRedraw;
+        [self setBackgroundDrawView:background
+                           forState:stateNumber.integerValue];
+    }
+}
+
+#pragma mark - UIView
+
+- (void)updateBackgrounds
+{
+    for (NSNumber *stateNumber in self.backgroundDrawViewForStateDict) {
+        BFWDrawView *background = self.backgroundDrawViewForStateDict[stateNumber];
+        background.frame = self.bounds;
+        [self setBackgroundImage:background.image forState:stateNumber.integerValue];
+    }
+}
+
+- (void)layoutSubviews
+{
+    [self updateBackgrounds];
+    [super layoutSubviews];
+}
+
 @end

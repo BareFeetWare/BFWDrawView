@@ -24,5 +24,9 @@
                forState:(UIControlState)state;
 - (void)setBackgroundDrawView:(BFWDrawView *)drawView
                      forState:(UIControlState)state;
+// Convenience method, assuming backgrounds all use the same styleKit and should fill frame (contentMode = redraw)
+- (void)makeBackgroundDrawViewsFromStateNameDict:(NSDictionary *)stateNameDict
+                                       styleKit:(NSString *)styleKit
+;
 
 @end
