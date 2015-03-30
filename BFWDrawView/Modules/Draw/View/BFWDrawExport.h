@@ -17,4 +17,11 @@
                         fillColor:(UIColor *)fillColor
                           android:(BOOL)isAndroid;
 
++ (void)exportForAndroidToDirectory:(NSString *)directory
+                          styleKits:(NSArray *)styleKits
+                      pathScaleDict:(NSDictionary *)pathScaleDict;
+
++ (void)exportForAndroidToDocumentsStyleKits:(NSArray *)styleKits
+                               pathScaleDict:(NSDictionary *)pathScaleDict;
+
 @end

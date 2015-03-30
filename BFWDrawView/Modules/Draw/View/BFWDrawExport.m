@@ -57,6 +57,7 @@ static NSString * const animationKey = @"animation";
                         fillColor:(UIColor *)fillColor
                           android:(BOOL)isAndroid
 {
+    NSMutableSet *usedFileNames = [[NSMutableSet alloc] init];
     for (NSString *styleKit in styleKitArray) {
         Class styleKitClass = NSClassFromString(styleKit);
         NSDictionary *parameterDict = [styleKitClass parameterDict];
@@ -73,6 +74,10 @@ static NSString * const animationKey = @"animation";
                 drawView.frame = CGRectMake(0, 0, size.width, size.height);
                 drawView.fillColor = fillColor;
                 NSString *fileName = isAndroid ? [drawingName androidFileName] : drawingName;
+                if ([usedFileNames containsObject:fileName]) {
+                    fileName = [fileName stringByAppendingFormat:@"_%@", styleKit];
+                }
+                [usedFileNames addObject:fileName];
                 [self writeImagesFromDrawView:drawView
                                   toDirectory:directoryPath
                                 pathScaleDict:pathScaleDict
@@ -137,6 +142,42 @@ static NSString * const animationKey = @"animation";
             NSLog(@"failed to write %@", relativePath);
         }
     }
+}
+
++ (void)exportForAndroidToDirectory:(NSString *)directory
+                          styleKits:(NSArray *)styleKits
+                      pathScaleDict:(NSDictionary *)pathScaleDict
+{
+    DLog(@"writing images to %@", directory);
+    [BFWDrawExport writeAllImagesToDirectory:directory
+                                   styleKits:styleKits
+                               pathScaleDict:pathScaleDict
+                                   fillColor:nil
+                                     android:YES];
+    /// Note: currently exports colors only from the first styleKit
+    NSString *colorsXmlString = [NSClassFromString(styleKits.firstObject) colorsXmlString];
+    NSString *colorsFile = [directory stringByAppendingPathComponent:@"paintcode_colors.xml"];
+    [colorsXmlString writeToFile:colorsFile
+                      atomically:YES
+                        encoding:NSStringEncodingConversionAllowLossy
+                           error:nil];
+}
+
++ (NSString *)documentsDirectoryPath
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths firstObject];
+    return documentsPath;
+}
+
++ (void)exportForAndroidToDocumentsStyleKits:(NSArray *)styleKits
+                               pathScaleDict:(NSDictionary *)pathScaleDict
+{
+    NSString *directory = [[self documentsDirectoryPath] stringByAppendingPathComponent:@"android_drawables"];
+    [[NSFileManager defaultManager] removeItemAtPath:directory error:nil];
+    [self exportForAndroidToDirectory:directory
+                            styleKits:styleKits
+                        pathScaleDict:pathScaleDict];
 }
 
 @end
