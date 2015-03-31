@@ -77,8 +77,10 @@ static CGFloat const fps = 30.0;
 
 - (void)setAnimation:(CGFloat)animation
 {
-    _animation = animation;
-    [self setNeedsDisplay];
+    if (_animation != animation) {
+        _animation = animation;
+        [self setNeedsDisplay];
+    }
 }
 
 #pragma mark - animation
@@ -116,7 +118,9 @@ static CGFloat const fps = 30.0;
     if (self.paused || self.finished) {
         [self.timer invalidate];
         self.timer = nil;
-        [self setNeedsDisplay]; // ensure it draws final frame
+        if (self.finished) {
+            self.animation = 1.0; // ensure it draws final frame
+        }
     }
     else {
         // Get the fractional part of the current time (ensures 0..1 interval)
