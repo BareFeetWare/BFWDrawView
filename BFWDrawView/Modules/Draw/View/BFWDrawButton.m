@@ -107,6 +107,7 @@
 {
     [self.backgroundDrawViewForStateDict setValueOrRemoveNil:drawView
                                                    forKey:@(state)];
+    [self setNeedsLayout];
 }
 
 - (void)makeBackgroundDrawViewsFromStateNameDict:(NSDictionary *)stateNameDict
