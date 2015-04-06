@@ -128,7 +128,8 @@ NSString * const sizesByPrefixKey = @"sizesByPrefix";
 
 - (NSString *)drawFrameSelectorString
 {
-    NSString *selectorString = [NSString stringWithFormat:@"draw%@WithFrame:", [self.name uppercaseFirstCharacter]];
+    NSString *nameWithoutSpaces = [self.name stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *selectorString = [NSString stringWithFormat:@"draw%@WithFrame:", [nameWithoutSpaces uppercaseFirstCharacter]];
     return selectorString;
 }
 
