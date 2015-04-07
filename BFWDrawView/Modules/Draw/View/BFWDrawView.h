@@ -17,7 +17,6 @@ IB_DESIGNABLE
 
 @property (nonatomic, copy) IBInspectable NSString* name;
 @property (nonatomic, copy) IBInspectable NSString* styleKit;
-@property (nonatomic, strong) IBInspectable UIColor* fillColor;
 
 @property (nonatomic, assign) CGSize drawnSize;
 @property (nonatomic, readonly) UIImage* image;

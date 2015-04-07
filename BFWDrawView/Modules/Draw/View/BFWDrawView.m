@@ -151,14 +151,14 @@ NSString * const sizesByPrefixKey = @"sizesByPrefix";
                                               argumentPointers:@[framePointer]];
         }
         else {
-            selectorString = [selectorString stringByAppendingString:@"fillColor:"];
+            selectorString = [selectorString stringByAppendingString:@"tintColor:"];
             SEL selector = NSSelectorFromString(selectorString);
             if ([class respondsToSelector:selector]) {
-                UIColor *fillColor = self.fillColor;
-                NSValue *fillColorPointer = [NSValue valueWithPointer:&fillColor];
+                UIColor *tintColor = self.tintColor;
+                NSValue *tintColorPointer = [NSValue valueWithPointer:&tintColor];
                 _drawInvocation = [NSInvocation invocationForClass:class
                                                           selector:selector
-                                                  argumentPointers:@[framePointer, fillColorPointer]];
+                                                  argumentPointers:@[framePointer, tintColorPointer]];
             }
             else {
                 DLog(@"**** error: No method for drawing name: %@", self.name);
@@ -180,15 +180,6 @@ NSString * const sizesByPrefixKey = @"sizesByPrefix";
 
 
 #pragma mark - setters
-
-- (void)setFillColor:(UIColor *)fillColor
-{
-    if (![_fillColor isEqual:fillColor]) {
-        _fillColor = fillColor;
-        [_drawInvocation setArgument:&fillColor atIndex:3];
-        [self setNeedsDisplay];
-    }
-}
 
 - (void)setName:(NSString *)name
 {
@@ -214,8 +205,8 @@ NSString * const sizesByPrefixKey = @"sizesByPrefix";
 - (NSString *)cacheKey
 {
     NSMutableArray *components = [@[self.name, self.styleKit, NSStringFromCGSize(self.frame.size)] mutableCopy];
-    if (self.fillColor) {
-        NSString *colorString = [[CIColor colorWithCGColor:self.fillColor.CGColor] stringRepresentation];
+    if (self.tintColor) {
+        NSString *colorString = [[CIColor colorWithCGColor:self.tintColor.CGColor] stringRepresentation];
         [components addObject:colorString];
     }
     NSString *key = [components componentsJoinedByString:@"."];

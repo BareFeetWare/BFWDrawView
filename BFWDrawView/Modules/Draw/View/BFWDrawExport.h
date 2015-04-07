@@ -14,7 +14,7 @@
 + (void)writeAllImagesToDirectory:(NSString *)directoryPath
                         styleKits:(NSArray *)styleKitArray
                     pathScaleDict:(NSDictionary *)pathScaleDict
-                        fillColor:(UIColor *)fillColor
+                        tintColor:(UIColor *)tintColor
                           android:(BOOL)isAndroid;
 
 + (void)exportForAndroidToDirectory:(NSString *)directory

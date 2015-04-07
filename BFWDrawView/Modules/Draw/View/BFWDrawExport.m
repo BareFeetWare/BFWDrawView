@@ -45,7 +45,7 @@
 
 static NSString * const baseKey = @"base";
 static NSString * const sizeKey = @"size";
-static NSString * const fillColorKey = @"fillColor";
+static NSString * const tintColorKey = @"tintColor";
 static NSString * const derivedKey = @"derived";
 static NSString * const animationKey = @"animation";
 
@@ -54,7 +54,7 @@ static NSString * const animationKey = @"animation";
 + (void)writeAllImagesToDirectory:(NSString *)directoryPath
                         styleKits:(NSArray *)styleKitArray
                     pathScaleDict:(NSDictionary *)pathScaleDict
-                        fillColor:(UIColor *)fillColor
+                        tintColor:(UIColor *)tintColor
                           android:(BOOL)isAndroid
 {
     NSMutableSet *usedFileNames = [[NSMutableSet alloc] init];
@@ -72,7 +72,7 @@ static NSString * const animationKey = @"animation";
             }
             else {
                 drawView.frame = CGRectMake(0, 0, size.width, size.height);
-                drawView.fillColor = fillColor;
+                drawView.tintColor = tintColor;
                 NSString *fileName = isAndroid ? [drawingName androidFileName] : drawingName;
                 if ([usedFileNames containsObject:fileName]) {
                     fileName = [fileName stringByAppendingFormat:@"_%@", styleKit];
@@ -91,16 +91,16 @@ static NSString * const animationKey = @"animation";
             NSString *sizeString = derivedDict[sizeKey] ? derivedDict[sizeKey] : parameterDict[sizesKey][baseName];
             if (sizeString) {
                 CGSize size = CGSizeFromString(sizeString);
-                UIColor *useFillColor = fillColor;
-                NSString *fillColorString = derivedDict[fillColorKey];
-                if (fillColorString) {
-                    useFillColor = [styleKitClass colorWithName:fillColorString];
+                UIColor *useTintColor = tintColor;
+                NSString *tintColorString = derivedDict[tintColorKey];
+                if (tintColorString) {
+                    useTintColor = [styleKitClass colorWithName:tintColorString];
                 }
                 if (!CGSizeEqualToSize(size, CGSizeZero)) {
                     BFWAnimationView *drawView = [[BFWAnimationView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
                     drawView.name = baseName;
                     drawView.styleKit = styleKit;
-                    drawView.fillColor = useFillColor;
+                    drawView.tintColor = useTintColor;
                     NSNumber *animationNumber = derivedDict[animationKey];
                     if (animationNumber) {
                         drawView.animation = animationNumber.doubleValue;
@@ -152,7 +152,7 @@ static NSString * const animationKey = @"animation";
     [BFWDrawExport writeAllImagesToDirectory:directory
                                    styleKits:styleKits
                                pathScaleDict:pathScaleDict
-                                   fillColor:nil
+                                   tintColor:nil
                                      android:YES];
     /// Note: currently exports colors only from the first styleKit
     NSString *colorsXmlString = [NSClassFromString(styleKits.firstObject) colorsXmlString];
