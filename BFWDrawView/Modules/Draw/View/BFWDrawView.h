@@ -18,6 +18,8 @@ IB_DESIGNABLE
 @property (nonatomic, copy) IBInspectable NSString* name;
 @property (nonatomic, copy) IBInspectable NSString* styleKit;
 
+@property (nonatomic, strong) UIColor* fillColor; // Deprecated. Use UIView's tintColor
+
 @property (nonatomic, assign) CGSize drawnSize;
 @property (nonatomic, readonly) UIImage* image;
 @property (nonatomic, readonly) BOOL canDraw;

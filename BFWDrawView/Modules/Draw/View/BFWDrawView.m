@@ -181,6 +181,23 @@ NSString * const sizesByPrefixKey = @"sizesByPrefix";
 
 #pragma mark - setters
 
+- (void)setFillColor:(UIColor *)fillColor // Deprecated. Use UIView's tintColor.
+{
+    DLog(@"BFWDrawView called deprecated fillColor. Use tintColor instead. %@", fillColor
+         );
+    self.tintColor = fillColor;
+    _fillColor = fillColor;
+}
+
+- (void)setTintColor:(UIColor *)tintColor
+{
+    if (![super.tintColor isEqual:tintColor]) {
+        [super setTintColor:tintColor];
+        [_drawInvocation setArgument:&tintColor atIndex:3];
+        [self setNeedsDisplay]; // needed?
+    }
+}
+
 - (void)setName:(NSString *)name
 {
     if (![_name isEqualToString:name]) {
