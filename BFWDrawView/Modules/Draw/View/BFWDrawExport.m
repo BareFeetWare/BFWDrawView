@@ -147,13 +147,14 @@ static NSString * const animationKey = @"animation";
 + (void)exportForAndroidToDirectory:(NSString *)directory
                           styleKits:(NSArray *)styleKits
                       pathScaleDict:(NSDictionary *)pathScaleDict
+                          tintColor:(UIColor *)tintColor
 {
     DLog(@"writing images to %@", directory);
-    [BFWDrawExport writeAllImagesToDirectory:directory
-                                   styleKits:styleKits
-                               pathScaleDict:pathScaleDict
-                                   tintColor:nil
-                                     android:YES];
+    [self writeAllImagesToDirectory:directory
+                          styleKits:styleKits
+                      pathScaleDict:pathScaleDict
+                          tintColor:tintColor
+                            android:YES];
     /// Note: currently exports colors only from the first styleKit
     NSString *colorsXmlString = [NSClassFromString(styleKits.firstObject) colorsXmlString];
     NSString *colorsFile = [directory stringByAppendingPathComponent:@"paintcode_colors.xml"];
@@ -172,12 +173,14 @@ static NSString * const animationKey = @"animation";
 
 + (void)exportForAndroidToDocumentsStyleKits:(NSArray *)styleKits
                                pathScaleDict:(NSDictionary *)pathScaleDict
+                                   tintColor:(UIColor *)tintColor
 {
     NSString *directory = [[self documentsDirectoryPath] stringByAppendingPathComponent:@"android_drawables"];
     [[NSFileManager defaultManager] removeItemAtPath:directory error:nil];
     [self exportForAndroidToDirectory:directory
                             styleKits:styleKits
-                        pathScaleDict:pathScaleDict];
+                        pathScaleDict:pathScaleDict
+                            tintColor:tintColor];
 }
 
 @end

@@ -19,9 +19,11 @@
 
 + (void)exportForAndroidToDirectory:(NSString *)directory
                           styleKits:(NSArray *)styleKits
-                      pathScaleDict:(NSDictionary *)pathScaleDict;
+                      pathScaleDict:(NSDictionary *)pathScaleDict
+                          tintColor:(UIColor *)tintColor;
 
 + (void)exportForAndroidToDocumentsStyleKits:(NSArray *)styleKits
-                               pathScaleDict:(NSDictionary *)pathScaleDict;
+                               pathScaleDict:(NSDictionary *)pathScaleDict
+                                   tintColor:(UIColor *)tintColor;
 
 @end
