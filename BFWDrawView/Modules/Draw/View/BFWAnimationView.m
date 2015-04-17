@@ -136,13 +136,22 @@ static CGFloat const fps = 30.0;
     [super drawRect:rect];
 }
 
+- (CGFloat)animationBetweenStartAndEnd
+{
+    CGFloat animation = self.animation;
+    if (self.start || self.end) {
+        animation = (self.animation + self.start) * (self.end - self.start);
+    }
+    return animation;
+}
+
 - (NSInvocation *)drawInvocation
 {
     // TODO: cache invocation but allow changing animation value
     NSInvocation *invocation;
     CGRect frame = self.drawFrame;
     NSValue *framePointer = [NSValue valueWithPointer:&frame];
-    CGFloat animation = self.animation;
+    CGFloat animation = [self animationBetweenStartAndEnd];
     NSValue *animationPointer = [NSValue valueWithPointer:&animation];
     NSString *selectorString = [NSString stringWithFormat:@"draw%@WithFrame:animation:", [self.name uppercaseFirstCharacter]];
     SEL selector = NSSelectorFromString(selectorString);
