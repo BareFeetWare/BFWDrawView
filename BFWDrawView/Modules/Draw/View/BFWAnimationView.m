@@ -140,7 +140,7 @@ static CGFloat const fps = 30.0;
 {
     CGFloat animation = self.animation;
     if (self.start || self.end) {
-        animation = (self.animation + self.start) * (self.end - self.start);
+        animation = self.start + self.animation * (self.end - self.start);
     }
     return animation;
 }
