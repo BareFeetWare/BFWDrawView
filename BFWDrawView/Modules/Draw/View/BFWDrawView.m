@@ -48,6 +48,9 @@ NSString * const sizesByPrefixKey = @"sizesByPrefix";
     if (CGSizeEqualToSize(_drawnSize, CGSizeZero)) {
         NSDictionary *parameterDict = [self.styleKitClass parameterDict];
         NSString *sizeString = parameterDict[sizesKey][self.name];
+        if (!sizesKey) {
+            sizeString = parameterDict[sizesKey][[self.name wordsToCamel]];
+        }
         if (!sizeString) {
             NSDictionary *sizeByPrefixDict = parameterDict[sizesByPrefixKey];
             NSArray *sortedKeys = [sizeByPrefixDict.allKeys sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {

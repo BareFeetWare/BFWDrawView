@@ -12,5 +12,6 @@
 - (NSString *)uppercaseFirstCharacter; // only uppercase first character in string
 - (NSString *)lowercaseFirstCharacter; // only lowercase first character in string
 - (NSString *)camelToWords; // convert camelCase to separate words
+- (NSString *)wordsToCamel; // convert separate words to camelCase
 
 @end

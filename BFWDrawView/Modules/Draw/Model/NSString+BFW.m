@@ -45,4 +45,19 @@
     return [NSString stringWithString:wordString];
 }
 
+- (NSString *)wordsToCamel
+{
+    NSMutableArray *camelWords = [[NSMutableArray alloc] init];
+    NSArray *words = [self componentsSeparatedByString:@" "];
+    for (NSString *word in words) {
+        if (word.length) {
+            [camelWords addObject:[word uppercaseFirstCharacter]];
+        }
+    }
+    if (camelWords.count) {
+        camelWords[0] = [camelWords[0] lowercaseFirstCharacter];
+    }
+    return [camelWords copy];
+}
+
 @end
