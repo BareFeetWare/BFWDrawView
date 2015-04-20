@@ -29,7 +29,7 @@
     return [self isEqualToString:self.uppercaseString];
 }
 
-- (NSString *)camelToWords
+- (NSString *)camelCaseToWords
 {
     NSMutableString *wordString = [[NSMutableString alloc] init];
     NSString *previousChar = nil;
@@ -45,19 +45,16 @@
     return [NSString stringWithString:wordString];
 }
 
-- (NSString *)wordsToCamel
+- (NSString *)wordsToPaintCodeCase
 {
-    NSMutableArray *camelWords = [[NSMutableArray alloc] init];
-    NSArray *words = [self componentsSeparatedByString:@" "];
+    NSMutableArray *casedWords = [[NSMutableArray alloc] init];
+    NSArray *words = [self componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     for (NSString *word in words) {
         if (word.length) {
-            [camelWords addObject:[word uppercaseFirstCharacter]];
+            [casedWords addObject:[word uppercaseFirstCharacter]];
         }
     }
-    if (camelWords.count) {
-        camelWords[0] = [camelWords[0] lowercaseFirstCharacter];
-    }
-    return [camelWords copy];
+    return [casedWords componentsJoinedByString:@""];
 }
 
 @end

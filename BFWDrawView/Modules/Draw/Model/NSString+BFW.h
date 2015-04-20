@@ -11,7 +11,7 @@
 
 - (NSString *)uppercaseFirstCharacter; // only uppercase first character in string
 - (NSString *)lowercaseFirstCharacter; // only lowercase first character in string
-- (NSString *)camelToWords; // convert camelCase to separate words
-- (NSString *)wordsToCamel; // convert separate words to camelCase
+- (NSString *)camelCaseToWords; // convert camelCase to separate words
+- (NSString *)wordsToPaintCodeCase; // convert separate words to the case that PaintCode uses for methods
 
 @end

@@ -49,7 +49,7 @@ NSString * const sizesByPrefixKey = @"sizesByPrefix";
         NSDictionary *parameterDict = [self.styleKitClass parameterDict];
         NSString *sizeString = parameterDict[sizesKey][self.name];
         if (!sizesKey) {
-            sizeString = parameterDict[sizesKey][[self.name wordsToCamel]];
+            sizeString = parameterDict[sizesKey][[self.name wordsToPaintCodeCase]];
         }
         if (!sizeString) {
             NSDictionary *sizeByPrefixDict = parameterDict[sizesByPrefixKey];
@@ -131,8 +131,8 @@ NSString * const sizesByPrefixKey = @"sizesByPrefix";
 
 - (NSString *)drawFrameSelectorString
 {
-    NSString *nameWithoutSpaces = [self.name stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString *selectorString = [NSString stringWithFormat:@"draw%@WithFrame:", [nameWithoutSpaces uppercaseFirstCharacter]];
+    NSString *paintCodeCaseString = [self.name wordsToPaintCodeCase];
+    NSString *selectorString = [NSString stringWithFormat:@"draw%@WithFrame:", paintCodeCaseString];
     return selectorString;
 }
 

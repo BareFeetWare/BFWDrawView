@@ -56,4 +56,10 @@
     }
 }
 
+- (void)testWordsToPaintCodeCase {
+    NSString *words = @"I went to the beach on\tSaturday ALLCAPS wOW";
+    NSString *casedString = [words wordsToPaintCodeCase];
+    XCTAssertEqualObjects(casedString, @"IWentToTheBeachOnSaturdayALLCAPSWOW");
+}
+
 @end

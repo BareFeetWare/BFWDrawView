@@ -33,7 +33,7 @@
 
 - (NSString *)androidFileName
 {
-    NSArray *words = [[self camelToWords] componentsSeparatedByString:@" "];
+    NSArray *words = [[self camelCaseToWords] componentsSeparatedByString:@" "];
     NSDictionary *replacePrefixDict = @{@"button" : @"btn",
                                         @"icon" : @"ic"};
     words = [words arrayByReplacingFirstObjectWithReplaceDict:replacePrefixDict];
