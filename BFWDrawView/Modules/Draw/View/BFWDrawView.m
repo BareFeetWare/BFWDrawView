@@ -15,6 +15,8 @@
 
 @interface BFWDrawView ()
 
+@property (nonatomic, assign) BOOL didCheckCanDraw;
+
 @end
 
 NSString * const sizesKey = @"sizes";
@@ -163,8 +165,8 @@ NSString * const sizesByPrefixKey = @"sizesByPrefix";
                                                           selector:selector
                                                   argumentPointers:@[framePointer, tintColorPointer]];
             }
-            else {
-                DLog(@"**** error: No method for drawing name: %@", self.name);
+            else if (!self.didCheckCanDraw) {
+                DLog(@"**** warning: No method for drawing name: %@", self.name);
             }
         }
     }
@@ -173,6 +175,7 @@ NSString * const sizesByPrefixKey = @"sizesByPrefix";
 
 - (BOOL)canDraw
 {
+    self.didCheckCanDraw = YES;
     return self.drawInvocation ? YES : NO;
 }
 
