@@ -105,6 +105,10 @@
 - (void)setBackgroundDrawView:(BFWDrawView *)drawView
                      forState:(UIControlState)state
 {
+    BOOL canDraw = drawView.canDraw;
+    if (!canDraw) {
+        drawView = nil;
+    }
     [self.backgroundDrawViewForStateDict setValueOrRemoveNil:drawView
                                                    forKey:@(state)];
     [self setNeedsLayout];
