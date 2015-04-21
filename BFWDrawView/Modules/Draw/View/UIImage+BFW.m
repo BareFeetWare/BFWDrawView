@@ -26,7 +26,8 @@
 	return [UIImage imageWithCGImage:masked];
 }
 
-+ (UIImage*)imageOfView:(UIView*)view size:(CGSize)size
++ (UIImage*)imageOfView:(UIView*)view
+                   size:(CGSize)size
 {
 	BOOL isOpaque = NO;
 	CGFloat scale = [[UIScreen mainScreen] scale];

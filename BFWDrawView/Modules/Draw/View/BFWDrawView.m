@@ -236,16 +236,29 @@ NSString * const sizesByPrefixKey = @"sizesByPrefix";
     return key;
 }
 
+- (UIImage *)cachedImageForKey:(NSString *)key
+{
+    return [self class].imageCache[key];
+}
+
+- (void)setCachedImage:(UIImage *)image
+                forKey:(NSString *)key
+{
+    [self class].imageCache[key] = image;
+}
+
 - (UIImage*)imageFromView
 {
     UIImage *image = nil;
     if (self.name && self.styleKit) {
         NSString *key = [self cacheKey];
-        image = [self class].imageCache[key];
+        image = [self cachedImageForKey:key];
         if (!image) {
-            image = [UIImage imageOfView:self size:self.frame.size];
+            image = [UIImage imageOfView:self
+                                    size:self.frame.size];
             if (image) {
-                [self class].imageCache[key] = image;
+                [self setCachedImage:image
+                              forKey:key];
             }
         }
     }
