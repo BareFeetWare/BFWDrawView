@@ -38,9 +38,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        if (!CGSizeEqualToSize(frame.size, CGSizeZero)) {
-            [self commonInit];
-        }
+        [self commonInit];
     }
     return self;
 }
@@ -52,11 +50,6 @@
         [self commonInit];
     }
     return self;
-}
-
-- (void)prepareForInterfaceBuilder
-{
-    [self commonInit];
 }
 
 - (void)commonInit
