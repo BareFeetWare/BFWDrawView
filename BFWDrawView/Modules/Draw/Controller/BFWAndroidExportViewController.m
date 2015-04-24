@@ -10,14 +10,18 @@
 #import "BFWDrawExport.h"
 #import "NSObject+BFWStyleKit.h"
 
-@interface BFWAndroidExportViewController ()
+@interface BFWAndroidExportViewController () <UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UITableViewCell) NSArray *exportSizeCells;
 @property (weak, nonatomic) IBOutlet UITableViewCell *exportCell;
+@property (weak, nonatomic) IBOutlet UITextField *directoryTextField;
+
+@property (strong, nonatomic) NSString* directoryPath;
 
 @end
 
-static const NSUInteger styleKitsSection = 1;
+static NSUInteger const styleKitsSection = 1;
+static NSString * const exportDirectoryKey = @"exportDirectory";
 
 @implementation BFWAndroidExportViewController
 
@@ -55,21 +59,57 @@ static const NSUInteger styleKitsSection = 1;
     return [styleKits copy];
 }
 
+- (NSString *)defaultDirectoryPath
+{
+    return [[BFWDrawExport documentsDirectoryPath] stringByAppendingPathComponent:@"android_drawables"];
+}
+
+- (NSString *)directoryPath
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:exportDirectoryKey];
+}
+
+- (void)setDirectoryPath:(NSString *)directoryPath
+{
+    [[NSUserDefaults standardUserDefaults] setObject:directoryPath
+                                              forKey:exportDirectoryKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#pragma mark - UIViewController
+
+- (void)viewDidLoad {
+    self.directoryTextField.placeholder = [self defaultDirectoryPath];
+    self.directoryTextField.text = self.directoryPath;
+}
+
 #pragma mark - UITableViewController
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (cell == self.exportCell) {
-        [BFWDrawExport exportForAndroidToDocumentsStyleKits:[self styleKits]
-                                              pathScaleDict:[self pathScaleDict]
-                                                  tintColor:[UIColor blackColor]]; // TODO: get color from UI
+        [self.view endEditing:YES];
+        NSString *directoryPath = self.directoryPath ?: [self defaultDirectoryPath];
+        [BFWDrawExport exportForAndroidToDirectory:directoryPath
+                                         styleKits:[self styleKits]
+                                     pathScaleDict:[self pathScaleDict]
+                                         tintColor:[UIColor blackColor]]; // TODO: get color from UI
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     else {
         cell.accessoryType = cell.accessoryType == UITableViewCellAccessoryCheckmark ? UITableViewCellAccessoryNone : UITableViewCellAccessoryCheckmark;
     }
     [cell setSelected:NO animated:YES];
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField == self.directoryTextField) {
+        self.directoryPath = self.directoryTextField.text;
+    }
 }
 
 @end

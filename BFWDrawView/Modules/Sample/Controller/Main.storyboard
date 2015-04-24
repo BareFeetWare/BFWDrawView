@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AiI-Fz-9eh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AiI-Fz-9eh">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -131,7 +132,7 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleKit" value="SampleStyleKit"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="name" value="frontDoor"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="name" value="Front Door"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="9kC-iM-16P" userLabel="bathroom" customClass="BFWDrawView">
@@ -143,7 +144,7 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleKit" value="SampleStyleKit"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="name" value="bathroom"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="name" value="Bathroom"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
@@ -158,6 +159,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="554" y="383"/>
         </scene>
         <!--Android Export View Controller-->
         <scene sceneID="RRM-i7-gPk">
@@ -316,9 +318,42 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Export Directory" id="hPv-rF-krE">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="sIj-NI-fkj">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sIj-NI-fkj" id="M0C-o2-MFw">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Directory" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcA-mG-FJu">
+                                                    <rect key="frame" x="15" y="12" width="66" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GmZ-Zb-EJu">
+                                                    <rect key="frame" x="89" y="7" width="503" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="I9W-Ag-ofT" id="WSj-IR-YNG"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="GmZ-Zb-EJu" secondAttribute="centerY" id="8vc-KX-7D9"/>
+                                                <constraint firstItem="GmZ-Zb-EJu" firstAttribute="trailing" secondItem="M0C-o2-MFw" secondAttribute="trailingMargin" id="RSh-PE-jBP"/>
+                                                <constraint firstAttribute="centerY" secondItem="gcA-mG-FJu" secondAttribute="centerY" constant="0.25" id="arH-wy-WmG"/>
+                                                <constraint firstItem="GmZ-Zb-EJu" firstAttribute="leading" secondItem="gcA-mG-FJu" secondAttribute="trailing" constant="8" id="e6e-z2-3ka"/>
+                                                <constraint firstItem="gcA-mG-FJu" firstAttribute="leading" secondItem="M0C-o2-MFw" secondAttribute="leadingMargin" constant="7" id="gR4-YS-f7C"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="Actions" id="jRa-jo-GSo">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="hgL-RI-Oc6" detailTextLabel="Kgc-vD-kNl" style="IBUITableViewCellStyleSubtitle" id="y18-jY-y2q">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="hgL-RI-Oc6" style="IBUITableViewCellStyleDefault" id="y18-jY-y2q">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="y18-jY-y2q" id="QhP-MQ-cax">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -327,12 +362,6 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="to Documents folder of this app" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kgc-vD-kNl">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -347,6 +376,7 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="directoryTextField" destination="GmZ-Zb-EJu" id="xuw-cY-aqZ"/>
                         <outlet property="exportCell" destination="y18-jY-y2q" id="hMq-J1-fsl"/>
                         <outletCollection property="exportSizeCells" destination="5WD-ge-Zat" id="xyk-ie-3UA"/>
                         <outletCollection property="exportSizeCells" destination="Ed4-4g-Lew" id="rbq-Fj-HnV"/>

@@ -11,6 +11,8 @@
 
 #pragma mark - image output methods
 
++ (NSString *)documentsDirectoryPath;
+
 + (void)writeAllImagesToDirectory:(NSString *)directoryPath
                         styleKits:(NSArray *)styleKitArray
                     pathScaleDict:(NSDictionary *)pathScaleDict
