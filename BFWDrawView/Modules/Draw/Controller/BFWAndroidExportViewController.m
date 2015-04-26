@@ -20,7 +20,9 @@
 
 @end
 
+static NSUInteger const sizesSection = 0;
 static NSUInteger const styleKitsSection = 1;
+static NSUInteger const directorySection = 2;
 static NSString * const exportDirectoryKey = @"exportDirectory";
 
 @implementation BFWAndroidExportViewController
@@ -97,7 +99,7 @@ static NSString * const exportDirectoryKey = @"exportDirectory";
                                          tintColor:[UIColor blackColor]]; // TODO: get color from UI
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
-    else {
+    else if (indexPath.section == sizesSection || indexPath.section == styleKitsSection) {
         cell.accessoryType = cell.accessoryType == UITableViewCellAccessoryCheckmark ? UITableViewCellAccessoryNone : UITableViewCellAccessoryCheckmark;
     }
     [cell setSelected:NO animated:YES];
