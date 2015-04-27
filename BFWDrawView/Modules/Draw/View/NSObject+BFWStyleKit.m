@@ -60,10 +60,10 @@
     
     [self getRed:&red green:&green blue:&blue alpha:&alpha];
     
-    NSUInteger redInt = red * 255.0;
-    NSUInteger greenInt = green * 255.0;
-    NSUInteger blueInt = blue * 255.0;
-    NSUInteger alphaInt = alpha * 255.0;
+    NSUInteger redInt = round(red * 255.0);
+    NSUInteger greenInt = round(green * 255.0);
+    NSUInteger blueInt = round(blue * 255.0);
+    NSUInteger alphaInt = round(alpha * 255.0);
     
     NSString *hexString = [NSString stringWithFormat:@"%02lx%02lx%02lx%02lx", (unsigned long)alphaInt, (unsigned long)redInt, (unsigned long)greenInt, (unsigned long)blueInt];
     
