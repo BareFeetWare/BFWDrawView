@@ -207,7 +207,10 @@
         for (NSString *colorName in colorNames) {
             UIColor *color = colorDict[colorName];
             NSString *colorHex = [color hexString];
-            NSString *colorString = [NSString stringWithFormat:@"    <color name=\"%@\">#%@</color>", colorName, colorHex];
+            NSString *wordsString = [colorName camelCaseToWords];
+            NSString *underscoreName = [wordsString stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+            NSString *androidColorName = underscoreName.lowercaseString;
+            NSString *colorString = [NSString stringWithFormat:@"    <color name=\"%@\">#%@</color>", androidColorName, colorHex];
             [components addObject:colorString];
         }
         [components addObject:@"</resources>"];
