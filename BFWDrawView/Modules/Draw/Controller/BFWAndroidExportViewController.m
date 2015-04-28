@@ -22,7 +22,6 @@
 
 static NSUInteger const sizesSection = 0;
 static NSUInteger const styleKitsSection = 1;
-static NSUInteger const directorySection = 2;
 static NSString * const exportDirectoryKey = @"exportDirectory";
 
 @implementation BFWAndroidExportViewController
@@ -80,7 +79,9 @@ static NSString * const exportDirectoryKey = @"exportDirectory";
 
 #pragma mark - UIViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
     self.directoryTextField.placeholder = [self defaultDirectoryPath];
     self.directoryTextField.text = self.directoryPath;
 }
