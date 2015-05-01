@@ -75,14 +75,16 @@ static NSString * const animationKey = @"animation";
                 drawView.tintColor = tintColor;
                 NSString *fileName = isAndroid ? [drawingName androidFileName] : drawingName;
                 if ([usedFileNames containsObject:fileName]) {
-                    fileName = [fileName stringByAppendingFormat:@"_%@", styleKit];
+                    DLog(@"**** warning: attempted to write over existing file: %@", fileName);
                 }
-                [usedFileNames addObject:fileName];
-                [self writeImagesFromDrawView:drawView
-                                  toDirectory:directoryPath
-                                pathScaleDict:pathScaleDict
-                                         size:size
-                                     fileName:fileName];
+                else {
+                    [usedFileNames addObject:fileName];
+                    [self writeImagesFromDrawView:drawView
+                                      toDirectory:directoryPath
+                                    pathScaleDict:pathScaleDict
+                                             size:size
+                                         fileName:fileName];
+                }
             }
         }
         for (NSString *drawingName in parameterDict[derivedKey]) {
