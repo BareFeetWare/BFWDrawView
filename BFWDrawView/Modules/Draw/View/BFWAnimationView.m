@@ -10,8 +10,6 @@
 #import "NSString+BFW.h"
 #import "NSInvocation+BFW.h"
 
-static CGFloat const fps = 30.0;
-
 @interface BFWAnimationView ()
 
 @property (nonatomic, weak) NSTimer *timer; // NSRunLoop holds a strong reference
@@ -46,6 +44,7 @@ static CGFloat const fps = 30.0;
 
 - (void)commonInit
 {
+    _framesPerSecond = 30.0;
     _duration = 3.0; // default seconds
 }
 
@@ -101,7 +100,7 @@ static CGFloat const fps = 30.0;
         if (!self.startDate) {
             self.startDate = [NSDate date];
         }
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 / fps
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 / self.framesPerSecond
                                                       target:self
                                                     selector:@selector(tick:)
                                                     userInfo:nil
@@ -126,6 +125,23 @@ static CGFloat const fps = 30.0;
         // Get the fractional part of the current time (ensures 0..1 interval)
         self.animation = complete - floorf(complete);
     }
+}
+
+- (BOOL)writeImagesAtScale:(CGFloat)scale
+                    toFile:(NSString *)filePath;
+{
+    BOOL success = YES;
+    NSUInteger frameCount = self.duration * self.framesPerSecond;
+    NSUInteger digits = log10((double)frameCount) + 1;
+    NSString* pathBaseFormat = [filePath.stringByDeletingPathExtension stringByAppendingFormat:@"%%0%lud", (unsigned long)digits];
+    NSString *pathFormat = [pathBaseFormat stringByAppendingPathExtension:filePath.pathExtension];
+    for (NSUInteger frameN = 0; frameN < frameCount; frameN++) {
+        self.animation = (CGFloat)frameN / frameCount;
+        NSString *imagePath = [NSString stringWithFormat:pathFormat, frameN];
+        success = success && [self writeImageAtScale:scale
+                                              toFile:imagePath];
+    }
+    return success;
 }
 
 #pragma mark - BFWDrawView

@@ -19,6 +19,10 @@ IB_DESIGNABLE
 @property (nonatomic, assign) IBInspectable NSUInteger cycles; // default 0 = infinite repetitions
 @property (nonatomic, assign) IBInspectable BOOL paused;
 
+@property (nonatomic, assign) CGFloat framesPerSecond;
+
 - (void)restart;
+- (BOOL)writeImagesAtScale:(CGFloat)scale
+                    toFile:(NSString *)filePath;
 
 @end
