@@ -2,7 +2,8 @@
 //  BFWDrawExport.h
 //
 //  Created by Tom Brodhurst-Hill on 23/03/2015.
-//  Copyright (c) 2015 CommBank. All rights reserved.
+//  Copyright (c) 2015 BareFeetWare. All rights reserved.
+//  Free to use at your own risk, with acknowledgement to BareFeetWare.
 //
 
 #import <UIKit/UIKit.h>
