@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>sizesByPrefix</key>
+	<dict>
+		<key>Icon</key>
+		<string>{32, 32}</string>
+	</dict>
+	<key>sizes</key>
+	<dict>
+		<key>Bathroom</key>
+		<string>{66, 34}</string>
+		<key>Front Door</key>
+		<string>{32, 48}</string>
+		<key>Pac Man</key>
+		<string>{74, 74}</string>
+	</dict>
+</dict>
+</plist>

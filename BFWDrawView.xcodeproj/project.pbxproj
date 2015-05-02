@@ -10,19 +10,19 @@
 		E20357981A7F5144002BC3F4 /* BFWAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E20357861A7F5144002BC3F4 /* BFWAnimationView.m */; };
 		E20357991A7F5144002BC3F4 /* BFWDrawButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E20357881A7F5144002BC3F4 /* BFWDrawButton.m */; };
 		E203579A1A7F5144002BC3F4 /* BFWDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = E203578A1A7F5144002BC3F4 /* BFWDrawView.m */; };
-		E203579C1A7F5144002BC3F4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E20357901A7F5144002BC3F4 /* AppDelegate.m */; };
-		E203579E1A7F5144002BC3F4 /* SampleStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E20357961A7F5144002BC3F4 /* SampleStyleKit.m */; };
-		E203579F1A7F5144002BC3F4 /* SampleStyleKit.plist in Resources */ = {isa = PBXBuildFile; fileRef = E20357971A7F5144002BC3F4 /* SampleStyleKit.plist */; };
 		E20357A11A7F5187002BC3F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20357A01A7F5187002BC3F4 /* Main.storyboard */; };
 		E20ED10E1A9F24860045FA69 /* UIImage+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E20ED10D1A9F24860045FA69 /* UIImage+BFW.m */; };
 		E20ED1111A9F24B50045FA69 /* NSObject+BFWStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E20ED1101A9F24B50045FA69 /* NSObject+BFWStyleKit.m */; };
 		E20ED1171A9F24CC0045FA69 /* NSInvocation+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E20ED1141A9F24CC0045FA69 /* NSInvocation+BFW.m */; };
 		E20ED1181A9F24CC0045FA69 /* NSString+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E20ED1161A9F24CC0045FA69 /* NSString+BFW.m */; };
 		E20ED11F1A9FC43D0045FA69 /* NSString_BFW_Tests.plist in Resources */ = {isa = PBXBuildFile; fileRef = E20ED11E1A9FC43D0045FA69 /* NSString_BFW_Tests.plist */; };
-		E21105711A7E003A0025BDA0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E21105701A7E003A0025BDA0 /* main.m */; };
-		E211057C1A7E003A0025BDA0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E211057B1A7E003A0025BDA0 /* Images.xcassets */; };
 		E211058B1A7E003A0025BDA0 /* BFWDrawViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E211058A1A7E003A0025BDA0 /* BFWDrawViewTests.m */; };
-		E21105AF1A7ECB3F0025BDA0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E21105AE1A7ECB3F0025BDA0 /* LaunchScreen.xib */; };
+		E221178C1AF4FE40007B515F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E22117881AF4FE40007B515F /* Images.xcassets */; };
+		E221178E1AF4FE40007B515F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E221178A1AF4FE40007B515F /* LaunchScreen.xib */; };
+		E221178F1AF4FE40007B515F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E221178B1AF4FE40007B515F /* main.m */; };
+		E22117921AF4FE92007B515F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E22117911AF4FE92007B515F /* AppDelegate.m */; };
+		E29917041AF4FEE500F0DEDE /* SampleStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E29917021AF4FEE500F0DEDE /* SampleStyleKit.m */; };
+		E29917051AF4FEE500F0DEDE /* SampleStyleKit.plist in Resources */ = {isa = PBXBuildFile; fileRef = E29917031AF4FEE500F0DEDE /* SampleStyleKit.plist */; };
 		E2EBB3211ABFDE2E00C3787F /* BFWDrawExport.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EBB3201ABFDE2E00C3787F /* BFWDrawExport.m */; };
 		E2FC1D9D1AC9066700F08B90 /* BFWAndroidExportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2FC1D9C1AC9066700F08B90 /* BFWAndroidExportViewController.m */; };
 /* End PBXBuildFile section */
@@ -44,11 +44,6 @@
 		E20357881A7F5144002BC3F4 /* BFWDrawButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawButton.m; sourceTree = "<group>"; };
 		E20357891A7F5144002BC3F4 /* BFWDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawView.h; sourceTree = "<group>"; };
 		E203578A1A7F5144002BC3F4 /* BFWDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawView.m; sourceTree = "<group>"; };
-		E203578F1A7F5144002BC3F4 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		E20357901A7F5144002BC3F4 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E20357951A7F5144002BC3F4 /* SampleStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleStyleKit.h; sourceTree = "<group>"; };
-		E20357961A7F5144002BC3F4 /* SampleStyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleStyleKit.m; sourceTree = "<group>"; };
-		E20357971A7F5144002BC3F4 /* SampleStyleKit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SampleStyleKit.plist; sourceTree = "<group>"; };
 		E20357A01A7F5187002BC3F4 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E20ED10C1A9F24860045FA69 /* UIImage+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BFW.h"; sourceTree = "<group>"; };
 		E20ED10D1A9F24860045FA69 /* UIImage+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BFW.m"; sourceTree = "<group>"; };
@@ -60,13 +55,18 @@
 		E20ED1161A9F24CC0045FA69 /* NSString+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BFW.m"; sourceTree = "<group>"; };
 		E20ED11E1A9FC43D0045FA69 /* NSString_BFW_Tests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NSString_BFW_Tests.plist; sourceTree = "<group>"; };
 		E211056B1A7E003A0025BDA0 /* BFWDrawView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BFWDrawView.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E211056F1A7E003A0025BDA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E21105701A7E003A0025BDA0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		E211057B1A7E003A0025BDA0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E21105841A7E003A0025BDA0 /* BFWDrawViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BFWDrawViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E21105891A7E003A0025BDA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E211058A1A7E003A0025BDA0 /* BFWDrawViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFWDrawViewTests.m; sourceTree = "<group>"; };
-		E21105AE1A7ECB3F0025BDA0 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		E22117881AF4FE40007B515F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		E221178A1AF4FE40007B515F /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		E221178B1AF4FE40007B515F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E22117901AF4FE92007B515F /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		E22117911AF4FE92007B515F /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		E29917011AF4FEE500F0DEDE /* SampleStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleStyleKit.h; sourceTree = "<group>"; };
+		E29917021AF4FEE500F0DEDE /* SampleStyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleStyleKit.m; sourceTree = "<group>"; };
+		E29917031AF4FEE500F0DEDE /* SampleStyleKit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SampleStyleKit.plist; sourceTree = "<group>"; };
+		E29917061AF4FF6F00F0DEDE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BFWDrawView/Info.plist; sourceTree = SOURCE_ROOT; };
 		E2EBB31F1ABFDE2E00C3787F /* BFWDrawExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawExport.h; sourceTree = "<group>"; };
 		E2EBB3201ABFDE2E00C3787F /* BFWDrawExport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawExport.m; sourceTree = "<group>"; };
 		E2FC1D9B1AC9066700F08B90 /* BFWAndroidExportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWAndroidExportViewController.h; sourceTree = "<group>"; };
@@ -95,8 +95,8 @@
 			isa = PBXGroup;
 			children = (
 				E20357831A7F5144002BC3F4 /* Draw */,
+				E29916FF1AF4FEE500F0DEDE /* StyleKits */,
 				E203578D1A7F5144002BC3F4 /* Sample */,
-				E20357931A7F5144002BC3F4 /* StyleKit */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -141,29 +141,9 @@
 		E203578E1A7F5144002BC3F4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E203578F1A7F5144002BC3F4 /* AppDelegate.h */,
-				E20357901A7F5144002BC3F4 /* AppDelegate.m */,
 				E20357A01A7F5187002BC3F4 /* Main.storyboard */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		E20357931A7F5144002BC3F4 /* StyleKit */ = {
-			isa = PBXGroup;
-			children = (
-				E20357941A7F5144002BC3F4 /* View */,
-			);
-			path = StyleKit;
-			sourceTree = "<group>";
-		};
-		E20357941A7F5144002BC3F4 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				E20357951A7F5144002BC3F4 /* SampleStyleKit.h */,
-				E20357961A7F5144002BC3F4 /* SampleStyleKit.m */,
-				E20357971A7F5144002BC3F4 /* SampleStyleKit.plist */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		E20ED1121A9F24CC0045FA69 /* Model */ = {
@@ -198,21 +178,10 @@
 		E211056D1A7E003A0025BDA0 /* BFWDrawView */ = {
 			isa = PBXGroup;
 			children = (
+				E22117871AF4FE40007B515F /* Launch */,
 				E20357821A7F5144002BC3F4 /* Modules */,
-				E21105AE1A7ECB3F0025BDA0 /* LaunchScreen.xib */,
-				E211057B1A7E003A0025BDA0 /* Images.xcassets */,
-				E211056E1A7E003A0025BDA0 /* Supporting Files */,
 			);
 			path = BFWDrawView;
-			sourceTree = "<group>";
-		};
-		E211056E1A7E003A0025BDA0 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				E211056F1A7E003A0025BDA0 /* Info.plist */,
-				E21105701A7E003A0025BDA0 /* main.m */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		E21105871A7E003A0025BDA0 /* BFWDrawViewTests */ = {
@@ -231,6 +200,37 @@
 				E21105891A7E003A0025BDA0 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E22117871AF4FE40007B515F /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				E22117901AF4FE92007B515F /* AppDelegate.h */,
+				E22117911AF4FE92007B515F /* AppDelegate.m */,
+				E29917061AF4FF6F00F0DEDE /* Info.plist */,
+				E22117881AF4FE40007B515F /* Images.xcassets */,
+				E221178A1AF4FE40007B515F /* LaunchScreen.xib */,
+				E221178B1AF4FE40007B515F /* main.m */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		E29916FF1AF4FEE500F0DEDE /* StyleKits */ = {
+			isa = PBXGroup;
+			children = (
+				E29917001AF4FEE500F0DEDE /* View */,
+			);
+			path = StyleKits;
+			sourceTree = "<group>";
+		};
+		E29917001AF4FEE500F0DEDE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E29917011AF4FEE500F0DEDE /* SampleStyleKit.h */,
+				E29917021AF4FEE500F0DEDE /* SampleStyleKit.m */,
+				E29917031AF4FEE500F0DEDE /* SampleStyleKit.plist */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		E2FC1D9A1AC9066700F08B90 /* Controller */ = {
@@ -322,10 +322,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E21105AF1A7ECB3F0025BDA0 /* LaunchScreen.xib in Resources */,
-				E203579F1A7F5144002BC3F4 /* SampleStyleKit.plist in Resources */,
-				E211057C1A7E003A0025BDA0 /* Images.xcassets in Resources */,
+				E221178E1AF4FE40007B515F /* LaunchScreen.xib in Resources */,
+				E29917051AF4FEE500F0DEDE /* SampleStyleKit.plist in Resources */,
 				E20357A11A7F5187002BC3F4 /* Main.storyboard in Resources */,
+				E221178C1AF4FE40007B515F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,17 +344,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E21105711A7E003A0025BDA0 /* main.m in Sources */,
 				E20ED1111A9F24B50045FA69 /* NSObject+BFWStyleKit.m in Sources */,
 				E20357991A7F5144002BC3F4 /* BFWDrawButton.m in Sources */,
 				E20ED10E1A9F24860045FA69 /* UIImage+BFW.m in Sources */,
 				E2EBB3211ABFDE2E00C3787F /* BFWDrawExport.m in Sources */,
 				E20357981A7F5144002BC3F4 /* BFWAnimationView.m in Sources */,
-				E203579C1A7F5144002BC3F4 /* AppDelegate.m in Sources */,
-				E203579E1A7F5144002BC3F4 /* SampleStyleKit.m in Sources */,
 				E20ED1171A9F24CC0045FA69 /* NSInvocation+BFW.m in Sources */,
+				E29917041AF4FEE500F0DEDE /* SampleStyleKit.m in Sources */,
 				E203579A1A7F5144002BC3F4 /* BFWDrawView.m in Sources */,
+				E22117921AF4FE92007B515F /* AppDelegate.m in Sources */,
 				E2FC1D9D1AC9066700F08B90 /* BFWAndroidExportViewController.m in Sources */,
+				E221178F1AF4FE40007B515F /* main.m in Sources */,
 				E20ED1181A9F24CC0045FA69 /* NSString+BFW.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,6 +461,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BFWDrawView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -471,6 +472,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BFWDrawView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
