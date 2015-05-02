@@ -17,15 +17,21 @@
                         styleKits:(NSArray *)styleKitArray
                     pathScaleDict:(NSDictionary *)pathScaleDict
                         tintColor:(UIColor *)tintColor
-                          android:(BOOL)isAndroid;
+                          android:(BOOL)isAndroid
+                         duration:(CGFloat)duration
+                  framesPerSecond:(CGFloat)framesPerSecond;
 
 + (void)exportForAndroidToDirectory:(NSString *)directory
                           styleKits:(NSArray *)styleKits
                       pathScaleDict:(NSDictionary *)pathScaleDict
-                          tintColor:(UIColor *)tintColor;
+                          tintColor:(UIColor *)tintColor
+                           duration:(CGFloat)duration
+                    framesPerSecond:(CGFloat)framesPerSecond;
 
 + (void)exportForAndroidToDocumentsStyleKits:(NSArray *)styleKits
                                pathScaleDict:(NSDictionary *)pathScaleDict
-                                   tintColor:(UIColor *)tintColor;
+                                   tintColor:(UIColor *)tintColor
+                                    duration:(CGFloat)duration
+                             framesPerSecond:(CGFloat)framesPerSecond;
 
 @end

@@ -15,14 +15,19 @@
 @property (strong, nonatomic) IBOutletCollection(UITableViewCell) NSArray *exportSizeCells;
 @property (weak, nonatomic) IBOutlet UITableViewCell *exportCell;
 @property (weak, nonatomic) IBOutlet UITextField *directoryTextField;
+@property (weak, nonatomic) IBOutlet UISwitch *includeAnimationsSwitch;
+@property (weak, nonatomic) IBOutlet UITextField *durationTextField;
+@property (weak, nonatomic) IBOutlet UITextField *framesPerSecondTextField;
 
-@property (strong, nonatomic) NSString* directoryPath;
+@property (nonatomic) NSString* directoryPath;
+@property (nonatomic) BOOL includeAnimations;
 
 @end
 
 static NSUInteger const sizesSection = 0;
 static NSUInteger const styleKitsSection = 1;
 static NSString * const exportDirectoryKey = @"exportDirectory";
+static NSString * const includeAnimationsKey = @"includeAnimations";
 
 @implementation BFWAndroidExportViewController
 
@@ -77,6 +82,18 @@ static NSString * const exportDirectoryKey = @"exportDirectory";
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (BOOL)includeAnimations
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:includeAnimationsKey];
+}
+
+- (void)setIncludeAnimations:(BOOL)includeAnimations
+{
+    [[NSUserDefaults standardUserDefaults] setBool:includeAnimations
+                                            forKey:includeAnimationsKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 #pragma mark - UIViewController
 
 - (void)viewDidLoad
@@ -84,6 +101,7 @@ static NSString * const exportDirectoryKey = @"exportDirectory";
     [super viewDidLoad];
     self.directoryTextField.placeholder = [self defaultDirectoryPath];
     self.directoryTextField.text = self.directoryPath;
+    self.includeAnimationsSwitch.on = self.includeAnimations;
 }
 
 #pragma mark - UITableViewController
@@ -93,26 +111,30 @@ static NSString * const exportDirectoryKey = @"exportDirectory";
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (cell == self.exportCell) {
         [self.view endEditing:YES];
-        NSString *directoryPath = self.directoryPath ?: [self defaultDirectoryPath];
+        CGFloat duration = 0.0;
+        CGFloat framesPerSecond = 0.0; // 0.0 = do not include animations;
+        self.includeAnimations = self.includeAnimationsSwitch.isOn;
+        if (self.includeAnimationsSwitch.isOn) {
+            NSString *durationString = self.durationTextField.text.length ? self.durationTextField.text : self.durationTextField.placeholder;
+            duration = durationString.doubleValue;
+            NSString *framesPerSecondString = self.framesPerSecondTextField.text.length ? self.framesPerSecondTextField.text : self.framesPerSecondTextField.placeholder;
+            framesPerSecond = framesPerSecondString.doubleValue;
+        }
+        self.directoryPath = self.directoryTextField.text;
+        NSString *directoryPath = self.directoryPath.length ? self.directoryPath : [self defaultDirectoryPath];
+        [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:nil];
         [BFWDrawExport exportForAndroidToDirectory:directoryPath
                                          styleKits:[self styleKits]
                                      pathScaleDict:[self pathScaleDict]
-                                         tintColor:[UIColor blackColor]]; // TODO: get color from UI
+                                         tintColor:[UIColor blackColor] // TODO: get color from UI
+                                          duration:duration
+                                   framesPerSecond:framesPerSecond];
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     else if (indexPath.section == sizesSection || indexPath.section == styleKitsSection) {
         cell.accessoryType = cell.accessoryType == UITableViewCellAccessoryCheckmark ? UITableViewCellAccessoryNone : UITableViewCellAccessoryCheckmark;
     }
     [cell setSelected:NO animated:YES];
-}
-
-#pragma mark - UITextFieldDelegate
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    if (textField == self.directoryTextField) {
-        self.directoryPath = self.directoryTextField.text;
-    }
 }
 
 @end

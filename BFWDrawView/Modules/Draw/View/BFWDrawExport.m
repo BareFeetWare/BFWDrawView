@@ -56,14 +56,20 @@ static NSString * const animationKey = @"animation";
                     pathScaleDict:(NSDictionary *)pathScaleDict
                         tintColor:(UIColor *)tintColor
                           android:(BOOL)isAndroid
+                         duration:(CGFloat)duration
+                  framesPerSecond:(CGFloat)framesPerSecond
 {
     NSMutableSet *usedFileNames = [[NSMutableSet alloc] init];
     for (NSString *styleKit in styleKitArray) {
         Class styleKitClass = NSClassFromString(styleKit);
         NSDictionary *parameterDict = [styleKitClass parameterDict];
-        NSArray *drawingNames = [[styleKitClass drawParameterDict] allKeys];
+        NSDictionary *drawParameterDict = [styleKitClass drawParameterDict];
+        NSArray *drawingNames = drawParameterDict.allKeys;
         for (NSString *drawingName in drawingNames) {
-            BFWAnimationView *drawView = [[BFWAnimationView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
+            NSArray *parameters = drawParameterDict[drawingName];
+            BOOL isAnimation = [parameters containsObject:@"animation"];
+            Class class = isAnimation ? [BFWAnimationView class] : [BFWDrawView class];
+            BFWAnimationView *drawView = [[class alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
             drawView.name = drawingName;
             drawView.styleKit = styleKit;
             CGSize size = drawView.drawnSize;
@@ -83,10 +89,13 @@ static NSString * const animationKey = @"animation";
                                       toDirectory:directoryPath
                                     pathScaleDict:pathScaleDict
                                              size:size
-                                         fileName:fileName];
+                                         fileName:fileName
+                                         duration:duration
+                                  framesPerSecond:framesPerSecond];
                 }
             }
         }
+        // TODO: refactor for above and below to to call a common method
         for (NSString *drawingName in parameterDict[derivedKey]) {
             NSDictionary *derivedDict = parameterDict[derivedKey][drawingName];
             NSString *baseName = derivedDict[baseKey];
@@ -99,7 +108,10 @@ static NSString * const animationKey = @"animation";
                     useTintColor = [styleKitClass colorWithName:tintColorString];
                 }
                 if (!CGSizeEqualToSize(size, CGSizeZero)) {
-                    BFWAnimationView *drawView = [[BFWAnimationView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+                    NSArray *parameters = drawParameterDict[drawingName];
+                    BOOL isAnimation = [parameters containsObject:@"animation"];
+                    Class class = isAnimation ? [BFWAnimationView class] : [BFWDrawView class];
+                    BFWAnimationView *drawView = [[class alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
                     drawView.name = baseName;
                     drawView.styleKit = styleKit;
                     drawView.tintColor = useTintColor;
@@ -113,7 +125,9 @@ static NSString * const animationKey = @"animation";
                                       toDirectory:directoryPath
                                     pathScaleDict:pathScaleDict
                                              size:size
-                                         fileName:fileName];
+                                         fileName:fileName
+                                         duration:duration
+                                  framesPerSecond:framesPerSecond];
                 }
             }
         }
@@ -125,6 +139,8 @@ static NSString * const animationKey = @"animation";
                   pathScaleDict:(NSDictionary *)pathScaleDict
                            size:(CGSize)size
                        fileName:(NSString *)fileName
+                       duration:(CGFloat)duration
+                framesPerSecond:(CGFloat)framesPerSecond
 {
     for (NSString *path in pathScaleDict) {
         NSNumber *scaleNumber = pathScaleDict[path];
@@ -138,8 +154,20 @@ static NSString * const animationKey = @"animation";
         }
         NSString *filePath = [directoryPath stringByAppendingPathComponent:relativePath];
         filePath = [filePath stringByAppendingPathExtension:@"png"];
-        BOOL success = [drawView writeImageAtScale:scale
-                                            toFile:filePath];
+        BOOL success = NO;
+        if ([drawView isKindOfClass:[BFWAnimationView class]]) {
+            BFWAnimationView *animationView = (BFWAnimationView *)drawView;
+            if (duration) {
+                animationView.duration = duration;
+            }
+            animationView.framesPerSecond = framesPerSecond;
+            success = [animationView writeImagesAtScale:scale
+                                                 toFile:filePath];
+        }
+        else {
+            success = [drawView writeImageAtScale:scale
+                                           toFile:filePath];
+        }
         if (!success) {
             NSLog(@"failed to write %@", relativePath);
         }
@@ -150,13 +178,17 @@ static NSString * const animationKey = @"animation";
                           styleKits:(NSArray *)styleKits
                       pathScaleDict:(NSDictionary *)pathScaleDict
                           tintColor:(UIColor *)tintColor
+                           duration:(CGFloat)duration
+                    framesPerSecond:(CGFloat)framesPerSecond
 {
     DLog(@"writing images to %@", directory);
     [self writeAllImagesToDirectory:directory
                           styleKits:styleKits
                       pathScaleDict:pathScaleDict
                           tintColor:tintColor
-                            android:YES];
+                            android:YES
+                           duration:duration
+                    framesPerSecond:framesPerSecond];
     /// Note: currently exports colors only from the first styleKit
     NSString *colorsXmlString = [NSClassFromString(styleKits.firstObject) colorsXmlString];
     NSString *colorsFile = [directory stringByAppendingPathComponent:@"paintcode_colors.xml"];
@@ -176,13 +208,17 @@ static NSString * const animationKey = @"animation";
 + (void)exportForAndroidToDocumentsStyleKits:(NSArray *)styleKits
                                pathScaleDict:(NSDictionary *)pathScaleDict
                                    tintColor:(UIColor *)tintColor
+                                    duration:(CGFloat)duration
+                             framesPerSecond:(CGFloat)framesPerSecond
 {
     NSString *directory = [[self documentsDirectoryPath] stringByAppendingPathComponent:@"android_drawables"];
     [[NSFileManager defaultManager] removeItemAtPath:directory error:nil];
     [self exportForAndroidToDirectory:directory
                             styleKits:styleKits
                         pathScaleDict:pathScaleDict
-                            tintColor:tintColor];
+                            tintColor:tintColor
+                             duration:(CGFloat)duration
+                      framesPerSecond:framesPerSecond];
 }
 
 @end
