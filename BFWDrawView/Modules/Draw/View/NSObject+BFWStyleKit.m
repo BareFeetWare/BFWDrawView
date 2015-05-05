@@ -178,7 +178,7 @@
 + (UIColor *)colorWithName:(NSString *)colorName
 {
     UIColor *color;
-    SEL selector = NSSelectorFromString(colorName);
+    SEL selector = NSSelectorFromString([colorName wordsToPaintCodeCase]);
     NSInvocation *invocation = [NSInvocation invocationForClass:self
                                                        selector:selector
                                                argumentPointers:nil];
