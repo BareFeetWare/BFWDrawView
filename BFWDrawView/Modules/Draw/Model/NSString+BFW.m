@@ -37,7 +37,7 @@
     for (NSUInteger charN = 0; charN < self.length; charN++) {
         NSString *thisChar = [self substringWithRange:NSMakeRange(charN, 1)];
         NSString *nextChar = charN + 1 < self.length ? [self substringWithRange:NSMakeRange(charN + 1, 1)] : nil;
-        if (charN > 0 && ![thisChar isEqualToString:@" "] && [thisChar isUppercase] && (![previousChar isUppercase] || (nextChar && ![nextChar isUppercase]))) {
+        if (charN > 0 && ![previousChar isEqualToString:@" "] && ![thisChar isEqualToString:@" "] && [thisChar isUppercase] && (![previousChar isUppercase] || (nextChar && ![nextChar isUppercase]))) {
             [wordString appendString:@" "];
         }
         [wordString appendString:thisChar];

@@ -78,6 +78,12 @@
 				<key>return</key>
 				<string>i Am A Camel with some Words thrown in at The End</string>
 			</dict>
+			<dict>
+				<key>self</key>
+				<string>CamelStart Plus Separate Words</string>
+				<key>return</key>
+				<string>Camel Start Plus Separate Words</string>
+			</dict>
 		</array>
 	</dict>
 </dict>
