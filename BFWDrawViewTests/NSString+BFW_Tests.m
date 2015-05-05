@@ -32,6 +32,7 @@
     NSString *plistPath = [[NSBundle bundleForClass:[self class]] pathForResource:className ofType:@"plist"];
     NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     NSDictionary *selectorExpectationDict = plistDict[@"selectorExpectations"];
+    XCTAssert(selectorExpectationDict, @"Cannot get selectorExpectations from plist");
     for (NSString *selectorName in selectorExpectationDict) {
         NSArray *expectations = selectorExpectationDict[selectorName];
         for (NSDictionary *expectation in expectations) {
