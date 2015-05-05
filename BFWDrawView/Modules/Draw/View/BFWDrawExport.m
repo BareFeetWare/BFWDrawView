@@ -112,15 +112,18 @@ static NSString * const animationKey = @"animation";
                     NSArray *parameters = drawParameterDict[drawingName];
                     BOOL isAnimation = [parameters containsObject:@"animation"];
                     Class class = isAnimation ? [BFWAnimationView class] : [BFWDrawView class];
-                    BFWAnimationView *drawView = [[class alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+                    BFWDrawView *drawView = [[class alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
                     drawView.name = baseName;
                     drawView.styleKit = styleKit;
                     drawView.tintColor = useTintColor;
-                    NSNumber *animationNumber = derivedDict[animationKey];
-                    if (animationNumber) {
-                        drawView.animation = animationNumber.doubleValue;
-                    }
                     drawView.contentMode = UIViewContentModeScaleAspectFit;
+                    if (isAnimation) {
+                        NSNumber *animationNumber = derivedDict[animationKey];
+                        if (animationNumber) {
+                            BFWAnimationView *animationView = (BFWAnimationView *)drawView;
+                            animationView.animation = animationNumber.doubleValue;
+                        }
+                    }
                     NSString *fileName = isAndroid ? [drawingName androidFileName] : drawingName;
                     [self writeImagesFromDrawView:drawView
                                       toDirectory:directoryPath
