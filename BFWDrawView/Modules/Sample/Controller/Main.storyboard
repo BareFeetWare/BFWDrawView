@@ -462,35 +462,22 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Actions" id="jRa-jo-GSo">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="hgL-RI-Oc6" style="IBUITableViewCellStyleDefault" id="y18-jY-y2q">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="y18-jY-y2q" id="QhP-MQ-cax">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Export" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hgL-RI-Oc6">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="I9W-Ag-ofT" id="d5m-FK-Oqj"/>
                             <outlet property="delegate" destination="I9W-Ag-ofT" id="jHj-dG-7YJ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Export" id="LGn-zv-6dP"/>
+                    <navigationItem key="navigationItem" title="Export" id="LGn-zv-6dP">
+                        <barButtonItem key="rightBarButtonItem" title="Export" id="vOA-pT-BIk">
+                            <connections>
+                                <action selector="export:" destination="I9W-Ag-ofT" id="BUb-jh-SsV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="directoryTextField" destination="GmZ-Zb-EJu" id="xuw-cY-aqZ"/>
                         <outlet property="durationTextField" destination="THE-Ce-swb" id="4HD-X8-Vea"/>
-                        <outlet property="exportCell" destination="y18-jY-y2q" id="hMq-J1-fsl"/>
                         <outlet property="framesPerSecondTextField" destination="XBv-sq-OYw" id="uzv-e5-KpO"/>
                         <outlet property="includeAnimationsSwitch" destination="wq2-J5-oi9" id="nWy-el-nHp"/>
                         <outletCollection property="exportSizeCells" destination="5WD-ge-Zat" id="xyk-ie-3UA"/>
