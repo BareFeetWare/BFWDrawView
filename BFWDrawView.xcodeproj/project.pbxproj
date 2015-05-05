@@ -16,7 +16,7 @@
 		E20ED1171A9F24CC0045FA69 /* NSInvocation+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E20ED1141A9F24CC0045FA69 /* NSInvocation+BFW.m */; };
 		E20ED1181A9F24CC0045FA69 /* NSString+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E20ED1161A9F24CC0045FA69 /* NSString+BFW.m */; };
 		E20ED11F1A9FC43D0045FA69 /* NSString_BFW_Tests.plist in Resources */ = {isa = PBXBuildFile; fileRef = E20ED11E1A9FC43D0045FA69 /* NSString_BFW_Tests.plist */; };
-		E211058B1A7E003A0025BDA0 /* BFWDrawViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E211058A1A7E003A0025BDA0 /* BFWDrawViewTests.m */; };
+		E211058B1A7E003A0025BDA0 /* NSString+BFW_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E211058A1A7E003A0025BDA0 /* NSString+BFW_Tests.m */; };
 		E221178C1AF4FE40007B515F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E22117881AF4FE40007B515F /* Images.xcassets */; };
 		E221178E1AF4FE40007B515F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E221178A1AF4FE40007B515F /* LaunchScreen.xib */; };
 		E221178F1AF4FE40007B515F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E221178B1AF4FE40007B515F /* main.m */; };
@@ -57,7 +57,7 @@
 		E211056B1A7E003A0025BDA0 /* BFWDrawView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BFWDrawView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E21105841A7E003A0025BDA0 /* BFWDrawViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BFWDrawViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E21105891A7E003A0025BDA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E211058A1A7E003A0025BDA0 /* BFWDrawViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFWDrawViewTests.m; sourceTree = "<group>"; };
+		E211058A1A7E003A0025BDA0 /* NSString+BFW_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+BFW_Tests.m"; sourceTree = "<group>"; };
 		E22117881AF4FE40007B515F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E221178A1AF4FE40007B515F /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		E221178B1AF4FE40007B515F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -187,7 +187,7 @@
 		E21105871A7E003A0025BDA0 /* BFWDrawViewTests */ = {
 			isa = PBXGroup;
 			children = (
-				E211058A1A7E003A0025BDA0 /* BFWDrawViewTests.m */,
+				E211058A1A7E003A0025BDA0 /* NSString+BFW_Tests.m */,
 				E20ED11E1A9FC43D0045FA69 /* NSString_BFW_Tests.plist */,
 				E21105881A7E003A0025BDA0 /* Supporting Files */,
 			);
@@ -363,7 +363,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E211058B1A7E003A0025BDA0 /* BFWDrawViewTests.m in Sources */,
+				E211058B1A7E003A0025BDA0 /* NSString+BFW_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

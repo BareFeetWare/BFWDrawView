@@ -30,12 +30,6 @@
     return [self isEqualToString:self.uppercaseString];
 }
 
-- (BOOL)isUppercaseOrWhiteSpace
-{
-    return [self isUppercase] || [self stringByReplacingOccurrencesOfString:@" " withString:@""].length == 0;
-    // TODO: check for other white space characters
-}
-
 - (NSString *)camelCaseToWords
 {
     NSMutableString *wordString = [[NSMutableString alloc] init];
@@ -43,7 +37,7 @@
     for (NSUInteger charN = 0; charN < self.length; charN++) {
         NSString *thisChar = [self substringWithRange:NSMakeRange(charN, 1)];
         NSString *nextChar = charN + 1 < self.length ? [self substringWithRange:NSMakeRange(charN + 1, 1)] : nil;
-        if (charN > 0 && [thisChar isUppercase] && (![previousChar isUppercaseOrWhiteSpace] || (nextChar && ![nextChar isUppercaseOrWhiteSpace]))) {
+        if (charN > 0 && ![thisChar isEqualToString:@" "] && [thisChar isUppercase] && (![previousChar isUppercase] || (nextChar && ![nextChar isUppercase]))) {
             [wordString appendString:@" "];
         }
         [wordString appendString:thisChar];

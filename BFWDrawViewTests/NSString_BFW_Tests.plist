@@ -55,6 +55,30 @@
 				<string>ic_of_something</string>
 			</dict>
 		</array>
+		<key>wordsToPaintCodeCase</key>
+		<array>
+			<dict>
+				<key>self</key>
+				<string>I went to the beach on	Saturday ALLCAPS wOW</string>
+				<key>return</key>
+				<string>IWentToTheBeachOnSaturdayALLCAPSWOW</string>
+			</dict>
+		</array>
+		<key>camelCaseToWords</key>
+		<array>
+			<dict>
+				<key>self</key>
+				<string>iAmACamel</string>
+				<key>return</key>
+				<string>i Am A Camel</string>
+			</dict>
+			<dict>
+				<key>self</key>
+				<string>iAmACamel with someWords thrown in atTheEnd</string>
+				<key>return</key>
+				<string>i Am A Camel with some Words thrown in at The End</string>
+			</dict>
+		</array>
 	</dict>
 </dict>
 </plist>

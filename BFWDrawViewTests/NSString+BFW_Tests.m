@@ -1,6 +1,6 @@
 //
-//  BFWDrawViewTests.m
-//  BFWDrawViewTests
+//  NSString+BFW_Tests.m
+//  NSString+BFW_Tests
 //
 //  Created by Tom Brodhurst-Hill on 1/02/2015.
 //  Copyright (c) 2015 BareFeetWare. All rights reserved.
@@ -10,11 +10,11 @@
 #import <XCTest/XCTest.h>
 #import "NSString+BFW.h"
 
-@interface BFWDrawViewTests : XCTestCase
+@interface NSString_BFW_Tests : XCTestCase
 
 @end
 
-@implementation BFWDrawViewTests
+@implementation NSString_BFW_Tests
 
 - (void)setUp {
     [super setUp];
@@ -54,12 +54,6 @@
             }
         }
     }
-}
-
-- (void)testWordsToPaintCodeCase {
-    NSString *words = @"I went to the beach on\tSaturday ALLCAPS wOW";
-    NSString *casedString = [words wordsToPaintCodeCase];
-    XCTAssertEqualObjects(casedString, @"IWentToTheBeachOnSaturdayALLCAPSWOW");
 }
 
 @end
