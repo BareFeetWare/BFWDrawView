@@ -49,6 +49,8 @@ static NSString * const sizeKey = @"size";
 static NSString * const tintColorKey = @"tintColor";
 static NSString * const derivedKey = @"derived";
 static NSString * const animationKey = @"animation";
+static NSString * const arrayKey = @"array";
+static NSString * const arraysKey = @"arrays";
 
 @implementation BFWDrawExport
 
@@ -79,7 +81,7 @@ static NSString * const animationKey = @"animation";
 + (void)modifyDrawView:(BFWDrawView *)drawView
        withDerivedDict:(NSDictionary *)derivedDict
 {
-    NSString *tintColorString = derivedDict[tintColorKey];
+    NSString *tintColorString = derivedDict[tintColorKey]; //TODO: allow for "Tint Color" & "tintColor"
     if (tintColorString) {
         drawView.tintColor = [drawView.styleKitClass colorWithName:tintColorString];
     }
@@ -129,8 +131,39 @@ static NSString * const animationKey = @"animation";
             BFWDrawView *drawView = [self drawViewForName:baseName
                                                  styleKit:styleKit
                                                 tintColor:tintColor];
-            [self modifyDrawView:drawView
-                 withDerivedDict:derivedDict];
+            if ([drawingName containsString:@"%@"]) {
+                NSString *arrayName = derivedDict[arrayKey];
+                NSArray *array = parameterDict[arraysKey][arrayName];
+                for (NSString *itemString in array) {
+                    NSString *itemDrawingName = [NSString stringWithFormat:drawingName, itemString];
+                    NSMutableDictionary *mutableDerivedDict = [derivedDict mutableCopy];
+                    for (NSString *key in derivedDict) {
+                        if ([key isEqualToString:arrayKey]) {
+                            [mutableDerivedDict removeObjectForKey:key];
+                        }
+                        else {
+                            NSString *format = derivedDict[key];
+                            if ([format isKindOfClass:[NSString class]] && [format containsString:@"%@"]) {
+                                mutableDerivedDict[key] = [NSString stringWithFormat:format, itemString];
+                            }
+                        }
+                    }
+                    [self modifyDrawView:drawView
+                         withDerivedDict:[mutableDerivedDict copy]];
+                    [self writeImagesFromDrawView:drawView
+                                      toDirectory:directoryPath
+                                    pathScaleDict:pathScaleDict
+                                         fileName:itemDrawingName
+                                          android:isAndroid
+                                         duration:duration
+                                  framesPerSecond:framesPerSecond
+                                    usedFileNames:usedFileNames];
+                }
+            }
+            else {
+                [self modifyDrawView:drawView
+                     withDerivedDict:derivedDict];
+            }
             [self writeImagesFromDrawView:drawView
                               toDirectory:directoryPath
                             pathScaleDict:pathScaleDict
@@ -233,7 +266,7 @@ static NSString * const animationKey = @"animation";
                             styleKits:styleKits
                         pathScaleDict:pathScaleDict
                             tintColor:tintColor
-                             duration:(CGFloat)duration
+                             duration:duration
                       framesPerSecond:framesPerSecond];
 }
 
