@@ -52,6 +52,50 @@ static NSString * const animationKey = @"animation";
 
 @implementation BFWDrawExport
 
++ (BFWDrawView *)drawViewForName:(NSString *)drawingName
+                        styleKit:(NSString *)styleKit
+                       tintColor:(UIColor *)tintColor
+{
+    Class styleKitClass = NSClassFromString(styleKit);
+    NSDictionary *drawParameterDict = [styleKitClass drawParameterDict]; //TODO: cache
+    NSArray *parameters = drawParameterDict[drawingName];
+    BOOL isAnimation = [parameters containsObject:@"animation"];
+    Class class = isAnimation ? [BFWAnimationView class] : [BFWDrawView class];
+    BFWAnimationView *drawView = [[class alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
+    drawView.name = drawingName;
+    drawView.styleKit = styleKit;
+    drawView.contentMode = UIViewContentModeScaleAspectFit;
+    drawView.tintColor = tintColor;
+    CGSize size = drawView.drawnSize;
+    if (CGSizeEqualToSize(size, CGSizeZero)) {
+        DLog(@"missing size for drawing: %@", drawingName);
+    }
+    else {
+        drawView.frame = CGRectMake(0, 0, size.width, size.height);
+    }
+    return drawView;
+}
+
++ (void)modifyDrawView:(BFWDrawView *)drawView
+       withDerivedDict:(NSDictionary *)derivedDict
+{
+    NSString *tintColorString = derivedDict[tintColorKey];
+    if (tintColorString) {
+        drawView.tintColor = [drawView.styleKitClass colorWithName:tintColorString];
+    }
+    NSString *sizeString = derivedDict[sizeKey];
+    CGSize size = CGSizeFromString(sizeString);
+    if (!CGSizeEqualToSize(size, CGSizeZero)) {
+        drawView.frame = CGRectMake(0, 0, size.width, size.height);
+    }
+    NSNumber *animationNumber = derivedDict[animationKey];
+    if (animationNumber && [drawView isKindOfClass:[BFWAnimationView class]]) {
+        BFWAnimationView *animationView = (BFWAnimationView *)drawView;
+        animationView.animation = animationNumber.doubleValue;
+        animationView.paused = YES; // so it only creates one image
+    }
+}
+
 + (void)writeAllImagesToDirectory:(NSString *)directoryPath
                         styleKits:(NSArray *)styleKitArray
                     pathScaleDict:(NSDictionary *)pathScaleDict
@@ -67,73 +111,34 @@ static NSString * const animationKey = @"animation";
         NSDictionary *drawParameterDict = [styleKitClass drawParameterDict];
         NSArray *drawingNames = drawParameterDict.allKeys;
         for (NSString *drawingName in drawingNames) {
-            NSArray *parameters = drawParameterDict[drawingName];
-            BOOL isAnimation = [parameters containsObject:@"animation"];
-            Class class = isAnimation ? [BFWAnimationView class] : [BFWDrawView class];
-            BFWAnimationView *drawView = [[class alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
-            drawView.name = drawingName;
-            drawView.styleKit = styleKit;
-            CGSize size = drawView.drawnSize;
-            if (CGSizeEqualToSize(size, CGSizeZero)) {
-                DLog(@"missing size for drawing: %@", drawingName);
-            }
-            else {
-                drawView.frame = CGRectMake(0, 0, size.width, size.height);
-                drawView.tintColor = tintColor;
-                NSString *fileName = isAndroid ? [drawingName androidFileName] : drawingName;
-                if ([usedFileNames containsObject:fileName]) {
-                    DLog(@"**** warning: attempted to write over existing file: %@", fileName);
-                }
-                else {
-                    [usedFileNames addObject:fileName];
-                    [self writeImagesFromDrawView:drawView
-                                      toDirectory:directoryPath
-                                    pathScaleDict:pathScaleDict
-                                             size:size
-                                         fileName:fileName
-                                         duration:duration
-                                  framesPerSecond:framesPerSecond];
-                }
-            }
+            BFWDrawView *drawView = [self drawViewForName:drawingName
+                                                 styleKit:styleKit
+                                                tintColor:tintColor];
+            [self writeImagesFromDrawView:drawView
+                              toDirectory:directoryPath
+                            pathScaleDict:pathScaleDict
+                                 fileName:drawingName
+                                  android:isAndroid
+                                 duration:duration
+                          framesPerSecond:framesPerSecond
+                            usedFileNames:usedFileNames];
         }
-        // TODO: refactor for above and below to to call a common method
         for (NSString *drawingName in parameterDict[derivedKey]) {
             NSDictionary *derivedDict = parameterDict[derivedKey][drawingName];
             NSString *baseName = derivedDict[baseKey];
-            NSString *sizeString = derivedDict[sizeKey] ? derivedDict[sizeKey] : parameterDict[sizesKey][baseName];
-            if (sizeString) {
-                CGSize size = CGSizeFromString(sizeString);
-                UIColor *useTintColor = tintColor;
-                NSString *tintColorString = derivedDict[tintColorKey];
-                if (tintColorString) {
-                    useTintColor = [styleKitClass colorWithName:tintColorString];
-                }
-                if (!CGSizeEqualToSize(size, CGSizeZero)) {
-                    NSArray *parameters = drawParameterDict[drawingName];
-                    BOOL isAnimation = [parameters containsObject:@"animation"];
-                    Class class = isAnimation ? [BFWAnimationView class] : [BFWDrawView class];
-                    BFWDrawView *drawView = [[class alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-                    drawView.name = baseName;
-                    drawView.styleKit = styleKit;
-                    drawView.tintColor = useTintColor;
-                    drawView.contentMode = UIViewContentModeScaleAspectFit;
-                    if (isAnimation) {
-                        NSNumber *animationNumber = derivedDict[animationKey];
-                        if (animationNumber) {
-                            BFWAnimationView *animationView = (BFWAnimationView *)drawView;
-                            animationView.animation = animationNumber.doubleValue;
-                        }
-                    }
-                    NSString *fileName = isAndroid ? [drawingName androidFileName] : drawingName;
-                    [self writeImagesFromDrawView:drawView
-                                      toDirectory:directoryPath
-                                    pathScaleDict:pathScaleDict
-                                             size:size
-                                         fileName:fileName
-                                         duration:duration
-                                  framesPerSecond:framesPerSecond];
-                }
-            }
+            BFWDrawView *drawView = [self drawViewForName:baseName
+                                                 styleKit:styleKit
+                                                tintColor:tintColor];
+            [self modifyDrawView:drawView
+                 withDerivedDict:derivedDict];
+            [self writeImagesFromDrawView:drawView
+                              toDirectory:directoryPath
+                            pathScaleDict:pathScaleDict
+                                 fileName:drawingName
+                                  android:isAndroid
+                                 duration:duration
+                          framesPerSecond:framesPerSecond
+                            usedFileNames:usedFileNames];
         }
     }
 }
@@ -141,20 +146,27 @@ static NSString * const animationKey = @"animation";
 + (void)writeImagesFromDrawView:(BFWDrawView *)drawView
                     toDirectory:(NSString *)directoryPath
                   pathScaleDict:(NSDictionary *)pathScaleDict
-                           size:(CGSize)size
                        fileName:(NSString *)fileName
+                        android:(BOOL)isAndroid
                        duration:(CGFloat)duration
                 framesPerSecond:(CGFloat)framesPerSecond
+                  usedFileNames:(NSMutableSet *)usedFileNames
 {
+    NSString *useFileName = isAndroid ? [fileName androidFileName] : fileName;
+    if ([usedFileNames containsObject:useFileName]) {
+        DLog(@"**** warning: attempted to write over existing file: %@", useFileName);
+        return;
+    }
+    [usedFileNames addObject:useFileName];
     for (NSString *path in pathScaleDict) {
         NSNumber *scaleNumber = pathScaleDict[path];
         CGFloat scale = [scaleNumber floatValue];
         NSString *relativePath;
         if ([path containsString:@"%@"]) {
-            relativePath = [NSString stringWithFormat:path, fileName];
+            relativePath = [NSString stringWithFormat:path, useFileName];
         }
         else {
-            relativePath = [path stringByAppendingPathComponent:fileName];
+            relativePath = [path stringByAppendingPathComponent:useFileName];
         }
         NSString *filePath = [directoryPath stringByAppendingPathComponent:relativePath];
         filePath = [filePath stringByAppendingPathExtension:@"png"];
