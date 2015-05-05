@@ -60,7 +60,8 @@ static NSString * const arraysKey = @"arrays";
 {
     Class styleKitClass = NSClassFromString(styleKit);
     NSDictionary *drawParameterDict = [styleKitClass drawParameterDict]; //TODO: cache
-    NSArray *parameters = drawParameterDict[drawingName];
+    NSString *paintCodeDrawingName = [[drawingName wordsToPaintCodeCase] lowercaseFirstCharacter];
+    NSArray *parameters = drawParameterDict[paintCodeDrawingName];
     BOOL isAnimation = [parameters containsObject:@"animation"];
     Class class = isAnimation ? [BFWAnimationView class] : [BFWDrawView class];
     BFWAnimationView *drawView = [[class alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
@@ -113,6 +114,10 @@ static NSString * const arraysKey = @"arrays";
         NSDictionary *drawParameterDict = [styleKitClass drawParameterDict];
         NSArray *drawingNames = drawParameterDict.allKeys;
         for (NSString *drawingName in drawingNames) {
+            if (![drawParameterDict[drawingName] containsObject:@"frame"]) {
+                // skipping since can't draw
+                continue;
+            }
             BFWDrawView *drawView = [self drawViewForName:drawingName
                                                  styleKit:styleKit
                                                 tintColor:tintColor];
