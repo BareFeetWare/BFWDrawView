@@ -168,15 +168,15 @@ static NSString * const arraysKey = @"arrays";
             else {
                 [self modifyDrawView:drawView
                      withDerivedDict:derivedDict];
+                [self writeImagesFromDrawView:drawView
+                                  toDirectory:directoryPath
+                                pathScaleDict:pathScaleDict
+                                     fileName:drawingName
+                                      android:isAndroid
+                                     duration:duration
+                              framesPerSecond:framesPerSecond
+                                usedFileNames:usedFileNames];
             }
-            [self writeImagesFromDrawView:drawView
-                              toDirectory:directoryPath
-                            pathScaleDict:pathScaleDict
-                                 fileName:drawingName
-                                  android:isAndroid
-                                 duration:duration
-                          framesPerSecond:framesPerSecond
-                            usedFileNames:usedFileNames];
         }
     }
 }
