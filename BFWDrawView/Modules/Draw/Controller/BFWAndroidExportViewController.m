@@ -94,6 +94,37 @@ static NSString * const includeAnimationsKey = @"includeAnimations";
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#pragma mark - actions
+
+- (IBAction)export:(id)sender
+{
+    [self.view endEditing:YES];
+    CGFloat duration = 0.0;
+    CGFloat framesPerSecond = 0.0; // 0.0 = do not include animations;
+    self.includeAnimations = self.includeAnimationsSwitch.isOn;
+    if (self.includeAnimationsSwitch.isOn) {
+        NSString *durationString = self.durationTextField.text.length ? self.durationTextField.text : self.durationTextField.placeholder;
+        duration = durationString.doubleValue;
+        NSString *framesPerSecondString = self.framesPerSecondTextField.text.length ? self.framesPerSecondTextField.text : self.framesPerSecondTextField.placeholder;
+        framesPerSecond = framesPerSecondString.doubleValue;
+    }
+    self.directoryPath = self.directoryTextField.text;
+    NSString *directoryPath = self.directoryPath.length ? self.directoryPath : [self defaultDirectoryPath];
+    [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:nil];
+    [BFWDrawExport exportForAndroidToDirectory:directoryPath
+                                     styleKits:[self styleKits]
+                                 pathScaleDict:[self pathScaleDict]
+                                     tintColor:[UIColor blackColor] // TODO: get color from UI
+                                      duration:duration
+                               framesPerSecond:framesPerSecond];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Export complete"
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+    [alertView show];
+}
+
 #pragma mark - UIViewController
 
 - (void)viewDidLoad
@@ -110,25 +141,7 @@ static NSString * const includeAnimationsKey = @"includeAnimations";
 {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (cell == self.exportCell) {
-        [self.view endEditing:YES];
-        CGFloat duration = 0.0;
-        CGFloat framesPerSecond = 0.0; // 0.0 = do not include animations;
-        self.includeAnimations = self.includeAnimationsSwitch.isOn;
-        if (self.includeAnimationsSwitch.isOn) {
-            NSString *durationString = self.durationTextField.text.length ? self.durationTextField.text : self.durationTextField.placeholder;
-            duration = durationString.doubleValue;
-            NSString *framesPerSecondString = self.framesPerSecondTextField.text.length ? self.framesPerSecondTextField.text : self.framesPerSecondTextField.placeholder;
-            framesPerSecond = framesPerSecondString.doubleValue;
-        }
-        self.directoryPath = self.directoryTextField.text;
-        NSString *directoryPath = self.directoryPath.length ? self.directoryPath : [self defaultDirectoryPath];
-        [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:nil];
-        [BFWDrawExport exportForAndroidToDirectory:directoryPath
-                                         styleKits:[self styleKits]
-                                     pathScaleDict:[self pathScaleDict]
-                                         tintColor:[UIColor blackColor] // TODO: get color from UI
-                                          duration:duration
-                                   framesPerSecond:framesPerSecond];
+        [self export:cell];
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     else if (indexPath.section == sizesSection || indexPath.section == styleKitsSection) {
