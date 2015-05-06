@@ -60,7 +60,7 @@ NSString * const sizesByPrefixKey = @"sizesByPrefix";
                 return obj1.length > obj2.length ? NSOrderedAscending : NSOrderedDescending;
             }];
             for (NSString *prefix in sortedKeys) {
-                if ([self.name hasPrefix:prefix]) {
+                if ([[self.name camelCaseToWords].lowercaseString hasPrefix:[prefix camelCaseToWords].lowercaseString]) {
                     sizeString = sizeByPrefixDict[prefix];
                     break;
                 }
