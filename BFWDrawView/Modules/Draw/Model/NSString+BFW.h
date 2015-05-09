@@ -14,5 +14,7 @@
 - (NSString *)lowercaseFirstCharacter; // only lowercase first character in string
 - (NSString *)camelCaseToWords; // convert camelCase to separate words
 - (NSString *)wordsToPaintCodeCase; // convert separate words to the case that PaintCode uses for methods
+- (NSString *)lowercaseWords;
+- (NSString *)longestWordsMatchInPrefixArray:(NSArray *)prefixArray;
 
 @end

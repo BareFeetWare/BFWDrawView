@@ -8,7 +8,6 @@
 
 #import "NSString+BFW.h"
 
-
 @implementation NSString (BFW)
 
 - (NSString *)uppercaseFirstCharacter // only uppercase first character in string
@@ -56,6 +55,28 @@
         }
     }
     return [casedWords componentsJoinedByString:@""];
+}
+
+- (NSString *)lowercaseWords
+{
+    return [self camelCaseToWords].lowercaseString;
+}
+
+- (NSString *)longestWordsMatchInPrefixArray:(NSArray *)prefixArray
+{
+    NSArray *sortedItems = [prefixArray sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
+        // sort from longest to shortest so more specific (longer) match is found first
+        return obj1.length > obj2.length ? NSOrderedAscending : NSOrderedDescending;
+    }];
+    NSString *matchingPrefix = nil;
+    NSString *lowercaseWords = [self lowercaseWords];
+    for (NSString *prefix in sortedItems) {
+        if ([lowercaseWords hasPrefix:[prefix lowercaseWords]]) {
+            matchingPrefix = prefix;
+            break;
+        }
+    }
+    return matchingPrefix;
 }
 
 @end

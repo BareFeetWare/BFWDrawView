@@ -10,17 +10,20 @@
 #import "UIImage+BFW.h"
 #import "NSInvocation+BFW.h"
 #import "NSString+BFW.h"
+#import "NSDictionary+BFW.h"
 #import "NSObject+BFWStyleKit.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface BFWDrawView ()
 
+@property (nonatomic, strong) Class styleKitClass;
 @property (nonatomic, assign) BOOL didCheckCanDraw;
 
 @end
 
 NSString * const sizesKey = @"sizes";
 NSString * const sizesByPrefixKey = @"sizesByPrefix";
+NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 
 @implementation BFWDrawView
 
@@ -40,7 +43,19 @@ NSString * const sizesByPrefixKey = @"sizesByPrefix";
 
 - (Class)styleKitClass
 {
-    return NSClassFromString(self.styleKit);
+    if (!_styleKitClass) {
+        _styleKitClass = NSClassFromString(self.styleKit);
+        
+        /// Check if redirected to another stylekit:
+        NSDictionary *parameterDict = [_styleKitClass parameterDict]; // TODO: cache in styleKit class
+        NSString *styleKit = [parameterDict[styleKitByPrefixKey] objectForLongestPrefixKeyMatchingWordsInString:self.name];
+        if (styleKit) {
+            self.styleKit = styleKit;
+            _styleKitClass = NSClassFromString(self.styleKit);
+            parameterDict = [_styleKitClass parameterDict];
+        }
+    }
+    return _styleKitClass;
 }
 
 #pragma mark - frame calculations
@@ -48,23 +63,10 @@ NSString * const sizesByPrefixKey = @"sizesByPrefix";
 - (CGSize)drawnSize
 {
     if (CGSizeEqualToSize(_drawnSize, CGSizeZero)) {
-        NSDictionary *parameterDict = [self.styleKitClass parameterDict];
-        NSString *sizeString = parameterDict[sizesKey][self.name];
-        if (!sizesKey) {
-            sizeString = parameterDict[sizesKey][[self.name wordsToPaintCodeCase]];
-        }
+        NSDictionary *parameterDict = [self.styleKitClass parameterDict]; // TODO: cache in styleKit class
+        NSString *sizeString = [parameterDict[sizesKey] objectForWordsKey:self.name];
         if (!sizeString) {
-            NSDictionary *sizeByPrefixDict = parameterDict[sizesByPrefixKey];
-            NSArray *sortedKeys = [sizeByPrefixDict.allKeys sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
-                // sort from longest to shortest so more specific (longer) match is found first
-                return obj1.length > obj2.length ? NSOrderedAscending : NSOrderedDescending;
-            }];
-            for (NSString *prefix in sortedKeys) {
-                if ([[self.name camelCaseToWords].lowercaseString hasPrefix:[prefix camelCaseToWords].lowercaseString]) {
-                    sizeString = sizeByPrefixDict[prefix];
-                    break;
-                }
-            }
+            sizeString = [parameterDict[sizesByPrefixKey] objectForLongestPrefixKeyMatchingWordsInString:self.name];
         }
         _drawnSize = sizeString ? CGSizeFromString(sizeString) : self.frame.size;
     }

@@ -85,6 +85,21 @@
 				<string>Camel Start Plus Separate Words</string>
 			</dict>
 		</array>
+		<key>lowercaseWords</key>
+		<array>
+			<dict>
+				<key>self</key>
+				<string>iAmACamel</string>
+				<key>return</key>
+				<string>i am a camel</string>
+			</dict>
+			<dict>
+				<key>self</key>
+				<string>iAmACamel with someWords thrown in atTheEnd</string>
+				<key>return</key>
+				<string>i am a camel with some words thrown in at the end</string>
+			</dict>
+		</array>
 	</dict>
 </dict>
 </plist>

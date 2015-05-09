@@ -23,6 +23,8 @@
 		E22117921AF4FE92007B515F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E22117911AF4FE92007B515F /* AppDelegate.m */; };
 		E29917041AF4FEE500F0DEDE /* SampleStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E29917021AF4FEE500F0DEDE /* SampleStyleKit.m */; };
 		E29917051AF4FEE500F0DEDE /* SampleStyleKit.plist in Resources */ = {isa = PBXBuildFile; fileRef = E29917031AF4FEE500F0DEDE /* SampleStyleKit.plist */; };
+		E29F35961AFE07BF009A12FE /* NSDictionary+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E29F35951AFE07BF009A12FE /* NSDictionary+BFW.m */; };
+		E29F35971AFE07BF009A12FE /* NSDictionary+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E29F35951AFE07BF009A12FE /* NSDictionary+BFW.m */; };
 		E2EBB3211ABFDE2E00C3787F /* BFWDrawExport.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EBB3201ABFDE2E00C3787F /* BFWDrawExport.m */; };
 		E2FC1D9D1AC9066700F08B90 /* BFWAndroidExportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2FC1D9C1AC9066700F08B90 /* BFWAndroidExportViewController.m */; };
 /* End PBXBuildFile section */
@@ -67,6 +69,8 @@
 		E29917021AF4FEE500F0DEDE /* SampleStyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleStyleKit.m; sourceTree = "<group>"; };
 		E29917031AF4FEE500F0DEDE /* SampleStyleKit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SampleStyleKit.plist; sourceTree = "<group>"; };
 		E29917061AF4FF6F00F0DEDE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BFWDrawView/Info.plist; sourceTree = SOURCE_ROOT; };
+		E29F35941AFE07BF009A12FE /* NSDictionary+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BFW.h"; sourceTree = "<group>"; };
+		E29F35951AFE07BF009A12FE /* NSDictionary+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BFW.m"; sourceTree = "<group>"; };
 		E2EBB31F1ABFDE2E00C3787F /* BFWDrawExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawExport.h; sourceTree = "<group>"; };
 		E2EBB3201ABFDE2E00C3787F /* BFWDrawExport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawExport.m; sourceTree = "<group>"; };
 		E2FC1D9B1AC9066700F08B90 /* BFWAndroidExportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWAndroidExportViewController.h; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 				E20ED1141A9F24CC0045FA69 /* NSInvocation+BFW.m */,
 				E20ED1151A9F24CC0045FA69 /* NSString+BFW.h */,
 				E20ED1161A9F24CC0045FA69 /* NSString+BFW.m */,
+				E29F35941AFE07BF009A12FE /* NSDictionary+BFW.h */,
+				E29F35951AFE07BF009A12FE /* NSDictionary+BFW.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -352,6 +358,7 @@
 				E20ED1171A9F24CC0045FA69 /* NSInvocation+BFW.m in Sources */,
 				E29917041AF4FEE500F0DEDE /* SampleStyleKit.m in Sources */,
 				E203579A1A7F5144002BC3F4 /* BFWDrawView.m in Sources */,
+				E29F35961AFE07BF009A12FE /* NSDictionary+BFW.m in Sources */,
 				E22117921AF4FE92007B515F /* AppDelegate.m in Sources */,
 				E2FC1D9D1AC9066700F08B90 /* BFWAndroidExportViewController.m in Sources */,
 				E221178F1AF4FE40007B515F /* main.m in Sources */,
@@ -363,6 +370,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E29F35971AFE07BF009A12FE /* NSDictionary+BFW.m in Sources */,
 				E211058B1A7E003A0025BDA0 /* NSString+BFW_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
