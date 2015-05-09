@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2023CEE81AFE28FB00BBA2FA /* UIColor+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = 2023CEE71AFE28FB00BBA2FA /* UIColor+BFW.m */; };
+		2023CEEA1AFE2BAE00BBA2FA /* UIColor+BFW_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2023CEE91AFE2BAE00BBA2FA /* UIColor+BFW_Tests.m */; };
 		E20357981A7F5144002BC3F4 /* BFWAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E20357861A7F5144002BC3F4 /* BFWAnimationView.m */; };
 		E20357991A7F5144002BC3F4 /* BFWDrawButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E20357881A7F5144002BC3F4 /* BFWDrawButton.m */; };
 		E203579A1A7F5144002BC3F4 /* BFWDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = E203578A1A7F5144002BC3F4 /* BFWDrawView.m */; };
@@ -40,6 +42,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2023CEE61AFE28FB00BBA2FA /* UIColor+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+BFW.h"; sourceTree = "<group>"; };
+		2023CEE71AFE28FB00BBA2FA /* UIColor+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BFW.m"; sourceTree = "<group>"; };
+		2023CEE91AFE2BAE00BBA2FA /* UIColor+BFW_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BFW_Tests.m"; sourceTree = "<group>"; };
 		E20357851A7F5144002BC3F4 /* BFWAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWAnimationView.h; sourceTree = "<group>"; };
 		E20357861A7F5144002BC3F4 /* BFWAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWAnimationView.m; sourceTree = "<group>"; };
 		E20357871A7F5144002BC3F4 /* BFWDrawButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawButton.h; sourceTree = "<group>"; };
@@ -122,14 +127,16 @@
 				E20357861A7F5144002BC3F4 /* BFWAnimationView.m */,
 				E20357871A7F5144002BC3F4 /* BFWDrawButton.h */,
 				E20357881A7F5144002BC3F4 /* BFWDrawButton.m */,
-				E20357891A7F5144002BC3F4 /* BFWDrawView.h */,
-				E203578A1A7F5144002BC3F4 /* BFWDrawView.m */,
 				E2EBB31F1ABFDE2E00C3787F /* BFWDrawExport.h */,
 				E2EBB3201ABFDE2E00C3787F /* BFWDrawExport.m */,
-				E20ED10C1A9F24860045FA69 /* UIImage+BFW.h */,
-				E20ED10D1A9F24860045FA69 /* UIImage+BFW.m */,
+				E20357891A7F5144002BC3F4 /* BFWDrawView.h */,
+				E203578A1A7F5144002BC3F4 /* BFWDrawView.m */,
 				E20ED10F1A9F24B50045FA69 /* NSObject+BFWStyleKit.h */,
 				E20ED1101A9F24B50045FA69 /* NSObject+BFWStyleKit.m */,
+				2023CEE61AFE28FB00BBA2FA /* UIColor+BFW.h */,
+				2023CEE71AFE28FB00BBA2FA /* UIColor+BFW.m */,
+				E20ED10C1A9F24860045FA69 /* UIImage+BFW.h */,
+				E20ED10D1A9F24860045FA69 /* UIImage+BFW.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -194,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				E211058A1A7E003A0025BDA0 /* NSString+BFW_Tests.m */,
+				2023CEE91AFE2BAE00BBA2FA /* UIColor+BFW_Tests.m */,
 				E20ED11E1A9FC43D0045FA69 /* NSString_BFW_Tests.plist */,
 				E21105881A7E003A0025BDA0 /* Supporting Files */,
 			);
@@ -355,6 +363,7 @@
 				E20ED10E1A9F24860045FA69 /* UIImage+BFW.m in Sources */,
 				E2EBB3211ABFDE2E00C3787F /* BFWDrawExport.m in Sources */,
 				E20357981A7F5144002BC3F4 /* BFWAnimationView.m in Sources */,
+				2023CEE81AFE28FB00BBA2FA /* UIColor+BFW.m in Sources */,
 				E20ED1171A9F24CC0045FA69 /* NSInvocation+BFW.m in Sources */,
 				E29917041AF4FEE500F0DEDE /* SampleStyleKit.m in Sources */,
 				E203579A1A7F5144002BC3F4 /* BFWDrawView.m in Sources */,
@@ -372,6 +381,7 @@
 			files = (
 				E29F35971AFE07BF009A12FE /* NSDictionary+BFW.m in Sources */,
 				E211058B1A7E003A0025BDA0 /* NSString+BFW_Tests.m in Sources */,
+				2023CEEA1AFE2BAE00BBA2FA /* UIColor+BFW_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
