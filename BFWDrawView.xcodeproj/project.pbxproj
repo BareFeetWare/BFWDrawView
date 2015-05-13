@@ -21,6 +21,7 @@
 		E221178E1AF4FE40007B515F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E221178A1AF4FE40007B515F /* LaunchScreen.xib */; };
 		E221178F1AF4FE40007B515F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E221178B1AF4FE40007B515F /* main.m */; };
 		E22117921AF4FE92007B515F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E22117911AF4FE92007B515F /* AppDelegate.m */; };
+		E26B1DB01B02B0FB005EACDE /* SampleDrawButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E26B1DAF1B02B0FB005EACDE /* SampleDrawButton.m */; };
 		E29917041AF4FEE500F0DEDE /* SampleStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E29917021AF4FEE500F0DEDE /* SampleStyleKit.m */; };
 		E29917051AF4FEE500F0DEDE /* SampleStyleKit.plist in Resources */ = {isa = PBXBuildFile; fileRef = E29917031AF4FEE500F0DEDE /* SampleStyleKit.plist */; };
 		E29F35961AFE07BF009A12FE /* NSDictionary+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E29F35951AFE07BF009A12FE /* NSDictionary+BFW.m */; };
@@ -65,6 +66,8 @@
 		E221178B1AF4FE40007B515F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E22117901AF4FE92007B515F /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E22117911AF4FE92007B515F /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		E26B1DAE1B02B0FB005EACDE /* SampleDrawButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleDrawButton.h; sourceTree = "<group>"; };
+		E26B1DAF1B02B0FB005EACDE /* SampleDrawButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleDrawButton.m; sourceTree = "<group>"; };
 		E29917011AF4FEE500F0DEDE /* SampleStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleStyleKit.h; sourceTree = "<group>"; };
 		E29917021AF4FEE500F0DEDE /* SampleStyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleStyleKit.m; sourceTree = "<group>"; };
 		E29917031AF4FEE500F0DEDE /* SampleStyleKit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SampleStyleKit.plist; sourceTree = "<group>"; };
@@ -137,6 +140,7 @@
 		E203578D1A7F5144002BC3F4 /* Sample */ = {
 			isa = PBXGroup;
 			children = (
+				E26B1DAD1B02B0CD005EACDE /* View */,
 				E203578E1A7F5144002BC3F4 /* Controller */,
 			);
 			path = Sample;
@@ -219,6 +223,15 @@
 				E221178B1AF4FE40007B515F /* main.m */,
 			);
 			path = Launch;
+			sourceTree = "<group>";
+		};
+		E26B1DAD1B02B0CD005EACDE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E26B1DAE1B02B0FB005EACDE /* SampleDrawButton.h */,
+				E26B1DAF1B02B0FB005EACDE /* SampleDrawButton.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		E29916FF1AF4FEE500F0DEDE /* StyleKits */ = {
@@ -357,6 +370,7 @@
 				E20357981A7F5144002BC3F4 /* BFWAnimationView.m in Sources */,
 				E20ED1171A9F24CC0045FA69 /* NSInvocation+BFW.m in Sources */,
 				E29917041AF4FEE500F0DEDE /* SampleStyleKit.m in Sources */,
+				E26B1DB01B02B0FB005EACDE /* SampleDrawButton.m in Sources */,
 				E203579A1A7F5144002BC3F4 /* BFWDrawView.m in Sources */,
 				E29F35961AFE07BF009A12FE /* NSDictionary+BFW.m in Sources */,
 				E22117921AF4FE92007B515F /* AppDelegate.m in Sources */,

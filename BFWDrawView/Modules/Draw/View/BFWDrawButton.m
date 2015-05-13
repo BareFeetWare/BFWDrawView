@@ -27,6 +27,8 @@
 
 @property (nonatomic, strong) NSMutableDictionary *iconDrawViewForStateDict;
 @property (nonatomic, strong) NSMutableDictionary *backgroundDrawViewForStateDict;
+@property (nonatomic, strong) NSMutableDictionary *shadowForStateDict;
+@property (nonatomic, assign) BOOL needsUpdateShadow;
 
 @end
 
@@ -54,7 +56,7 @@
 
 - (void)commonInit
 {
-    // implement in subclasses if required
+    // implement in subclasses if required and call super
 }
 
 #pragma mark - accessors
@@ -73,6 +75,14 @@
         _backgroundDrawViewForStateDict = [[NSMutableDictionary alloc] init];
     }
     return _backgroundDrawViewForStateDict;
+}
+
+- (NSMutableDictionary *)shadowForStateDict
+{
+    if (!_shadowForStateDict) {
+        _shadowForStateDict = [[NSMutableDictionary alloc] init];
+    }
+    return _shadowForStateDict;
 }
 
 #pragma mark - accessors for state
@@ -121,7 +131,28 @@
     }
 }
 
-#pragma mark - UIView
+- (NSShadow *)shadowForState:(UIControlState)state
+{
+    return self.shadowForStateDict[@(state)];
+}
+
+- (void)setShadow:(NSShadow *)shadow
+         forState:(UIControlState)state
+{
+    [self.shadowForStateDict setValueOrRemoveNil:shadow
+                                          forKey:@(state)];
+    self.needsUpdateShadow = YES;
+}
+
+- (void)setNeedsUpdateShadow:(BOOL)needsUpdateShadow
+{
+    _needsUpdateShadow = needsUpdateShadow;
+    if (needsUpdateShadow) {
+        [self setNeedsDisplay];
+    }
+}
+
+#pragma mark - updates
 
 - (void)updateBackgrounds
 {
@@ -132,10 +163,60 @@
     }
 }
 
+- (void)updateShadowIfNeeded
+{
+    if (self.needsUpdateShadow) {
+        NSShadow *shadow = [self shadowForState:self.state];
+        if (!shadow) {
+            shadow = [self shadowForState:UIControlStateNormal];
+        }
+        [self applyShadow:shadow];
+        self.needsUpdateShadow = NO;
+    }
+}
+
+- (void)applyShadow:(NSShadow *)shadow
+{
+    UIColor *shadowColor = (UIColor *)shadow.shadowColor;
+    self.layer.shadowColor = shadowColor.CGColor;
+    self.layer.shadowOpacity = 1;
+    self.layer.shadowRadius = shadow.shadowBlurRadius;
+    self.layer.shadowOffset = shadow.shadowOffset;
+    self.layer.masksToBounds = shadow ? NO : YES;
+}
+
+#pragma mark - UIButton
+
+- (void)setHighlighted:(BOOL)highlighted
+{
+    [super setHighlighted:highlighted];
+    self.needsUpdateShadow = YES;
+}
+
+- (void)setSelected:(BOOL)selected
+{
+    [super setSelected:selected];
+    self.needsUpdateShadow = YES;
+}
+
+- (void)setEnabled:(BOOL)enabled
+{
+    [super setEnabled:enabled];
+    self.needsUpdateShadow = YES;
+}
+
+#pragma mark - UIView
+
 - (void)layoutSubviews
 {
     [self updateBackgrounds];
     [super layoutSubviews];
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+    [self updateShadowIfNeeded];
 }
 
 @end

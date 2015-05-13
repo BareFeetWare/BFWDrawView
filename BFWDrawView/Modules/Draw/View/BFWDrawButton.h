@@ -20,10 +20,13 @@
 
 - (BFWDrawView *)iconDrawViewForState:(UIControlState)state;
 - (BFWDrawView *)backgroundDrawViewForState:(UIControlState)state;
+- (NSShadow *)shadowForState:(UIControlState)state;
 - (void)setIconDrawView:(BFWDrawView *)drawView
                forState:(UIControlState)state;
 - (void)setBackgroundDrawView:(BFWDrawView *)drawView
                      forState:(UIControlState)state;
+- (void)setShadow:(NSShadow *)shadow
+         forState:(UIControlState)state;
 // Convenience method, assuming backgrounds all use the same styleKit and should fill frame (contentMode = redraw)
 - (void)makeBackgroundDrawViewsFromStateNameDict:(NSDictionary *)stateNameDict
                                        styleKit:(NSString *)styleKit
