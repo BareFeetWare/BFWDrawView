@@ -6,6 +6,7 @@
 //
 
 #import "NSObject+BFWStyleKit.h"
+#import "UIColor+BFW.h"
 #import "NSInvocation+BFW.h"
 #import "NSString+BFW.h"
 #import <objc/runtime.h>
@@ -34,40 +35,6 @@
         parameters = @[self];
     }
     return parameters;
-}
-
-@end
-
-@implementation UIColor (BFWDrawView)
-
-+ (UIColor *)colorWithName:(NSString *)colorName
-                  styleKit:(NSString *)styleKit
-{
-    return [NSClassFromString(styleKit) colorWithName:colorName];
-}
-
-- (NSString *)hexString
-{
-    if (self == [UIColor whiteColor]) {
-        // Special case, as white doesn't fall into the RGB color space
-        return @"ffffffff";
-    }
-    
-    CGFloat red;
-    CGFloat blue;
-    CGFloat green;
-    CGFloat alpha;
-    
-    [self getRed:&red green:&green blue:&blue alpha:&alpha];
-    
-    NSUInteger redInt = round(red * 255.0);
-    NSUInteger greenInt = round(green * 255.0);
-    NSUInteger blueInt = round(blue * 255.0);
-    NSUInteger alphaInt = round(alpha * 255.0);
-    
-    NSString *hexString = [NSString stringWithFormat:@"%02lx%02lx%02lx%02lx", (unsigned long)alphaInt, (unsigned long)redInt, (unsigned long)greenInt, (unsigned long)blueInt];
-    
-    return hexString;
 }
 
 @end
