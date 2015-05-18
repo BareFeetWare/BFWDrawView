@@ -53,8 +53,11 @@ static NSString * const includeAnimationsKey = @"includeAnimations";
     NSMutableArray *styleKits = [[NSMutableArray alloc] init];
     NSUInteger cellCount = [self.tableView numberOfRowsInSection:styleKitsSection];
     for (NSUInteger row = 0; row < cellCount; row++) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:styleKitsSection];
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row
+                                                    inSection:styleKitsSection];
+        // Note: if we used [self.tableView cellForRowAtIndexPath:] then we would get nil if the cell was scrolled off screen. So, we ask the UITableViewController which keeps a reference to static cells that were created in the storyboard.
+        UITableViewCell *cell = [self tableView:self.tableView
+                          cellForRowAtIndexPath:indexPath];
         if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
             NSString *styleKit = cell.textLabel.text;
             if (styleKit.length) {
