@@ -9,8 +9,6 @@
 #import "SampleDrawButton.h"
 #import "SampleStyleKit.h"
 
-static CGFloat const margin = 10.0;
-
 @implementation SampleDrawButton
 
 - (void)commonInit
