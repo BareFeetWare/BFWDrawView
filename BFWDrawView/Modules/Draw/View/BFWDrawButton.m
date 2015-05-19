@@ -8,6 +8,7 @@
 
 #import "BFWDrawButton.h"
 #import "BFWDrawView.h"
+#import "UIView+BFW.h"
 
 @implementation NSMutableDictionary (BFWDraw)
 
@@ -173,16 +174,6 @@
         [self applyShadow:shadow];
         self.needsUpdateShadow = NO;
     }
-}
-
-- (void)applyShadow:(NSShadow *)shadow
-{
-    UIColor *shadowColor = (UIColor *)shadow.shadowColor;
-    self.layer.shadowColor = shadowColor.CGColor;
-    self.layer.shadowOpacity = 1;
-    self.layer.shadowRadius = shadow.shadowBlurRadius;
-    self.layer.shadowOffset = shadow.shadowOffset;
-    self.layer.masksToBounds = shadow ? NO : YES;
 }
 
 #pragma mark - UIButton

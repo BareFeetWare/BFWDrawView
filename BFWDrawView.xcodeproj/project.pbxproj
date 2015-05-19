@@ -19,6 +19,7 @@
 		E20ED1181A9F24CC0045FA69 /* NSString+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E20ED1161A9F24CC0045FA69 /* NSString+BFW.m */; };
 		E20ED11F1A9FC43D0045FA69 /* NSString_BFW_Tests.plist in Resources */ = {isa = PBXBuildFile; fileRef = E20ED11E1A9FC43D0045FA69 /* NSString_BFW_Tests.plist */; };
 		E211058B1A7E003A0025BDA0 /* NSString+BFW_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E211058A1A7E003A0025BDA0 /* NSString+BFW_Tests.m */; };
+		E21CEF141B0B2A49006B137F /* UIView+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E21CEF131B0B2A49006B137F /* UIView+BFW.m */; };
 		E221178C1AF4FE40007B515F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E22117881AF4FE40007B515F /* Images.xcassets */; };
 		E221178E1AF4FE40007B515F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E221178A1AF4FE40007B515F /* LaunchScreen.xib */; };
 		E221178F1AF4FE40007B515F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E221178B1AF4FE40007B515F /* main.m */; };
@@ -66,6 +67,8 @@
 		E21105841A7E003A0025BDA0 /* BFWDrawViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BFWDrawViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E21105891A7E003A0025BDA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E211058A1A7E003A0025BDA0 /* NSString+BFW_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+BFW_Tests.m"; sourceTree = "<group>"; };
+		E21CEF121B0B2A49006B137F /* UIView+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+BFW.h"; sourceTree = "<group>"; };
+		E21CEF131B0B2A49006B137F /* UIView+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BFW.m"; sourceTree = "<group>"; };
 		E22117881AF4FE40007B515F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E221178A1AF4FE40007B515F /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		E221178B1AF4FE40007B515F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -140,6 +143,8 @@
 				2023CEE71AFE28FB00BBA2FA /* UIColor+BFW.m */,
 				E20ED10C1A9F24860045FA69 /* UIImage+BFW.h */,
 				E20ED10D1A9F24860045FA69 /* UIImage+BFW.m */,
+				E21CEF121B0B2A49006B137F /* UIView+BFW.h */,
+				E21CEF131B0B2A49006B137F /* UIView+BFW.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -383,6 +388,7 @@
 				E203579A1A7F5144002BC3F4 /* BFWDrawView.m in Sources */,
 				E29F35961AFE07BF009A12FE /* NSDictionary+BFW.m in Sources */,
 				E22117921AF4FE92007B515F /* AppDelegate.m in Sources */,
+				E21CEF141B0B2A49006B137F /* UIView+BFW.m in Sources */,
 				E2FC1D9D1AC9066700F08B90 /* BFWAndroidExportViewController.m in Sources */,
 				E221178F1AF4FE40007B515F /* main.m in Sources */,
 				E20ED1181A9F24CC0045FA69 /* NSString+BFW.m in Sources */,
