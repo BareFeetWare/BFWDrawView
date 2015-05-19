@@ -195,7 +195,6 @@ static NSString * const arraysKey = @"arrays";
         DLog(@"**** warning: attempted to write over existing file: %@", useFileName);
         return;
     }
-    [usedFileNames addObject:useFileName];
     for (NSString *path in pathScaleDict) {
         NSNumber *scaleNumber = pathScaleDict[path];
         CGFloat scale = [scaleNumber floatValue];
@@ -222,7 +221,10 @@ static NSString * const arraysKey = @"arrays";
             success = [drawView writeImageAtScale:scale
                                            toFile:filePath];
         }
-        if (!success) {
+        if (success) {
+            [usedFileNames addObject:useFileName];
+        }
+        else {
             NSLog(@"failed to write %@", relativePath);
         }
     }

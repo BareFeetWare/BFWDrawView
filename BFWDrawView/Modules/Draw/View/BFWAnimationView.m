@@ -130,7 +130,7 @@
 - (BOOL)writeImagesAtScale:(CGFloat)scale
                     toFile:(NSString *)filePath;
 {
-    BOOL success = YES;
+    BOOL success = NO;
     if (self.paused) {
         success = [self writeImageAtScale:scale
                                    toFile:filePath];
@@ -143,8 +143,14 @@
         for (NSUInteger frameN = 0; frameN < frameCount; frameN++) {
             self.animation = (CGFloat)frameN / frameCount;
             NSString *imagePath = [NSString stringWithFormat:pathFormat, frameN];
-            success = success && [self writeImageAtScale:scale
-                                                  toFile:imagePath];
+            BOOL frameSuccess = [self writeImageAtScale:scale
+                                                 toFile:imagePath];
+            if (frameN == 0) {
+                success = frameSuccess;
+            }
+            else {
+                success = success && frameSuccess;
+            }
         }
     }
     return success;
