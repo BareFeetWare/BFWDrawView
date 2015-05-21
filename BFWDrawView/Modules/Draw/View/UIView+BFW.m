@@ -14,9 +14,9 @@
 {
     UIColor *shadowColor = (UIColor *)shadow.shadowColor;
     self.layer.shadowColor = shadowColor.CGColor;
-    self.layer.shadowOpacity = 1;
     self.layer.shadowRadius = shadow.shadowBlurRadius;
     self.layer.shadowOffset = shadow.shadowOffset;
+    self.layer.shadowOpacity = shadow ? 1.0 : 0.0;
     self.layer.masksToBounds = shadow ? NO : YES;
 }
 
