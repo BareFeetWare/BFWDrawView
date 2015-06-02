@@ -299,11 +299,14 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 {
     UIImage *image = nil;
     if (self.canDraw) {
+        CGFloat savedContentsScale = self.contentScaleFactor;
+        self.contentScaleFactor = scale;
         BOOL isOpaque = NO;
         UIGraphicsBeginImageContextWithOptions(self.frame.size, isOpaque, scale);
         [self.layer renderInContext:UIGraphicsGetCurrentContext()];
         image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
+        self.contentScaleFactor = savedContentsScale;
     }
     return image;
 }
