@@ -230,8 +230,8 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 - (NSString *)cacheKey
 {
     NSMutableArray *components = [@[self.name, self.styleKit, NSStringFromCGSize(self.frame.size)] mutableCopy];
-    if (self.tintColor) {
-        NSString *colorString = [[CIColor colorWithCGColor:self.tintColor.CGColor] stringRepresentation];
+    NSString *colorString = self.tintColor.description;
+    if (colorString) {
         [components addObject:colorString];
     }
     NSString *key = [components componentsJoinedByString:@"."];
