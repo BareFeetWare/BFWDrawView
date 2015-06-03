@@ -33,8 +33,8 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor clearColor];
-        self.contentMode = UIViewContentModeRedraw;  // forces redraw when view is resized, eg when device is rotated
+        super.backgroundColor = [UIColor clearColor];
+        super.contentMode = UIViewContentModeRedraw;  // forces redraw when view is resized, eg when device is rotated
     }
     return self;
 }
