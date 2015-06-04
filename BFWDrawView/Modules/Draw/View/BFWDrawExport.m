@@ -113,7 +113,9 @@ static NSString * const arraysKey = @"arrays";
         Class styleKitClass = NSClassFromString(styleKit);
         NSDictionary *parameterDict = [styleKitClass parameterDict];
         NSArray *blacklist = parameterDict[exportBlacklistKey];
-        [excludeFileNames addObjectsFromArray:blacklist];
+        for (NSString *fileName in blacklist) {
+            [excludeFileNames addObject:fileName.lowercaseWords];
+        }
         NSDictionary *drawParameterDict = [styleKitClass drawParameterDict];
         NSArray *drawingNames = drawParameterDict.allKeys;
         for (NSString *drawingName in drawingNames) {
@@ -193,11 +195,12 @@ static NSString * const arraysKey = @"arrays";
                 framesPerSecond:(CGFloat)framesPerSecond
                excludeFileNames:(NSMutableSet *)excludeFileNames
 {
-    NSString *useFileName = isAndroid ? [fileName androidFileName] : fileName;
-    if ([excludeFileNames containsObject:useFileName]) {
-        DLog(@"skipping excluded or existing file: %@", useFileName);
+    NSString *fileNameLowercaseWords = fileName.lowercaseWords;
+    if ([excludeFileNames containsObject:fileNameLowercaseWords]) {
+        DLog(@"skipping excluded or existing file: %@", fileNameLowercaseWords);
         return;
     }
+    NSString *useFileName = isAndroid ? [fileName androidFileName] : fileName;
     for (NSString *path in pathScaleDict) {
         NSNumber *scaleNumber = pathScaleDict[path];
         CGFloat scale = [scaleNumber floatValue];
@@ -225,7 +228,7 @@ static NSString * const arraysKey = @"arrays";
                                            toFile:filePath];
         }
         if (success) {
-            [excludeFileNames addObject:useFileName];
+            [excludeFileNames addObject:fileNameLowercaseWords];
         }
         else {
             NSLog(@"failed to write %@", relativePath);
