@@ -48,6 +48,7 @@ static NSString * const baseKey = @"base";
 static NSString * const sizeKey = @"size";
 static NSString * const tintColorKey = @"tintColor";
 static NSString * const derivedKey = @"derived";
+static NSString * const exportBlacklistKey = @"exportBlacklist";
 static NSString * const animationKey = @"animation";
 static NSString * const arrayKey = @"array";
 static NSString * const arraysKey = @"arrays";
@@ -107,10 +108,12 @@ static NSString * const arraysKey = @"arrays";
                          duration:(CGFloat)duration
                   framesPerSecond:(CGFloat)framesPerSecond
 {
-    NSMutableSet *usedFileNames = [[NSMutableSet alloc] init];
+    NSMutableSet *excludeFileNames = [[NSMutableSet alloc] init];
     for (NSString *styleKit in styleKitArray) {
         Class styleKitClass = NSClassFromString(styleKit);
         NSDictionary *parameterDict = [styleKitClass parameterDict];
+        NSArray *blacklist = parameterDict[exportBlacklistKey];
+        [excludeFileNames addObjectsFromArray:blacklist];
         NSDictionary *drawParameterDict = [styleKitClass drawParameterDict];
         NSArray *drawingNames = drawParameterDict.allKeys;
         for (NSString *drawingName in drawingNames) {
@@ -128,7 +131,7 @@ static NSString * const arraysKey = @"arrays";
                                   android:isAndroid
                                  duration:duration
                           framesPerSecond:framesPerSecond
-                            usedFileNames:usedFileNames];
+                         excludeFileNames:excludeFileNames];
         }
         for (NSString *drawingName in parameterDict[derivedKey]) {
             NSDictionary *derivedDict = parameterDict[derivedKey][drawingName];
@@ -162,7 +165,7 @@ static NSString * const arraysKey = @"arrays";
                                           android:isAndroid
                                          duration:duration
                                   framesPerSecond:framesPerSecond
-                                    usedFileNames:usedFileNames];
+                                 excludeFileNames:excludeFileNames];
                 }
             }
             else {
@@ -175,7 +178,7 @@ static NSString * const arraysKey = @"arrays";
                                       android:isAndroid
                                      duration:duration
                               framesPerSecond:framesPerSecond
-                                usedFileNames:usedFileNames];
+                             excludeFileNames:excludeFileNames];
             }
         }
     }
@@ -188,11 +191,11 @@ static NSString * const arraysKey = @"arrays";
                         android:(BOOL)isAndroid
                        duration:(CGFloat)duration
                 framesPerSecond:(CGFloat)framesPerSecond
-                  usedFileNames:(NSMutableSet *)usedFileNames
+               excludeFileNames:(NSMutableSet *)excludeFileNames
 {
     NSString *useFileName = isAndroid ? [fileName androidFileName] : fileName;
-    if ([usedFileNames containsObject:useFileName]) {
-        DLog(@"**** warning: attempted to write over existing file: %@", useFileName);
+    if ([excludeFileNames containsObject:useFileName]) {
+        DLog(@"skipping excluded or existing file: %@", useFileName);
         return;
     }
     for (NSString *path in pathScaleDict) {
@@ -222,7 +225,7 @@ static NSString * const arraysKey = @"arrays";
                                            toFile:filePath];
         }
         if (success) {
-            [usedFileNames addObject:useFileName];
+            [excludeFileNames addObject:useFileName];
         }
         else {
             NSLog(@"failed to write %@", relativePath);
