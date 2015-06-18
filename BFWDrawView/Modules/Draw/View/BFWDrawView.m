@@ -230,8 +230,8 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 - (NSString *)cacheKey
 {
     NSMutableArray *components = [@[self.name, self.styleKit, NSStringFromCGSize(self.frame.size)] mutableCopy];
-    if (self.tintColor) {
-        NSString *colorString = [[CIColor colorWithCGColor:self.tintColor.CGColor] stringRepresentation];
+    NSString *colorString = self.tintColor.description;
+    if (colorString) {
         [components addObject:colorString];
     }
     NSString *key = [components componentsJoinedByString:@"."];
@@ -299,11 +299,14 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 {
     UIImage *image = nil;
     if (self.canDraw) {
+        CGFloat savedContentsScale = self.contentScaleFactor;
+        self.contentScaleFactor = scale;
         BOOL isOpaque = NO;
         UIGraphicsBeginImageContextWithOptions(self.frame.size, isOpaque, scale);
         [self.layer renderInContext:UIGraphicsGetCurrentContext()];
         image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
+        self.contentScaleFactor = savedContentsScale;
     }
     return image;
 }
