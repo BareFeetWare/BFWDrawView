@@ -29,7 +29,9 @@
          forState:(UIControlState)state;
 // Convenience method, assuming backgrounds all use the same styleKit and should fill frame (contentMode = redraw)
 - (void)makeBackgroundDrawViewsFromStateNameDict:(NSDictionary *)stateNameDict
-                                       styleKit:(NSString *)styleKit
-;
+                                       styleKit:(NSString *)styleKit;
+// Convenience method, assuming icons all use the same styleKit and have drawnSize
+- (void)makeIconDrawViewsFromStateNameDict:(NSDictionary *)stateNameDict
+                                  styleKit:(NSString *)styleKit;
 
 @end

@@ -118,6 +118,21 @@
     [self setNeedsLayout];
 }
 
+- (void)makeIconDrawViewsFromStateNameDict:(NSDictionary *)stateNameDict
+                                  styleKit:(NSString *)styleKit
+{
+    self.iconDrawViewForStateDict = nil;
+    for (NSNumber *stateNumber in stateNameDict) {
+        BFWDrawView *icon = [[BFWDrawView alloc] init];
+        icon.name = stateNameDict[stateNumber];
+        icon.styleKit = styleKit;
+        icon.contentMode = UIViewContentModeRedraw;
+        icon.frame = CGRectMake(0, 0, icon.drawnSize.width, icon.drawnSize.height);
+        [self setIconDrawView:icon
+                     forState:stateNumber.integerValue];
+    }
+}
+
 - (void)makeBackgroundDrawViewsFromStateNameDict:(NSDictionary *)stateNameDict
                                         styleKit:(NSString *)styleKit
 {
