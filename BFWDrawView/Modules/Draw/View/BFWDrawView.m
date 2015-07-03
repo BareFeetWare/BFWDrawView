@@ -201,7 +201,7 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 {
     if (![super.tintColor isEqual:tintColor]) {
         [super setTintColor:tintColor];
-        [_drawInvocation setArgument:&tintColor atIndex:3];
+		self.drawInvocation = nil;
         [self setNeedsDisplay]; // needed?
     }
 }
