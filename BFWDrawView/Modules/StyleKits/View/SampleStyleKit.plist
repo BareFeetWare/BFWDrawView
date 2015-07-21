@@ -4,16 +4,16 @@
 <dict>
 	<key>sizesByPrefix</key>
 	<dict>
-		<key>Icon</key>
+		<key>icon</key>
 		<string>{32, 32}</string>
 	</dict>
 	<key>sizes</key>
 	<dict>
-		<key>Bathroom</key>
+		<key>bathroom</key>
 		<string>{66, 34}</string>
-		<key>Front Door</key>
+		<key>front door</key>
 		<string>{32, 48}</string>
-		<key>Pac Man</key>
+		<key>pac man</key>
 		<string>{74, 74}</string>
 	</dict>
 </dict>
