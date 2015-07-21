@@ -11,12 +11,16 @@
 #import "NSInvocation+BFW.h"
 #import "NSString+BFW.h"
 #import "NSDictionary+BFW.h"
-#import "NSObject+BFWStyleKit.h"
+#import "NSObject+BFWStyleKit.h" // for DLog
 #import <QuartzCore/QuartzCore.h>
+#import "BFWStyleKit.h"
+#import "BFWStyleKitDrawing.h"
 
 @interface BFWDrawView ()
 
-@property (nonatomic, strong) Class styleKitClass;
+@property (nonatomic, strong) BFWStyleKit *bStyleKit;
+@property (nonatomic, strong) BFWStyleKitDrawing *drawing;
+@property (nonatomic, strong) NSInvocation *drawInvocation;
 @property (nonatomic, assign) BOOL didCheckCanDraw;
 
 @end
@@ -41,21 +45,58 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 
 #pragma mark - accessors
 
-- (Class)styleKitClass
+- (BFWStyleKit *)bStyleKit
 {
-    if (!_styleKitClass) {
-        _styleKitClass = NSClassFromString(self.styleKit);
-        
-        /// Check if redirected to another stylekit:
-        NSDictionary *parameterDict = [_styleKitClass parameterDict]; // TODO: cache in styleKit class
-        NSString *styleKit = [parameterDict[styleKitByPrefixKey] objectForLongestPrefixKeyMatchingWordsInString:self.name];
-        if (styleKit) {
-            self.styleKit = styleKit;
-            _styleKitClass = NSClassFromString(self.styleKit);
-            parameterDict = [_styleKitClass parameterDict];
-        }
+    if (!_bStyleKit) {
+        _bStyleKit = [BFWStyleKit styleKitForName:self.styleKit];
     }
-    return _styleKitClass;
+    return _bStyleKit;
+}
+
+- (BFWStyleKitDrawing *)drawing
+{
+    if (!_drawing) {
+        _drawing = [self.bStyleKit drawingForName:self.name];
+    }
+    return _drawing;
+}
+
+- (void)setFillColor:(UIColor *)fillColor // Deprecated. Use UIView's tintColor.
+{
+    DLog(@"BFWDrawView called deprecated fillColor. Use tintColor instead. %@", fillColor
+         );
+    self.tintColor = fillColor;
+    _fillColor = fillColor;
+}
+
+- (void)setTintColor:(UIColor *)tintColor
+{
+    if (![super.tintColor isEqual:tintColor]) {
+        [super setTintColor:tintColor];
+        self.drawInvocation = nil;
+        [self setNeedsDisplay]; // needed?
+    }
+}
+
+- (void)setStyleKit:(NSString *)styleKit
+{
+    if (![_styleKit isEqualToString:styleKit]) {
+        _styleKit = styleKit;
+        self.drawInvocation = nil;
+        self.bStyleKit = nil;
+        self.drawing = nil;
+        [self setNeedsDisplay];
+    }
+}
+
+- (void)setName:(NSString *)name
+{
+    if (![_name isEqualToString:name]) {
+        _name = name;
+        self.drawInvocation = nil;
+        self.drawing = nil;
+        [self setNeedsDisplay];
+    }
 }
 
 #pragma mark - frame calculations
@@ -63,7 +104,7 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 - (CGSize)drawnSize
 {
     if (CGSizeEqualToSize(_drawnSize, CGSizeZero)) {
-        NSDictionary *parameterDict = [self.styleKitClass parameterDict]; // TODO: cache in styleKit class
+        NSDictionary *parameterDict = self.bStyleKit.parameterDict;
         NSString *sizeString = [parameterDict[sizesKey] objectForWordsKey:self.name];
         if (!sizeString) {
             sizeString = [parameterDict[sizesByPrefixKey] objectForLongestPrefixKeyMatchingWordsInString:self.name];
@@ -133,43 +174,56 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 
 #pragma mark - drawing
 
-- (NSString *)drawFrameSelectorString
+- (void)setArgumentPointer:(NSValue *)argumentPointer
+              forParameter:(NSString *)parameter
 {
-    NSString *paintCodeCaseString = [self.name wordsToPaintCodeCase];
-    NSString *selectorString = [NSString stringWithFormat:@"draw%@WithFrame:", paintCodeCaseString];
-    return selectorString;
+    NSUInteger index = [self.drawing.methodParameters indexOfObject:parameter];
+    if (index != NSNotFound) {
+        [self.drawInvocation setArgument:argumentPointer.pointerValue
+                                 atIndex:index + 2];
+    }
+}
+
+- (NSArray *)parameters {
+    return self.drawing.methodParameters;
+}
+
+- (SEL)drawingSelector {
+    return NSSelectorFromString(self.drawing.methodName);
+}
+
+- (Class)drawingClass {
+    return self.bStyleKit.paintCodeClass;
 }
 
 - (NSInvocation *)drawInvocation
 {
-    Class class = self.styleKitClass;
-    if (!class) {
-        DLog(@"**** error: Failed to get styleKitClass to draw %@", self.name);
-        return nil;
-    }
     if (!_drawInvocation) {
-        NSString *selectorString = [self drawFrameSelectorString];
+        NSMutableArray *argumentPointers = [[NSMutableArray alloc] init];
+        // Declare local variable copies in same scope as call to NSInvocation so they are retained
         CGRect frame = self.drawFrame;
-        NSValue *framePointer = [NSValue valueWithPointer:&frame];
-        SEL selector = NSSelectorFromString(selectorString);
-        if ([class respondsToSelector:selector]) {
-            _drawInvocation = [NSInvocation invocationForClass:class
-                                                      selector:selector
-                                              argumentPointers:@[framePointer]];
+        UIColor *tintColor = self.tintColor;
+        for (NSString *parameter in self.drawing.methodParameters) {
+            NSValue *argumentPointer = nil;
+            if ([parameter isEqualToString:@"frame"]) {
+                argumentPointer = [NSValue valueWithPointer:&frame];
+            }
+            else if ([parameter isEqualToString:@"tintColor"]) {
+                argumentPointer = [NSValue valueWithPointer:&tintColor];
+            }
+            if (argumentPointer) {
+                [argumentPointers addObject:argumentPointer];
+            }
+            else {
+                DLog(@"**** error: unexpected parameter: %@", parameter);
+                argumentPointers = nil;
+                break;
+            }
         }
-        else {
-            selectorString = [selectorString stringByAppendingString:@"tintColor:"];
-            SEL selector = NSSelectorFromString(selectorString);
-            if ([class respondsToSelector:selector]) {
-                UIColor *tintColor = self.tintColor;
-                NSValue *tintColorPointer = [NSValue valueWithPointer:&tintColor];
-                _drawInvocation = [NSInvocation invocationForClass:class
-                                                          selector:selector
-                                                  argumentPointers:@[framePointer, tintColorPointer]];
-            }
-            else if (!self.didCheckCanDraw) {
-                DLog(@"**** warning: No method for drawing name: %@", self.name);
-            }
+        if (argumentPointers) {
+            _drawInvocation = [NSInvocation invocationForClass:self.bStyleKit.paintCodeClass
+                                                      selector:self.drawingSelector
+                                              argumentPointers:argumentPointers];
         }
     }
     return _drawInvocation;
@@ -183,36 +237,7 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 
 - (void)drawRect:(CGRect)rect
 {
-    [[self drawInvocation] invoke];
-}
-
-
-#pragma mark - setters
-
-- (void)setFillColor:(UIColor *)fillColor // Deprecated. Use UIView's tintColor.
-{
-    DLog(@"BFWDrawView called deprecated fillColor. Use tintColor instead. %@", fillColor
-         );
-    self.tintColor = fillColor;
-    _fillColor = fillColor;
-}
-
-- (void)setTintColor:(UIColor *)tintColor
-{
-    if (![super.tintColor isEqual:tintColor]) {
-        [super setTintColor:tintColor];
-		self.drawInvocation = nil;
-        [self setNeedsDisplay]; // needed?
-    }
-}
-
-- (void)setName:(NSString *)name
-{
-    if (![_name isEqualToString:name]) {
-        _name = name;
-        self.drawInvocation = nil;
-        [self setNeedsDisplay];
-    }
+    [self.drawInvocation invoke];
 }
 
 #pragma mark - image rendering

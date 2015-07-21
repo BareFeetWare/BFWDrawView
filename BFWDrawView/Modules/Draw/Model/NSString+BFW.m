@@ -79,4 +79,27 @@
     return matchingPrefix;
 }
 
+- (NSArray *)methodNameComponents
+{
+    static NSString * const withString = @"With";
+    NSArray *parameters = nil;
+    if ([self hasSuffix:@":"]) {
+        NSArray *parameterComponents = [self componentsSeparatedByString:@":"];
+        NSArray *withComponents = [parameterComponents.firstObject componentsSeparatedByString:withString];
+        if (withComponents.count) {
+            NSString *methodBaseName = [[withComponents subarrayWithRange:NSMakeRange(0, withComponents.count - 1)] componentsJoinedByString:withString];
+            NSString *firstParameter = [withComponents.lastObject lowercaseFirstCharacter];
+            NSMutableArray *mutableParameters = [[NSMutableArray alloc] init];
+            [mutableParameters addObject:methodBaseName];
+            [mutableParameters addObject:firstParameter];
+            [mutableParameters addObjectsFromArray:[parameterComponents subarrayWithRange:NSMakeRange(1, parameterComponents.count - 2)]];
+            parameters = [mutableParameters copy];
+        }
+    }
+    else {
+        parameters = @[self];
+    }
+    return parameters;
+}
+
 @end

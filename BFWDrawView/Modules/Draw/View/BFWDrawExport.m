@@ -10,6 +10,8 @@
 #import "NSObject+BFWStyleKit.h"
 #import "BFWAnimationView.h"
 #import "NSString+BFW.h"
+#import "BFWStyleKit.h"
+#import "BFWStyleKitDrawing.h"
 
 @implementation NSArray (BFW)
 
@@ -59,11 +61,9 @@ static NSString * const arraysKey = @"arrays";
                         styleKit:(NSString *)styleKit
                        tintColor:(UIColor *)tintColor
 {
-    Class styleKitClass = NSClassFromString(styleKit);
-    NSDictionary *drawParameterDict = [styleKitClass drawParameterDict]; //TODO: cache
-    NSString *paintCodeDrawingName = [[drawingName wordsToPaintCodeCase] lowercaseFirstCharacter];
-    NSArray *parameters = drawParameterDict[paintCodeDrawingName];
-    BOOL isAnimation = [parameters containsObject:@"animation"];
+    BFWStyleKitDrawing *drawing = [BFWStyleKit drawingForStyleKitName:styleKit
+                                                          drawingName:drawingName];
+    BOOL isAnimation = [drawing.methodParameters containsObject:@"animation"];
     Class class = isAnimation ? [BFWAnimationView class] : [BFWDrawView class];
     BFWAnimationView *drawView = [[class alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
     drawView.name = drawingName;
@@ -73,6 +73,7 @@ static NSString * const arraysKey = @"arrays";
     CGSize size = drawView.drawnSize;
     if (CGSizeEqualToSize(size, CGSizeZero)) {
         DLog(@"missing size for drawing: %@", drawingName);
+        drawView = nil;
     }
     else {
         drawView.frame = CGRectMake(0, 0, size.width, size.height);
@@ -85,7 +86,8 @@ static NSString * const arraysKey = @"arrays";
 {
     NSString *tintColorString = derivedDict[tintColorKey]; //TODO: allow for "Tint Color" & "tintColor"
     if (tintColorString) {
-        drawView.tintColor = [drawView.styleKitClass colorWithName:tintColorString];
+        BFWStyleKit *styleKit = [BFWStyleKit styleKitForName:drawView.styleKit];
+        drawView.tintColor = [styleKit colorForName:tintColorString];
     }
     NSString *sizeString = derivedDict[sizeKey];
     CGSize size = CGSizeFromString(sizeString);
@@ -109,27 +111,25 @@ static NSString * const arraysKey = @"arrays";
                   framesPerSecond:(CGFloat)framesPerSecond
 {
     NSMutableSet *excludeFileNames = [[NSMutableSet alloc] init];
-    for (NSString *styleKit in styleKitArray) {
-        Class styleKitClass = NSClassFromString(styleKit);
-        NSDictionary *parameterDict = [styleKitClass parameterDict];
-        NSArray *blacklist = parameterDict[exportBlacklistKey];
+    for (NSString *styleKitName in styleKitArray) {
+        BFWStyleKit *styleKit = [BFWStyleKit styleKitForName:styleKitName];
+        NSDictionary *parameterDict = styleKit.parameterDict;
+        NSArray *blacklist = styleKit.parameterDict[exportBlacklistKey];
         for (NSString *fileName in blacklist) {
             [excludeFileNames addObject:fileName.lowercaseWords];
         }
-        NSDictionary *drawParameterDict = [styleKitClass drawParameterDict];
-        NSArray *drawingNames = drawParameterDict.allKeys;
-        for (NSString *drawingName in drawingNames) {
-            if (![drawParameterDict[drawingName] containsObject:@"frame"]) {
+        for (BFWStyleKitDrawing *drawing in styleKit.drawings) {
+            if (![drawing.methodParameters containsObject:@"frame"]) {
                 // skipping since can't draw
                 continue;
             }
-            BFWDrawView *drawView = [self drawViewForName:drawingName
-                                                 styleKit:styleKit
+            BFWDrawView *drawView = [self drawViewForName:drawing.name
+                                                 styleKit:styleKitName
                                                 tintColor:tintColor];
             [self writeImagesFromDrawView:drawView
                               toDirectory:directoryPath
                             pathScaleDict:pathScaleDict
-                                 fileName:drawingName
+                                 fileName:drawing.name
                                   android:isAndroid
                                  duration:duration
                           framesPerSecond:framesPerSecond
@@ -139,7 +139,7 @@ static NSString * const arraysKey = @"arrays";
             NSDictionary *derivedDict = parameterDict[derivedKey][drawingName];
             NSString *baseName = derivedDict[baseKey];
             BFWDrawView *drawView = [self drawViewForName:baseName
-                                                 styleKit:styleKit
+                                                 styleKit:styleKitName
                                                 tintColor:tintColor];
             if ([drawingName containsString:@"%@"]) {
                 NSString *arrayName = derivedDict[arrayKey];
@@ -252,7 +252,9 @@ static NSString * const arraysKey = @"arrays";
                            duration:duration
                     framesPerSecond:framesPerSecond];
     /// Note: currently exports colors only from the first styleKit
-    NSString *colorsXmlString = [NSClassFromString(styleKits.firstObject) colorsXmlString];
+    NSString *styleKitName = styleKits.firstObject;
+    BFWStyleKit *styleKit = [BFWStyleKit styleKitForName:styleKitName];
+    NSString *colorsXmlString = [styleKit colorsXmlString];
     NSString *colorsFile = [directory stringByAppendingPathComponent:@"paintcode_colors.xml"];
     [colorsXmlString writeToFile:colorsFile
                       atomically:YES

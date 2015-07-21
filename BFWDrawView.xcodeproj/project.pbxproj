@@ -30,6 +30,8 @@
 		E29F35961AFE07BF009A12FE /* NSDictionary+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E29F35951AFE07BF009A12FE /* NSDictionary+BFW.m */; };
 		E29F35971AFE07BF009A12FE /* NSDictionary+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E29F35951AFE07BF009A12FE /* NSDictionary+BFW.m */; };
 		E2EBB3211ABFDE2E00C3787F /* BFWDrawExport.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EBB3201ABFDE2E00C3787F /* BFWDrawExport.m */; };
+		E2F58CFC1B5B7C0300F3CFF3 /* BFWStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F58CFB1B5B7C0300F3CFF3 /* BFWStyleKit.m */; };
+		E2F58CFF1B5B7C9B00F3CFF3 /* BFWStyleKitDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F58CFE1B5B7C9B00F3CFF3 /* BFWStyleKitDrawing.m */; };
 		E2FC1D9D1AC9066700F08B90 /* BFWAndroidExportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2FC1D9C1AC9066700F08B90 /* BFWAndroidExportViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +86,10 @@
 		E29F35951AFE07BF009A12FE /* NSDictionary+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BFW.m"; sourceTree = "<group>"; };
 		E2EBB31F1ABFDE2E00C3787F /* BFWDrawExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawExport.h; sourceTree = "<group>"; };
 		E2EBB3201ABFDE2E00C3787F /* BFWDrawExport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawExport.m; sourceTree = "<group>"; };
+		E2F58CFA1B5B7C0300F3CFF3 /* BFWStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWStyleKit.h; sourceTree = "<group>"; };
+		E2F58CFB1B5B7C0300F3CFF3 /* BFWStyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWStyleKit.m; sourceTree = "<group>"; };
+		E2F58CFD1B5B7C9B00F3CFF3 /* BFWStyleKitDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWStyleKitDrawing.h; sourceTree = "<group>"; };
+		E2F58CFE1B5B7C9B00F3CFF3 /* BFWStyleKitDrawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWStyleKitDrawing.m; sourceTree = "<group>"; };
 		E2FC1D9B1AC9066700F08B90 /* BFWAndroidExportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWAndroidExportViewController.h; sourceTree = "<group>"; };
 		E2FC1D9C1AC9066700F08B90 /* BFWAndroidExportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWAndroidExportViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -139,6 +145,10 @@
 				E203578A1A7F5144002BC3F4 /* BFWDrawView.m */,
 				E20ED10F1A9F24B50045FA69 /* NSObject+BFWStyleKit.h */,
 				E20ED1101A9F24B50045FA69 /* NSObject+BFWStyleKit.m */,
+				E2F58CFA1B5B7C0300F3CFF3 /* BFWStyleKit.h */,
+				E2F58CFB1B5B7C0300F3CFF3 /* BFWStyleKit.m */,
+				E2F58CFD1B5B7C9B00F3CFF3 /* BFWStyleKitDrawing.h */,
+				E2F58CFE1B5B7C9B00F3CFF3 /* BFWStyleKitDrawing.m */,
 				2023CEE61AFE28FB00BBA2FA /* UIColor+BFW.h */,
 				2023CEE71AFE28FB00BBA2FA /* UIColor+BFW.m */,
 				E20ED10C1A9F24860045FA69 /* UIImage+BFW.h */,
@@ -388,8 +398,10 @@
 				E203579A1A7F5144002BC3F4 /* BFWDrawView.m in Sources */,
 				E29F35961AFE07BF009A12FE /* NSDictionary+BFW.m in Sources */,
 				E22117921AF4FE92007B515F /* AppDelegate.m in Sources */,
+				E2F58CFC1B5B7C0300F3CFF3 /* BFWStyleKit.m in Sources */,
 				E21CEF141B0B2A49006B137F /* UIView+BFW.m in Sources */,
 				E2FC1D9D1AC9066700F08B90 /* BFWAndroidExportViewController.m in Sources */,
+				E2F58CFF1B5B7C9B00F3CFF3 /* BFWStyleKitDrawing.m in Sources */,
 				E221178F1AF4FE40007B515F /* main.m in Sources */,
 				E20ED1181A9F24CC0045FA69 /* NSString+BFW.m in Sources */,
 			);

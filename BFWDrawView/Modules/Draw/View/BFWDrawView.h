@@ -26,10 +26,8 @@ IB_DESIGNABLE
 
 // for subclasses:
 
-@property (nonatomic, readonly) Class styleKitClass;
-@property (nonatomic, readonly) NSString *drawFrameSelectorString;
-@property (nonatomic, readonly) CGRect drawFrame;
-@property (nonatomic, strong) NSInvocation *drawInvocation;
+- (void)setArgumentPointer:(NSValue *)argumentPointer
+              forParameter:(NSString *)parameter;
 
 #pragma mark - image output methods
 

@@ -16,5 +16,6 @@
 - (NSString *)wordsToPaintCodeCase; // convert separate words to the case that PaintCode uses for methods
 - (NSString *)lowercaseWords;
 - (NSString *)longestWordsMatchInPrefixArray:(NSArray *)prefixArray;
+- (NSArray *)methodNameComponents;
 
 @end

@@ -15,11 +15,10 @@
 
 @interface NSObject (BFWStyleKit)
 
-#pragma mark - Introspection for StyleKit classes produced by PaintCode
+#pragma mark - Introspection for NSObject subclasses
 
-+ (NSDictionary *)parameterDict;
-+ (NSDictionary *)drawParameterDict;
-+ (NSString *)colorsXmlString;
-+ (UIColor *)colorWithName:(NSString *)colorName;
++ (NSArray *)methodNames;
++ (NSDictionary *)returnValueForMethodDict;
++ (NSArray *)subclassesOf:(Class)parentClass;
 
 @end

@@ -9,6 +9,18 @@
 #import "BFWAnimationView.h"
 #import "NSString+BFW.h"
 #import "NSInvocation+BFW.h"
+#import "NSObject+BFWStyleKit.h" // for DLog
+
+@interface BFWDrawView ()
+
+@property (nonatomic, strong) NSInvocation *drawInvocation;
+
+- (CGRect)drawFrame;
+- (NSArray *)parameters;
+- (SEL)drawingSelector;
+- (Class)drawingClass;
+
+@end
 
 @interface BFWAnimationView ()
 
@@ -78,8 +90,19 @@
 {
     if (_animation != animation) {
         _animation = animation;
+        [self setArgumentPointer:[NSValue valueWithPointer:&animation]
+                    forParameter:@"animation"];
         [self setNeedsDisplay];
     }
+}
+
+- (CGFloat)animationBetweenStartAndEnd
+{
+    CGFloat animation = self.animation;
+    if (self.start || self.end) {
+        animation = self.start + self.animation * (self.end - self.start);
+    }
+    return animation;
 }
 
 #pragma mark - animation
@@ -158,52 +181,63 @@
 
 #pragma mark - BFWDrawView
 
+- (NSInvocation *)drawInvocation
+{
+    if (!super.drawInvocation) {
+        NSMutableArray *argumentPointers = [[NSMutableArray alloc] init];
+        // Declare local variable copies in same scope as call to NSInvocation so they are retained
+        // TODO: find a way to remove the duplicated code from here (and BFWDrawView) while satisfying argumentPointers
+        CGRect frame = [self drawFrame];
+        UIColor *tintColor = self.tintColor;
+        CGFloat animation = [self animationBetweenStartAndEnd];
+        for (NSString *parameter in self.parameters) {
+            NSValue *argumentPointer = nil;
+            if ([parameter isEqualToString:@"frame"]) {
+                argumentPointer = [NSValue valueWithPointer:&frame];
+            }
+            else if ([parameter isEqualToString:@"tintColor"]) {
+                argumentPointer = [NSValue valueWithPointer:&tintColor];
+            }
+            else if ([parameter isEqualToString:@"animation"]) {
+                argumentPointer = [NSValue valueWithPointer:&animation];
+            }
+            if (argumentPointer) {
+                [argumentPointers addObject:argumentPointer];
+            }
+            else {
+                DLog(@"**** error: unexpected parameter: %@", parameter);
+                argumentPointers = nil;
+                break;
+            }
+        }
+        if (argumentPointers) {
+            super.drawInvocation = [NSInvocation invocationForClass:self.drawingClass
+                                                      selector:self.drawingSelector
+                                              argumentPointers:argumentPointers];
+        }
+    }
+    return super.drawInvocation;
+}
+
+#pragma mark - UIView
+
 - (void)drawRect:(CGRect)rect
 {
     [self startTimerIfNeeded];
     [super drawRect:rect];
 }
 
-- (CGFloat)animationBetweenStartAndEnd
+- (void)setHidden:(BOOL)hidden
 {
-    CGFloat animation = self.animation;
-    if (self.start || self.end) {
-        animation = self.start + self.animation * (self.end - self.start);
-    }
-    return animation;
-}
-
-- (NSInvocation *)drawInvocation
-{
-    // TODO: cache invocation but allow changing animation value
-    NSInvocation *invocation;
-    CGRect frame = self.drawFrame;
-    NSValue *framePointer = [NSValue valueWithPointer:&frame];
-    CGFloat animation = [self animationBetweenStartAndEnd];
-    NSValue *animationPointer = [NSValue valueWithPointer:&animation];
-    NSString *drawFrameSelectorString = [self drawFrameSelectorString];
-    NSString *selectorString = [drawFrameSelectorString stringByAppendingString:@"animation:"];
-    SEL selector = NSSelectorFromString(selectorString);
-    if ([self.styleKitClass respondsToSelector:selector]) {
-        invocation = [NSInvocation invocationForClass:self.styleKitClass
-                                             selector:selector
-                                     argumentPointers:@[framePointer, animationPointer]];
-    }
-    else {
-        NSString *selectorString = [drawFrameSelectorString stringByAppendingString:@"tintColor:animation:"];
-        SEL selector = NSSelectorFromString(selectorString);
-        if ([self.styleKitClass respondsToSelector:selector]) {
-            UIColor *tintColor = self.tintColor;
-            NSValue *tintColorPointer = [NSValue valueWithPointer:&tintColor];
-            invocation = [NSInvocation invocationForClass:self.styleKitClass
-                                                 selector:selector
-                                         argumentPointers:@[framePointer, tintColorPointer, animationPointer]];
-        }
-        else {
-            invocation = [super drawInvocation];
+    BOOL wasHidden = super.hidden;
+    [super setHidden:hidden];
+    if (hidden != wasHidden) {
+        if (hidden) {
+            [self.timer invalidate];
+        } else {
+            [self startTimerIfNeeded];
         }
     }
-    return invocation;
 }
 
 @end
