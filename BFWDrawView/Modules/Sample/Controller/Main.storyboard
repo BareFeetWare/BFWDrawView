@@ -33,6 +33,23 @@
                                             <segue destination="BYZ-38-t0r" kind="show" id="dCL-Gi-THj"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="36a-w7-Y1d" style="IBUITableViewCellStyleDefault" id="0s9-aV-bdA">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0s9-aV-bdA" id="RAR-nV-NYR">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Tint Color" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="36a-w7-Y1d">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="WJG-3k-HNi" kind="show" id="doB-uo-Hyg"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="QgS-Ny-Q3e" style="IBUITableViewCellStyleDefault" id="o6C-KY-rpz">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o6C-KY-rpz" id="zhn-bR-vPt">
@@ -98,7 +115,7 @@
             </objects>
             <point key="canvasLocation" x="554" y="-405"/>
         </scene>
-        <!--Title-->
+        <!--Buttons-->
         <scene sceneID="jMz-rQ-V6A">
             <objects>
                 <viewController id="0hF-u8-gGb" sceneMemberID="viewController">
@@ -123,7 +140,7 @@
                             <constraint firstAttribute="centerX" secondItem="1Qv-YC-KnK" secondAttribute="centerX" id="vRc-se-Fm9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="KJN-ga-5vW"/>
+                    <navigationItem key="navigationItem" title="Buttons" id="KJN-ga-5vW"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="diE-JQ-Dd0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -219,7 +236,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="16a-G5-Ss6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1293" y="383"/>
+            <point key="canvasLocation" x="2041" y="383"/>
         </scene>
         <!--Export-->
         <scene sceneID="RRM-i7-gPk">
@@ -537,7 +554,50 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dbu-U1-dkB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2035" y="383"/>
+            <point key="canvasLocation" x="2783" y="383"/>
+        </scene>
+        <!--Tint Color-->
+        <scene sceneID="c2s-Bp-is0">
+            <objects>
+                <viewController id="WJG-3k-HNi" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HRq-Jf-Tk6"/>
+                        <viewControllerLayoutGuide type="bottom" id="mRm-r8-XLI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="a0a-b2-4eI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="rWE-qA-nMp" userLabel="bathroom" customClass="BFWDrawView">
+                                <rect key="frame" x="284" y="284" width="32" height="32"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="styleKit" value="SampleStyleKit"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="name" value="icon pac man"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Qu4-dG-Ufr" userLabel="bathroom" customClass="BFWDrawView">
+                                <rect key="frame" x="324" y="284" width="32" height="32"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="styleKit" value="SampleStyleKit"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="name" value="icon ghost"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Qu4-dG-Ufr" firstAttribute="centerY" secondItem="rWE-qA-nMp" secondAttribute="centerY" id="3wg-u2-2Fi"/>
+                            <constraint firstAttribute="centerX" secondItem="rWE-qA-nMp" secondAttribute="centerX" id="7FL-a3-N2H"/>
+                            <constraint firstAttribute="centerY" secondItem="rWE-qA-nMp" secondAttribute="centerY" id="C2u-Oa-w7B"/>
+                            <constraint firstItem="Qu4-dG-Ufr" firstAttribute="leading" secondItem="rWE-qA-nMp" secondAttribute="trailing" constant="8" id="R9u-Xk-zvE"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Tint Color" id="Sym-91-6LY"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XtD-9v-xoD" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1293" y="383"/>
         </scene>
     </scenes>
 </document>
