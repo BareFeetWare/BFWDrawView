@@ -23,6 +23,7 @@ IB_DESIGNABLE
 @property (nonatomic, assign) CGSize drawnSize;
 @property (nonatomic, readonly) UIImage* image;
 @property (nonatomic, readonly) BOOL canDraw;
+@property (nonatomic, readonly) BOOL isDrawInvocationInstantiated; // for subclasses
 
 // for subclasses:
 

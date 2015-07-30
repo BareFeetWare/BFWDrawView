@@ -183,7 +183,7 @@
 
 - (NSInvocation *)drawInvocation
 {
-    if (!super.drawInvocation) {
+    if (!self.isDrawInvocationInstantiated) {
         NSMutableArray *argumentPointers = [[NSMutableArray alloc] init];
         // Declare local variable copies in same scope as call to NSInvocation so they are retained
         // TODO: find a way to remove the duplicated code from here (and BFWDrawView) while satisfying argumentPointers
@@ -212,8 +212,8 @@
         }
         if (argumentPointers) {
             super.drawInvocation = [NSInvocation invocationForClass:self.drawingClass
-                                                      selector:self.drawingSelector
-                                              argumentPointers:argumentPointers];
+                                                           selector:self.drawingSelector
+                                                   argumentPointers:argumentPointers];
         }
     }
     return super.drawInvocation;

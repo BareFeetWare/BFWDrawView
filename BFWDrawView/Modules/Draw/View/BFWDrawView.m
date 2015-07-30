@@ -235,6 +235,11 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
     return self.drawInvocation ? YES : NO;
 }
 
+- (BOOL)isDrawInvocationInstantiated
+{
+    return _drawInvocation != nil;
+}
+
 - (void)drawRect:(CGRect)rect
 {
     [self.drawInvocation invoke];
