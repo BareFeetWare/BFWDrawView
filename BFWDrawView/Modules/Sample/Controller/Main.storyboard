@@ -84,6 +84,23 @@
                                             <segue destination="wWF-4t-CUr" kind="show" id="QiI-MK-hoE"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="RzD-eZ-EKJ" style="IBUITableViewCellStyleDefault" id="a07-TR-AC6">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a07-TR-AC6" id="LLw-IW-cw9">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Animation speed test" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RzD-eZ-EKJ">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="XnP-Zf-dSw" kind="show" id="wF6-RC-lcc"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="B7L-gu-98s" style="IBUITableViewCellStyleDefault" id="YFa-MY-cws">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YFa-MY-cws" id="xf7-mc-yeM">
@@ -554,7 +571,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dbu-U1-dkB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2783" y="383"/>
+            <point key="canvasLocation" x="3543" y="377"/>
         </scene>
         <!--Tint Color-->
         <scene sceneID="c2s-Bp-is0">
@@ -598,6 +615,95 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XtD-9v-xoD" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1293" y="383"/>
+        </scene>
+        <!--Animation Speed Test-->
+        <scene sceneID="Gzs-5R-vxj">
+            <objects>
+                <viewController id="XnP-Zf-dSw" customClass="AnimationCountViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="plI-RQ-5Ma"/>
+                        <viewControllerLayoutGuide type="bottom" id="Cth-Ff-nMQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lpK-lK-YrR">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gkn-sY-DwZ" customClass="BFWAnimationView">
+                                <rect key="frame" x="263" y="263" width="74" height="74"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="name" value="Pac Man"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="styleKit" value="SampleStyleKit"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="animation">
+                                        <real key="value" value="0.40000000000000002"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="duration">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drawn frames per second:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Eg-2l-X3E">
+                                <rect key="frame" x="16" y="104" width="203" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KZ3-yA-Dlk">
+                                <rect key="frame" x="235" y="104" width="10" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Desired frames per second:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I56-2T-AL7">
+                                <rect key="frame" x="16" y="72" width="211.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iVy-Wz-7gK">
+                                <rect key="frame" x="235" y="69" width="97" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="97" id="iVh-da-bGQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1DT-er-Toq">
+                                <rect key="frame" x="275" y="127" width="50" height="30"/>
+                                <state key="normal" title="Restart">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="restart:" destination="XnP-Zf-dSw" eventType="touchUpInside" id="nEp-9V-k35"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="Gkn-sY-DwZ" secondAttribute="centerY" id="Fxz-XH-p8Q"/>
+                            <constraint firstAttribute="centerX" secondItem="Gkn-sY-DwZ" secondAttribute="centerX" id="QW3-sF-bAp"/>
+                            <constraint firstItem="KZ3-yA-Dlk" firstAttribute="leading" secondItem="iVy-Wz-7gK" secondAttribute="leading" id="d8I-NK-AKC"/>
+                            <constraint firstItem="7Eg-2l-X3E" firstAttribute="leading" secondItem="I56-2T-AL7" secondAttribute="leading" id="eAf-vc-pej"/>
+                            <constraint firstItem="7Eg-2l-X3E" firstAttribute="top" secondItem="I56-2T-AL7" secondAttribute="bottom" constant="11" id="lqj-hq-eej"/>
+                            <constraint firstItem="I56-2T-AL7" firstAttribute="top" secondItem="plI-RQ-5Ma" secondAttribute="bottom" constant="8.5" id="tZ7-pY-tbh"/>
+                            <constraint firstItem="KZ3-yA-Dlk" firstAttribute="baseline" secondItem="7Eg-2l-X3E" secondAttribute="baseline" constant="0.5" id="tms-5m-pbv"/>
+                            <constraint firstAttribute="centerX" secondItem="1DT-er-Toq" secondAttribute="centerX" id="tpv-0G-Fjm"/>
+                            <constraint firstItem="I56-2T-AL7" firstAttribute="baseline" secondItem="iVy-Wz-7gK" secondAttribute="baseline" id="uI2-EJ-sOw"/>
+                            <constraint firstItem="I56-2T-AL7" firstAttribute="leading" secondItem="lpK-lK-YrR" secondAttribute="leadingMargin" id="vPK-YL-1F6"/>
+                            <constraint firstItem="iVy-Wz-7gK" firstAttribute="leading" secondItem="I56-2T-AL7" secondAttribute="trailing" constant="8" id="yps-yp-rpH"/>
+                            <constraint firstItem="1DT-er-Toq" firstAttribute="top" secondItem="7Eg-2l-X3E" secondAttribute="bottom" constant="2.5" id="zfN-XX-whN"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Animation Speed Test" id="B7g-a7-cpd"/>
+                    <connections>
+                        <outlet property="animationView" destination="Gkn-sY-DwZ" id="ufM-Hn-MR9"/>
+                        <outlet property="desiredFramesPerSecondTextField" destination="iVy-Wz-7gK" id="liM-lE-NpP"/>
+                        <outlet property="drawnFramesPerSecondLabel" destination="KZ3-yA-Dlk" id="igE-LN-Qeh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aH5-a3-0bC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2777" y="383"/>
         </scene>
     </scenes>
 </document>
