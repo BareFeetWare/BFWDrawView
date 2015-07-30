@@ -137,7 +137,7 @@
     
     CGFloat complete = elapsed / self.duration;
     self.finished = (self.cycles && complete > self.cycles);
-    if (self.paused || self.finished) {
+    if (self.paused || self.finished || !self.superview) {
         [self.timer invalidate];
         self.timer = nil;
         if (self.finished) {
