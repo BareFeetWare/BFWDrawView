@@ -29,6 +29,7 @@
 @property (nonatomic, strong) NSDate *pausedDate;
 @property (nonatomic, assign) NSTimeInterval pausedTimeInterval;
 @property (nonatomic, assign) BOOL finished;
+@property (nonatomic, assign) NSUInteger drawnFrameCount; // to count actual frames drawn
 
 @end
 
@@ -105,6 +106,12 @@
     return animation;
 }
 
+- (CGFloat)drawnFramesPerSecond
+{
+    NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:self.startDate];
+    return interval > 0 ? self.drawnFrameCount / interval : 0.0;
+}
+
 #pragma mark - animation
 
 - (void)restart
@@ -122,6 +129,7 @@
     if (!self.timer && !self.paused && !self.finished) {
         if (!self.startDate) {
             self.startDate = [NSDate date];
+            self.drawnFrameCount = 0;
         }
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 / self.framesPerSecond
                                                       target:self
@@ -224,6 +232,7 @@
 - (void)drawRect:(CGRect)rect
 {
     [self startTimerIfNeeded];
+    self.drawnFrameCount++;
     [super drawRect:rect];
 }
 
