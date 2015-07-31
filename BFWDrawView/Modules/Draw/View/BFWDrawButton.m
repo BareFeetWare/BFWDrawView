@@ -9,6 +9,8 @@
 #import "BFWDrawButton.h"
 #import "BFWDrawView.h"
 #import "UIView+BFW.h"
+#import "BFWStyleKit.h"
+#import "BFWStyleKitDrawing.h"
 
 @implementation NSMutableDictionary (BFWDraw)
 
@@ -123,11 +125,11 @@
 {
     self.iconDrawViewForStateDict = nil;
     for (NSNumber *stateNumber in stateNameDict) {
-        BFWDrawView *icon = [[BFWDrawView alloc] init];
-        icon.name = stateNameDict[stateNumber];
-        icon.styleKit = styleKit;
+        BFWStyleKitDrawing *drawing = [BFWStyleKit drawingForStyleKitName:styleKit
+                                                              drawingName:stateNameDict[stateNumber]];
+        BFWDrawView *icon = [[BFWDrawView alloc] initWithFrame:drawing.intrinsicFrame];
+        icon.drawing = drawing;
         icon.contentMode = UIViewContentModeRedraw;
-        icon.frame = CGRectMake(0, 0, icon.drawnSize.width, icon.drawnSize.height);
         [self setIconDrawView:icon
                      forState:stateNumber.integerValue];
     }

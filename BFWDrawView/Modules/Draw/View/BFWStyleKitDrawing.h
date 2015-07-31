@@ -17,5 +17,7 @@
 @property (nonatomic, copy) NSString *methodName;
 @property (nonatomic, weak) BFWStyleKit *styleKit;
 @property (nonatomic, readonly) CGSize drawnSize;
+@property (nonatomic, readonly) BOOL hasDrawnSize;
+@property (nonatomic, readonly) CGRect intrinsicFrame;
 
 @end

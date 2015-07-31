@@ -18,17 +18,16 @@
 
 @interface BFWDrawView ()
 
-@property (nonatomic, strong) BFWStyleKit *bStyleKit;
 @property (nonatomic, strong) NSInvocation *drawInvocation;
 @property (nonatomic, assign) BOOL didCheckCanDraw;
+@property (nonatomic, readonly) CGSize drawInFrameSize;
 
 @end
 
-NSString * const sizesKey = @"sizes";
-NSString * const sizesByPrefixKey = @"sizesByPrefix";
-NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
-
 @implementation BFWDrawView
+
+@synthesize styleKit = _styleKit;
+@synthesize name = _name;
 
 #pragma mark - init
 
@@ -44,20 +43,23 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 
 #pragma mark - accessors
 
-- (BFWStyleKit *)bStyleKit
-{
-    if (!_bStyleKit) {
-        _bStyleKit = [BFWStyleKit styleKitForName:self.styleKit];
-    }
-    return _bStyleKit;
-}
-
 - (BFWStyleKitDrawing *)drawing
 {
     if (!_drawing) {
-        _drawing = [self.bStyleKit drawingForName:self.name];
+        _drawing = [BFWStyleKit drawingForStyleKitName:_styleKit
+                                           drawingName:_name];
     }
     return _drawing;
+}
+
+- (NSString *)styleKit
+{
+    return self.drawing.styleKit.name ?: _styleKit;
+}
+
+- (NSString *)name
+{
+    return self.drawing.name ?: _name;
 }
 
 - (void)setFillColor:(UIColor *)fillColor // Deprecated. Use UIView's tintColor.
@@ -82,7 +84,6 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
     if (![_styleKit isEqualToString:styleKit]) {
         _styleKit = styleKit;
         self.drawInvocation = nil;
-        self.bStyleKit = nil;
         self.drawing = nil;
         [self setNeedsDisplay];
     }
@@ -100,24 +101,16 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 
 #pragma mark - frame calculations
 
-- (CGSize)drawnSize
+- (CGSize)drawInFrameSize
 {
-    if (CGSizeEqualToSize(_drawnSize, CGSizeZero)) {
-        NSDictionary *parameterDict = self.bStyleKit.parameterDict;
-        NSString *sizeString = [parameterDict[sizesKey] objectForWordsKey:self.name];
-        if (!sizeString) {
-            sizeString = [parameterDict[sizesByPrefixKey] objectForLongestPrefixKeyMatchingWordsInString:self.name];
-        }
-        _drawnSize = sizeString ? CGSizeFromString(sizeString) : self.frame.size;
-    }
-    return _drawnSize;
+    return self.drawing.hasDrawnSize ? self.drawing.drawnSize : self.frame.size;
 }
 
 - (CGSize)intrinsicContentSize
 {
     CGSize size = CGSizeMake(UIViewNoIntrinsicMetric, UIViewNoIntrinsicMetric);
-    if (!CGSizeEqualToSize(self.drawnSize, CGSizeZero)) {
-        size = self.drawnSize;
+    if (self.drawing.hasDrawnSize) {
+        size = self.drawing.drawnSize;
     }
     return size;
 }
@@ -126,11 +119,14 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 {
     CGRect drawFrame = CGRectZero;
     if (self.contentMode == UIViewContentModeCenter) {
-        drawFrame = CGRectMake((self.frame.size.width - self.drawnSize.width) / 2, (self.frame.size.height - self.drawnSize.height) / 2, self.drawnSize.width, self.drawnSize.height);
+        drawFrame = CGRectMake((self.frame.size.width - self.drawInFrameSize.width) / 2,
+                               (self.frame.size.height - self.drawInFrameSize.height) / 2,
+                               self.drawInFrameSize.width,
+                               self.drawInFrameSize.height);
     }
     else if (self.contentMode == UIViewContentModeScaleAspectFit || self.contentMode == UIViewContentModeScaleAspectFill) {
-        CGFloat widthScale = self.frame.size.width / self.drawnSize.width;
-        CGFloat heightScale = self.frame.size.height / self.drawnSize.height;
+        CGFloat widthScale = self.frame.size.width / self.drawInFrameSize.width;
+        CGFloat heightScale = self.frame.size.height / self.drawInFrameSize.height;
         CGFloat scale;
         if (self.contentMode == UIViewContentModeScaleAspectFit) {
             scale = widthScale > heightScale ? heightScale : widthScale;
@@ -138,7 +134,8 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
         else {
             scale = widthScale > heightScale ? widthScale : heightScale;
         }
-        drawFrame.size = CGSizeMake(self.drawnSize.width * scale, self.drawnSize.height * scale);
+        drawFrame.size = CGSizeMake(self.drawInFrameSize.width * scale,
+                                    self.drawInFrameSize.height * scale);
         drawFrame.origin.x = (self.frame.size.width - drawFrame.size.width) / 2.0;
         drawFrame.origin.y = (self.frame.size.height - drawFrame.size.height) / 2.0;
     }
@@ -146,15 +143,16 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
         drawFrame = self.bounds;
     }
     else {
-        drawFrame = CGRectMake(0, 0, self.drawnSize.width, self.drawnSize.height);
+        drawFrame = CGRectMake(0, 0, self.drawInFrameSize.width,
+                               self.drawInFrameSize.height);
         if (self.contentMode == UIViewContentModeTopLeft) {
             // leave as-is
         }
         if (self.contentMode == UIViewContentModeTopRight || self.contentMode == UIViewContentModeBottomRight || self.contentMode == UIViewContentModeRight) {
-            drawFrame.origin.x = self.bounds.size.width - self.drawnSize.width;
+            drawFrame.origin.x = self.bounds.size.width - self.drawInFrameSize.width;
         }
         if (self.contentMode == UIViewContentModeBottomLeft || self.contentMode == UIViewContentModeBottomRight || self.contentMode == UIViewContentModeBottom) {
-            drawFrame.origin.y = self.bounds.size.height - self.drawnSize.height;
+            drawFrame.origin.y = self.bounds.size.height - self.drawInFrameSize.height;
         }
     }
     return drawFrame;
@@ -191,10 +189,6 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
     return NSSelectorFromString(self.drawing.methodName);
 }
 
-- (Class)drawingClass {
-    return self.bStyleKit.paintCodeClass;
-}
-
 - (NSInvocation *)drawInvocation
 {
     if (!_drawInvocation) {
@@ -220,7 +214,7 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
             }
         }
         if (argumentPointers) {
-            _drawInvocation = [NSInvocation invocationForClass:self.bStyleKit.paintCodeClass
+            _drawInvocation = [NSInvocation invocationForClass:self.drawing.styleKit.paintCodeClass
                                                       selector:self.drawingSelector
                                               argumentPointers:argumentPointers];
         }

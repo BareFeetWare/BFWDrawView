@@ -61,22 +61,19 @@ static NSString * const arraysKey = @"arrays";
                         styleKit:(NSString *)styleKit
                        tintColor:(UIColor *)tintColor
 {
+    BFWDrawView *drawView = nil;
     BFWStyleKitDrawing *drawing = [BFWStyleKit drawingForStyleKitName:styleKit
                                                           drawingName:drawingName];
-    BOOL isAnimation = [drawing.methodParameters containsObject:@"animation"];
-    Class class = isAnimation ? [BFWAnimationView class] : [BFWDrawView class];
-    BFWAnimationView *drawView = [[class alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
-    drawView.name = drawingName;
-    drawView.styleKit = styleKit;
-    drawView.contentMode = UIViewContentModeScaleAspectFit;
-    drawView.tintColor = tintColor;
-    CGSize size = drawView.drawnSize;
-    if (CGSizeEqualToSize(size, CGSizeZero)) {
-        DLog(@"missing size for drawing: %@", drawingName);
-        drawView = nil;
+    if (drawing.hasDrawnSize) {
+        BOOL isAnimation = [drawing.methodParameters containsObject:@"animation"];
+        Class class = isAnimation ? [BFWAnimationView class] : [BFWDrawView class];
+        BFWAnimationView *drawView = [[class alloc] initWithFrame:drawing.intrinsicFrame];
+        drawView.drawing = drawing;
+        drawView.contentMode = UIViewContentModeScaleAspectFit;
+        drawView.tintColor = tintColor;
     }
     else {
-        drawView.frame = CGRectMake(0, 0, size.width, size.height);
+        DLog(@"missing size for drawing: %@", drawingName);
     }
     return drawView;
 }

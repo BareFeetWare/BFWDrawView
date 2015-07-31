@@ -37,4 +37,14 @@ static NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
     return _drawnSize;
 }
 
+- (BOOL)hasDrawnSize
+{
+    return !CGSizeEqualToSize(self.drawnSize, CGSizeZero);
+}
+
+- (CGRect)intrinsicFrame
+{
+    return CGRectMake(0, 0, self.drawnSize.width, self.drawnSize.height);
+}
+
 @end

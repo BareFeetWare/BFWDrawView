@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString * const sizesKey;
-extern NSString * const sizesByPrefixKey;
-
 @class BFWStyleKitDrawing;
 
 IB_DESIGNABLE
@@ -24,7 +21,6 @@ IB_DESIGNABLE
 
 @property (nonatomic, strong) UIColor* fillColor; // Deprecated. Use UIView's tintColor
 
-@property (nonatomic, assign) CGSize drawnSize;
 @property (nonatomic, readonly) UIImage* image;
 @property (nonatomic, readonly) BOOL canDraw;
 @property (nonatomic, readonly) BOOL isDrawInvocationInstantiated; // for subclasses
