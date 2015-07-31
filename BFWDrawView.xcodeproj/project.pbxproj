@@ -30,6 +30,13 @@
 		E29F35961AFE07BF009A12FE /* NSDictionary+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E29F35951AFE07BF009A12FE /* NSDictionary+BFW.m */; };
 		E29F35971AFE07BF009A12FE /* NSDictionary+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E29F35951AFE07BF009A12FE /* NSDictionary+BFW.m */; };
 		E2A073591B64B4BA0054AD1A /* AnimationCountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A073581B64B4BA0054AD1A /* AnimationCountViewController.m */; };
+		E2A0735C1B69F73D0054AD1A /* BFWStyleKitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A0735B1B69F73D0054AD1A /* BFWStyleKitsViewController.m */; };
+		E2A0735F1B69FAD70054AD1A /* BFWStyleKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A0735E1B69FAD70054AD1A /* BFWStyleKitViewController.m */; };
+		E2A073621B69FE380054AD1A /* BFWDrawingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A073611B69FE380054AD1A /* BFWDrawingCell.m */; };
+		E2A073651B6A4D400054AD1A /* NSArray+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A073641B6A4D400054AD1A /* NSArray+BFW.m */; };
+		E2A073661B6A4D400054AD1A /* NSArray+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A073641B6A4D400054AD1A /* NSArray+BFW.m */; };
+		E2A073691B6A5BE60054AD1A /* BFWDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A073681B6A5BE60054AD1A /* BFWDrawViewController.m */; };
+		E2A0736A1B6A5BE60054AD1A /* BFWDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A073681B6A5BE60054AD1A /* BFWDrawViewController.m */; };
 		E2EBB3211ABFDE2E00C3787F /* BFWDrawExport.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EBB3201ABFDE2E00C3787F /* BFWDrawExport.m */; };
 		E2F58CFC1B5B7C0300F3CFF3 /* BFWStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F58CFB1B5B7C0300F3CFF3 /* BFWStyleKit.m */; };
 		E2F58CFF1B5B7C9B00F3CFF3 /* BFWStyleKitDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F58CFE1B5B7C9B00F3CFF3 /* BFWStyleKitDrawing.m */; };
@@ -87,6 +94,16 @@
 		E29F35951AFE07BF009A12FE /* NSDictionary+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BFW.m"; sourceTree = "<group>"; };
 		E2A073571B64B4BA0054AD1A /* AnimationCountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationCountViewController.h; sourceTree = "<group>"; };
 		E2A073581B64B4BA0054AD1A /* AnimationCountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationCountViewController.m; sourceTree = "<group>"; };
+		E2A0735A1B69F73D0054AD1A /* BFWStyleKitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWStyleKitsViewController.h; sourceTree = "<group>"; };
+		E2A0735B1B69F73D0054AD1A /* BFWStyleKitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWStyleKitsViewController.m; sourceTree = "<group>"; };
+		E2A0735D1B69FAD70054AD1A /* BFWStyleKitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWStyleKitViewController.h; sourceTree = "<group>"; };
+		E2A0735E1B69FAD70054AD1A /* BFWStyleKitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWStyleKitViewController.m; sourceTree = "<group>"; };
+		E2A073601B69FE380054AD1A /* BFWDrawingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawingCell.h; sourceTree = "<group>"; };
+		E2A073611B69FE380054AD1A /* BFWDrawingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawingCell.m; sourceTree = "<group>"; };
+		E2A073631B6A4D400054AD1A /* NSArray+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+BFW.h"; sourceTree = "<group>"; };
+		E2A073641B6A4D400054AD1A /* NSArray+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BFW.m"; sourceTree = "<group>"; };
+		E2A073671B6A5BE60054AD1A /* BFWDrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawViewController.h; sourceTree = "<group>"; };
+		E2A073681B6A5BE60054AD1A /* BFWDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawViewController.m; sourceTree = "<group>"; };
 		E2EBB31F1ABFDE2E00C3787F /* BFWDrawExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawExport.h; sourceTree = "<group>"; };
 		E2EBB3201ABFDE2E00C3787F /* BFWDrawExport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawExport.m; sourceTree = "<group>"; };
 		E2F58CFA1B5B7C0300F3CFF3 /* BFWStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWStyleKit.h; sourceTree = "<group>"; };
@@ -177,6 +194,12 @@
 				E20357A01A7F5187002BC3F4 /* Main.storyboard */,
 				E2A073571B64B4BA0054AD1A /* AnimationCountViewController.h */,
 				E2A073581B64B4BA0054AD1A /* AnimationCountViewController.m */,
+				E2A0735A1B69F73D0054AD1A /* BFWStyleKitsViewController.h */,
+				E2A0735B1B69F73D0054AD1A /* BFWStyleKitsViewController.m */,
+				E2A0735D1B69FAD70054AD1A /* BFWStyleKitViewController.h */,
+				E2A0735E1B69FAD70054AD1A /* BFWStyleKitViewController.m */,
+				E2A073671B6A5BE60054AD1A /* BFWDrawViewController.h */,
+				E2A073681B6A5BE60054AD1A /* BFWDrawViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -184,6 +207,8 @@
 		E20ED1121A9F24CC0045FA69 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E2A073631B6A4D400054AD1A /* NSArray+BFW.h */,
+				E2A073641B6A4D400054AD1A /* NSArray+BFW.m */,
 				E20ED1131A9F24CC0045FA69 /* NSInvocation+BFW.h */,
 				E20ED1141A9F24CC0045FA69 /* NSInvocation+BFW.m */,
 				E20ED1151A9F24CC0045FA69 /* NSString+BFW.h */,
@@ -258,6 +283,8 @@
 			children = (
 				E26B1DAE1B02B0FB005EACDE /* SampleDrawButton.h */,
 				E26B1DAF1B02B0FB005EACDE /* SampleDrawButton.m */,
+				E2A073601B69FE380054AD1A /* BFWDrawingCell.h */,
+				E2A073611B69FE380054AD1A /* BFWDrawingCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -392,9 +419,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E20ED1111A9F24B50045FA69 /* NSObject+BFWStyleKit.m in Sources */,
+				E2A0735F1B69FAD70054AD1A /* BFWStyleKitViewController.m in Sources */,
+				E2A0735C1B69F73D0054AD1A /* BFWStyleKitsViewController.m in Sources */,
 				E20357991A7F5144002BC3F4 /* BFWDrawButton.m in Sources */,
 				E20ED10E1A9F24860045FA69 /* UIImage+BFW.m in Sources */,
 				E2EBB3211ABFDE2E00C3787F /* BFWDrawExport.m in Sources */,
+				E2A073691B6A5BE60054AD1A /* BFWDrawViewController.m in Sources */,
 				E20357981A7F5144002BC3F4 /* BFWAnimationView.m in Sources */,
 				2023CEE81AFE28FB00BBA2FA /* UIColor+BFW.m in Sources */,
 				E20ED1171A9F24CC0045FA69 /* NSInvocation+BFW.m in Sources */,
@@ -404,7 +434,9 @@
 				E29F35961AFE07BF009A12FE /* NSDictionary+BFW.m in Sources */,
 				E2A073591B64B4BA0054AD1A /* AnimationCountViewController.m in Sources */,
 				E22117921AF4FE92007B515F /* AppDelegate.m in Sources */,
+				E2A073651B6A4D400054AD1A /* NSArray+BFW.m in Sources */,
 				E2F58CFC1B5B7C0300F3CFF3 /* BFWStyleKit.m in Sources */,
+				E2A073621B69FE380054AD1A /* BFWDrawingCell.m in Sources */,
 				E21CEF141B0B2A49006B137F /* UIView+BFW.m in Sources */,
 				E2FC1D9D1AC9066700F08B90 /* BFWAndroidExportViewController.m in Sources */,
 				E2F58CFF1B5B7C9B00F3CFF3 /* BFWStyleKitDrawing.m in Sources */,
@@ -417,8 +449,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2A0736A1B6A5BE60054AD1A /* BFWDrawViewController.m in Sources */,
 				E29F35971AFE07BF009A12FE /* NSDictionary+BFW.m in Sources */,
 				E211058B1A7E003A0025BDA0 /* NSString+BFW_Tests.m in Sources */,
+				E2A073661B6A4D400054AD1A /* NSArray+BFW.m in Sources */,
 				2023CEEA1AFE2BAE00BBA2FA /* UIColor+BFW_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
