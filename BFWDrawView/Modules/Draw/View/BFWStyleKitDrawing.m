@@ -13,6 +13,7 @@
 @interface BFWStyleKitDrawing ()
 
 @property (nonatomic, assign, readwrite) CGSize drawnSize;
+@property (nonatomic, assign) BOOL didSetDrawnSize;
 
 @end
 
@@ -24,7 +25,8 @@ static NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 
 - (CGSize)drawnSize
 {
-    if (CGSizeEqualToSize(_drawnSize, CGSizeZero)) {
+    if (!self.didSetDrawnSize) {
+        self.didSetDrawnSize = YES;
         NSDictionary *parameterDict = self.styleKit.parameterDict;
         NSString *sizeString = [parameterDict[sizesKey] objectForWordsKey:self.name];
         if (!sizeString) {
