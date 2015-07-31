@@ -102,6 +102,7 @@ static NSString * const styleKitSuffix = @"StyleKit";
                     BFWStyleKitDrawing *drawing = [[BFWStyleKitDrawing alloc] init];
                     drawing.methodName = methodName;
                     drawing.name = name;
+                    drawing.styleKit = self;
                     if (methodNameComponents.count > 1) {
                         drawing.methodParameters = [methodNameComponents subarrayWithRange:NSMakeRange(1, methodNameComponents.count - 1)];
                     }

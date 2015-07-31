@@ -6,12 +6,16 @@
 //  Copyright (c) 2015 BareFeetWare. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+@class BFWStyleKit;
 
 @interface BFWStyleKitDrawing : NSObject
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSArray *methodParameters;
 @property (nonatomic, copy) NSString *methodName;
+@property (nonatomic, weak) BFWStyleKit *styleKit;
+@property (nonatomic, readonly) CGSize drawnSize;
 
 @end
