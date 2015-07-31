@@ -19,7 +19,6 @@
 @interface BFWDrawView ()
 
 @property (nonatomic, strong) BFWStyleKit *bStyleKit;
-@property (nonatomic, strong) BFWStyleKitDrawing *drawing;
 @property (nonatomic, strong) NSInvocation *drawInvocation;
 @property (nonatomic, assign) BOOL didCheckCanDraw;
 
