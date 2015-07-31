@@ -11,6 +11,7 @@
 #import "NSInvocation+BFW.h"
 #import "NSObject+BFWStyleKit.h" // for DLog
 #import "BFWStyleKitDrawing.h"
+#import "BFWStyleKit.h"
 
 @interface BFWDrawView ()
 
@@ -19,7 +20,6 @@
 - (CGRect)drawFrame;
 - (NSArray *)parameters;
 - (SEL)drawingSelector;
-- (Class)drawingClass;
 
 @end
 
@@ -226,7 +226,7 @@
             }
         }
         if (argumentPointers) {
-            super.drawInvocation = [NSInvocation invocationForClass:self.drawingClass
+            super.drawInvocation = [NSInvocation invocationForClass:self.drawing.styleKit.paintCodeClass
                                                            selector:self.drawingSelector
                                                    argumentPointers:argumentPointers];
         }
