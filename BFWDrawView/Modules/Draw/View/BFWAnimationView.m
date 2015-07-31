@@ -10,6 +10,7 @@
 #import "NSString+BFW.h"
 #import "NSInvocation+BFW.h"
 #import "NSObject+BFWStyleKit.h" // for DLog
+#import "BFWStyleKitDrawing.h"
 
 @interface BFWDrawView ()
 
@@ -30,6 +31,7 @@
 @property (nonatomic, assign) NSTimeInterval pausedTimeInterval;
 @property (nonatomic, assign) BOOL finished;
 @property (nonatomic, assign) NSUInteger drawnFrameCount; // to count actual frames drawn
+@property (nonatomic, readonly) BOOL isAnimation;
 
 @end
 
@@ -112,6 +114,11 @@
     return interval > 0 ? self.drawnFrameCount / interval : 0.0;
 }
 
+- (BOOL)isAnimation
+{
+    return [self.drawing.methodParameters containsObject:@"animation"];
+}
+
 #pragma mark - animation
 
 - (void)restart
@@ -126,7 +133,7 @@
 
 - (void)startTimerIfNeeded
 {
-    if (!self.timer && !self.paused && !self.finished) {
+    if (!self.timer && !self.paused && !self.finished && self.isAnimation) {
         if (!self.startDate) {
             self.startDate = [NSDate date];
             self.drawnFrameCount = 0;
