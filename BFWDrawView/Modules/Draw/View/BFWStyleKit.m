@@ -25,6 +25,7 @@
 
 static NSString * const drawPrefix = @"draw";
 static NSString * const styleKitSuffix = @"StyleKit";
+static NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 
 #pragma mark - class methods
 
@@ -147,7 +148,15 @@ static NSString * const styleKitSuffix = @"StyleKit";
 
 - (BFWStyleKitDrawing *)drawingForName:(NSString *)drawingName
 {
-    BFWStyleKitDrawing *drawing = [self.drawings objectForWordsKey:drawingName];
+    BFWStyleKit *styleKit;
+    NSString *redirectStyleKitName = [self.parameterDict[styleKitByPrefixKey] objectForLongestPrefixKeyMatchingWordsInString:drawingName];
+    if (redirectStyleKitName) {
+        styleKit = [[self class] styleKitForName:redirectStyleKitName];
+    }
+    else {
+        styleKit = self;
+    }
+    BFWStyleKitDrawing *drawing = [styleKit.drawings objectForWordsKey:drawingName];
     if (!drawing) {
         DLog(@"failed to find drawing name: %@", drawingName);
     }

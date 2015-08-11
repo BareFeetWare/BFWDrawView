@@ -19,7 +19,6 @@
 
 static NSString * const sizesKey = @"sizes";
 static NSString * const sizesByPrefixKey = @"sizesByPrefix";
-static NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 
 @implementation BFWStyleKitDrawing
 
