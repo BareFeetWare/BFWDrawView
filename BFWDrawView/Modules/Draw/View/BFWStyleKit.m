@@ -130,7 +130,20 @@ static NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 {
     if (!_parameterDict) {
         NSString *path = [[self bundle] pathForResource:self.name ofType:@"plist"];
-        _parameterDict = [NSDictionary dictionaryWithContentsOfFile:path];
+        NSMutableDictionary *parameterDict = [[NSDictionary dictionaryWithContentsOfFile:path] mutableCopy];
+        //TODO: move filtering to another class with references to consts for keys
+        for (NSString *key in @[@"sizes", @"sizesByPrefix", @"derived"]) {
+            NSDictionary *dictionary = parameterDict[key];
+            if (dictionary) {
+                NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc] init];
+                for (NSString *oldKey in dictionary) {
+                    NSString *newKey = oldKey.lowercaseWords;
+                    mutableDict[newKey] = dictionary[oldKey];
+                }
+                parameterDict[key] = [mutableDict copy];
+            }
+        }
+        _parameterDict = [parameterDict copy];
     }
     return _parameterDict;
 }
