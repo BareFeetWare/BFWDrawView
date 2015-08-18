@@ -13,10 +13,11 @@
 #import "BFWDrawView.h"
 #import "NSArray+BFW.h"
 #import "BFWDrawViewController.h"
+#import "NSString+BFW.h"
 
 @interface BFWStyleKitViewController ()
 
-@property (nonatomic, strong) NSArray *drawingNames;
+@property (nonatomic, copy) NSArray *drawingNames;
 
 @end
 
@@ -27,7 +28,12 @@
 - (NSArray *)drawingNames
 {
     if (!_drawingNames) {
-        _drawingNames = [self.styleKit.drawings.allKeys arrayOfStringsSortedCaseInsensitive];
+        NSMutableArray *wordsArray = [[NSMutableArray alloc] init];
+        NSArray *camelCaseNames = [self.styleKit.drawings.allKeys arrayOfStringsSortedCaseInsensitive];
+        for (NSString *camelCaseName in camelCaseNames) {
+            [wordsArray addObject:camelCaseName.lowercaseWords];
+        }
+        _drawingNames = [wordsArray copy];
     }
     return _drawingNames;
 }
@@ -53,7 +59,7 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *drawingName = self.drawingNames[indexPath.row];
-    BFWStyleKitDrawing *drawing = self.styleKit.drawings[drawingName];
+    BFWStyleKitDrawing *drawing = [self.styleKit drawingForName:drawingName];
     BOOL isAnimation = [drawing.methodParameters containsObject:@"animation"];
     NSString *cellIdentifier = isAnimation ? @"animation" : @"drawing";
     
@@ -83,7 +89,7 @@
             UITableViewCell *cell = (UITableViewCell *)sender;
             NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
             NSString *drawingName = self.drawingNames[indexPath.row];
-            BFWStyleKitDrawing *drawing = self.styleKit.drawings[drawingName];
+            BFWStyleKitDrawing *drawing = [self.styleKit drawingForName:drawingName];
             destinationViewController.drawing = drawing;
         }
     }
