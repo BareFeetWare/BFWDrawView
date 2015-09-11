@@ -101,6 +101,11 @@
 
 #pragma mark - frame calculations
 
+- (CGSize)drawnSize
+{
+    return self.drawInFrameSize;
+}
+
 - (CGSize)drawInFrameSize
 {
     return self.drawing.hasDrawnSize ? self.drawing.drawnSize : self.frame.size;

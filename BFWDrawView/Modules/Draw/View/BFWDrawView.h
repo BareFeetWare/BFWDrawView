@@ -20,6 +20,7 @@ IB_DESIGNABLE
 @property (nonatomic, strong) BFWStyleKitDrawing* drawing;
 
 @property (nonatomic, strong) UIColor* fillColor; // Deprecated. Use UIView's tintColor
+@property (nonatomic, readonly) CGSize drawnSize; // Deprecated. Use self.drawing.drawnSize
 
 @property (nonatomic, readonly) UIImage* image;
 @property (nonatomic, readonly) BOOL canDraw;
