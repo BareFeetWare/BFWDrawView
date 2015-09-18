@@ -18,6 +18,7 @@
 
 @property (nonatomic, strong) Class styleKitClass;
 @property (nonatomic, assign) BOOL didCheckCanDraw;
+@property (nonatomic, strong) UIColor *retainedTintColor; // retains reference to tintColor so NSInvocation doesn't crash if the "darken colors" is enabled in System Preferences in iOS 9
 
 @end
 
@@ -161,7 +162,8 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
             selectorString = [selectorString stringByAppendingString:@"tintColor:"];
             SEL selector = NSSelectorFromString(selectorString);
             if ([class respondsToSelector:selector]) {
-                UIColor *tintColor = self.tintColor;
+                self.retainedTintColor = self.tintColor;
+                UIColor *tintColor = self.retainedTintColor;
                 NSValue *tintColorPointer = [NSValue valueWithPointer:&tintColor];
                 _drawInvocation = [NSInvocation invocationForClass:class
                                                           selector:selector
