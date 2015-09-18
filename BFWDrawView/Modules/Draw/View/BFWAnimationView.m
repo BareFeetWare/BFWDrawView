@@ -10,6 +10,12 @@
 #import "NSString+BFW.h"
 #import "NSInvocation+BFW.h"
 
+@interface BFWDrawView ()
+
+@property (nonatomic, strong) UIColor *retainedTintColor;
+
+@end
+
 @interface BFWAnimationView ()
 
 @property (nonatomic, weak) NSTimer *timer; // NSRunLoop holds a strong reference
@@ -193,7 +199,8 @@
         NSString *selectorString = [drawFrameSelectorString stringByAppendingString:@"tintColor:animation:"];
         SEL selector = NSSelectorFromString(selectorString);
         if ([self.styleKitClass respondsToSelector:selector]) {
-            UIColor *tintColor = self.tintColor;
+            self.retainedTintColor = self.tintColor;
+            UIColor *tintColor = self.retainedTintColor;
             NSValue *tintColorPointer = [NSValue valueWithPointer:&tintColor];
             invocation = [NSInvocation invocationForClass:self.styleKitClass
                                                  selector:selector
