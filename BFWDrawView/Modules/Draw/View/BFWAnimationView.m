@@ -16,6 +16,7 @@
 @interface BFWDrawView ()
 
 @property (nonatomic, strong) NSInvocation *drawInvocation;
+@property (nonatomic, strong) UIColor *retainedTintColor; // retains reference to tintColor so NSInvocation doesn't crash if the "darken colors" is enabled in System Preferences in iOS 9
 
 - (CGRect)drawFrame;
 - (NSArray *)parameters;
@@ -203,7 +204,8 @@
         // Declare local variable copies in same scope as call to NSInvocation so they are retained
         // TODO: find a way to remove the duplicated code from here (and BFWDrawView) while satisfying argumentPointers
         CGRect frame = [self drawFrame];
-        UIColor *tintColor = self.tintColor;
+        self.retainedTintColor = self.tintColor;
+        UIColor *tintColor = self.retainedTintColor;
         CGFloat animation = [self animationBetweenStartAndEnd];
         for (NSString *parameter in self.parameters) {
             NSValue *argumentPointer = nil;

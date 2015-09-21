@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSInvocation *drawInvocation;
 @property (nonatomic, assign) BOOL didCheckCanDraw;
 @property (nonatomic, readonly) CGSize drawInFrameSize;
+@property (nonatomic, strong) UIColor *retainedTintColor; // retains reference to tintColor so NSInvocation doesn't crash if the "darken colors" is enabled in System Preferences in iOS 9
 
 @end
 
@@ -200,7 +201,8 @@
         NSMutableArray *argumentPointers = [[NSMutableArray alloc] init];
         // Declare local variable copies in same scope as call to NSInvocation so they are retained
         CGRect frame = self.drawFrame;
-        UIColor *tintColor = self.tintColor;
+        self.retainedTintColor = self.tintColor;
+        UIColor *tintColor = self.retainedTintColor;
         for (NSString *parameter in self.drawing.methodParameters) {
             NSValue *argumentPointer = nil;
             if ([parameter isEqualToString:@"frame"]) {
