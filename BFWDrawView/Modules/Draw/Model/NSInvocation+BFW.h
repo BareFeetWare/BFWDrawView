@@ -10,7 +10,6 @@
 @interface NSInvocation (BFW)
 
 + (NSInvocation *)invocationForClass:(Class)aClass
-                            selector:(SEL)selector
-                    argumentPointers:(NSArray *)argumentPointers;
+                            selector:(SEL)selector;
 
 @end

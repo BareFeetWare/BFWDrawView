@@ -45,7 +45,7 @@
             // Danger: calling method may have side effects
             NSInvocation *invocation = [NSInvocation invocationForClass:[self class]
                                                                selector:NSSelectorFromString(methodName) // TODO: more direct way
-                                                       argumentPointers:nil];
+                                        ];
             [invocation invoke];
             id __unsafe_unretained tempReturnValue;
             [invocation getReturnValue:&tempReturnValue];
