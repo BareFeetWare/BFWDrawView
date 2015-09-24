@@ -12,7 +12,8 @@
 
 @interface BFWDrawView ()
 
-@property (nonatomic, strong) UIColor *retainedTintColor;
+- (void *)argumentForParameter:(NSString *)parameter;
+- (BOOL)updateArgumentForParameter:(NSString *)parameter;
 
 @end
 
@@ -23,6 +24,7 @@
 @property (nonatomic, strong) NSDate *pausedDate;
 @property (nonatomic, assign) NSTimeInterval pausedTimeInterval;
 @property (nonatomic, assign) BOOL finished;
+@property (nonatomic, assign) CGFloat invokedAnimation;
 
 @end
 
@@ -84,8 +86,18 @@
 {
     if (_animation != animation) {
         _animation = animation;
+        [self updateArgumentForParameter:@"animation"];
         [self setNeedsDisplay];
     }
+}
+
+- (CGFloat)animationBetweenStartAndEnd
+{
+    CGFloat animation = self.animation;
+    if (self.start || self.end) {
+        animation = self.start + self.animation * (self.end - self.start);
+    }
+    return animation;
 }
 
 #pragma mark - animation
@@ -164,53 +176,34 @@
 
 #pragma mark - BFWDrawView
 
+- (NSArray *)possibleParametersArray
+{
+    return @[@[@"frame", @"animation"],
+             @[@"frame", @"tintColor", @"animation"],
+             @[@"frame"],
+             @[@"frame", @"tintColor"]
+             ];
+}
+
+- (void *)argumentForParameter:(NSString *)parameter
+{
+    void *argument = nil;
+    if ([parameter isEqualToString:@"animation"]) {
+        self.invokedAnimation = [self animationBetweenStartAndEnd];
+        argument = &_invokedAnimation;
+    }
+    else {
+        argument = [super argumentForParameter:parameter];
+    }
+    return argument;
+}
+
+#pragma mark - UIView
+
 - (void)drawRect:(CGRect)rect
 {
     [self startTimerIfNeeded];
     [super drawRect:rect];
-}
-
-- (CGFloat)animationBetweenStartAndEnd
-{
-    CGFloat animation = self.animation;
-    if (self.start || self.end) {
-        animation = self.start + self.animation * (self.end - self.start);
-    }
-    return animation;
-}
-
-- (NSInvocation *)drawInvocation
-{
-    // TODO: cache invocation but allow changing animation value
-    NSInvocation *invocation;
-    CGRect frame = self.drawFrame;
-    NSValue *framePointer = [NSValue valueWithPointer:&frame];
-    CGFloat animation = [self animationBetweenStartAndEnd];
-    NSValue *animationPointer = [NSValue valueWithPointer:&animation];
-    NSString *drawFrameSelectorString = [self drawFrameSelectorString];
-    NSString *selectorString = [drawFrameSelectorString stringByAppendingString:@"animation:"];
-    SEL selector = NSSelectorFromString(selectorString);
-    if ([self.styleKitClass respondsToSelector:selector]) {
-        invocation = [NSInvocation invocationForClass:self.styleKitClass
-                                             selector:selector
-                                     argumentPointers:@[framePointer, animationPointer]];
-    }
-    else {
-        NSString *selectorString = [drawFrameSelectorString stringByAppendingString:@"tintColor:animation:"];
-        SEL selector = NSSelectorFromString(selectorString);
-        if ([self.styleKitClass respondsToSelector:selector]) {
-            self.retainedTintColor = self.tintColor;
-            UIColor *tintColor = self.retainedTintColor;
-            NSValue *tintColorPointer = [NSValue valueWithPointer:&tintColor];
-            invocation = [NSInvocation invocationForClass:self.styleKitClass
-                                                 selector:selector
-                                         argumentPointers:@[framePointer, tintColorPointer, animationPointer]];
-        }
-        else {
-            invocation = [super drawInvocation];
-        }
-    }
-    return invocation;
 }
 
 @end

@@ -11,7 +11,6 @@
 
 + (NSInvocation *)invocationForClass:(Class)class
                             selector:(SEL)selector
-                    argumentPointers:(NSArray *)argumentPointers
 {
     NSInvocation *invocation;
     if ([class respondsToSelector:selector]) {
@@ -19,10 +18,6 @@
         invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
         [invocation setSelector:selector];
         [invocation setTarget:class];
-        for (NSUInteger argumentN = 0; argumentN < argumentPointers.count; argumentN++) {
-            NSValue *argumentAddress = argumentPointers[argumentN];
-            [invocation setArgument:argumentAddress.pointerValue atIndex:argumentN + 2];
-        }
     }
     return invocation;
 }

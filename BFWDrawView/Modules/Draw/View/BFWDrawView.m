@@ -18,7 +18,9 @@
 
 @property (nonatomic, strong) Class styleKitClass;
 @property (nonatomic, assign) BOOL didCheckCanDraw;
-@property (nonatomic, strong) UIColor *retainedTintColor; // retains reference to tintColor so NSInvocation doesn't crash if the "darken colors" is enabled in System Preferences in iOS 9
+@property (nonatomic, strong) NSArray *parameters;
+@property (nonatomic, assign) CGRect invokedDrawFrame;
+@property (nonatomic, strong) UIColor *invokedTintColor; // retains reference to tintColor so NSInvocation doesn't crash if the "darken colors" is enabled in System Preferences in iOS 9
 
 @end
 
@@ -134,43 +136,85 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 
 #pragma mark - drawing
 
-- (NSString *)drawFrameSelectorString
+- (NSArray *)possibleParametersArray
 {
+    return @[@[@"frame"],
+             @[@"frame", @"tintColor"]
+             ];
+}
+
+- (NSString *)selectorStringForParameters:(NSArray *)parameters
+{
+    NSString *parametersString = [parameters componentsJoinedByString:@":"];
+    parametersString = parametersString.uppercaseFirstCharacter;
     NSString *paintCodeCaseString = [self.name wordsToPaintCodeCase];
-    NSString *selectorString = [NSString stringWithFormat:@"draw%@WithFrame:", paintCodeCaseString];
+    NSString *selectorString = [NSString stringWithFormat:@"draw%@With%@:", paintCodeCaseString, parametersString];
     return selectorString;
+}
+
+- (NSArray *)parameters {
+    if (!_parameters) {
+        for (NSArray *possibleParameters in self.possibleParametersArray) {
+            NSString *selectorString = [self selectorStringForParameters:possibleParameters];
+            SEL selector = NSSelectorFromString(selectorString);
+            if ([self.styleKitClass respondsToSelector:selector]) {
+                _parameters = possibleParameters;
+                break;
+            }
+        }
+    }
+    return _parameters;
+}
+
+- (BOOL)updateArgumentForParameter:(NSString *)parameter
+{
+    BOOL success = NO;
+    NSUInteger index = [self.parameters indexOfObject:parameter];
+    if (index != NSNotFound) {
+        void *argument = [self argumentForParameter:parameter];
+        if (argument) {
+            [_drawInvocation setArgument:argument
+                                 atIndex:index + 2]; // 0 and 1 are used by NSInvocation for self and _cmd
+            success = YES;
+        }
+    }
+    return success;
+}
+
+- (void *)argumentForParameter:(NSString *)parameter
+{
+    void *argument = nil;
+    if ([parameter isEqualToString:@"frame"]) {
+        self.invokedDrawFrame = [self drawFrame];
+        argument = &_invokedDrawFrame;
+    }
+    else if ([parameter isEqualToString:@"tintColor"]) {
+        self.invokedTintColor = self.tintColor;
+        argument = &_invokedTintColor;
+    }
+    return argument;
+}
+
+- (SEL)drawingSelector {
+    NSString *selectorString = [self selectorStringForParameters:self.parameters];
+    return NSSelectorFromString(selectorString);
 }
 
 - (NSInvocation *)drawInvocation
 {
+    SEL selector = self.drawingSelector;
     Class class = self.styleKitClass;
-    if (!class) {
-        DLog(@"**** error: Failed to get styleKitClass to draw %@", self.name);
-        return nil;
-    }
-    if (!_drawInvocation) {
-        NSString *selectorString = [self drawFrameSelectorString];
-        CGRect frame = self.drawFrame;
-        NSValue *framePointer = [NSValue valueWithPointer:&frame];
-        SEL selector = NSSelectorFromString(selectorString);
-        if ([class respondsToSelector:selector]) {
-            _drawInvocation = [NSInvocation invocationForClass:class
-                                                      selector:selector
-                                              argumentPointers:@[framePointer]];
-        }
-        else {
-            selectorString = [selectorString stringByAppendingString:@"tintColor:"];
-            SEL selector = NSSelectorFromString(selectorString);
-            if ([class respondsToSelector:selector]) {
-                self.retainedTintColor = self.tintColor;
-                UIColor *tintColor = self.retainedTintColor;
-                NSValue *tintColorPointer = [NSValue valueWithPointer:&tintColor];
-                _drawInvocation = [NSInvocation invocationForClass:class
-                                                          selector:selector
-                                                  argumentPointers:@[framePointer, tintColorPointer]];
-            }
-            else if (!self.didCheckCanDraw) {
-                DLog(@"**** warning: No method for drawing name: %@", self.name);
+    if ([class respondsToSelector:selector]) {
+        NSMethodSignature *methodSignature = [class methodSignatureForSelector:selector];
+        _drawInvocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+        [_drawInvocation setSelector:selector];
+        [_drawInvocation setTarget:class];
+        for (NSString *parameter in self.parameters) {
+            BOOL success = [self updateArgumentForParameter:parameter];
+            if (!success) {
+                _drawInvocation = nil;
+                DLog(@"**** error: unexpected parameter: %@", parameter);
+                break;
             }
         }
     }
@@ -277,7 +321,7 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
     return [self imageFromView];
 }
 
-#pragma mark - image output methods
+#pragma mark - image output
 
 - (BOOL)writeImageAtScale:(CGFloat)scale
                    toFile:(NSString*)savePath
