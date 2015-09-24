@@ -19,8 +19,10 @@
 @interface BFWDrawView ()
 
 @property (nonatomic, strong) NSInvocation *drawInvocation;
+@property (nonatomic, readonly) Class styleKitClass;
 @property (nonatomic, assign) BOOL didCheckCanDraw;
 @property (nonatomic, readonly) CGSize drawInFrameSize;
+@property (nonatomic, readonly) NSArray *parameters;
 @property (nonatomic, assign) CGRect invokedDrawFrame;
 @property (nonatomic, strong) UIColor *invokedTintColor; // retains reference to tintColor so NSInvocation doesn't crash if the "darken colors" is enabled in System Preferences in iOS 9
 
@@ -44,6 +46,11 @@
 }
 
 #pragma mark - accessors
+
+- (Class)styleKitClass
+{
+    return self.drawing.styleKit.paintCodeClass;
+}
 
 - (BFWStyleKitDrawing *)drawing
 {
@@ -219,13 +226,13 @@
 {
     if (!_drawInvocation) {
         SEL selector = self.drawingSelector;
-        Class class = self.drawing.styleKit.paintCodeClass;
+        Class class = self.styleKitClass;
         if ([class respondsToSelector:selector]) {
             NSMethodSignature *methodSignature = [class methodSignatureForSelector:selector];
             _drawInvocation = [NSInvocation invocationWithMethodSignature:methodSignature];
             [_drawInvocation setSelector:selector];
             [_drawInvocation setTarget:class];
-            for (NSString *parameter in self.drawing.methodParameters) {
+            for (NSString *parameter in self.parameters) {
                 BOOL success = [self updateArgumentForParameter:parameter];
                 if (!success) {
                     _drawInvocation = nil;

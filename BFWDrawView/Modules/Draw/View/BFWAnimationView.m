@@ -15,6 +15,8 @@
 
 @interface BFWDrawView ()
 
+@property (nonatomic, readonly) NSArray *parameters;
+
 - (void *)argumentForParameter:(NSString *)parameter;
 - (BOOL)updateArgumentForParameter:(NSString *)parameter;
 
@@ -113,7 +115,7 @@
 
 - (BOOL)isAnimation
 {
-    return [self.drawing.methodParameters containsObject:@"animation"];
+    return [self.parameters containsObject:@"animation"];
 }
 
 #pragma mark - animation
