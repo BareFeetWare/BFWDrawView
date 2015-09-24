@@ -16,6 +16,7 @@
 
 @interface BFWDrawView ()
 
+@property (nonatomic, strong) NSInvocation *drawInvocation;
 @property (nonatomic, strong) Class styleKitClass;
 @property (nonatomic, assign) BOOL didCheckCanDraw;
 @property (nonatomic, strong) NSArray *parameters;
@@ -202,19 +203,21 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 
 - (NSInvocation *)drawInvocation
 {
-    SEL selector = self.drawingSelector;
-    Class class = self.styleKitClass;
-    if ([class respondsToSelector:selector]) {
-        NSMethodSignature *methodSignature = [class methodSignatureForSelector:selector];
-        _drawInvocation = [NSInvocation invocationWithMethodSignature:methodSignature];
-        [_drawInvocation setSelector:selector];
-        [_drawInvocation setTarget:class];
-        for (NSString *parameter in self.parameters) {
-            BOOL success = [self updateArgumentForParameter:parameter];
-            if (!success) {
-                _drawInvocation = nil;
-                DLog(@"**** error: unexpected parameter: %@", parameter);
-                break;
+    if (!_drawInvocation) {
+        SEL selector = self.drawingSelector;
+        Class class = self.styleKitClass;
+        if ([class respondsToSelector:selector]) {
+            NSMethodSignature *methodSignature = [class methodSignatureForSelector:selector];
+            _drawInvocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+            [_drawInvocation setSelector:selector];
+            [_drawInvocation setTarget:class];
+            for (NSString *parameter in self.parameters) {
+                BOOL success = [self updateArgumentForParameter:parameter];
+                if (!success) {
+                    _drawInvocation = nil;
+                    DLog(@"**** error: unexpected parameter: %@", parameter);
+                    break;
+                }
             }
         }
     }
@@ -229,7 +232,7 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 
 - (void)drawRect:(CGRect)rect
 {
-    [[self drawInvocation] invoke];
+    [self.drawInvocation invoke];
 }
 
 
