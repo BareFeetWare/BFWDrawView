@@ -223,4 +223,17 @@
     [super drawRect:rect];
 }
 
+- (void)setHidden:(BOOL)hidden
+{
+    BOOL wasHidden = super.hidden;
+    [super setHidden:hidden];
+    if (hidden != wasHidden) {
+        if (hidden) {
+            [self.timer invalidate];
+        } else {
+            [self startTimerIfNeeded];
+        }
+    }
+}
+
 @end
