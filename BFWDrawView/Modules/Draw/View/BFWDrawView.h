@@ -24,12 +24,6 @@ IB_DESIGNABLE
 
 @property (nonatomic, readonly) UIImage* image;
 @property (nonatomic, readonly) BOOL canDraw;
-@property (nonatomic, readonly) BOOL isDrawInvocationInstantiated; // for subclasses
-
-// for subclasses:
-
-- (void)setArgumentPointer:(NSValue *)argumentPointer
-              forParameter:(NSString *)parameter;
 
 #pragma mark - image output methods
 

@@ -15,12 +15,8 @@
 
 @interface BFWDrawView ()
 
-@property (nonatomic, strong) NSInvocation *drawInvocation;
-@property (nonatomic, strong) UIColor *retainedTintColor; // retains reference to tintColor so NSInvocation doesn't crash if the "darken colors" is enabled in System Preferences in iOS 9
-
-- (CGRect)drawFrame;
-- (NSArray *)parameters;
-- (SEL)drawingSelector;
+- (void *)argumentForParameter:(NSString *)parameter;
+- (BOOL)updateArgumentForParameter:(NSString *)parameter;
 
 @end
 
@@ -33,6 +29,7 @@
 @property (nonatomic, assign) BOOL finished;
 @property (nonatomic, assign) NSUInteger drawnFrameCount; // to count actual frames drawn
 @property (nonatomic, readonly) BOOL isAnimation;
+@property (nonatomic, assign) CGFloat invokedAnimation;
 
 @end
 
@@ -94,8 +91,7 @@
 {
     if (_animation != animation) {
         _animation = animation;
-        [self setArgumentPointer:[NSValue valueWithPointer:&animation]
-                    forParameter:@"animation"];
+        [self updateArgumentForParameter:@"animation"];
         [self setNeedsDisplay];
     }
 }
@@ -197,43 +193,17 @@
 
 #pragma mark - BFWDrawView
 
-- (NSInvocation *)drawInvocation
+- (void *)argumentForParameter:(NSString *)parameter
 {
-    if (!self.isDrawInvocationInstantiated) {
-        NSMutableArray *argumentPointers = [[NSMutableArray alloc] init];
-        // Declare local variable copies in same scope as call to NSInvocation so they are retained
-        // TODO: find a way to remove the duplicated code from here (and BFWDrawView) while satisfying argumentPointers
-        CGRect frame = [self drawFrame];
-        self.retainedTintColor = self.tintColor;
-        UIColor *tintColor = self.retainedTintColor;
-        CGFloat animation = [self animationBetweenStartAndEnd];
-        for (NSString *parameter in self.parameters) {
-            NSValue *argumentPointer = nil;
-            if ([parameter isEqualToString:@"frame"]) {
-                argumentPointer = [NSValue valueWithPointer:&frame];
-            }
-            else if ([parameter isEqualToString:@"tintColor"]) {
-                argumentPointer = [NSValue valueWithPointer:&tintColor];
-            }
-            else if ([parameter isEqualToString:@"animation"]) {
-                argumentPointer = [NSValue valueWithPointer:&animation];
-            }
-            if (argumentPointer) {
-                [argumentPointers addObject:argumentPointer];
-            }
-            else {
-                DLog(@"**** error: unexpected parameter: %@", parameter);
-                argumentPointers = nil;
-                break;
-            }
-        }
-        if (argumentPointers) {
-            super.drawInvocation = [NSInvocation invocationForClass:self.drawing.styleKit.paintCodeClass
-                                                           selector:self.drawingSelector
-                                                   argumentPointers:argumentPointers];
-        }
+    void *argument = nil;
+    if ([parameter isEqualToString:@"animation"]) {
+        self.invokedAnimation = [self animationBetweenStartAndEnd];
+        argument = &_invokedAnimation;
     }
-    return super.drawInvocation;
+    else {
+        argument = [super argumentForParameter:parameter];
+    }
+    return argument;
 }
 
 #pragma mark - UIView

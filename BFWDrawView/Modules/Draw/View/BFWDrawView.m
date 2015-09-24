@@ -21,7 +21,8 @@
 @property (nonatomic, strong) NSInvocation *drawInvocation;
 @property (nonatomic, assign) BOOL didCheckCanDraw;
 @property (nonatomic, readonly) CGSize drawInFrameSize;
-@property (nonatomic, strong) UIColor *retainedTintColor; // retains reference to tintColor so NSInvocation doesn't crash if the "darken colors" is enabled in System Preferences in iOS 9
+@property (nonatomic, assign) CGRect invokedDrawFrame;
+@property (nonatomic, strong) UIColor *invokedTintColor; // retains reference to tintColor so NSInvocation doesn't crash if the "darken colors" is enabled in System Preferences in iOS 9
 
 @end
 
@@ -177,18 +178,37 @@
 
 #pragma mark - drawing
 
-- (void)setArgumentPointer:(NSValue *)argumentPointer
-              forParameter:(NSString *)parameter
-{
-    NSUInteger index = [self.drawing.methodParameters indexOfObject:parameter];
-    if (index != NSNotFound) {
-        [self.drawInvocation setArgument:argumentPointer.pointerValue
-                                 atIndex:index + 2];
-    }
-}
-
 - (NSArray *)parameters {
     return self.drawing.methodParameters;
+}
+
+- (BOOL)updateArgumentForParameter:(NSString *)parameter
+{
+    BOOL success = NO;
+    NSUInteger index = [self.parameters indexOfObject:parameter];
+    if (index != NSNotFound) {
+        void *argument = [self argumentForParameter:parameter];
+        if (argument) {
+            [_drawInvocation setArgument:argument
+                                 atIndex:index + 2]; // 0 and 1 are used by NSInvocation for self and _cmd
+            success = YES;
+        }
+    }
+    return success;
+}
+
+- (void *)argumentForParameter:(NSString *)parameter
+{
+    void *argument = nil;
+    if ([parameter isEqualToString:@"frame"]) {
+        self.invokedDrawFrame = [self drawFrame];
+        argument = &_invokedDrawFrame;
+    }
+    else if ([parameter isEqualToString:@"tintColor"]) {
+        self.invokedTintColor = self.tintColor;
+        argument = &_invokedTintColor;
+    }
+    return argument;
 }
 
 - (SEL)drawingSelector {
@@ -198,32 +218,21 @@
 - (NSInvocation *)drawInvocation
 {
     if (!_drawInvocation) {
-        NSMutableArray *argumentPointers = [[NSMutableArray alloc] init];
-        // Declare local variable copies in same scope as call to NSInvocation so they are retained
-        CGRect frame = self.drawFrame;
-        self.retainedTintColor = self.tintColor;
-        UIColor *tintColor = self.retainedTintColor;
-        for (NSString *parameter in self.drawing.methodParameters) {
-            NSValue *argumentPointer = nil;
-            if ([parameter isEqualToString:@"frame"]) {
-                argumentPointer = [NSValue valueWithPointer:&frame];
+        SEL selector = self.drawingSelector;
+        Class class = self.drawing.styleKit.paintCodeClass;
+        if ([class respondsToSelector:selector]) {
+            NSMethodSignature *methodSignature = [class methodSignatureForSelector:selector];
+            _drawInvocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+            [_drawInvocation setSelector:selector];
+            [_drawInvocation setTarget:class];
+            for (NSString *parameter in self.drawing.methodParameters) {
+                BOOL success = [self updateArgumentForParameter:parameter];
+                if (!success) {
+                    _drawInvocation = nil;
+                    DLog(@"**** error: unexpected parameter: %@", parameter);
+                    break;
+                }
             }
-            else if ([parameter isEqualToString:@"tintColor"]) {
-                argumentPointer = [NSValue valueWithPointer:&tintColor];
-            }
-            if (argumentPointer) {
-                [argumentPointers addObject:argumentPointer];
-            }
-            else {
-                DLog(@"**** error: unexpected parameter: %@", parameter);
-                argumentPointers = nil;
-                break;
-            }
-        }
-        if (argumentPointers) {
-            _drawInvocation = [NSInvocation invocationForClass:self.drawing.styleKit.paintCodeClass
-                                                      selector:self.drawingSelector
-                                              argumentPointers:argumentPointers];
         }
     }
     return _drawInvocation;
@@ -233,11 +242,6 @@
 {
     self.didCheckCanDraw = YES;
     return self.drawInvocation ? YES : NO;
-}
-
-- (BOOL)isDrawInvocationInstantiated
-{
-    return _drawInvocation != nil;
 }
 
 - (void)drawRect:(CGRect)rect
@@ -305,7 +309,7 @@
     return [self imageFromView];
 }
 
-#pragma mark - image output methods
+#pragma mark - image output
 
 - (BOOL)writeImageAtScale:(CGFloat)scale
                    toFile:(NSString*)savePath
