@@ -62,6 +62,32 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
     return _styleKitClass;
 }
 
+- (void)setFillColor:(UIColor *)fillColor // Deprecated. Use UIView's tintColor.
+{
+    DLog(@"BFWDrawView called deprecated fillColor. Use tintColor instead. %@", fillColor
+         );
+    self.tintColor = fillColor;
+    _fillColor = fillColor;
+}
+
+- (void)setTintColor:(UIColor *)tintColor
+{
+    if (![super.tintColor isEqual:tintColor]) {
+        [super setTintColor:tintColor];
+        self.drawInvocation = nil;
+        [self setNeedsDisplay]; // needed?
+    }
+}
+
+- (void)setName:(NSString *)name
+{
+    if (![_name isEqualToString:name]) {
+        _name = name;
+        self.drawInvocation = nil;
+        [self setNeedsDisplay];
+    }
+}
+
 #pragma mark - frame calculations
 
 - (CGSize)drawnSize
@@ -233,35 +259,6 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 - (void)drawRect:(CGRect)rect
 {
     [self.drawInvocation invoke];
-}
-
-
-#pragma mark - setters
-
-- (void)setFillColor:(UIColor *)fillColor // Deprecated. Use UIView's tintColor.
-{
-    DLog(@"BFWDrawView called deprecated fillColor. Use tintColor instead. %@", fillColor
-         );
-    self.tintColor = fillColor;
-    _fillColor = fillColor;
-}
-
-- (void)setTintColor:(UIColor *)tintColor
-{
-    if (![super.tintColor isEqual:tintColor]) {
-        [super setTintColor:tintColor];
-		self.drawInvocation = nil;
-        [self setNeedsDisplay]; // needed?
-    }
-}
-
-- (void)setName:(NSString *)name
-{
-    if (![_name isEqualToString:name]) {
-        _name = name;
-        self.drawInvocation = nil;
-        [self setNeedsDisplay];
-    }
 }
 
 #pragma mark - image rendering
