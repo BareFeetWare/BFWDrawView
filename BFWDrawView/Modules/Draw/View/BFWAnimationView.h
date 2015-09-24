@@ -20,6 +20,7 @@ IB_DESIGNABLE
 @property (nonatomic, assign) IBInspectable BOOL paused;
 
 @property (nonatomic, assign) CGFloat framesPerSecond;
+@property (nonatomic, readonly) CGFloat drawnFramesPerSecond;
 
 - (void)restart;
 - (BOOL)writeImagesAtScale:(CGFloat)scale

@@ -12,6 +12,8 @@
 
 @interface BFWDrawView ()
 
+@property (nonatomic, strong) NSArray *parameters;
+
 - (void *)argumentForParameter:(NSString *)parameter;
 - (BOOL)updateArgumentForParameter:(NSString *)parameter;
 
@@ -24,6 +26,8 @@
 @property (nonatomic, strong) NSDate *pausedDate;
 @property (nonatomic, assign) NSTimeInterval pausedTimeInterval;
 @property (nonatomic, assign) BOOL finished;
+@property (nonatomic, assign) NSUInteger drawnFrameCount; // to count actual frames drawn
+@property (nonatomic, readonly) BOOL isAnimation;
 @property (nonatomic, assign) CGFloat invokedAnimation;
 
 @end
@@ -100,6 +104,17 @@
     return animation;
 }
 
+- (CGFloat)drawnFramesPerSecond
+{
+    NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:self.startDate];
+    return interval > 0 ? self.drawnFrameCount / interval : 0.0;
+}
+
+- (BOOL)isAnimation
+{
+    return [self.parameters containsObject:@"animation"];
+}
+
 #pragma mark - animation
 
 - (void)restart
@@ -114,9 +129,10 @@
 
 - (void)startTimerIfNeeded
 {
-    if (!self.timer && !self.paused && !self.finished) {
+    if (!self.timer && !self.paused && !self.finished && self.isAnimation) {
         if (!self.startDate) {
             self.startDate = [NSDate date];
+            self.drawnFrameCount = 0;
         }
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 / self.framesPerSecond
                                                       target:self
@@ -203,6 +219,7 @@
 - (void)drawRect:(CGRect)rect
 {
     [self startTimerIfNeeded];
+    self.drawnFrameCount++;
     [super drawRect:rect];
 }
 
