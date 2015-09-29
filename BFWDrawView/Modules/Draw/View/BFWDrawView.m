@@ -62,6 +62,12 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
     return _styleKitClass;
 }
 
+- (void)setStyleKit:(NSString *)styleKit
+{
+    _styleKit = styleKit;
+    self.styleKitClass = nil;
+}
+
 - (void)setFillColor:(UIColor *)fillColor // Deprecated. Use UIView's tintColor.
 {
     DLog(@"BFWDrawView called deprecated fillColor. Use tintColor instead. %@", fillColor
@@ -84,6 +90,7 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
     if (![_name isEqualToString:name]) {
         _name = name;
         self.drawInvocation = nil;
+        self.drawnSize = CGSizeZero;
         [self setNeedsDisplay];
     }
 }
