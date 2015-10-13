@@ -71,6 +71,16 @@
     return self.drawing.name ?: _name;
 }
 
+- (void)setStyleKit:(NSString *)styleKit
+{
+    if (![_styleKit isEqualToString:styleKit]) {
+        _styleKit = styleKit;
+        self.drawInvocation = nil;
+        self.drawing = nil;
+        [self setNeedsDisplay];
+    }
+}
+
 - (void)setFillColor:(UIColor *)fillColor // Deprecated. Use UIView's tintColor.
 {
     DLog(@"BFWDrawView called deprecated fillColor. Use tintColor instead. %@", fillColor
@@ -85,16 +95,6 @@
         [super setTintColor:tintColor];
         self.drawInvocation = nil;
         [self setNeedsDisplay]; // needed?
-    }
-}
-
-- (void)setStyleKit:(NSString *)styleKit
-{
-    if (![_styleKit isEqualToString:styleKit]) {
-        _styleKit = styleKit;
-        self.drawInvocation = nil;
-        self.drawing = nil;
-        [self setNeedsDisplay];
     }
 }
 
