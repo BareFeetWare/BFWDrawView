@@ -16,6 +16,12 @@
 #import "BFWStyleKit.h"
 #import "BFWStyleKitDrawing.h"
 
+@interface UIView (BFW)
+
+- (void)copyPropertiesFromView:(BFWDrawView *)view;
+
+@end
+
 @interface BFWDrawView ()
 
 @property (nonatomic, strong) NSInvocation *drawInvocation;
@@ -350,6 +356,15 @@
         self.contentScaleFactor = savedContentsScale;
     }
     return image;
+}
+
+#pragma mark - protocols for UIView+BFW
+
+- (void)copyPropertiesFromView:(BFWDrawView *)view
+{
+    [super copyPropertiesFromView:view];
+    self.styleKit = view.styleKit;
+    self.name = view.name;
 }
 
 @end
