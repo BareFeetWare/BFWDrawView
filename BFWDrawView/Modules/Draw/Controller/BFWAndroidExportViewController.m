@@ -26,7 +26,7 @@
 
 static NSUInteger const sizesSection = 0;
 static NSUInteger const styleKitsSection = 1;
-static NSString * const exportDirectoryKey = @"exportDirectory";
+static NSString * const exportDirectoryBaseKey = @"exportDirectory";
 static NSString * const includeAnimationsKey = @"includeAnimations";
 
 @implementation BFWAndroidExportViewController
@@ -73,15 +73,18 @@ static NSString * const includeAnimationsKey = @"includeAnimations";
     return [[BFWDrawExport documentsDirectoryPath] stringByAppendingPathComponent:@"android_drawables"];
 }
 
+- (NSString *)exportDirectoryKey {
+    return [exportDirectoryBaseKey stringByAppendingPathComponent:self.navigationItem.title];
+}
 - (NSString *)directoryPath
 {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:exportDirectoryKey];
+    return [[NSUserDefaults standardUserDefaults] stringForKey:self.exportDirectoryKey];
 }
 
 - (void)setDirectoryPath:(NSString *)directoryPath
 {
     [[NSUserDefaults standardUserDefaults] setObject:directoryPath
-                                              forKey:exportDirectoryKey];
+                                              forKey:self.exportDirectoryKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
