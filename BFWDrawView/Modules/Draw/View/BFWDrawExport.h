@@ -22,12 +22,13 @@
                          duration:(CGFloat)duration
                   framesPerSecond:(CGFloat)framesPerSecond;
 
-+ (void)exportForAndroidToDirectory:(NSString *)directory
-                          styleKits:(NSArray *)styleKits
-                      pathScaleDict:(NSDictionary *)pathScaleDict
-                          tintColor:(UIColor *)tintColor
-                           duration:(CGFloat)duration
-                    framesPerSecond:(CGFloat)framesPerSecond;
++ (void)exportForAndroid:(BOOL)isAndroid
+             toDirectory:(NSString *)directory
+               styleKits:(NSArray *)styleKits
+           pathScaleDict:(NSDictionary *)pathScaleDict
+               tintColor:(UIColor *)tintColor
+                duration:(CGFloat)duration
+         framesPerSecond:(CGFloat)framesPerSecond;
 
 + (void)exportForAndroidToDocumentsStyleKits:(NSArray *)styleKits
                                pathScaleDict:(NSDictionary *)pathScaleDict

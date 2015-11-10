@@ -236,28 +236,31 @@ static NSString * const arraysKey = @"arrays";
     }
 }
 
-+ (void)exportForAndroidToDirectory:(NSString *)directory
-                          styleKits:(NSArray *)styleKits
-                      pathScaleDict:(NSDictionary *)pathScaleDict
-                          tintColor:(UIColor *)tintColor
-                           duration:(CGFloat)duration
-                    framesPerSecond:(CGFloat)framesPerSecond
++ (void)exportForAndroid:(BOOL)isAndroid
+             toDirectory:(NSString *)directory
+               styleKits:(NSArray *)styleKits
+           pathScaleDict:(NSDictionary *)pathScaleDict
+               tintColor:(UIColor *)tintColor
+                duration:(CGFloat)duration
+         framesPerSecond:(CGFloat)framesPerSecond
 {
     DLog(@"writing images to %@", directory);
     [self writeAllImagesToDirectory:directory
                           styleKits:styleKits
                       pathScaleDict:pathScaleDict
                           tintColor:tintColor
-                            android:YES
+                            android:isAndroid
                            duration:duration
                     framesPerSecond:framesPerSecond];
-    /// Note: currently exports colors only from the first styleKit
-    NSString *colorsXmlString = [NSClassFromString(styleKits.firstObject) colorsXmlString];
-    NSString *colorsFile = [directory stringByAppendingPathComponent:@"paintcode_colors.xml"];
-    [colorsXmlString writeToFile:colorsFile
-                      atomically:YES
-                        encoding:NSStringEncodingConversionAllowLossy
-                           error:nil];
+    if (isAndroid) {
+        /// Note: currently exports colors only from the first styleKit
+        NSString *colorsXmlString = [NSClassFromString(styleKits.firstObject) colorsXmlString];
+        NSString *colorsFile = [directory stringByAppendingPathComponent:@"paintcode_colors.xml"];
+        [colorsXmlString writeToFile:colorsFile
+                          atomically:YES
+                            encoding:NSStringEncodingConversionAllowLossy
+                               error:nil];
+    }
 }
 
 + (NSString *)documentsDirectoryPath
@@ -275,12 +278,13 @@ static NSString * const arraysKey = @"arrays";
 {
     NSString *directory = [[self documentsDirectoryPath] stringByAppendingPathComponent:@"android_drawables"];
     [[NSFileManager defaultManager] removeItemAtPath:directory error:nil];
-    [self exportForAndroidToDirectory:directory
-                            styleKits:styleKits
-                        pathScaleDict:pathScaleDict
-                            tintColor:tintColor
-                             duration:duration
-                      framesPerSecond:framesPerSecond];
+    [self exportForAndroid:YES
+               toDirectory:directory
+                 styleKits:styleKits
+             pathScaleDict:pathScaleDict
+                 tintColor:tintColor
+                  duration:duration
+           framesPerSecond:framesPerSecond];
 }
 
 @end
