@@ -25,8 +25,8 @@
 
 @end
 
-static NSUInteger const sizesSection = 0;
-static NSUInteger const styleKitsSection = 1;
+static NSUInteger const sizesSection = 1;
+static NSUInteger const styleKitsSection = 2;
 static NSString * const exportDirectoryBaseKey = @"exportDirectory";
 static NSString * const includeAnimationsKey = @"includeAnimations";
 static NSString * const androidTitle = @"Android";
