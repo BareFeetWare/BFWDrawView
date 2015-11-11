@@ -12,6 +12,7 @@
 
 @interface BFWAndroidExportViewController () <UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *namingSegmentedControl;
 @property (strong, nonatomic) IBOutletCollection(UITableViewCell) NSArray *exportSizeCells;
 @property (weak, nonatomic) IBOutlet UITableViewCell *exportCell;
 @property (weak, nonatomic) IBOutlet UITextField *directoryTextField;
@@ -24,10 +25,11 @@
 
 @end
 
-static NSUInteger const sizesSection = 0;
-static NSUInteger const styleKitsSection = 1;
-static NSString * const exportDirectoryKey = @"exportDirectory";
+static NSUInteger const sizesSection = 1;
+static NSUInteger const styleKitsSection = 2;
+static NSString * const exportDirectoryBaseKey = @"exportDirectory";
 static NSString * const includeAnimationsKey = @"includeAnimations";
+static NSString * const androidTitle = @"Android";
 
 @implementation BFWAndroidExportViewController
 
@@ -73,15 +75,18 @@ static NSString * const includeAnimationsKey = @"includeAnimations";
     return [[BFWDrawExport documentsDirectoryPath] stringByAppendingPathComponent:@"android_drawables"];
 }
 
+- (NSString *)exportDirectoryKey {
+    return [exportDirectoryBaseKey stringByAppendingPathComponent:self.navigationItem.title];
+}
 - (NSString *)directoryPath
 {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:exportDirectoryKey];
+    return [[NSUserDefaults standardUserDefaults] stringForKey:self.exportDirectoryKey];
 }
 
 - (void)setDirectoryPath:(NSString *)directoryPath
 {
     [[NSUserDefaults standardUserDefaults] setObject:directoryPath
-                                              forKey:exportDirectoryKey];
+                                              forKey:self.exportDirectoryKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -114,12 +119,15 @@ static NSString * const includeAnimationsKey = @"includeAnimations";
     self.directoryPath = self.directoryTextField.text;
     NSString *directoryPath = self.directoryPath.length ? self.directoryPath : [self defaultDirectoryPath];
     [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:nil];
-    [BFWDrawExport exportForAndroidToDirectory:directoryPath
-                                     styleKits:[self styleKits]
-                                 pathScaleDict:[self pathScaleDict]
-                                     tintColor:[UIColor blackColor] // TODO: get color from UI
-                                      duration:duration
-                               framesPerSecond:framesPerSecond];
+    BOOL isAndroid = [[self.namingSegmentedControl titleForSegmentAtIndex:self.namingSegmentedControl.selectedSegmentIndex] isEqualToString:androidTitle];
+
+    [BFWDrawExport exportForAndroid:isAndroid
+                        toDirectory:directoryPath
+                          styleKits:[self styleKits]
+                      pathScaleDict:[self pathScaleDict]
+                          tintColor:[UIColor blackColor] // TODO: get color from UI
+                           duration:duration
+                    framesPerSecond:framesPerSecond];
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Export complete"
                                                         message:nil
                                                        delegate:nil
