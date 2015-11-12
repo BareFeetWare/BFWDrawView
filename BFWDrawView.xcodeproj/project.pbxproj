@@ -23,16 +23,16 @@
 		E221178E1AF4FE40007B515F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E221178A1AF4FE40007B515F /* LaunchScreen.xib */; };
 		E221178F1AF4FE40007B515F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E221178B1AF4FE40007B515F /* main.m */; };
 		E22117921AF4FE92007B515F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E22117911AF4FE92007B515F /* AppDelegate.m */; };
-		E24D260F1BB41A33007D9EEE /* BFWDrawingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E24D260E1BB41A33007D9EEE /* BFWDrawingCell.m */; settings = {ASSET_TAGS = (); }; };
+		E24CAA7E1BF44F7300BDBE59 /* AnimationCountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E24CAA7C1BF44F7300BDBE59 /* AnimationCountViewController.m */; };
+		E24CAA7F1BF44F7300BDBE59 /* Sample.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E24CAA7D1BF44F7300BDBE59 /* Sample.storyboard */; };
+		E24D260F1BB41A33007D9EEE /* BFWDrawingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E24D260E1BB41A33007D9EEE /* BFWDrawingCell.m */; };
 		E26B1DB01B02B0FB005EACDE /* SampleDrawButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E26B1DAF1B02B0FB005EACDE /* SampleDrawButton.m */; };
 		E29917041AF4FEE500F0DEDE /* SampleStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E29917021AF4FEE500F0DEDE /* SampleStyleKit.m */; };
 		E29917051AF4FEE500F0DEDE /* SampleStyleKit.plist in Resources */ = {isa = PBXBuildFile; fileRef = E29917031AF4FEE500F0DEDE /* SampleStyleKit.plist */; };
 		E29F35961AFE07BF009A12FE /* NSDictionary+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E29F35951AFE07BF009A12FE /* NSDictionary+BFW.m */; };
 		E29F35971AFE07BF009A12FE /* NSDictionary+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E29F35951AFE07BF009A12FE /* NSDictionary+BFW.m */; };
-		E2A073591B64B4BA0054AD1A /* AnimationCountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A073581B64B4BA0054AD1A /* AnimationCountViewController.m */; };
 		E2A073651B6A4D400054AD1A /* NSArray+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A073641B6A4D400054AD1A /* NSArray+BFW.m */; };
 		E2A073661B6A4D400054AD1A /* NSArray+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A073641B6A4D400054AD1A /* NSArray+BFW.m */; };
-		E2CA50401B82BE8E00BCE533 /* Sample.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2CA503F1B82BE8E00BCE533 /* Sample.storyboard */; };
 		E2CA50481B82BEA400BCE533 /* BFWDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CA50421B82BEA400BCE533 /* BFWDrawViewController.m */; };
 		E2CA50491B82BEA400BCE533 /* BFWStyleKitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CA50441B82BEA400BCE533 /* BFWStyleKitsViewController.m */; };
 		E2CA504A1B82BEA400BCE533 /* BFWStyleKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CA50461B82BEA400BCE533 /* BFWStyleKitViewController.m */; };
@@ -83,6 +83,9 @@
 		E221178B1AF4FE40007B515F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E22117901AF4FE92007B515F /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E22117911AF4FE92007B515F /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		E24CAA7B1BF44F7300BDBE59 /* AnimationCountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationCountViewController.h; sourceTree = "<group>"; };
+		E24CAA7C1BF44F7300BDBE59 /* AnimationCountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationCountViewController.m; sourceTree = "<group>"; };
+		E24CAA7D1BF44F7300BDBE59 /* Sample.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Sample.storyboard; sourceTree = "<group>"; };
 		E24D260D1BB41A33007D9EEE /* BFWDrawingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawingCell.h; sourceTree = "<group>"; };
 		E24D260E1BB41A33007D9EEE /* BFWDrawingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawingCell.m; sourceTree = "<group>"; };
 		E26B1DAE1B02B0FB005EACDE /* SampleDrawButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleDrawButton.h; sourceTree = "<group>"; };
@@ -93,11 +96,8 @@
 		E29917061AF4FF6F00F0DEDE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BFWDrawView/Info.plist; sourceTree = SOURCE_ROOT; };
 		E29F35941AFE07BF009A12FE /* NSDictionary+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BFW.h"; sourceTree = "<group>"; };
 		E29F35951AFE07BF009A12FE /* NSDictionary+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BFW.m"; sourceTree = "<group>"; };
-		E2A073571B64B4BA0054AD1A /* AnimationCountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationCountViewController.h; sourceTree = "<group>"; };
-		E2A073581B64B4BA0054AD1A /* AnimationCountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationCountViewController.m; sourceTree = "<group>"; };
 		E2A073631B6A4D400054AD1A /* NSArray+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+BFW.h"; sourceTree = "<group>"; };
 		E2A073641B6A4D400054AD1A /* NSArray+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BFW.m"; sourceTree = "<group>"; };
-		E2CA503F1B82BE8E00BCE533 /* Sample.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Sample.storyboard; sourceTree = "<group>"; };
 		E2CA50411B82BEA400BCE533 /* BFWDrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawViewController.h; sourceTree = "<group>"; };
 		E2CA50421B82BEA400BCE533 /* BFWDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawViewController.m; sourceTree = "<group>"; };
 		E2CA50431B82BEA400BCE533 /* BFWStyleKitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWStyleKitsViewController.h; sourceTree = "<group>"; };
@@ -194,9 +194,9 @@
 		E203578E1A7F5144002BC3F4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E2CA503F1B82BE8E00BCE533 /* Sample.storyboard */,
-				E2A073571B64B4BA0054AD1A /* AnimationCountViewController.h */,
-				E2A073581B64B4BA0054AD1A /* AnimationCountViewController.m */,
+				E24CAA7B1BF44F7300BDBE59 /* AnimationCountViewController.h */,
+				E24CAA7C1BF44F7300BDBE59 /* AnimationCountViewController.m */,
+				E24CAA7D1BF44F7300BDBE59 /* Sample.storyboard */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -401,7 +401,7 @@
 				E2CA504B1B82BEA400BCE533 /* StyleKitsBrowser.storyboard in Resources */,
 				E221178E1AF4FE40007B515F /* LaunchScreen.xib in Resources */,
 				E29917051AF4FEE500F0DEDE /* SampleStyleKit.plist in Resources */,
-				E2CA50401B82BE8E00BCE533 /* Sample.storyboard in Resources */,
+				E24CAA7F1BF44F7300BDBE59 /* Sample.storyboard in Resources */,
 				E221178C1AF4FE40007B515F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,7 +436,6 @@
 				E2CA50491B82BEA400BCE533 /* BFWStyleKitsViewController.m in Sources */,
 				E29F35961AFE07BF009A12FE /* NSDictionary+BFW.m in Sources */,
 				E2CA504A1B82BEA400BCE533 /* BFWStyleKitViewController.m in Sources */,
-				E2A073591B64B4BA0054AD1A /* AnimationCountViewController.m in Sources */,
 				E22117921AF4FE92007B515F /* AppDelegate.m in Sources */,
 				E2A073651B6A4D400054AD1A /* NSArray+BFW.m in Sources */,
 				E2F58CFC1B5B7C0300F3CFF3 /* BFWStyleKit.m in Sources */,
@@ -444,6 +443,7 @@
 				E2FC1D9D1AC9066700F08B90 /* BFWAndroidExportViewController.m in Sources */,
 				E2F58CFF1B5B7C9B00F3CFF3 /* BFWStyleKitDrawing.m in Sources */,
 				E221178F1AF4FE40007B515F /* main.m in Sources */,
+				E24CAA7E1BF44F7300BDBE59 /* AnimationCountViewController.m in Sources */,
 				E20ED1181A9F24CC0045FA69 /* NSString+BFW.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
