@@ -13,6 +13,12 @@
 #import "BFWStyleKitDrawing.h"
 #import "BFWStyleKit.h"
 
+@interface UIView (BFW)
+
+- (void)copyPropertiesFromView:(BFWDrawView *)view;
+
+@end
+
 @interface BFWDrawView ()
 
 @property (nonatomic, readonly) NSArray *parameters;
@@ -228,6 +234,20 @@
             [self startTimerIfNeeded];
         }
     }
+}
+
+#pragma mark - protocols for UIView+BFW
+
+- (void)copyPropertiesFromView:(BFWAnimationView *)view
+{
+    [super copyPropertiesFromView:view];
+    self.animation = view.animation;
+    self.start = view.start;
+    self.end = view.end;
+    self.duration = view.duration;
+    self.cycles = view.cycles;
+    self.paused = view.paused;
+    self.framesPerSecond = view.framesPerSecond;
 }
 
 @end
