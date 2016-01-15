@@ -19,7 +19,7 @@
 @property (nonatomic, strong) NSInvocation *drawInvocation;
 @property (nonatomic, strong) Class styleKitClass;
 @property (nonatomic, assign) BOOL didCheckCanDraw;
-@property (nonatomic, strong) NSArray *parameters;
+@property (nonatomic, copy) NSArray *parameters;
 @property (nonatomic, assign) CGRect invokedDrawFrame;
 @property (nonatomic, strong) UIColor *invokedTintColor; // retains reference to tintColor so NSInvocation doesn't crash if the "darken colors" is enabled in System Preferences in iOS 9
 

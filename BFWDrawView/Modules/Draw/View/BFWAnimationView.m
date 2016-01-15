@@ -12,7 +12,7 @@
 
 @interface BFWDrawView ()
 
-@property (nonatomic, strong) NSArray *parameters;
+@property (nonatomic, copy) NSArray *parameters;
 
 - (void *)argumentForParameter:(NSString *)parameter;
 - (BOOL)updateArgumentForParameter:(NSString *)parameter;
