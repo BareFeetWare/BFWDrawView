@@ -172,7 +172,7 @@
     else {
         NSUInteger frameCount = self.duration * self.framesPerSecond;
         NSUInteger digits = log10((double)frameCount) + 1;
-        NSString* pathBaseFormat = [filePath.stringByDeletingPathExtension stringByAppendingFormat:@"%%0%lud", (unsigned long)digits];
+        NSString *pathBaseFormat = [filePath.stringByDeletingPathExtension stringByAppendingFormat:@"%%0%lud", (unsigned long)digits];
         NSString *pathFormat = [pathBaseFormat stringByAppendingPathExtension:filePath.pathExtension];
         for (NSUInteger frameN = 0; frameN < frameCount; frameN++) {
             self.animation = (CGFloat)frameN / frameCount;

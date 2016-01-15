@@ -33,7 +33,7 @@
 	CGFloat scale = [[UIScreen mainScreen] scale];
 	UIGraphicsBeginImageContextWithOptions(size, isOpaque, scale);
 	[view.layer renderInContext:UIGraphicsGetCurrentContext()];
-	UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	return image;
 }
