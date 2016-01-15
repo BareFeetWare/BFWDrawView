@@ -142,7 +142,7 @@
     }
 }
 
-- (void)tick:(NSTimer*)timer
+- (void)tick:(NSTimer *)timer
 {
     NSTimeInterval elapsed = [[NSDate date] timeIntervalSinceDate:self.startDate] - self.pausedTimeInterval;
     

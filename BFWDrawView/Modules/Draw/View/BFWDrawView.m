@@ -302,7 +302,7 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
     [self class].imageCache[key] = image;
 }
 
-- (UIImage*)imageFromView
+- (UIImage *)imageFromView
 {
     UIImage *image = nil;
     if (self.name && self.styleKit) {
@@ -323,7 +323,7 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
     return image;
 }
 
-- (UIImage*)image
+- (UIImage *)image
 {
     return [self imageFromView];
 }
@@ -331,7 +331,7 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 #pragma mark - image output
 
 - (BOOL)writeImageAtScale:(CGFloat)scale
-                   toFile:(NSString*)savePath
+                   toFile:(NSString *)savePath
 {
     NSString *directoryPath = [savePath stringByDeletingLastPathComponent];
     if (![[NSFileManager defaultManager] fileExistsAtPath:directoryPath]) {
@@ -348,7 +348,7 @@ NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
     return success;
 }
 
-- (UIImage*)imageAtScale:(CGFloat)scale
+- (UIImage *)imageAtScale:(CGFloat)scale
 {
     UIImage *image = nil;
     if (self.canDraw) {

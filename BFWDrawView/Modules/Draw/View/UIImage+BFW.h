@@ -10,7 +10,7 @@
 
 @interface UIImage (BFW)
 
-- (UIImage*)maskWithImage:(UIImage*)maskImage;
-+ (UIImage*)imageOfView:(UIView*)view size:(CGSize)size;
+- (UIImage *)maskWithImage:(UIImage *)maskImage;
++ (UIImage *)imageOfView:(UIView *)view size:(CGSize)size;
 
 @end

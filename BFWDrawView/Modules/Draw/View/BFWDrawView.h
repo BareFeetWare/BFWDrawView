@@ -31,6 +31,6 @@ IB_DESIGNABLE
 #pragma mark - image output methods
 
 - (BOOL)writeImageAtScale:(CGFloat)scale
-                   toFile:(NSString*)savePath;
+                   toFile:(NSString *)savePath;
 
 @end
