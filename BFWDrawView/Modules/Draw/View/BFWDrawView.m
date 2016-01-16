@@ -28,7 +28,7 @@
 @property (nonatomic, readonly) Class styleKitClass;
 @property (nonatomic, assign) BOOL didCheckCanDraw;
 @property (nonatomic, readonly) CGSize drawInFrameSize;
-@property (nonatomic, readonly) NSArray *parameters;
+@property (nonatomic, copy) NSArray *parameters;
 @property (nonatomic, assign) CGRect invokedDrawFrame;
 @property (nonatomic, strong) UIColor *invokedTintColor; // retains reference to tintColor so NSInvocation doesn't crash if the "darken colors" is enabled in System Preferences in iOS 9
 
@@ -296,7 +296,7 @@
     [self class].imageCache[key] = image;
 }
 
-- (UIImage*)imageFromView
+- (UIImage *)imageFromView
 {
     UIImage *image = nil;
     if (self.name && self.styleKit) {
@@ -317,7 +317,7 @@
     return image;
 }
 
-- (UIImage*)image
+- (UIImage *)image
 {
     return [self imageFromView];
 }
@@ -325,7 +325,7 @@
 #pragma mark - image output
 
 - (BOOL)writeImageAtScale:(CGFloat)scale
-                   toFile:(NSString*)savePath
+                   toFile:(NSString *)savePath
 {
     NSString *directoryPath = [savePath stringByDeletingLastPathComponent];
     if (![[NSFileManager defaultManager] fileExistsAtPath:directoryPath]) {
@@ -342,7 +342,7 @@
     return success;
 }
 
-- (UIImage*)imageAtScale:(CGFloat)scale
+- (UIImage *)imageAtScale:(CGFloat)scale
 {
     UIImage *image = nil;
     if (self.canDraw) {

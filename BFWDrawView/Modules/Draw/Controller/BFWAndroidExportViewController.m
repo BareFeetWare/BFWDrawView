@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *durationTextField;
 @property (weak, nonatomic) IBOutlet UITextField *framesPerSecondTextField;
 
-@property (nonatomic) NSString* directoryPath;
+@property (nonatomic) NSString *directoryPath;
 @property (nonatomic) BOOL includeAnimations;
 
 @end

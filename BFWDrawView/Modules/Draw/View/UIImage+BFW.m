@@ -12,7 +12,7 @@
 @implementation UIImage (BFW)
 
 /// Adapted from http://iphonedevelopertips.com/cocoa/how-to-mask-an-image.html
-- (UIImage*)maskWithImage:(UIImage*)maskImage
+- (UIImage *)maskWithImage:(UIImage *)maskImage
 {
 	CGImageRef maskRef = maskImage.CGImage; 
 	CGImageRef mask = CGImageMaskCreate(CGImageGetWidth(maskRef),
@@ -26,14 +26,14 @@
 	return [UIImage imageWithCGImage:masked];
 }
 
-+ (UIImage*)imageOfView:(UIView*)view
++ (UIImage *)imageOfView:(UIView *)view
                    size:(CGSize)size
 {
 	BOOL isOpaque = NO;
 	CGFloat scale = [[UIScreen mainScreen] scale];
 	UIGraphicsBeginImageContextWithOptions(size, isOpaque, scale);
 	[view.layer renderInContext:UIGraphicsGetCurrentContext()];
-	UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	return image;
 }

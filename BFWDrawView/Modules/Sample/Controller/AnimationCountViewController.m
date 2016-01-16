@@ -43,7 +43,7 @@ static double const defaultDesiredFramesPerSecond = 60.0;
 
 #pragma mark - KVO
 
-- (NSString*)animationKeyPath
+- (NSString *)animationKeyPath
 {
     if (!_animationKeyPath) {
         _animationKeyPath = NSStringFromSelector(@selector(animation));
