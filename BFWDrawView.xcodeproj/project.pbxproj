@@ -57,6 +57,7 @@
 		2023CEE61AFE28FB00BBA2FA /* UIColor+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+BFW.h"; sourceTree = "<group>"; };
 		2023CEE71AFE28FB00BBA2FA /* UIColor+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BFW.m"; sourceTree = "<group>"; };
 		2023CEE91AFE2BAE00BBA2FA /* UIColor+BFW_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BFW_Tests.m"; sourceTree = "<group>"; };
+		E200F23F1C55D94E00CD868D /* BFWDrawView-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BFWDrawView-Bridging-Header.h"; sourceTree = "<group>"; };
 		E20357851A7F5144002BC3F4 /* BFWAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWAnimationView.h; sourceTree = "<group>"; };
 		E20357861A7F5144002BC3F4 /* BFWAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWAnimationView.m; sourceTree = "<group>"; };
 		E20357871A7F5144002BC3F4 /* BFWDrawButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawButton.h; sourceTree = "<group>"; };
@@ -267,6 +268,7 @@
 			children = (
 				E22117901AF4FE92007B515F /* AppDelegate.h */,
 				E22117911AF4FE92007B515F /* AppDelegate.m */,
+				E200F23F1C55D94E00CD868D /* BFWDrawView-Bridging-Header.h */,
 				E29917061AF4FF6F00F0DEDE /* Info.plist */,
 				E22117881AF4FE40007B515F /* Images.xcassets */,
 				E221178A1AF4FE40007B515F /* LaunchScreen.xib */,
@@ -362,6 +364,7 @@
 		E21105631A7E003A0025BDA0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = BareFeetWare;
 				TargetAttributes = {
@@ -552,10 +555,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = BFWDrawView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BFWDrawView/Launch/BFWDrawView-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -563,10 +569,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = BFWDrawView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BFWDrawView/Launch/BFWDrawView-Bridging-Header.h";
 			};
 			name = Release;
 		};
