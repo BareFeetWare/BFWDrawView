@@ -67,12 +67,11 @@ static NSString * const arraysKey = @"arrays";
     if (drawing.hasDrawnSize) {
         BOOL isAnimation = [drawing.methodParameters containsObject:@"animation"];
         Class class = isAnimation ? [BFWAnimationView class] : [BFWDrawView class];
-        BFWAnimationView *drawView = [[class alloc] initWithFrame:drawing.intrinsicFrame];
+        drawView = [[class alloc] initWithFrame:drawing.intrinsicFrame];
         drawView.drawing = drawing;
         drawView.contentMode = UIViewContentModeScaleAspectFit;
         drawView.tintColor = tintColor;
-    }
-    else {
+    } else {
         DLog(@"missing size for drawing: %@", drawingName);
     }
     return drawView;
