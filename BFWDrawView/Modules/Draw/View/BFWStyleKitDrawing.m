@@ -13,16 +13,57 @@
 
 @interface BFWStyleKitDrawing ()
 
+@property (nonatomic, weak, readwrite) BFWStyleKit *styleKit;
+@property (nonatomic, copy, readwrite) NSString *name;
+@property (nonatomic, copy, readwrite) NSArray *methodParameters;
+@property (nonatomic, copy, readwrite) NSString *methodName;
 @property (nonatomic, assign, readwrite) CGSize drawnSize;
 @property (nonatomic, assign) BOOL didSetDrawnSize;
 @property (nonatomic, copy) NSString *lookupName;
 
 @end
 
+NSString * const drawPrefix = @"draw";
 static NSString * const sizesKey = @"sizes";
 static NSString * const sizesByPrefixKey = @"sizesByPrefix";
 
 @implementation BFWStyleKitDrawing
+
+#pragma mark - Init
+
+- (instancetype)initWithStyleKit:(BFWStyleKit *)styleKit
+                            name:(NSString *)name
+{
+    self = [super init];
+    if (self) {
+        _styleKit = styleKit;
+        _name = name;
+    }
+    return self;
+}
+
+#pragma mark - Accessors
+
+- (NSString *)methodName
+{
+    if (!_methodName) {
+        _methodName = [self.styleKit classMethodNameForDrawingName:self.name];
+    }
+    return _methodName;
+}
+
+- (NSArray *)methodParameters
+{
+    if (!_methodParameters) {
+        NSArray *methodNameComponents = [self.methodName methodNameComponents];
+        if (methodNameComponents.count) {
+            if (methodNameComponents.count > 1) {
+                _methodParameters = [methodNameComponents subarrayWithRange:NSMakeRange(1, methodNameComponents.count - 1)];
+            }
+        }
+    }
+    return _methodParameters;
+}
 
 - (NSString *)lookupName
 {

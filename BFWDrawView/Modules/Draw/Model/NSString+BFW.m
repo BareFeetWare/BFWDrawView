@@ -79,6 +79,19 @@
     return matchingPrefix;
 }
 
+- (NSString *)wordsMatchingWordsArray:(NSArray *)wordsArray
+{
+    NSString *foundString = nil;
+    NSString *searchWords = [self lowercaseWords];
+    for (NSString *words in wordsArray) {
+        if ([searchWords isEqualToString:[words lowercaseWords]]) {
+            foundString = words;
+            break;
+        }
+    }
+    return foundString;
+}
+
 - (NSArray *)methodNameComponents
 {
     static NSString * const withString = @"With";

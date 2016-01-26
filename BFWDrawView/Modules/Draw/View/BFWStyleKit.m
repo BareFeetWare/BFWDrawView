@@ -15,7 +15,9 @@
 
 @interface BFWStyleKit ()
 
-@property (nonatomic, strong) NSDictionary *returnValueForMethodDict;
+@property (nonatomic, strong) NSDictionary *returnValueForClassMethodNameDict; // @{NSString : NSObject}
+@property (nonatomic, strong) NSMutableDictionary *colorForNameDict; // @{NSString : UIColor}
+@property (nonatomic, strong) NSMutableDictionary *drawingForNameDict; // @{NSString : BFWStyleKitDrawing}
 
 @end
 
@@ -23,35 +25,49 @@
 
 #pragma mark - constants
 
-static NSString * const drawPrefix = @"draw";
 static NSString * const styleKitSuffix = @"StyleKit";
 static NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 
 #pragma mark - class methods
 
-+ (NSDictionary *)styleKits
++ (NSMutableDictionary *)styleKitForNameDict
 {
-    static NSDictionary *styleKits = nil;
+    static NSMutableDictionary *styleKitForNameDict = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSMutableDictionary * mutableStyleKits = [[NSMutableDictionary alloc] init];
+        styleKitForNameDict = [[NSMutableDictionary alloc] init];
+    });
+    return styleKitForNameDict;
+}
+
++ (NSArray *)styleKitNames
+{
+    static NSArray *styleKitNames = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSMutableArray* mutableStyleKitNames = [[NSMutableArray alloc] init];
         for (Class class in [NSObject subclassesOf:[NSObject class]]) {
             NSString *className = NSStringFromClass(class);
             if ([className hasSuffix:styleKitSuffix] && class != self) {
                 // TODO: implement a more robust filter than suffix when PaintCode offers it
-                BFWStyleKit *styleKit = [[BFWStyleKit alloc] init];
-                styleKit.name = className;
-                styleKit.paintCodeClass = class;
-                mutableStyleKits[className] = styleKit;
+                [mutableStyleKitNames addObject:className];
             }
         }
-        styleKits = [mutableStyleKits copy];
+        styleKitNames = [mutableStyleKitNames copy];
     });
-    return styleKits;
+    return styleKitNames;
 }
 
-+ (instancetype)styleKitForName:(NSString *)name {
-    return self.styleKits[name];
++ (instancetype)styleKitForName:(NSString *)name
+{
+    BFWStyleKit* styleKit = [self styleKitForNameDict][name];
+    if (!styleKit) {
+        styleKit = [[BFWStyleKit alloc] init];
+        styleKit.name = name;
+        styleKit.paintCodeClass = NSClassFromString(name);
+        [self styleKitForNameDict][name] = styleKit;
+    }
+    return styleKit;
 }
 
 + (BFWStyleKitDrawing *)drawingForStyleKitName:(NSString *)styleKitName
@@ -62,21 +78,34 @@ static NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
     return drawing;
 }
 
-#pragma mark - accessors
+#pragma mark - Class method names
 
-- (NSDictionary *)returnValueForMethodDict
+- (NSArray *)classMethodNames
 {
-    if (!_returnValueForMethodDict) {
-        _returnValueForMethodDict = [self.paintCodeClass returnValueForMethodDict];
+    if (!_classMethodNames) {
+        _classMethodNames = [self.paintCodeClass classMethodNames];
     }
-    return _returnValueForMethodDict;
+    return _classMethodNames;
 }
 
-- (NSDictionary *)colors
+#pragma mark - Full list methods
+
+// Calling any of these methods is expensive, since it executes every method and caches the returnValue. Use only for discovery, eg showing a browser of all drawings.
+
+- (NSDictionary *)returnValueForClassMethodNameDict
 {
-    if (!_colors) {
+    if (!_returnValueForClassMethodNameDict) {
+        DLog(@"**** warning: calling BFWStyleKit returnValueForClassMethodNameDict, which has a large up front caching hit for the app. Only call this if you want to browse the entire list of drawings and colors available from the styleKit");
+        _returnValueForClassMethodNameDict = [self.paintCodeClass returnValueForClassMethodNameDict];
+    }
+    return _returnValueForClassMethodNameDict;
+}
+
+- (NSArray *)colorNames
+{
+    if (!_colorNames) {
         NSMutableDictionary *colorsDict = [[NSMutableDictionary alloc] init];
-        NSDictionary *methodValueDict = self.returnValueForMethodDict;
+        NSDictionary *methodValueDict = self.returnValueForClassMethodNameDict;
         for (NSString *methodName in methodValueDict) {
             id returnValue = methodValueDict[methodName];
             if ([returnValue isKindOfClass:[UIColor class]]) {
@@ -84,37 +113,43 @@ static NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
                 colorsDict[methodName] = returnValue;
             }
         }
-        _colors = [colorsDict copy];
+        _colorForNameDict = [colorsDict copy];
+        _colorNames = colorsDict.allKeys;
     }
-    return _colors;
+    return _colorNames;
 }
 
-- (NSDictionary *)drawings
+- (NSArray *)drawingNames
 {
-    if (!_drawings) {
-        NSMutableDictionary *drawingsDict = [[NSMutableDictionary alloc] init];
-        NSDictionary *methodValueDict = self.returnValueForMethodDict;
+    if (!_drawingNames) {
+        NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
+        NSDictionary *methodValueDict = [self returnValueForClassMethodNameDict];
         for (NSString *methodName in methodValueDict) {
             id returnValue = methodValueDict[methodName];
             if ([returnValue isEqual:[NSNull null]] && [methodName hasPrefix:drawPrefix]) {
-                NSArray *methodNameComponents = [methodName methodNameComponents];
-                if (methodNameComponents.count) {
-                    NSString *name = [[methodNameComponents.firstObject substringFromIndex:drawPrefix.length] lowercaseFirstCharacter];
-                    BFWStyleKitDrawing *drawing = [[BFWStyleKitDrawing alloc] init];
-                    drawing.methodName = methodName;
-                    drawing.name = name;
-                    drawing.styleKit = self;
-                    if (methodNameComponents.count > 1) {
-                        drawing.methodParameters = [methodNameComponents subarrayWithRange:NSMakeRange(1, methodNameComponents.count - 1)];
-                    }
-                    drawingsDict[name] = drawing;
-                }
+                NSString *drawingName = [self drawingNameForMethodName:methodName];
+                [mutableArray addObject:drawingName];
             }
         }
-        _drawings = [drawingsDict copy];
+        _drawingNames = [mutableArray copy];
     }
-    return _drawings;
+    return _drawingNames;
 }
+
+#pragma mark - Use cache if already created
+
+- (id)returnValueForClassMethodName:(NSString *)methodName
+{
+    id returnValue = nil;
+    if (_returnValueForClassMethodNameDict) {
+        returnValue = _returnValueForClassMethodNameDict[methodName];
+    } else {
+        returnValue = [self.paintCodeClass returnValueForClassMethodName:methodName];
+    }
+    return returnValue;
+}
+
+#pragma mark - Plist
 
 - (NSBundle *)bundle
 {
@@ -148,30 +183,87 @@ static NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
     return _parameterDict;
 }
 
-#pragma mark - instance methods
+#pragma mark - Colors
+
+- (NSMutableDictionary *)colorForNameDict
+{
+    if (!_colorForNameDict) {
+        _colorForNameDict = [[NSMutableDictionary alloc] init];
+    }
+    return _colorForNameDict;
+}
 
 - (UIColor *)colorForName:(NSString *)colorName
 {
-    UIColor *color = [self.colors objectForWordsKey:colorName];
+    UIColor *color = [self.colorForNameDict objectForWordsKey:colorName];
     if (!color) {
-        DLog(@"failed to find color name: %@", colorName);
+        NSString *methodName = [colorName wordsMatchingWordsArray:self.classMethodNames];
+        id returnValue = [self returnValueForClassMethodName:methodName];
+        if ([returnValue isKindOfClass:[UIColor class]]) {
+            // TODO: filter out non color methods
+            color = (UIColor *)returnValue;
+            self.colorForNameDict[methodName] = color;
+        } else {
+            DLog(@"**** error: failed to find color for name: %@", colorName);
+        }
     }
     return color;
 }
 
+#pragma mark - Drawings
+
+- (NSMutableDictionary *)drawingForNameDict
+{
+    if (!_drawingForNameDict) {
+        _drawingForNameDict = [[NSMutableDictionary alloc] init];
+    }
+    return _drawingForNameDict;
+}
+
+- (NSString *)drawingNameForMethodName:(NSString *)methodName
+{
+    NSString *drawingName = nil;
+    NSArray *methodNameComponents = [methodName methodNameComponents];
+    if (methodNameComponents.count) {
+        drawingName = [[methodNameComponents.firstObject substringFromIndex:drawPrefix.length] lowercaseFirstCharacter];
+    }
+    return drawingName;
+}
+
+- (NSString *)classMethodNameForDrawingName:(NSString *)drawingName
+{
+    NSString *methodName = nil;
+    NSString *drawingWords = [NSString stringWithFormat:@"%@ %@", drawPrefix, drawingName.lowercaseWords];
+    for (NSString *searchMethodName in self.classMethodNames) {
+        NSString *baseName = searchMethodName.methodNameComponents.firstObject;
+        if ([baseName.lowercaseWords isEqualToString:drawingWords]) {
+            methodName = searchMethodName;
+            break;
+        }
+    }
+    return methodName;
+}
+
 - (BFWStyleKitDrawing *)drawingForName:(NSString *)drawingName
 {
+    BFWStyleKitDrawing *drawing = nil;
     BFWStyleKit *styleKit;
     NSString *redirectStyleKitName = [self.parameterDict[styleKitByPrefixKey] objectForLongestPrefixKeyMatchingWordsInString:drawingName];
-    if (redirectStyleKitName) {
+    if (redirectStyleKitName && ![redirectStyleKitName isEqualToString:self.name]) {
         styleKit = [[self class] styleKitForName:redirectStyleKitName];
-    }
-    else {
-        styleKit = self;
-    }
-    BFWStyleKitDrawing *drawing = [styleKit.drawings objectForWordsKey:drawingName];
-    if (!drawing) {
-        DLog(@"failed to find drawing name: %@", drawingName);
+        drawing = [styleKit drawingForName:drawingName];
+    } else {
+        NSString *drawingKey = drawingName.lowercaseWords;
+        drawing = self.drawingForNameDict[drawingKey];
+        if (!drawing) {
+            if ([self classMethodNameForDrawingName:drawingName]) {
+                drawing = [[BFWStyleKitDrawing alloc] initWithStyleKit:self
+                                                                  name:drawingName];
+                self.drawingForNameDict[drawingKey] = drawing;
+            } else {
+                DLog(@"failed to find drawing name: %@", drawingName);
+            }
+        }
     }
     return drawing;
 }
@@ -181,13 +273,13 @@ static NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 - (NSString *)colorsXmlString
 {
     NSString *colorsXmlString = nil;
-    if (self.colors.count) {
+    NSArray* colorNames = [self.colorNames sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    if (self.colorNames.count) {
         NSMutableArray *components = [[NSMutableArray alloc] init];
         [components addObject:@"<!--Warning: Do not add any color to this file as it is generated by PaintCode and BFWDrawView-->"];
         [components addObject:@"<resources>"];
-        NSArray *colorNames = [self.colors.allKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
         for (NSString *colorName in colorNames) {
-            UIColor *color = self.colors[colorName];
+            UIColor *color = [self colorForName:colorName];
             NSString *colorHex = [color hexString];
             NSString *wordsString = [colorName camelCaseToWords];
             NSString *underscoreName = [wordsString stringByReplacingOccurrencesOfString:@" " withString:@"_"];

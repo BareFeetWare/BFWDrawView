@@ -13,7 +13,6 @@
 
 @interface BFWStyleKitsViewController ()
 
-@property (nonatomic, readonly) NSDictionary *styleKits;
 @property (nonatomic, strong) NSArray *styleKitNames;
 
 @end
@@ -25,20 +24,16 @@
 - (NSArray *)styleKitNames
 {
     if (!_styleKitNames) {
-        _styleKitNames = [self.styleKits.allKeys arrayOfStringsSortedCaseInsensitive];
+        _styleKitNames = [[BFWStyleKit styleKitNames] arrayOfStringsSortedCaseInsensitive];
     }
     return _styleKitNames;
 }
 
-- (NSDictionary *)styleKits
-{
-    return [BFWStyleKit styleKits];
-}
-
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.styleKits.count;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.styleKitNames.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -47,11 +42,10 @@
     static NSString * const cellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier
                                                             forIndexPath:indexPath];
-    
     NSString *styleKitName = self.styleKitNames[indexPath.row];
-    BFWStyleKit *styleKit = self.styleKits[styleKitName];
     cell.textLabel.text = styleKitName;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu drawings, %lu colors", (unsigned long)styleKit.drawings.count, (unsigned long)styleKit.colors.count];
+    BFWStyleKit *styleKit = [BFWStyleKit styleKitForName:styleKitName];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu drawings, %lu colors", (unsigned long)styleKit.drawingNames.count, (unsigned long)styleKit.colorNames.count];
     
     return cell;
 }
@@ -62,12 +56,11 @@
 {
     if ([segue.destinationViewController isKindOfClass:[BFWStyleKitViewController class]]) {
         BFWStyleKitViewController *destinationViewController = segue.destinationViewController;
-        if ([sender isKindOfClass:[UITableViewCell class]])
-        {
+        if ([sender isKindOfClass:[UITableViewCell class]]) {
             UITableViewCell *cell = (UITableViewCell *)sender;
             NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
             NSString *styleKitName = self.styleKitNames[indexPath.row];
-            destinationViewController.styleKit = self.styleKits[styleKitName];
+            destinationViewController.styleKit = [BFWStyleKit styleKitForName:styleKitName];
         }
     }
 }

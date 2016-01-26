@@ -114,7 +114,8 @@ static NSString * const arraysKey = @"arrays";
         for (NSString *fileName in blacklist) {
             [excludeFileNames addObject:fileName.lowercaseWords];
         }
-        for (BFWStyleKitDrawing *drawing in styleKit.drawings) {
+        for (NSString* drawingName in styleKit.drawingNames) {
+            BFWStyleKitDrawing *drawing = [styleKit drawingForName:drawingName];
             if (![drawing.methodParameters containsObject:@"frame"]) {
                 // skipping since can't draw
                 continue;

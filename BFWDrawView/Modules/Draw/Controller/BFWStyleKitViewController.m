@@ -29,7 +29,7 @@
 {
     if (!_drawingNames) {
         NSMutableArray *wordsArray = [[NSMutableArray alloc] init];
-        NSArray *camelCaseNames = [self.styleKit.drawings.allKeys arrayOfStringsSortedCaseInsensitive];
+        NSArray *camelCaseNames = [self.styleKit.drawingNames arrayOfStringsSortedCaseInsensitive];
         for (NSString *camelCaseName in camelCaseNames) {
             [wordsArray addObject:camelCaseName.lowercaseWords];
         }

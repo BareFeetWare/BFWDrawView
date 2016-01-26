@@ -13,7 +13,7 @@
 
 #pragma mark - Introspection
 
-+ (NSArray *)methodNames
++ (NSArray *)classMethodNames
 {
     NSMutableArray *methodNames = [[NSMutableArray alloc] init];
     int unsigned methodCount;
@@ -27,43 +27,45 @@
     return [methodNames copy];
 }
 
-+ (NSDictionary *)returnValueForMethodDict
++ (id)returnValueForClassMethodName:(NSString *)methodName
 {
     static NSString * const classType = @"@";
     static NSString * const voidType = @"v";
-    
-    NSMutableDictionary *methodDict = [[NSMutableDictionary alloc] init];
-    int unsigned methodCount;
-    Method *methods = class_copyMethodList(objc_getMetaClass([NSStringFromClass([self class]) UTF8String]), &methodCount);
-    for (int i = 0; i < methodCount; i++) {
-        Method method = methods[i];
-        NSString *methodName = NSStringFromSelector(method_getName(method));
-        char *returnType = method_copyReturnType(method);
-        NSString *typeString = [NSString stringWithUTF8String:returnType];
-        id returnValue;
-        if ([typeString isEqualToString:classType]) {
-            // Danger: calling method may have side effects
-            NSInvocation *invocation = [NSInvocation invocationForClass:[self class]
-                                                               selector:NSSelectorFromString(methodName) // TODO: more direct way
-                                        ];
-            [invocation invoke];
-            id __unsafe_unretained tempReturnValue;
-            [invocation getReturnValue:&tempReturnValue];
-            returnValue = tempReturnValue;
-        }
-        else if ([typeString isEqualToString:voidType]) {
-            returnValue= [NSNull null];
-        }
-        else {
-            DLog(@"**** unexpected returnType = %s", returnType);
-        }
-        if (returnValue) {
-            methodDict[methodName] = returnValue;
-        }
-        free(returnType);
+    Class class = objc_getMetaClass([NSStringFromClass([self class]) UTF8String]);
+    Method method = class_getClassMethod(class, NSSelectorFromString(methodName));
+    char *returnType = method_copyReturnType(method);
+    NSString *typeString = [NSString stringWithUTF8String:returnType];
+    id returnValue = nil;
+    if ([typeString isEqualToString:classType]) {
+        // Danger: calling method may have side effects
+        NSInvocation *invocation = [NSInvocation invocationForClass:[self class]
+                                                           selector:NSSelectorFromString(methodName) // TODO: more direct way
+                                    ];
+        [invocation invoke];
+        id __unsafe_unretained tempReturnValue;
+        [invocation getReturnValue:&tempReturnValue];
+        returnValue = tempReturnValue;
     }
-    free(methods);
-    return [methodDict copy];
+    else if ([typeString isEqualToString:voidType]) {
+        returnValue= [NSNull null];
+    }
+    else {
+        DLog(@"**** unexpected returnType = %s", returnType);
+    }
+    free(returnType);
+    return returnValue;
+}
+
++ (NSDictionary *)returnValueForClassMethodNameDict
+{
+    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] init];
+    for (NSString *methodName in [self classMethodNames]) {
+        id returnValue = [self returnValueForClassMethodName:methodName];
+        if (returnValue) {
+            mutableDictionary[methodName] = returnValue;
+        }
+    }
+    return [mutableDictionary copy];
 }
 
 + (NSArray *)subclassesOf:(Class)parentClass

@@ -15,15 +15,16 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, strong) Class paintCodeClass; // class exported by PaintCode
 
-@property (nonatomic, copy) NSDictionary *colors;   // @{NSString : UIColor}
-@property (nonatomic, copy) NSDictionary *drawings; // @{NSString : BFWStyleKitDrawing}
+@property (nonatomic, copy) NSArray *classMethodNames; // @[NSString]
+@property (nonatomic, copy) NSArray *colorNames; // @[NSString]
+@property (nonatomic, copy) NSArray *drawingNames; // @[NSString]
 
 @property (nonatomic, copy) NSDictionary *parameterDict;
 @property (nonatomic, copy) NSDictionary *drawParameterDict;
 
 #pragma mark - class methods
 
-+ (NSDictionary *)styleKits;
++ (NSArray *)styleKitNames;
 + (instancetype)styleKitForName:(NSString *)name;
 + (BFWStyleKitDrawing *)drawingForStyleKitName:(NSString *)styleKitName
                                    drawingName:(NSString *)drawingName;
@@ -36,5 +37,6 @@
 
 - (UIColor *)colorForName:(NSString *)colorName;
 - (BFWStyleKitDrawing *)drawingForName:(NSString *)drawingName;
+- (NSString *)classMethodNameForDrawingName:(NSString *)drawingName;
 
 @end

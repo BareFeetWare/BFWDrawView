@@ -12,12 +12,17 @@
 
 @interface BFWStyleKitDrawing : NSObject
 
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSArray *methodParameters;
-@property (nonatomic, copy) NSString *methodName;
-@property (nonatomic, weak) BFWStyleKit *styleKit;
+extern NSString * const drawPrefix;
+
+@property (nonatomic, weak, readonly) BFWStyleKit *styleKit;
+@property (nonatomic, copy, readonly) NSString *name;
+@property (nonatomic, copy, readonly) NSArray *methodParameters;
+@property (nonatomic, copy, readonly) NSString *methodName;
 @property (nonatomic, readonly) CGSize drawnSize;
 @property (nonatomic, readonly) BOOL hasDrawnSize;
 @property (nonatomic, readonly) CGRect intrinsicFrame;
+
+- (instancetype)initWithStyleKit:(BFWStyleKit *)styleKit
+                            name:(NSString *)name;
 
 @end

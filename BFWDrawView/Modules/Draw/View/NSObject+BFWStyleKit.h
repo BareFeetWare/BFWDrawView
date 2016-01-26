@@ -17,8 +17,9 @@
 
 #pragma mark - Introspection for NSObject subclasses
 
-+ (NSArray *)methodNames;
-+ (NSDictionary *)returnValueForMethodDict;
++ (NSArray *)classMethodNames;
++ (id)returnValueForClassMethodName:(NSString *)methodName;
++ (NSDictionary *)returnValueForClassMethodNameDict;
 + (NSArray *)subclassesOf:(Class)parentClass;
 
 @end
