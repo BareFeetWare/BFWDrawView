@@ -24,7 +24,8 @@
 
 + (void)exportForAndroid:(BOOL)isAndroid
              toDirectory:(NSString *)directory
-               styleKits:(NSArray *)styleKits
+   drawingsStyleKitNames:(NSArray *)drawingsStyleKitNames
+     colorsStyleKitNames:(NSArray *)colorsStyleKitNames
            pathScaleDict:(NSDictionary *)pathScaleDict
                tintColor:(UIColor *)tintColor
                 duration:(CGFloat)duration

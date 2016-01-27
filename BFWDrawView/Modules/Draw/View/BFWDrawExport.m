@@ -235,7 +235,8 @@ static NSString * const arraysKey = @"arrays";
 
 + (void)exportForAndroid:(BOOL)isAndroid
              toDirectory:(NSString *)directory
-               styleKits:(NSArray *)styleKits
+   drawingsStyleKitNames:(NSArray *)drawingsStyleKitNames
+     colorsStyleKitNames:(NSArray *)colorsStyleKitNames
            pathScaleDict:(NSDictionary *)pathScaleDict
                tintColor:(UIColor *)tintColor
                 duration:(CGFloat)duration
@@ -243,7 +244,7 @@ static NSString * const arraysKey = @"arrays";
 {
     DLog(@"writing images to %@", directory);
     [self writeAllImagesToDirectory:directory
-                          styleKits:styleKits
+                          styleKits:drawingsStyleKitNames
                       pathScaleDict:pathScaleDict
                           tintColor:tintColor
                             android:isAndroid
@@ -251,9 +252,12 @@ static NSString * const arraysKey = @"arrays";
                     framesPerSecond:framesPerSecond];
     if (isAndroid) {
         /// Note: currently exports colors only from the first styleKit
-        NSString *styleKitName = styleKits.firstObject;
-        BFWStyleKit *styleKit = [BFWStyleKit styleKitForName:styleKitName];
-        NSString *colorsXmlString = [styleKit colorsXmlString];
+        NSMutableArray *styleKits = [[NSMutableArray alloc] init];
+        for (NSString *styleKitName in colorsStyleKitNames) {
+            BFWStyleKit *styleKit = [BFWStyleKit styleKitForName:styleKitName];
+            [styleKits addObject:styleKit];
+        }
+        NSString *colorsXmlString = [BFWStyleKit colorsXmlForStyleKits:styleKits];
         NSString *colorsFile = [directory stringByAppendingPathComponent:@"paintcode_colors.xml"];
         [colorsXmlString writeToFile:colorsFile
                           atomically:YES
@@ -279,7 +283,8 @@ static NSString * const arraysKey = @"arrays";
     [[NSFileManager defaultManager] removeItemAtPath:directory error:nil];
     [self exportForAndroid:YES
                toDirectory:directory
-                 styleKits:styleKits
+     drawingsStyleKitNames:styleKits
+       colorsStyleKitNames:styleKits
              pathScaleDict:pathScaleDict
                  tintColor:tintColor
                   duration:duration

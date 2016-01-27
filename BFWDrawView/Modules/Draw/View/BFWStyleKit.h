@@ -29,14 +29,14 @@
 + (BFWStyleKitDrawing *)drawingForStyleKitName:(NSString *)styleKitName
                                    drawingName:(NSString *)drawingName;
 
-#pragma mark - Android accessors
-
-- (NSString *)colorsXmlString;
-
 #pragma mark - instance methods
 
 - (UIColor *)colorForName:(NSString *)colorName;
 - (BFWStyleKitDrawing *)drawingForName:(NSString *)drawingName;
 - (NSString *)classMethodNameForDrawingName:(NSString *)drawingName;
+
+#pragma mark - Android export
+
++ (NSString *)colorsXmlForStyleKits:(NSArray *)styleKits;
 
 @end

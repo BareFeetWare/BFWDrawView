@@ -19,16 +19,16 @@
 @property (weak, nonatomic) IBOutlet UISwitch *includeAnimationsSwitch;
 @property (weak, nonatomic) IBOutlet UITextField *durationTextField;
 @property (weak, nonatomic) IBOutlet UITextField *framesPerSecondTextField;
-@property (strong, nonatomic) UITableViewCell *styleKitCell;
-@property (strong, nonatomic) NSMutableArray *chosenStyleKitNames;
+@property (strong, nonatomic) IBOutlet UITableViewCell *drawingsStyleKitsCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *colorsStyleKitsCell;
+@property (strong, nonatomic) NSMutableArray *drawingsStyleKitNames;
+@property (strong, nonatomic) NSMutableArray *colorsStyleKitNames;
 @property (copy, nonatomic) NSString *directoryPath;
 @property (assign, nonatomic) BOOL includeAnimations;
 
 @end
 
 static NSUInteger const sizesSection = 1;
-static NSUInteger const styleKitsSection = 2;
-static NSString * const styleKitCellReuseIdentifier = @"styleKit";
 static NSString * const exportDirectoryBaseKey = @"exportDirectory";
 static NSString * const includeAnimationsKey = @"includeAnimations";
 static NSString * const androidTitle = @"Android";
@@ -52,12 +52,20 @@ static NSString * const androidTitle = @"Android";
     return [pathScaleDict copy];
 }
 
-- (NSMutableArray *)chosenStyleKitNames
+- (NSMutableArray *)drawingsStyleKitNames
 {
-    if (!_chosenStyleKitNames) {
-        _chosenStyleKitNames = [[BFWStyleKit styleKitNames] mutableCopy];
+    if (!_drawingsStyleKitNames) {
+        _drawingsStyleKitNames = [[BFWStyleKit styleKitNames] mutableCopy];
     }
-    return _chosenStyleKitNames;
+    return _drawingsStyleKitNames;
+}
+
+- (NSMutableArray *)colorsStyleKitNames
+{
+    if (!_colorsStyleKitNames) {
+        _colorsStyleKitNames = [[BFWStyleKit styleKitNames] mutableCopy];
+    }
+    return _colorsStyleKitNames;
 }
 
 - (NSString *)defaultDirectoryPath
@@ -112,7 +120,8 @@ static NSString * const androidTitle = @"Android";
     BOOL isAndroid = [[self.namingSegmentedControl titleForSegmentAtIndex:self.namingSegmentedControl.selectedSegmentIndex] isEqualToString:androidTitle];
     [BFWDrawExport exportForAndroid:isAndroid
                         toDirectory:directoryPath
-                          styleKits:self.chosenStyleKitNames
+              drawingsStyleKitNames:self.drawingsStyleKitNames
+                colorsStyleKitNames:self.colorsStyleKitNames
                       pathScaleDict:[self pathScaleDict]
                           tintColor:[UIColor blackColor] // TODO: get color from UI
                            duration:duration
@@ -132,87 +141,20 @@ static NSString * const androidTitle = @"Android";
     [super viewDidLoad];
     self.directoryTextField.placeholder = [self defaultDirectoryPath];
     self.directoryTextField.text = self.directoryPath;
+    self.drawingsStyleKitsCell.detailTextLabel.text = [self.drawingsStyleKitNames componentsJoinedByString:@", "];
+    self.colorsStyleKitsCell.detailTextLabel.text = [self.colorsStyleKitNames componentsJoinedByString:@", "];
     self.includeAnimationsSwitch.on = self.includeAnimations;
 }
 
 #pragma mark - UITableViewController
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    NSInteger count = 0;
-    if (section == styleKitsSection) {
-        count = [BFWStyleKit styleKitNames].count;
-    } else {
-        count = [super tableView:tableView numberOfRowsInSection:section];
-    }
-    return count;
-}
-
-- (NSIndexPath *)adjustedIndexPathForIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.section == styleKitsSection) {
-        indexPath = [NSIndexPath indexPathForRow:0 inSection:indexPath.section];
-    }
-    return indexPath;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    indexPath = [self adjustedIndexPathForIndexPath:indexPath];
-    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    indexPath = [self adjustedIndexPathForIndexPath:indexPath];
-    return [super tableView:tableView indentationLevelForRowAtIndexPath:indexPath];
-}
-
-- (UITableViewCell *)styleKitCell
-{
-    if (!_styleKitCell) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0
-                                                    inSection:styleKitsSection];
-        _styleKitCell = [super tableView:self.tableView
-                   cellForRowAtIndexPath:indexPath];
-    }
-    return _styleKitCell;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = nil;
-    if (indexPath.section == styleKitsSection) {
-        cell = [tableView dequeueReusableCellWithIdentifier:styleKitCellReuseIdentifier];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:styleKitCellReuseIdentifier];
-        }
-        NSString *styleKitName = [BFWStyleKit styleKitNames][indexPath.row];
-        cell.textLabel.text = styleKitName;
-        cell.accessoryType = [self.chosenStyleKitNames containsObject:styleKitName] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
-    } else {
-        cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-    }
-    return cell;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if (indexPath.section == sizesSection || indexPath.section == styleKitsSection) {
+    if (indexPath.section == sizesSection) {
         BOOL wasSelected = cell.accessoryType == UITableViewCellAccessoryCheckmark;
         BOOL isSelected = !wasSelected;
         cell.accessoryType = isSelected ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
-        if (indexPath.section == styleKitsSection) {
-            NSString *styleKitName = [BFWStyleKit styleKitNames][indexPath.row];
-            if (isSelected) {
-                if (![self.chosenStyleKitNames containsObject:styleKitName]) {
-                    [self.chosenStyleKitNames addObject:styleKitName];
-                }
-            } else {
-                [self.chosenStyleKitNames removeObject:styleKitName];
-            }
-        }
     }
     [cell setSelected:NO animated:YES];
 }
