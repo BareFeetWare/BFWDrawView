@@ -148,6 +148,26 @@ static NSString * const androidTitle = @"Android";
     return count;
 }
 
+- (NSIndexPath *)adjustedIndexPathForIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == styleKitsSection) {
+        indexPath = [NSIndexPath indexPathForRow:0 inSection:indexPath.section];
+    }
+    return indexPath;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    indexPath = [self adjustedIndexPathForIndexPath:indexPath];
+    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    indexPath = [self adjustedIndexPathForIndexPath:indexPath];
+    return [super tableView:tableView indentationLevelForRowAtIndexPath:indexPath];
+}
+
 - (UITableViewCell *)styleKitCell
 {
     if (!_styleKitCell) {
