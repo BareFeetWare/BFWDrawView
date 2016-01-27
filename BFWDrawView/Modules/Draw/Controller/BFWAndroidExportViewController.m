@@ -8,25 +8,27 @@
 
 #import "BFWAndroidExportViewController.h"
 #import "BFWDrawExport.h"
+#import "BFWStyleKit.h"
 #import "NSObject+BFWStyleKit.h"
 
 @interface BFWAndroidExportViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *namingSegmentedControl;
 @property (strong, nonatomic) IBOutletCollection(UITableViewCell) NSArray *exportSizeCells;
-@property (weak, nonatomic) IBOutlet UITableViewCell *exportCell;
 @property (weak, nonatomic) IBOutlet UITextField *directoryTextField;
 @property (weak, nonatomic) IBOutlet UISwitch *includeAnimationsSwitch;
 @property (weak, nonatomic) IBOutlet UITextField *durationTextField;
 @property (weak, nonatomic) IBOutlet UITextField *framesPerSecondTextField;
-
-@property (nonatomic) NSString *directoryPath;
-@property (nonatomic) BOOL includeAnimations;
+@property (strong, nonatomic) UITableViewCell *styleKitCell;
+@property (strong, nonatomic) NSMutableArray *chosenStyleKitNames;
+@property (copy, nonatomic) NSString *directoryPath;
+@property (assign, nonatomic) BOOL includeAnimations;
 
 @end
 
 static NSUInteger const sizesSection = 1;
 static NSUInteger const styleKitsSection = 2;
+static NSString * const styleKitCellReuseIdentifier = @"styleKit";
 static NSString * const exportDirectoryBaseKey = @"exportDirectory";
 static NSString * const includeAnimationsKey = @"includeAnimations";
 static NSString * const androidTitle = @"Android";
@@ -50,24 +52,12 @@ static NSString * const androidTitle = @"Android";
     return [pathScaleDict copy];
 }
 
-- (NSArray *)styleKits
+- (NSMutableArray *)chosenStyleKitNames
 {
-    NSMutableArray *styleKits = [[NSMutableArray alloc] init];
-    NSUInteger cellCount = [self.tableView numberOfRowsInSection:styleKitsSection];
-    for (NSUInteger row = 0; row < cellCount; row++) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row
-                                                    inSection:styleKitsSection];
-        // Note: if we used [self.tableView cellForRowAtIndexPath:] then we would get nil if the cell was scrolled off screen. So, we ask the UITableViewController which keeps a reference to static cells that were created in the storyboard.
-        UITableViewCell *cell = [self tableView:self.tableView
-                          cellForRowAtIndexPath:indexPath];
-        if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
-            NSString *styleKit = cell.textLabel.text;
-            if (styleKit.length) {
-                [styleKits addObject:styleKit];
-            }
-        }
+    if (!_chosenStyleKitNames) {
+        _chosenStyleKitNames = [[BFWStyleKit styleKitNames] mutableCopy];
     }
-    return [styleKits copy];
+    return _chosenStyleKitNames;
 }
 
 - (NSString *)defaultDirectoryPath
@@ -120,10 +110,9 @@ static NSString * const androidTitle = @"Android";
     NSString *directoryPath = self.directoryPath.length ? self.directoryPath : [self defaultDirectoryPath];
     [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:nil];
     BOOL isAndroid = [[self.namingSegmentedControl titleForSegmentAtIndex:self.namingSegmentedControl.selectedSegmentIndex] isEqualToString:androidTitle];
-
     [BFWDrawExport exportForAndroid:isAndroid
                         toDirectory:directoryPath
-                          styleKits:[self styleKits]
+                          styleKits:self.chosenStyleKitNames
                       pathScaleDict:[self pathScaleDict]
                           tintColor:[UIColor blackColor] // TODO: get color from UI
                            duration:duration
@@ -148,15 +137,62 @@ static NSString * const androidTitle = @"Android";
 
 #pragma mark - UITableViewController
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger count = 0;
+    if (section == styleKitsSection) {
+        count = [BFWStyleKit styleKitNames].count;
+    } else {
+        count = [super tableView:tableView numberOfRowsInSection:section];
+    }
+    return count;
+}
+
+- (UITableViewCell *)styleKitCell
+{
+    if (!_styleKitCell) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0
+                                                    inSection:styleKitsSection];
+        _styleKitCell = [super tableView:self.tableView
+                   cellForRowAtIndexPath:indexPath];
+    }
+    return _styleKitCell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = nil;
+    if (indexPath.section == styleKitsSection) {
+        cell = [tableView dequeueReusableCellWithIdentifier:styleKitCellReuseIdentifier];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:styleKitCellReuseIdentifier];
+        }
+        NSString *styleKitName = [BFWStyleKit styleKitNames][indexPath.row];
+        cell.textLabel.text = styleKitName;
+        cell.accessoryType = [self.chosenStyleKitNames containsObject:styleKitName] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+    } else {
+        cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    }
+    return cell;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if (cell == self.exportCell) {
-        [self export:cell];
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }
-    else if (indexPath.section == sizesSection || indexPath.section == styleKitsSection) {
-        cell.accessoryType = cell.accessoryType == UITableViewCellAccessoryCheckmark ? UITableViewCellAccessoryNone : UITableViewCellAccessoryCheckmark;
+    if (indexPath.section == sizesSection || indexPath.section == styleKitsSection) {
+        BOOL wasSelected = cell.accessoryType == UITableViewCellAccessoryCheckmark;
+        BOOL isSelected = !wasSelected;
+        cell.accessoryType = isSelected ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+        if (indexPath.section == styleKitsSection) {
+            NSString *styleKitName = [BFWStyleKit styleKitNames][indexPath.row];
+            if (isSelected) {
+                if (![self.chosenStyleKitNames containsObject:styleKitName]) {
+                    [self.chosenStyleKitNames addObject:styleKitName];
+                }
+            } else {
+                [self.chosenStyleKitNames removeObject:styleKitName];
+            }
+        }
     }
     [cell setSelected:NO animated:YES];
 }
