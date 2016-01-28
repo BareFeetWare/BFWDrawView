@@ -61,7 +61,7 @@ static NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 + (instancetype)styleKitForName:(NSString *)name
 {
     BFWStyleKit* styleKit = [self styleKitForNameDict][name];
-    if (!styleKit) {
+    if (!styleKit && name) {
         styleKit = [[BFWStyleKit alloc] init];
         styleKit.name = name;
         styleKit.paintCodeClass = NSClassFromString(name);
@@ -247,21 +247,23 @@ static NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 - (BFWStyleKitDrawing *)drawingForName:(NSString *)drawingName
 {
     BFWStyleKitDrawing *drawing = nil;
-    BFWStyleKit *styleKit;
-    NSString *redirectStyleKitName = [self.parameterDict[styleKitByPrefixKey] objectForLongestPrefixKeyMatchingWordsInString:drawingName];
-    if (redirectStyleKitName && ![redirectStyleKitName isEqualToString:self.name]) {
-        styleKit = [[self class] styleKitForName:redirectStyleKitName];
-        drawing = [styleKit drawingForName:drawingName];
-    } else {
-        NSString *drawingKey = drawingName.lowercaseWords;
-        drawing = self.drawingForNameDict[drawingKey];
-        if (!drawing) {
-            if ([self classMethodNameForDrawingName:drawingName]) {
-                drawing = [[BFWStyleKitDrawing alloc] initWithStyleKit:self
-                                                                  name:drawingName];
-                self.drawingForNameDict[drawingKey] = drawing;
-            } else {
-                DLog(@"failed to find drawing name: %@", drawingName);
+    if (drawingName) {
+        BFWStyleKit *styleKit;
+        NSString *redirectStyleKitName = [self.parameterDict[styleKitByPrefixKey] objectForLongestPrefixKeyMatchingWordsInString:drawingName];
+        if (redirectStyleKitName && ![redirectStyleKitName isEqualToString:self.name]) {
+            styleKit = [[self class] styleKitForName:redirectStyleKitName];
+            drawing = [styleKit drawingForName:drawingName];
+        } else {
+            NSString *drawingKey = drawingName.lowercaseWords;
+            drawing = self.drawingForNameDict[drawingKey];
+            if (!drawing) {
+                if ([self classMethodNameForDrawingName:drawingName]) {
+                    drawing = [[BFWStyleKitDrawing alloc] initWithStyleKit:self
+                                                                      name:drawingName];
+                    self.drawingForNameDict[drawingKey] = drawing;
+                } else {
+                    DLog(@"failed to find drawing name: %@", drawingName);
+                }
             }
         }
     }
