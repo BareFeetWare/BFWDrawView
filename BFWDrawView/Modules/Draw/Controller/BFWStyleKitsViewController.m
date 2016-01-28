@@ -45,6 +45,7 @@
     NSString *styleKitName = self.styleKitNames[indexPath.row];
     cell.textLabel.text = styleKitName;
     BFWStyleKit *styleKit = [BFWStyleKit styleKitForName:styleKitName];
+    // TODO: Get drawingNames and colorNames on background thread since it is CPU expensive and pauses UI.
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu drawings, %lu colors", (unsigned long)styleKit.drawingNames.count, (unsigned long)styleKit.colorNames.count];
     
     return cell;
