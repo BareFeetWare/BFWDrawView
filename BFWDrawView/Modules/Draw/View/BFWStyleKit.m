@@ -141,10 +141,12 @@ static NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 - (id)returnValueForClassMethodName:(NSString *)methodName
 {
     id returnValue = nil;
-    if (_returnValueForClassMethodNameDict) {
-        returnValue = _returnValueForClassMethodNameDict[methodName];
-    } else {
-        returnValue = [self.paintCodeClass returnValueForClassMethodName:methodName];
+    if (methodName) {
+        if (_returnValueForClassMethodNameDict) {
+            returnValue = _returnValueForClassMethodNameDict[methodName];
+        } else {
+            returnValue = [self.paintCodeClass returnValueForClassMethodName:methodName];
+        }
     }
     return returnValue;
 }
