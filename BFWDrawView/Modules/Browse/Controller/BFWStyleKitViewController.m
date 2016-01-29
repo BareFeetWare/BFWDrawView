@@ -11,8 +11,8 @@
 #import "BFWStyleKitDrawing.h"
 #import "BFWDrawingCell.h"
 #import "BFWDrawView.h"
-#import "NSArray+BFW.h"
 #import "BFWDrawViewController.h"
+#import "NSArray+BFW.h"
 #import "NSString+BFW.h"
 
 @interface BFWStyleKitViewController ()
