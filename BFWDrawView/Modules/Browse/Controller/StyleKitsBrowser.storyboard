@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--StyleKits-->
@@ -11,15 +12,15 @@
             <objects>
                 <tableViewController id="wNx-QG-6wm" customClass="BFWStyleKitsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Hjm-FA-etw">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" textLabel="1Ry-iy-GvF" detailTextLabel="ehl-ba-Rqk" style="IBUITableViewCellStyleSubtitle" id="WeK-DR-WK5">
-                                <rect key="frame" x="0.0" y="86" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="86" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WeK-DR-WK5" id="pKj-Bf-efW">
-                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="StyleKitName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Ry-iy-GvF">
@@ -59,15 +60,15 @@
             <objects>
                 <tableViewController title="Drawings &amp; Animations" id="apG-T0-ts3" customClass="BFWStyleKitViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bLr-eL-kGT">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="drawing" id="nS8-Bm-5y0" customClass="BFWDrawingCell">
-                                <rect key="frame" x="0.0" y="86" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="86" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nS8-Bm-5y0" id="b97-5c-PqJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="FCf-ck-jnt" customClass="BFWDrawView">
@@ -112,10 +113,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="animation" id="da5-Af-fw8" customClass="BFWDrawingCell">
-                                <rect key="frame" x="0.0" y="130" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="130" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="da5-Af-fw8" id="TmH-I8-btP">
-                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="HgO-Vw-ah4" customClass="BFWAnimationView">
@@ -159,7 +160,7 @@
                                     <outlet property="detailTextLabel" destination="Bqk-nG-De2" id="pGX-6d-GIx"/>
                                     <outlet property="drawView" destination="HgO-Vw-ah4" id="o6o-Ui-sq6"/>
                                     <outlet property="textLabel" destination="792-L6-o8V" id="73y-SZ-yPO"/>
-                                    <segue destination="WWu-9N-Gvg" kind="show" id="Ucj-60-FfO"/>
+                                    <segue destination="qF8-s5-kuv" kind="show" id="Vri-ay-Kcm"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -172,7 +173,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EAQ-h6-gwH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2801" y="-405"/>
+            <point key="canvasLocation" x="2676.5" y="-405.5"/>
         </scene>
         <!--drawing-->
         <scene sceneID="lIL-Hl-qJe">
@@ -183,11 +184,11 @@
                         <viewControllerLayoutGuide type="bottom" id="2PQ-CR-SxI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gmV-QY-3Q7">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="74" placeholderIntrinsicHeight="74" translatesAutoresizingMaskIntoConstraints="NO" id="WGy-Bv-Jfo" customClass="BFWAnimationView">
-                                <rect key="frame" x="263" y="263" width="74" height="74"/>
+                                <rect key="frame" x="151" y="297" width="74" height="74"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="animation">
@@ -209,13 +210,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jcj-zL-hhQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3550" y="-405"/>
+            <point key="canvasLocation" x="3269.5" y="-405.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5IF-On-H8u">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4ff-fd-QXy" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cD7-CM-gxw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -227,10 +229,96 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tUF-KG-3s0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1380" y="-405"/>
+            <point key="canvasLocation" x="1529.5" y="-405.5"/>
+        </scene>
+        <!--Animation Speed Test-->
+        <scene sceneID="I9k-vf-04M">
+            <objects>
+                <viewController id="qF8-s5-kuv" customClass="AnimationCountViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cze-sB-jnU"/>
+                        <viewControllerLayoutGuide type="bottom" id="JPa-ee-cKP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="A1x-UG-ZjS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MTd-6B-JnC" customClass="BFWAnimationView">
+                                <rect key="frame" x="150" y="296" width="74" height="74"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="name" value="Pac Man"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="styleKit" value="SampleStyleKit"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="animation">
+                                        <real key="value" value="0.40000000000000002"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="duration">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drawn frames per second:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5k5-T4-YCi">
+                                <rect key="frame" x="16" y="104" width="202" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bd1-uy-oQP">
+                                <rect key="frame" x="236" y="105" width="11" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Desired frames per second:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EYw-kc-k4X">
+                                <rect key="frame" x="16" y="72" width="212" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f3R-9k-op2">
+                                <rect key="frame" x="236" y="69" width="97" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="97" id="Xw7-Ic-3YB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XZs-RO-gBK">
+                                <rect key="frame" x="163" y="128" width="50" height="30"/>
+                                <state key="normal" title="Restart">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="restart:" destination="qF8-s5-kuv" eventType="touchUpInside" id="U2g-QK-bxU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5k5-T4-YCi" firstAttribute="leading" secondItem="EYw-kc-k4X" secondAttribute="leading" id="1qz-B8-Ob6"/>
+                            <constraint firstItem="EYw-kc-k4X" firstAttribute="top" secondItem="cze-sB-jnU" secondAttribute="bottom" constant="8.5" id="CRY-So-5Jd"/>
+                            <constraint firstItem="bd1-uy-oQP" firstAttribute="leading" secondItem="f3R-9k-op2" secondAttribute="leading" id="LMN-Kr-Rew"/>
+                            <constraint firstItem="bd1-uy-oQP" firstAttribute="baseline" secondItem="5k5-T4-YCi" secondAttribute="baseline" constant="0.5" id="NYr-WQ-LUf"/>
+                            <constraint firstAttribute="centerX" secondItem="MTd-6B-JnC" secondAttribute="centerX" id="SUf-fP-qbU"/>
+                            <constraint firstItem="f3R-9k-op2" firstAttribute="leading" secondItem="EYw-kc-k4X" secondAttribute="trailing" constant="8" id="Vya-1a-mXF"/>
+                            <constraint firstItem="XZs-RO-gBK" firstAttribute="top" secondItem="5k5-T4-YCi" secondAttribute="bottom" constant="2.5" id="mkx-To-xO0"/>
+                            <constraint firstAttribute="centerY" secondItem="MTd-6B-JnC" secondAttribute="centerY" id="oED-0n-46s"/>
+                            <constraint firstAttribute="centerX" secondItem="XZs-RO-gBK" secondAttribute="centerX" id="p8O-fQ-3qJ"/>
+                            <constraint firstItem="EYw-kc-k4X" firstAttribute="leading" secondItem="A1x-UG-ZjS" secondAttribute="leadingMargin" id="tjT-Z8-Fh2"/>
+                            <constraint firstItem="EYw-kc-k4X" firstAttribute="baseline" secondItem="f3R-9k-op2" secondAttribute="baseline" id="z0E-uR-4Q5"/>
+                            <constraint firstItem="5k5-T4-YCi" firstAttribute="top" secondItem="EYw-kc-k4X" secondAttribute="bottom" constant="11" id="zDu-99-TEM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Animation Speed Test" id="CNv-AM-uow"/>
+                    <connections>
+                        <outlet property="animationView" destination="MTd-6B-JnC" id="vl3-yl-nb3"/>
+                        <outlet property="desiredFramesPerSecondTextField" destination="f3R-9k-op2" id="bv7-tM-DyO"/>
+                        <outlet property="drawnFramesPerSecondLabel" destination="bd1-uy-oQP" id="UgI-JT-xL0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tHy-bW-xaH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3269.5" y="449.5"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="Ucj-60-FfO"/>
-    </inferredMetricsTieBreakers>
 </document>
