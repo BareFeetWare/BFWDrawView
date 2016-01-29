@@ -9,6 +9,7 @@
 #import "BFWAndroidExportViewController.h"
 #import "BFWDrawExport.h"
 #import "BFWStyleKit.h"
+#import "BFWStyleKitsViewController.h"
 #import "NSObject+BFWStyleKit.h"
 
 @interface BFWAndroidExportViewController () <UITextFieldDelegate>
@@ -144,6 +145,18 @@ static NSString * const androidTitle = @"Android";
     self.drawingsStyleKitsCell.detailTextLabel.text = [self.drawingsStyleKitNames componentsJoinedByString:@", "];
     self.colorsStyleKitsCell.detailTextLabel.text = [self.colorsStyleKitNames componentsJoinedByString:@", "];
     self.includeAnimationsSwitch.on = self.includeAnimations;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[BFWStyleKitsViewController class]]) {
+        BFWStyleKitsViewController *styleKitsViewController = (BFWStyleKitsViewController *)segue.destinationViewController;
+        if (sender == self.drawingsStyleKitsCell) {
+            styleKitsViewController.selectedStyleKitNames = self.drawingsStyleKitNames;
+        } else if (sender == self.colorsStyleKitsCell) {
+            styleKitsViewController.selectedStyleKitNames = self.colorsStyleKitNames;
+        }
+    }
 }
 
 #pragma mark - UITableViewController

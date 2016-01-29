@@ -10,4 +10,6 @@
 
 @interface BFWStyleKitsViewController : UITableViewController
 
+@property (nonatomic, strong) NSMutableArray *selectedStyleKitNames;
+
 @end
