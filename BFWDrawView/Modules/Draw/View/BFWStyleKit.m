@@ -15,7 +15,7 @@
 
 @interface BFWStyleKit ()
 
-@property (nonatomic, strong) NSDictionary *returnValueForClassMethodNameDict; // @{NSString : NSObject}
+@property (nonatomic, copy) NSDictionary *returnValueForClassMethodNameDict; // @{NSString : NSObject}
 @property (nonatomic, strong) NSMutableDictionary *colorForNameDict; // @{NSString : UIColor}
 @property (nonatomic, strong) NSMutableDictionary *drawingForNameDict; // @{NSString : BFWStyleKitDrawing}
 

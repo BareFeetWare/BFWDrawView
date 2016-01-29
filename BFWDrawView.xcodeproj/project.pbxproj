@@ -24,6 +24,7 @@
 		E20FADB41C5B3F5700C78BDC /* BFWStyleKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E20FADAB1C5B3F5700C78BDC /* BFWStyleKitViewController.m */; };
 		E20FADB51C5B3F5700C78BDC /* StyleKitsBrowser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20FADAC1C5B3F5700C78BDC /* StyleKitsBrowser.storyboard */; };
 		E20FADB61C5B3F5700C78BDC /* BFWDrawingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E20FADAF1C5B3F5700C78BDC /* BFWDrawingCell.m */; };
+		E20FADB81C5B45E900C78BDC /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADB71C5B45E900C78BDC /* SwitchCell.swift */; };
 		E211058B1A7E003A0025BDA0 /* NSString+BFW_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E211058A1A7E003A0025BDA0 /* NSString+BFW_Tests.m */; };
 		E21CEF141B0B2A49006B137F /* UIView+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E21CEF131B0B2A49006B137F /* UIView+BFW.m */; };
 		E221178C1AF4FE40007B515F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E22117881AF4FE40007B515F /* Images.xcassets */; };
@@ -86,6 +87,7 @@
 		E20FADAC1C5B3F5700C78BDC /* StyleKitsBrowser.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StyleKitsBrowser.storyboard; sourceTree = "<group>"; };
 		E20FADAE1C5B3F5700C78BDC /* BFWDrawingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawingCell.h; sourceTree = "<group>"; };
 		E20FADAF1C5B3F5700C78BDC /* BFWDrawingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawingCell.m; sourceTree = "<group>"; };
+		E20FADB71C5B45E900C78BDC /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		E211056B1A7E003A0025BDA0 /* BFWDrawView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BFWDrawView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E21105841A7E003A0025BDA0 /* BFWDrawViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BFWDrawViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E21105891A7E003A0025BDA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 			children = (
 				E20FADAE1C5B3F5700C78BDC /* BFWDrawingCell.h */,
 				E20FADAF1C5B3F5700C78BDC /* BFWDrawingCell.m */,
+				E20FADB71C5B45E900C78BDC /* SwitchCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				E20FADB21C5B3F5700C78BDC /* BFWDrawViewController.m in Sources */,
 				E221178F1AF4FE40007B515F /* main.m in Sources */,
 				E20ED1181A9F24CC0045FA69 /* NSString+BFW.m in Sources */,
+				E20FADB81C5B45E900C78BDC /* SwitchCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

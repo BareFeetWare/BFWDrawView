@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" textLabel="1Ry-iy-GvF" detailTextLabel="ehl-ba-Rqk" style="IBUITableViewCellStyleSubtitle" id="WeK-DR-WK5">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="old" textLabel="1Ry-iy-GvF" detailTextLabel="ehl-ba-Rqk" style="IBUITableViewCellStyleSubtitle" id="WeK-DR-WK5">
                                 <rect key="frame" x="0.0" y="86" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WeK-DR-WK5" id="pKj-Bf-efW">
@@ -43,6 +43,57 @@
                                     <segue destination="apG-T0-ts3" kind="show" id="3sv-HT-wQg"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" id="14O-Iz-bwt" customClass="SwitchCell" customModule="BFWDrawView" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="130" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="14O-Iz-bwt" id="Epz-qA-TBg">
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q0a-mH-MN7">
+                                            <rect key="frame" x="8" y="4" width="126" height="36"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="StyleKitName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHo-Wg-pU1">
+                                                    <rect key="frame" x="0.0" y="0.0" width="126" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xx drawings, yy colors" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XHb-B2-NXH">
+                                                    <rect key="frame" x="0.0" y="21" width="126" height="15"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="XHb-B2-NXH" secondAttribute="trailing" id="7eJ-gw-YGi"/>
+                                                <constraint firstAttribute="trailing" secondItem="HHo-Wg-pU1" secondAttribute="trailing" id="7jS-Ym-rOe"/>
+                                                <constraint firstItem="XHb-B2-NXH" firstAttribute="leading" secondItem="Q0a-mH-MN7" secondAttribute="leading" id="954-fA-EkH"/>
+                                                <constraint firstItem="HHo-Wg-pU1" firstAttribute="leading" secondItem="Q0a-mH-MN7" secondAttribute="leading" id="DqL-DY-xvw"/>
+                                                <constraint firstAttribute="bottom" secondItem="XHb-B2-NXH" secondAttribute="bottom" id="dPq-NV-krF"/>
+                                                <constraint firstItem="HHo-Wg-pU1" firstAttribute="top" secondItem="Q0a-mH-MN7" secondAttribute="top" id="kEN-tc-12s"/>
+                                                <constraint firstItem="XHb-B2-NXH" firstAttribute="top" secondItem="HHo-Wg-pU1" secondAttribute="bottom" id="v4a-0k-tcD"/>
+                                            </constraints>
+                                        </view>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wmt-Z9-B8m">
+                                            <rect key="frame" x="285" y="6" width="51" height="31"/>
+                                        </switch>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Q0a-mH-MN7" firstAttribute="leading" secondItem="Epz-qA-TBg" secondAttribute="leadingMargin" id="ZkN-Rb-ZNe"/>
+                                        <constraint firstItem="Q0a-mH-MN7" firstAttribute="centerY" secondItem="Epz-qA-TBg" secondAttribute="centerY" id="fin-e4-BMe"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="wmt-Z9-B8m" secondAttribute="trailing" id="lB1-ew-RiY"/>
+                                        <constraint firstItem="wmt-Z9-B8m" firstAttribute="centerY" secondItem="Epz-qA-TBg" secondAttribute="centerY" id="vbu-50-MSe"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="detailTextLabel" destination="XHb-B2-NXH" id="ivt-EA-JkD"/>
+                                    <outlet property="onSwitch" destination="wmt-Z9-B8m" id="YTA-Ds-2mK"/>
+                                    <outlet property="textLabel" destination="HHo-Wg-pU1" id="UDQ-70-kL5"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="wNx-QG-6wm" id="6xi-yH-PDf"/>
@@ -53,7 +104,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JuT-iN-cAK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2105" y="-405"/>
+            <point key="canvasLocation" x="2104.5" y="-405.5"/>
         </scene>
         <!--Drawings & Animations-->
         <scene sceneID="J0R-Gn-jh3">
