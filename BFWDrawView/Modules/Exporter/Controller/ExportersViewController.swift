@@ -1,0 +1,146 @@
+//
+//  ExportersViewController.swift
+//  BFWDrawView
+//
+//  Created by Tom Brodhurst-Hill on 30/01/2016.
+//  Copyright © 2016 BareFeetWare. All rights reserved.
+//
+
+import UIKit
+
+class ExportersViewController: UITableViewController {
+
+    // MARK: enums and structs
+    
+    enum Section: Int {
+        case Exporter = 0
+        case Add = 1
+    }
+    
+    enum Cell: String {
+        case Exporter = "exporter"
+        case Add = "add"
+    }
+    
+    struct DefaultsKey {
+        static let exporterNames = "exporterNames"
+    }
+    
+    // MARK: Variables
+    
+    private var exporterNames: [String] {
+        get {
+            var exporterNames = [String]()
+            if let savedNames = NSUserDefaults.standardUserDefaults().arrayForKey(DefaultsKey.exporterNames) as? [String] {
+                exporterNames += savedNames
+            }
+            return exporterNames
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: DefaultsKey.exporterNames)
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
+    
+    // MARK: UIViewController
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.clearsSelectionOnViewWillAppear = false
+        self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let exporterViewController = segue.destinationViewController as? BFWAndroidExportViewController,
+            cell = sender as? UITableViewCell {
+                if let indexPath = tableView.indexPathForCell(cell) {
+                    exporterViewController.exporterName = exporterNames[indexPath.row]
+                }
+        }
+    }
+    
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.reloadData()
+    }
+
+    // MARK: UITableViewController
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return self.editing ? 2 : 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var count = 0
+        if let section = Section(rawValue: section) {
+            switch section {
+            case .Exporter:
+                count = exporterNames.count
+            case .Add:
+                count = 1
+            }
+        }
+        return count
+    }
+
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell: UITableViewCell
+        if let section = Section(rawValue: indexPath.section) {
+            switch section {
+            case .Exporter:
+                cell = tableView.dequeueReusableCellWithIdentifier(Cell.Exporter.rawValue, forIndexPath: indexPath)
+                cell.textLabel?.text = exporterNames[indexPath.row]
+            case .Add:
+                cell = tableView.dequeueReusableCellWithIdentifier(Cell.Exporter.rawValue, forIndexPath: indexPath)
+            }
+        } else {
+            cell = UITableViewCell()
+        }
+        return cell
+    }
+
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        var style: UITableViewCellEditingStyle = .None
+        if let section = Section(rawValue: indexPath.section) {
+            switch section {
+            case .Exporter:
+                style = .Delete
+            case .Add:
+                style = .Insert
+            }
+        }
+        return style
+    }
+    
+    override func tableView(
+        tableView: UITableView,
+        commitEditingStyle editingStyle: UITableViewCellEditingStyle,
+        forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        if editingStyle == .Delete {
+            exporterNames.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        } else if editingStyle == .Insert {
+            addExporter()
+        }    
+    }
+
+    // MARK: Actions
+    
+    func addExporter() {
+        let alertController = UIAlertController(title: "Exporter Name", message: "Enter the name of the new exporter", preferredStyle: .Alert)
+        alertController.addTextFieldWithConfigurationHandler { (textField) in
+            textField.placeholder = "New exporter name"
+        }
+        alertController.addAction(UIAlertAction(title: "Add", style: .Default, handler: { (alertAction) in
+            if let exporterName = alertController.textFields?.first?.text {
+                self.exporterNames.append(exporterName)
+            }
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (alertAction) in
+            // Just dismiss.
+        }))
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+}

@@ -10,4 +10,6 @@
 
 @interface BFWAndroidExportViewController : UITableViewController
 
+@property (nonatomic, copy) NSString *exporterName;
+
 @end
