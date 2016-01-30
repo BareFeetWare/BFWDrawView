@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 BareFeetWare. All rights reserved.
 //
 
+#import "BFWDrawView-Swift.h" // For SwitchCell.
 #import "BFWStyleKitsViewController.h"
 #import "BFWStyleKit.h"
 #import "BFWStyleKitViewController.h"
@@ -29,6 +30,34 @@
     return _styleKitNames;
 }
 
+#pragma mark - Actions
+
+- (IBAction)changedSwitch:(UISwitch *)sender
+{
+    UITableViewCell *cell = [self cellContainingView:sender];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSString* styleKitName = self.styleKitNames[indexPath.row];
+    BOOL isInList = [self.selectedStyleKitNames containsObject:styleKitName];
+    if (sender.isOn) {
+        if (!isInList) {
+            [self.selectedStyleKitNames addObject:styleKitName];
+        }
+    } else {
+        if (isInList) {
+            [self.selectedStyleKitNames removeObject:styleKitName];
+        }
+    }
+}
+
+- (UITableViewCell*)cellContainingView:(UIView*)view
+{
+    UITableViewCell* cell = (UITableViewCell*)view;
+    while (cell && ![cell isKindOfClass:[UITableViewCell class]]) {
+        cell = (UITableViewCell*)cell.superview;
+    }
+    return cell;
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -40,14 +69,15 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * const cellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier
+    SwitchCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier
                                                             forIndexPath:indexPath];
     NSString *styleKitName = self.styleKitNames[indexPath.row];
     cell.textLabel.text = styleKitName;
     BFWStyleKit *styleKit = [BFWStyleKit styleKitForName:styleKitName];
     // TODO: Get drawingNames and colorNames on background thread since it is CPU expensive and pauses UI.
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu drawings, %lu colors", (unsigned long)styleKit.drawingNames.count, (unsigned long)styleKit.colorNames.count];
-    
+    cell.onSwitch.hidden = self.selectedStyleKitNames == nil;
+    cell.onSwitch.on = [self.selectedStyleKitNames containsObject:styleKitName];
     return cell;
 }
 

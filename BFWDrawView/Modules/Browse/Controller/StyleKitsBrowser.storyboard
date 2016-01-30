@@ -79,6 +79,9 @@
                                         </view>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wmt-Z9-B8m">
                                             <rect key="frame" x="285" y="6" width="51" height="31"/>
+                                            <connections>
+                                                <action selector="changedSwitch:" destination="wNx-QG-6wm" eventType="valueChanged" id="geU-BE-ec7"/>
+                                            </connections>
                                         </switch>
                                     </subviews>
                                     <constraints>
@@ -92,6 +95,7 @@
                                     <outlet property="detailTextLabel" destination="XHb-B2-NXH" id="ivt-EA-JkD"/>
                                     <outlet property="onSwitch" destination="wmt-Z9-B8m" id="YTA-Ds-2mK"/>
                                     <outlet property="textLabel" destination="HHo-Wg-pU1" id="UDQ-70-kL5"/>
+                                    <segue destination="apG-T0-ts3" kind="show" id="QLk-jZ-27Y"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -372,4 +376,7 @@
             <point key="canvasLocation" x="3269.5" y="449.5"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="QLk-jZ-27Y"/>
+    </inferredMetricsTieBreakers>
 </document>

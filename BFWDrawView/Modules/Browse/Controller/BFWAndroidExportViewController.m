@@ -142,9 +142,13 @@ static NSString * const androidTitle = @"Android";
     [super viewDidLoad];
     self.directoryTextField.placeholder = [self defaultDirectoryPath];
     self.directoryTextField.text = self.directoryPath;
+    self.includeAnimationsSwitch.on = self.includeAnimations;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     self.drawingsStyleKitsCell.detailTextLabel.text = [self.drawingsStyleKitNames componentsJoinedByString:@", "];
     self.colorsStyleKitsCell.detailTextLabel.text = [self.colorsStyleKitNames componentsJoinedByString:@", "];
-    self.includeAnimationsSwitch.on = self.includeAnimations;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
