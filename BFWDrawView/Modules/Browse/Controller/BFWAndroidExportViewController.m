@@ -32,6 +32,8 @@
 static NSUInteger const sizesSection = 1;
 static NSString * const exportDirectoryBaseKey = @"exportDirectory";
 static NSString * const includeAnimationsKey = @"includeAnimations";
+static NSString * const drawingsStyleKitNamesKey = @"drawingsStyleKitNames";
+static NSString * const colorsStyleKitNamesKey = @"colorsStyleKitNames";
 static NSString * const androidTitle = @"Android";
 
 @implementation BFWAndroidExportViewController
@@ -56,9 +58,22 @@ static NSString * const androidTitle = @"Android";
 - (NSMutableArray *)drawingsStyleKitNames
 {
     if (!_drawingsStyleKitNames) {
-        _drawingsStyleKitNames = [[BFWStyleKit styleKitNames] mutableCopy];
+        NSArray *drawingsStyleKitNames = [[NSUserDefaults standardUserDefaults] arrayForKey:drawingsStyleKitNamesKey];
+        if (!drawingsStyleKitNames) {
+            drawingsStyleKitNames = [BFWStyleKit styleKitNames];
+        }
+        _drawingsStyleKitNames = [drawingsStyleKitNames mutableCopy];
     }
     return _drawingsStyleKitNames;
+}
+
+- (void)saveDrawingsStyleKitNames {
+    NSArray *drawingsStyleKitNames = [[NSUserDefaults standardUserDefaults] arrayForKey:drawingsStyleKitNamesKey];
+    if ([self.drawingsStyleKitNames isEqualToArray:drawingsStyleKitNames]) {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:drawingsStyleKitNamesKey];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setObject:self.drawingsStyleKitNames forKey:drawingsStyleKitNamesKey];
+    }
 }
 
 - (NSMutableArray *)colorsStyleKitNames
@@ -67,6 +82,15 @@ static NSString * const androidTitle = @"Android";
         _colorsStyleKitNames = [[BFWStyleKit styleKitNames] mutableCopy];
     }
     return _colorsStyleKitNames;
+}
+
+- (void)saveColorsStyleKitNames {
+    NSArray *colorsStyleKitNames = [[NSUserDefaults standardUserDefaults] arrayForKey:colorsStyleKitNamesKey];
+    if ([self.colorsStyleKitNames isEqualToArray:colorsStyleKitNames]) {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:colorsStyleKitNamesKey];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setObject:self.colorsStyleKitNames forKey:colorsStyleKitNamesKey];
+    }
 }
 
 - (NSString *)defaultDirectoryPath
@@ -119,6 +143,8 @@ static NSString * const androidTitle = @"Android";
     NSString *directoryPath = self.directoryPath.length ? self.directoryPath : [self defaultDirectoryPath];
     [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:nil];
     BOOL isAndroid = [[self.namingSegmentedControl titleForSegmentAtIndex:self.namingSegmentedControl.selectedSegmentIndex] isEqualToString:androidTitle];
+    [self saveDrawingsStyleKitNames];
+    [self saveColorsStyleKitNames];
     [BFWDrawExport exportForAndroid:isAndroid
                         toDirectory:directoryPath
               drawingsStyleKitNames:self.drawingsStyleKitNames
