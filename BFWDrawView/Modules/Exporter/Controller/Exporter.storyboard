@@ -86,7 +86,7 @@
         <!--Exporter-->
         <scene sceneID="827-84-lk3">
             <objects>
-                <tableViewController id="C2Z-ut-XwB" customClass="BFWAndroidExportViewController" sceneMemberID="viewController">
+                <tableViewController id="C2Z-ut-XwB" customClass="ExporterViewController" customModule="BFWDrawView" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="jTm-so-1Oo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -495,12 +495,12 @@
                         <outlet property="framesPerSecondTextField" destination="y5B-3I-QVO" id="IrK-y1-xXA"/>
                         <outlet property="includeAnimationsSwitch" destination="zCh-Lg-xNt" id="gSz-3d-rns"/>
                         <outlet property="namingSegmentedControl" destination="LAP-Cq-Gb4" id="sjE-h8-PUK"/>
-                        <outletCollection property="exportSizeCells" destination="g6E-12-Ufm" id="yPm-TK-mbB"/>
-                        <outletCollection property="exportSizeCells" destination="zsR-mP-aGi" id="wdi-D6-EnK"/>
-                        <outletCollection property="exportSizeCells" destination="j0Z-Sp-t1Z" id="Ij1-IU-hXl"/>
-                        <outletCollection property="exportSizeCells" destination="gbs-GE-uO9" id="2aU-Rm-2GA"/>
-                        <outletCollection property="exportSizeCells" destination="b5b-qM-Wgq" id="5EZ-hw-xxF"/>
-                        <outletCollection property="exportSizeCells" destination="SrE-fT-f7J" id="LfH-QN-eYO"/>
+                        <outletCollection property="exportSizeCells" destination="g6E-12-Ufm" collectionClass="NSMutableArray" id="yPm-TK-mbB"/>
+                        <outletCollection property="exportSizeCells" destination="zsR-mP-aGi" collectionClass="NSMutableArray" id="wdi-D6-EnK"/>
+                        <outletCollection property="exportSizeCells" destination="j0Z-Sp-t1Z" collectionClass="NSMutableArray" id="Ij1-IU-hXl"/>
+                        <outletCollection property="exportSizeCells" destination="gbs-GE-uO9" collectionClass="NSMutableArray" id="2aU-Rm-2GA"/>
+                        <outletCollection property="exportSizeCells" destination="b5b-qM-Wgq" collectionClass="NSMutableArray" id="5EZ-hw-xxF"/>
+                        <outletCollection property="exportSizeCells" destination="SrE-fT-f7J" collectionClass="NSMutableArray" id="LfH-QN-eYO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kzf-kb-p8f" userLabel="First Responder" sceneMemberID="firstResponder"/>

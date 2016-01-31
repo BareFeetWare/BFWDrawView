@@ -1,183 +1,177 @@
 //
-//  BFWAndroidExportViewController.m
+//  ExporterViewController.m
 //  BFWDrawView
 //
 //  Created by Tom Brodhurst-Hill on 29/03/2015.
 //  Copyright (c) 2015 BareFeetWare. All rights reserved.
 //
 
-#import "BFWAndroidExportViewController.h"
-#import "BFWDrawExport.h"
-#import "BFWDrawView-Swift.h" // For ExportersRoot.
-#import "BFWStyleKit.h"
-#import "BFWStyleKitsViewController.h"
-#import "NSObject+BFWStyleKit.h"
+import UIKit
 
-@interface BFWAndroidExportViewController () <UITextFieldDelegate>
+class ExporterViewController: UITableViewController, UITextFieldDelegate {
 
-@property (nonatomic, strong) ExportersRoot *exportersRoot;
-@property (nonatomic, strong) NSMutableDictionary *exporter; // [String: AnyObject]
+    var exportersRoot: ExportersRoot?
+    var exporter: [String: AnyObject]?
 
-@property (weak, nonatomic) IBOutlet UISegmentedControl *namingSegmentedControl;
-@property (strong, nonatomic) IBOutletCollection(UITableViewCell) NSArray *exportSizeCells;
-@property (weak, nonatomic) IBOutlet UITextField *directoryTextField;
-@property (weak, nonatomic) IBOutlet UISwitch *includeAnimationsSwitch;
-@property (weak, nonatomic) IBOutlet UITextField *durationTextField;
-@property (weak, nonatomic) IBOutlet UITextField *framesPerSecondTextField;
-@property (strong, nonatomic) IBOutlet UITableViewCell *drawingsStyleKitsCell;
-@property (strong, nonatomic) IBOutlet UITableViewCell *colorsStyleKitsCell;
-@property (strong, nonatomic) NSMutableArray *drawingsStyleKitNames;
-@property (strong, nonatomic) NSMutableArray *colorsStyleKitNames;
-@property (copy, nonatomic) NSString *directoryPath;
-@property (assign, nonatomic) BOOL includeAnimations;
+    @IBOutlet var namingSegmentedControl: UISegmentedControl?
+    @IBOutlet var exportSizeCells: [UITableViewCell]?
+    @IBOutlet var directoryTextField: UITextField?
+    @IBOutlet var includeAnimationsSwitch: UISwitch?
+    @IBOutlet var durationTextField: UITextField?
+    @IBOutlet var framesPerSecondTextField: UITextField?
+    @IBOutlet var drawingsStyleKitsCell: UITableViewCell?
+    @IBOutlet var colorsStyleKitsCell: UITableViewCell?
 
-@end
+    enum Section: Int {
+        case sizes = 1
+    }
+    
+    struct Key {
+        static let exportDirectoryURL = "exportDirectoryURL"
+        static let includeAnimations = "includeAnimations"
+        static let drawingsStyleKitNames = "drawingsStyleKitNames"
+        static let colorsStyleKitNames = "colorsStyleKitNames"
+    }
+    
+    let androidTitle = "Android";
 
-static NSUInteger const sizesSection = 1;
-static NSString * const exportDirectoryKey = @"exportDirectory";
-static NSString * const includeAnimationsKey = @"includeAnimations";
-static NSString * const drawingsStyleKitNamesKey = @"drawingsStyleKitNames";
-static NSString * const colorsStyleKitNamesKey = @"colorsStyleKitNames";
-static NSString * const androidTitle = @"Android";
+    // MARK: - Accessors
 
-@implementation BFWAndroidExportViewController
+    var pathScaleDict: [String: Double] {
+        var pathScaleDict = [String: Double]()
+        for cell in exportSizeCells! {
+            if cell.accessoryType == .Checkmark {
+                if let path = cell.textLabel?.text,
+                    text = cell.detailTextLabel?.text,
+                    scale = Double(text)
+                {
+                    pathScaleDict[path] = scale;
+                }
+            }
+        }
+        return pathScaleDict
+    }
+    
+    var drawingsStyleKitNames: [String]? {
+        return exporter?[Key.drawingsStyleKitNames] as? [String] ?? BFWStyleKit.styleKitNames() as? [String]
+    }
 
-#pragma mark - accessors
+    var colorsStyleKitNames: [String]? {
+        return exporter?[Key.colorsStyleKitNames] as? [String] ?? BFWStyleKit.styleKitNames() as? [String]
+    }
 
-- (NSDictionary *)pathScaleDict
-{
-    NSMutableDictionary *pathScaleDict = [[NSMutableDictionary alloc] init];
-    for (UITableViewCell *cell in self.exportSizeCells) {
-        if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
-            NSString *path = cell.textLabel.text;
-            NSNumber *scale = @(cell.detailTextLabel.text.doubleValue);
-            if (path && scale) {
-                pathScaleDict[path] = scale;
+    var documentsURL = NSURL(fileURLWithPath: BFWDrawExport.documentsDirectoryPath(), isDirectory: true)
+    
+    var defaultDirectoryURL: NSURL {
+        return documentsURL.URLByAppendingPathComponent("android_drawables", isDirectory: true)
+    }
+
+    var directoryURL: NSURL? {
+        get {
+            return exporter?[Key.exportDirectoryURL] as? NSURL
+        }
+        set {
+            exporter?[Key.exportDirectoryURL] = newValue
+        }
+    }
+
+    var includeAnimations: Bool {
+        get {
+            return exporter?[Key.includeAnimations] as? Bool ?? false
+        }
+        set {
+            exporter?[Key.includeAnimations] = newValue
+        }
+    }
+
+    // MARK - Actions
+
+    @IBAction func export(sender: AnyObject) {
+        view.endEditing(true)
+        var duration = 0.0
+        var framesPerSecond = 0.0 // 0.0 = do not include animations
+        includeAnimations = includeAnimationsSwitch?.on ?? false
+        if includeAnimations {
+            if let durationString = durationTextField?.text ?? durationTextField?.placeholder {
+                duration = Double(durationString) ?? 0.0
+            }
+            if let framesPerSecondString = self.framesPerSecondTextField?.text ?? self.framesPerSecondTextField?.placeholder {
+                framesPerSecond = Double(framesPerSecondString) ?? 0.0
+            }
+        }
+        var useDirectoryURL: NSURL?
+        if let directoryText = directoryTextField?.text {
+            directoryURL = NSURL(fileURLWithPath: directoryText, isDirectory: true)
+            useDirectoryURL = directoryURL
+        } else {
+            useDirectoryURL = defaultDirectoryURL
+        }
+        let contents = try! NSFileManager.defaultManager().contentsOfDirectoryAtURL(useDirectoryURL!, includingPropertiesForKeys: nil, options: .SkipsHiddenFiles)
+        contents.forEach { (url) in
+            try! NSFileManager.defaultManager().removeItemAtURL(url)
+        }
+        var isAndroid = true
+        if let selectedSegmentTitle = namingSegmentedControl?.titleForSegmentAtIndex(namingSegmentedControl!.selectedSegmentIndex) {
+            isAndroid = selectedSegmentTitle == androidTitle
+        }
+        exportersRoot?.saveExporters()
+        BFWDrawExport.exportForAndroid(
+            isAndroid,
+            toDirectory: directoryURL?.path,
+            drawingsStyleKitNames: drawingsStyleKitNames,
+            colorsStyleKitNames: colorsStyleKitNames,
+            pathScaleDict: pathScaleDict,
+            tintColor: UIColor.blackColor(), // TODO: get color from UI
+            duration: duration,
+            framesPerSecond: framesPerSecond
+            )
+        let alertView = UIAlertView(
+            title: "Export complete",
+            message: "",
+            delegate: nil,
+            cancelButtonTitle: "OK"
+        )
+        alertView.show()
+    }
+
+    // MARK - UIViewController
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        directoryTextField?.placeholder = defaultDirectoryURL.path
+        directoryTextField?.text = directoryURL?.path
+        includeAnimationsSwitch?.on = includeAnimations
+}
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        drawingsStyleKitsCell?.detailTextLabel?.text = drawingsStyleKitNames?.joinWithSeparator(", ")
+        colorsStyleKitsCell?.detailTextLabel?.text = colorsStyleKitNames?.joinWithSeparator(", ")
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let styleKitsViewController = segue.destinationViewController as? BFWStyleKitsViewController,
+            cell = sender as? UITableViewCell
+        {
+            if cell == drawingsStyleKitsCell {
+                styleKitsViewController.selectedStyleKitNames = NSMutableArray(array: drawingsStyleKitNames!)
+            } else if cell == colorsStyleKitsCell {
+                styleKitsViewController.selectedStyleKitNames = NSMutableArray(array: colorsStyleKitNames!)
             }
         }
     }
-    return [pathScaleDict copy];
-}
 
-- (NSMutableArray *)drawingsStyleKitNames
-{
-    if (!_drawingsStyleKitNames) {
-        NSArray *drawingsStyleKitNames = self.exporter[drawingsStyleKitNamesKey];
-        if (!drawingsStyleKitNames) {
-            drawingsStyleKitNames = [BFWStyleKit styleKitNames];
-        }
-        _drawingsStyleKitNames = [drawingsStyleKitNames mutableCopy];
-    }
-    return _drawingsStyleKitNames;
-}
+    // MARK - UITableViewController
 
-- (NSMutableArray *)colorsStyleKitNames
-{
-    if (!_colorsStyleKitNames) {
-        _colorsStyleKitNames = [[BFWStyleKit styleKitNames] mutableCopy];
-    }
-    return _colorsStyleKitNames;
-}
-
-- (NSString *)defaultDirectoryPath
-{
-    return [[BFWDrawExport documentsDirectoryPath] stringByAppendingPathComponent:@"android_drawables"];
-}
-
-- (NSString *)directoryPath
-{
-    return self.exporter[exportDirectoryKey];
-}
-
-- (void)setDirectoryPath:(NSString *)directoryPath
-{
-    self.exporter[exportDirectoryKey] = directoryPath;
-}
-
-- (BOOL)includeAnimations
-{
-    return [self.exporter[includeAnimationsKey] boolValue];
-}
-
-- (void)setIncludeAnimations:(BOOL)includeAnimations
-{
-    self.exporter[includeAnimationsKey] = @(includeAnimations);
-}
-
-#pragma mark - actions
-
-- (IBAction)export:(id)sender
-{
-    [self.view endEditing:YES];
-    CGFloat duration = 0.0;
-    CGFloat framesPerSecond = 0.0; // 0.0 = do not include animations;
-    self.includeAnimations = self.includeAnimationsSwitch.isOn;
-    if (self.includeAnimationsSwitch.isOn) {
-        NSString *durationString = self.durationTextField.text.length ? self.durationTextField.text : self.durationTextField.placeholder;
-        duration = durationString.doubleValue;
-        NSString *framesPerSecondString = self.framesPerSecondTextField.text.length ? self.framesPerSecondTextField.text : self.framesPerSecondTextField.placeholder;
-        framesPerSecond = framesPerSecondString.doubleValue;
-    }
-    self.directoryPath = self.directoryTextField.text;
-    NSString *directoryPath = self.directoryPath.length ? self.directoryPath : [self defaultDirectoryPath];
-    [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:nil];
-    BOOL isAndroid = [[self.namingSegmentedControl titleForSegmentAtIndex:self.namingSegmentedControl.selectedSegmentIndex] isEqualToString:androidTitle];
-    [self.exportersRoot saveExporters];
-    [BFWDrawExport exportForAndroid:isAndroid
-                        toDirectory:directoryPath
-              drawingsStyleKitNames:self.drawingsStyleKitNames
-                colorsStyleKitNames:self.colorsStyleKitNames
-                      pathScaleDict:[self pathScaleDict]
-                          tintColor:[UIColor blackColor] // TODO: get color from UI
-                           duration:duration
-                    framesPerSecond:framesPerSecond];
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Export complete"
-                                                        message:nil
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-    [alertView show];
-}
-
-#pragma mark - UIViewController
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.directoryTextField.placeholder = [self defaultDirectoryPath];
-    self.directoryTextField.text = self.directoryPath;
-    self.includeAnimationsSwitch.on = self.includeAnimations;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    self.drawingsStyleKitsCell.detailTextLabel.text = [self.drawingsStyleKitNames componentsJoinedByString:@", "];
-    self.colorsStyleKitsCell.detailTextLabel.text = [self.colorsStyleKitNames componentsJoinedByString:@", "];
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.destinationViewController isKindOfClass:[BFWStyleKitsViewController class]]) {
-        BFWStyleKitsViewController *styleKitsViewController = (BFWStyleKitsViewController *)segue.destinationViewController;
-        if (sender == self.drawingsStyleKitsCell) {
-            styleKitsViewController.selectedStyleKitNames = self.drawingsStyleKitNames;
-        } else if (sender == self.colorsStyleKitsCell) {
-            styleKitsViewController.selectedStyleKitNames = self.colorsStyleKitNames;
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+            if indexPath.section == Section.sizes.rawValue {
+                let wasSelected = cell.accessoryType == .Checkmark
+                let isSelected = !wasSelected
+                cell.accessoryType = isSelected ? .Checkmark : .None
+            }
+            cell.setSelected(false, animated: true)
         }
     }
+
 }
-
-#pragma mark - UITableViewController
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if (indexPath.section == sizesSection) {
-        BOOL wasSelected = cell.accessoryType == UITableViewCellAccessoryCheckmark;
-        BOOL isSelected = !wasSelected;
-        cell.accessoryType = isSelected ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
-    }
-    [cell setSelected:NO animated:YES];
-}
-
-@end

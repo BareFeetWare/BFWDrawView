@@ -35,14 +35,14 @@ class ExportersViewController: UITableViewController {
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let exporterViewController = segue.destinationViewController as? BFWAndroidExportViewController,
+        if let exporterViewController = segue.destinationViewController as? ExporterViewController,
             cell = sender as? UITableViewCell
         {
             if let indexPath = tableView.indexPathForCell(cell),
                 exporter = exportersRoot.exporterAtIndex(indexPath.row)
             {
                 exporterViewController.exportersRoot = exportersRoot
-                exporterViewController.exporter = NSMutableDictionary(dictionary: exporter)
+                exporterViewController.exporter = exporter
             }
         }
     }
