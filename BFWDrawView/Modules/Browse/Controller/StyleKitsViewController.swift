@@ -14,6 +14,7 @@
 
 @interface BFWStyleKitsViewController ()
 
+@property (nonatomic, strong) NSMutableArray *selectedStyleKitNames;
 @property (nonatomic, copy) NSArray *styleKitNames;
 
 @end

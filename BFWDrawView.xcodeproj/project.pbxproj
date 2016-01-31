@@ -19,7 +19,7 @@
 		E20ED11F1A9FC43D0045FA69 /* NSString_BFW_Tests.plist in Resources */ = {isa = PBXBuildFile; fileRef = E20ED11E1A9FC43D0045FA69 /* NSString_BFW_Tests.plist */; };
 		E20FADB01C5B3F5700C78BDC /* AnimationCountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E20FADA31C5B3F5700C78BDC /* AnimationCountViewController.m */; };
 		E20FADB21C5B3F5700C78BDC /* BFWDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E20FADA71C5B3F5700C78BDC /* BFWDrawViewController.m */; };
-		E20FADB31C5B3F5700C78BDC /* BFWStyleKitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E20FADA91C5B3F5700C78BDC /* BFWStyleKitsViewController.m */; };
+		E20FADB31C5B3F5700C78BDC /* StyleKitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADA91C5B3F5700C78BDC /* StyleKitsViewController.swift */; };
 		E20FADB41C5B3F5700C78BDC /* BFWStyleKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E20FADAB1C5B3F5700C78BDC /* BFWStyleKitViewController.m */; };
 		E20FADB51C5B3F5700C78BDC /* StyleKitsBrowser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20FADAC1C5B3F5700C78BDC /* StyleKitsBrowser.storyboard */; };
 		E20FADB61C5B3F5700C78BDC /* BFWDrawingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E20FADAF1C5B3F5700C78BDC /* BFWDrawingCell.m */; };
@@ -81,8 +81,7 @@
 		E20FADA31C5B3F5700C78BDC /* AnimationCountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationCountViewController.m; sourceTree = "<group>"; };
 		E20FADA61C5B3F5700C78BDC /* BFWDrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawViewController.h; sourceTree = "<group>"; };
 		E20FADA71C5B3F5700C78BDC /* BFWDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawViewController.m; sourceTree = "<group>"; };
-		E20FADA81C5B3F5700C78BDC /* BFWStyleKitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWStyleKitsViewController.h; sourceTree = "<group>"; };
-		E20FADA91C5B3F5700C78BDC /* BFWStyleKitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWStyleKitsViewController.m; sourceTree = "<group>"; };
+		E20FADA91C5B3F5700C78BDC /* StyleKitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKitsViewController.swift; sourceTree = "<group>"; };
 		E20FADAA1C5B3F5700C78BDC /* BFWStyleKitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWStyleKitViewController.h; sourceTree = "<group>"; };
 		E20FADAB1C5B3F5700C78BDC /* BFWStyleKitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWStyleKitViewController.m; sourceTree = "<group>"; };
 		E20FADAC1C5B3F5700C78BDC /* StyleKitsBrowser.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StyleKitsBrowser.storyboard; sourceTree = "<group>"; };
@@ -235,11 +234,10 @@
 				E20FADA31C5B3F5700C78BDC /* AnimationCountViewController.m */,
 				E20FADA61C5B3F5700C78BDC /* BFWDrawViewController.h */,
 				E20FADA71C5B3F5700C78BDC /* BFWDrawViewController.m */,
-				E20FADA81C5B3F5700C78BDC /* BFWStyleKitsViewController.h */,
-				E20FADA91C5B3F5700C78BDC /* BFWStyleKitsViewController.m */,
 				E20FADAA1C5B3F5700C78BDC /* BFWStyleKitViewController.h */,
 				E20FADAB1C5B3F5700C78BDC /* BFWStyleKitViewController.m */,
 				E20FADAC1C5B3F5700C78BDC /* StyleKitsBrowser.storyboard */,
+				E20FADA91C5B3F5700C78BDC /* StyleKitsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -477,7 +475,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E20ED1111A9F24B50045FA69 /* NSObject+BFWStyleKit.m in Sources */,
-				E20FADB31C5B3F5700C78BDC /* BFWStyleKitsViewController.m in Sources */,
+				E20FADB31C5B3F5700C78BDC /* StyleKitsViewController.swift in Sources */,
 				E20357991A7F5144002BC3F4 /* BFWDrawButton.m in Sources */,
 				E20ED10E1A9F24860045FA69 /* UIImage+BFW.m in Sources */,
 				E20FADB61C5B3F5700C78BDC /* BFWDrawingCell.m in Sources */,
