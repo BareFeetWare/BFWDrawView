@@ -52,13 +52,13 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate {
         return pathScaleDict
     }
     
-    var drawingsStyleKitNames: [String]? {
-        return exporter?[Key.drawingsStyleKitNames] as? [String] ?? BFWStyleKit.styleKitNames() as? [String]
-    }
+    lazy var drawingsStyleKitNames: [String]? = {
+        return self.exporter?[Key.drawingsStyleKitNames] as? [String] ?? BFWStyleKit.styleKitNames() as? [String]
+    }()
 
-    var colorsStyleKitNames: [String]? {
-        return exporter?[Key.colorsStyleKitNames] as? [String] ?? BFWStyleKit.styleKitNames() as? [String]
-    }
+    lazy var colorsStyleKitNames: [String]? = {
+        return self.exporter?[Key.colorsStyleKitNames] as? [String] ?? BFWStyleKit.styleKitNames() as? [String]
+    }()
 
     var documentsURL = NSURL(fileURLWithPath: BFWDrawExport.documentsDirectoryPath(), isDirectory: true)
     
