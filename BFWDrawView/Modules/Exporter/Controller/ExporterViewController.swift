@@ -106,9 +106,10 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate {
         } else {
             useDirectoryURL = defaultDirectoryURL
         }
-        let contents = try! NSFileManager.defaultManager().contentsOfDirectoryAtURL(useDirectoryURL!, includingPropertiesForKeys: nil, options: .SkipsHiddenFiles)
-        contents.forEach { (url) in
-            try! NSFileManager.defaultManager().removeItemAtURL(url)
+        if let contents = try? NSFileManager.defaultManager().contentsOfDirectoryAtURL(useDirectoryURL!, includingPropertiesForKeys: nil, options: .SkipsHiddenFiles) {
+            contents.forEach { (url) in
+                try! NSFileManager.defaultManager().removeItemAtURL(url)
+            }
         }
         var isAndroid = true
         if let selectedSegmentTitle = namingSegmentedControl?.titleForSegmentAtIndex(namingSegmentedControl!.selectedSegmentIndex) {
