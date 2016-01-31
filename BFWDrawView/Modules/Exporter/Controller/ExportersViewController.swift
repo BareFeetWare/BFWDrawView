@@ -10,7 +10,7 @@ import UIKit
 
 class ExportersViewController: UITableViewController {
 
-    // MARK: enums and structs
+    // MARK: - Enums
     
     enum Section: Int {
         case Exporter = 0
@@ -22,27 +22,11 @@ class ExportersViewController: UITableViewController {
         case Add = "add"
     }
     
-    struct DefaultsKey {
-        static let exporterNames = "exporterNames"
-    }
+    // MARK: - Model
     
-    // MARK: Variables
+    let exportersRoot = ExportersRoot()
     
-    private var exporterNames: [String] {
-        get {
-            var exporterNames = [String]()
-            if let savedNames = NSUserDefaults.standardUserDefaults().arrayForKey(DefaultsKey.exporterNames) as? [String] {
-                exporterNames += savedNames
-            }
-            return exporterNames
-        }
-        set {
-            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: DefaultsKey.exporterNames)
-            NSUserDefaults.standardUserDefaults().synchronize()
-        }
-    }
-    
-    // MARK: UIViewController
+    // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,10 +36,14 @@ class ExportersViewController: UITableViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let exporterViewController = segue.destinationViewController as? BFWAndroidExportViewController,
-            cell = sender as? UITableViewCell {
-                if let indexPath = tableView.indexPathForCell(cell) {
-                    exporterViewController.exporterName = exporterNames[indexPath.row]
-                }
+            cell = sender as? UITableViewCell
+        {
+            if let indexPath = tableView.indexPathForCell(cell),
+                exporter = exportersRoot.exporterAtIndex(indexPath.row)
+            {
+                exporterViewController.exportersRoot = exportersRoot
+                exporterViewController.exporter = NSMutableDictionary(dictionary: exporter)
+            }
         }
     }
     
@@ -64,7 +52,7 @@ class ExportersViewController: UITableViewController {
         tableView.reloadData()
     }
 
-    // MARK: UITableViewController
+    // MARK: - UITableViewController
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.editing ? 2 : 1
@@ -75,7 +63,7 @@ class ExportersViewController: UITableViewController {
         if let section = Section(rawValue: section) {
             switch section {
             case .Exporter:
-                count = exporterNames.count
+                count = exportersRoot.count
             case .Add:
                 count = 1
             }
@@ -89,7 +77,7 @@ class ExportersViewController: UITableViewController {
             switch section {
             case .Exporter:
                 cell = tableView.dequeueReusableCellWithIdentifier(Cell.Exporter.rawValue, forIndexPath: indexPath)
-                cell.textLabel?.text = exporterNames[indexPath.row]
+                cell.textLabel?.text = exportersRoot.exporterNameAtIndex(indexPath.row)
             case .Add:
                 cell = tableView.dequeueReusableCellWithIdentifier(Cell.Exporter.rawValue, forIndexPath: indexPath)
             }
@@ -118,23 +106,23 @@ class ExportersViewController: UITableViewController {
         forRowAtIndexPath indexPath: NSIndexPath)
     {
         if editingStyle == .Delete {
-            exporterNames.removeAtIndex(indexPath.row)
+            exportersRoot.removeExporterAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             addExporter()
         }    
     }
 
-    // MARK: Actions
+    // MARK: - Actions
     
-    func addExporter() {
+    private func addExporter() {
         let alertController = UIAlertController(title: "Exporter Name", message: "Enter the name of the new exporter", preferredStyle: .Alert)
         alertController.addTextFieldWithConfigurationHandler { (textField) in
             textField.placeholder = "New exporter name"
         }
         alertController.addAction(UIAlertAction(title: "Add", style: .Default, handler: { (alertAction) in
             if let exporterName = alertController.textFields?.first?.text {
-                self.exporterNames.append(exporterName)
+                self.exportersRoot.addExporterWithName(exporterName)
             }
         }))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (alertAction) in

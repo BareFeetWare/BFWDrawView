@@ -8,6 +8,7 @@
 
 #import "BFWAndroidExportViewController.h"
 #import "BFWDrawExport.h"
+#import "BFWDrawView-Swift.h" // For ExportersRoot.
 #import "BFWStyleKit.h"
 #import "BFWStyleKitsViewController.h"
 #import "NSObject+BFWStyleKit.h"
@@ -30,7 +31,7 @@
 @end
 
 static NSUInteger const sizesSection = 1;
-static NSString * const exportDirectoryBaseKey = @"exportDirectory";
+static NSString * const exportDirectoryKey = @"exportDirectory";
 static NSString * const includeAnimationsKey = @"includeAnimations";
 static NSString * const drawingsStyleKitNamesKey = @"drawingsStyleKitNames";
 static NSString * const colorsStyleKitNamesKey = @"colorsStyleKitNames";
@@ -58,22 +59,13 @@ static NSString * const androidTitle = @"Android";
 - (NSMutableArray *)drawingsStyleKitNames
 {
     if (!_drawingsStyleKitNames) {
-        NSArray *drawingsStyleKitNames = [[NSUserDefaults standardUserDefaults] arrayForKey:drawingsStyleKitNamesKey];
+        NSArray *drawingsStyleKitNames = self.exporter[drawingsStyleKitNamesKey];
         if (!drawingsStyleKitNames) {
             drawingsStyleKitNames = [BFWStyleKit styleKitNames];
         }
         _drawingsStyleKitNames = [drawingsStyleKitNames mutableCopy];
     }
     return _drawingsStyleKitNames;
-}
-
-- (void)saveDrawingsStyleKitNames {
-    NSArray *drawingsStyleKitNames = [[NSUserDefaults standardUserDefaults] arrayForKey:drawingsStyleKitNamesKey];
-    if ([self.drawingsStyleKitNames isEqualToArray:drawingsStyleKitNames]) {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:drawingsStyleKitNamesKey];
-    } else {
-        [[NSUserDefaults standardUserDefaults] setObject:self.drawingsStyleKitNames forKey:drawingsStyleKitNamesKey];
-    }
 }
 
 - (NSMutableArray *)colorsStyleKitNames
@@ -84,45 +76,29 @@ static NSString * const androidTitle = @"Android";
     return _colorsStyleKitNames;
 }
 
-- (void)saveColorsStyleKitNames {
-    NSArray *colorsStyleKitNames = [[NSUserDefaults standardUserDefaults] arrayForKey:colorsStyleKitNamesKey];
-    if ([self.colorsStyleKitNames isEqualToArray:colorsStyleKitNames]) {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:colorsStyleKitNamesKey];
-    } else {
-        [[NSUserDefaults standardUserDefaults] setObject:self.colorsStyleKitNames forKey:colorsStyleKitNamesKey];
-    }
-}
-
 - (NSString *)defaultDirectoryPath
 {
     return [[BFWDrawExport documentsDirectoryPath] stringByAppendingPathComponent:@"android_drawables"];
 }
 
-- (NSString *)exportDirectoryKey {
-    return [exportDirectoryBaseKey stringByAppendingPathComponent:self.navigationItem.title];
-}
 - (NSString *)directoryPath
 {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:self.exportDirectoryKey];
+    return self.exporter[exportDirectoryKey];
 }
 
 - (void)setDirectoryPath:(NSString *)directoryPath
 {
-    [[NSUserDefaults standardUserDefaults] setObject:directoryPath
-                                              forKey:self.exportDirectoryKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    self.exporter[exportDirectoryKey] = directoryPath;
 }
 
 - (BOOL)includeAnimations
 {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:includeAnimationsKey];
+    return [self.exporter[includeAnimationsKey] boolValue];
 }
 
 - (void)setIncludeAnimations:(BOOL)includeAnimations
 {
-    [[NSUserDefaults standardUserDefaults] setBool:includeAnimations
-                                            forKey:includeAnimationsKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    self.exporter[includeAnimationsKey] = @(includeAnimations);
 }
 
 #pragma mark - actions
@@ -143,8 +119,7 @@ static NSString * const androidTitle = @"Android";
     NSString *directoryPath = self.directoryPath.length ? self.directoryPath : [self defaultDirectoryPath];
     [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:nil];
     BOOL isAndroid = [[self.namingSegmentedControl titleForSegmentAtIndex:self.namingSegmentedControl.selectedSegmentIndex] isEqualToString:androidTitle];
-    [self saveDrawingsStyleKitNames];
-    [self saveColorsStyleKitNames];
+    [self.exportersRoot saveExporters];
     [BFWDrawExport exportForAndroid:isAndroid
                         toDirectory:directoryPath
               drawingsStyleKitNames:self.drawingsStyleKitNames

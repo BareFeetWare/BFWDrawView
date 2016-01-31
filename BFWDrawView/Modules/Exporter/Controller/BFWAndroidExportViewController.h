@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class ExportersRoot;
+
 @interface BFWAndroidExportViewController : UITableViewController
 
-@property (nonatomic, copy) NSString *exporterName;
+@property (nonatomic, strong) ExportersRoot *exportersRoot;
+@property (nonatomic, strong) NSMutableDictionary *exporter; // [String: AnyObject]
 
 @end

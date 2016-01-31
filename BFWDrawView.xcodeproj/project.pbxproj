@@ -28,6 +28,7 @@
 		E20FADC01C5C729700C78BDC /* BFWAndroidExportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E20FADBF1C5C729700C78BDC /* BFWAndroidExportViewController.m */; };
 		E20FADC31C5C730800C78BDC /* BFWDrawExport.m in Sources */ = {isa = PBXBuildFile; fileRef = E20FADC21C5C730800C78BDC /* BFWDrawExport.m */; };
 		E20FADC51C5C73D300C78BDC /* ExportersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADC41C5C73D300C78BDC /* ExportersViewController.swift */; };
+		E20FADC81C5D862000C78BDC /* ExportersRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADC71C5D862000C78BDC /* ExportersRoot.swift */; };
 		E211058B1A7E003A0025BDA0 /* NSString+BFW_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E211058A1A7E003A0025BDA0 /* NSString+BFW_Tests.m */; };
 		E21CEF141B0B2A49006B137F /* UIView+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E21CEF131B0B2A49006B137F /* UIView+BFW.m */; };
 		E221178C1AF4FE40007B515F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E22117881AF4FE40007B515F /* Images.xcassets */; };
@@ -94,6 +95,7 @@
 		E20FADC11C5C730800C78BDC /* BFWDrawExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawExport.h; sourceTree = "<group>"; };
 		E20FADC21C5C730800C78BDC /* BFWDrawExport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawExport.m; sourceTree = "<group>"; };
 		E20FADC41C5C73D300C78BDC /* ExportersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportersViewController.swift; sourceTree = "<group>"; };
+		E20FADC71C5D862000C78BDC /* ExportersRoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportersRoot.swift; sourceTree = "<group>"; };
 		E211056B1A7E003A0025BDA0 /* BFWDrawView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BFWDrawView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E21105841A7E003A0025BDA0 /* BFWDrawViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BFWDrawViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E21105891A7E003A0025BDA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				E20FADBB1C5C722D00C78BDC /* Controller */,
+				E20FADC61C5D85D000C78BDC /* Model */,
 			);
 			path = Exporter;
 			sourceTree = "<group>";
@@ -273,6 +276,15 @@
 			);
 			path = Controller;
 			sourceTree = "<group>";
+		};
+		E20FADC61C5D85D000C78BDC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E20FADC71C5D862000C78BDC /* ExportersRoot.swift */,
+			);
+			name = Model;
+			path = BFWDrawView/Modules/Exporter/Model;
+			sourceTree = SOURCE_ROOT;
 		};
 		E21105621A7E003A0025BDA0 = {
 			isa = PBXGroup;
@@ -484,6 +496,7 @@
 				E22117921AF4FE92007B515F /* AppDelegate.m in Sources */,
 				E2A073651B6A4D400054AD1A /* NSArray+BFW.m in Sources */,
 				E2F58CFC1B5B7C0300F3CFF3 /* BFWStyleKit.m in Sources */,
+				E20FADC81C5D862000C78BDC /* ExportersRoot.swift in Sources */,
 				E21CEF141B0B2A49006B137F /* UIView+BFW.m in Sources */,
 				E2F58CFF1B5B7C9B00F3CFF3 /* BFWStyleKitDrawing.m in Sources */,
 				E20FADB21C5B3F5700C78BDC /* BFWDrawViewController.m in Sources */,
