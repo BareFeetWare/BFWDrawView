@@ -43,6 +43,7 @@
 		E29F35971AFE07BF009A12FE /* NSDictionary+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E29F35951AFE07BF009A12FE /* NSDictionary+BFW.m */; };
 		E2A073651B6A4D400054AD1A /* NSArray+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A073641B6A4D400054AD1A /* NSArray+BFW.m */; };
 		E2A073661B6A4D400054AD1A /* NSArray+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A073641B6A4D400054AD1A /* NSArray+BFW.m */; };
+		E2D2174D1C5EC9A900E28B4B /* UIViewCellExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D2174C1C5EC9A900E28B4B /* UIViewCellExtension.swift */; };
 		E2F58CFC1B5B7C0300F3CFF3 /* BFWStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F58CFB1B5B7C0300F3CFF3 /* BFWStyleKit.m */; };
 		E2F58CFF1B5B7C9B00F3CFF3 /* BFWStyleKitDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F58CFE1B5B7C9B00F3CFF3 /* BFWStyleKitDrawing.m */; };
 /* End PBXBuildFile section */
@@ -116,6 +117,7 @@
 		E29F35951AFE07BF009A12FE /* NSDictionary+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BFW.m"; sourceTree = "<group>"; };
 		E2A073631B6A4D400054AD1A /* NSArray+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+BFW.h"; sourceTree = "<group>"; };
 		E2A073641B6A4D400054AD1A /* NSArray+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BFW.m"; sourceTree = "<group>"; };
+		E2D2174C1C5EC9A900E28B4B /* UIViewCellExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewCellExtension.swift; sourceTree = "<group>"; };
 		E2F58CFA1B5B7C0300F3CFF3 /* BFWStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWStyleKit.h; sourceTree = "<group>"; };
 		E2F58CFB1B5B7C0300F3CFF3 /* BFWStyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWStyleKit.m; sourceTree = "<group>"; };
 		E2F58CFD1B5B7C9B00F3CFF3 /* BFWStyleKitDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWStyleKitDrawing.h; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				E20FADAE1C5B3F5700C78BDC /* BFWDrawingCell.h */,
 				E20FADAF1C5B3F5700C78BDC /* BFWDrawingCell.m */,
 				E20FADB71C5B45E900C78BDC /* SwitchCell.swift */,
+				E2D2174C1C5EC9A900E28B4B /* UIViewCellExtension.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -496,6 +499,7 @@
 				E21CEF141B0B2A49006B137F /* UIView+BFW.m in Sources */,
 				E2F58CFF1B5B7C9B00F3CFF3 /* BFWStyleKitDrawing.m in Sources */,
 				E20FADB21C5B3F5700C78BDC /* BFWDrawViewController.m in Sources */,
+				E2D2174D1C5EC9A900E28B4B /* UIViewCellExtension.swift in Sources */,
 				E20FADC31C5C730800C78BDC /* BFWDrawExport.m in Sources */,
 				E221178F1AF4FE40007B515F /* main.m in Sources */,
 				E20ED1181A9F24CC0045FA69 /* NSString+BFW.m in Sources */,

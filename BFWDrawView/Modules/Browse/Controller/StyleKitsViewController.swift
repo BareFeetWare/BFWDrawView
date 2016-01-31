@@ -80,21 +80,3 @@ class StyleKitsViewController: UITableViewController {
 protocol StyleKitsDelegate {
     func styleKitsViewController(styleKitsViewController: StyleKitsViewController, didChangeNames names: [String])
 }
-
-extension UIView {
-    
-    var superviewCell: UITableViewCell? {
-        var cell: UITableViewCell?
-        var view: UIView? = self
-        while view != nil {
-            if let tryCell = view as? UITableViewCell {
-                cell = tryCell
-                break
-            } else {
-                view = view?.superview
-            }
-        }
-        return cell;
-    }
-
-}
