@@ -8,10 +8,14 @@
 
 import UIKit
 
-class ExporterViewController: UITableViewController, UITextFieldDelegate {
+class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleKitsDelegate {
 
+    // MARK: - Public variables
+    
     var exportersRoot: ExportersRoot?
     var exporter: [String: AnyObject]?
+    
+    // MARK: - IBOutlets
 
     @IBOutlet var namingSegmentedControl: UISegmentedControl?
     @IBOutlet var exportSizeCells: [UITableViewCell]?
@@ -22,22 +26,24 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet var drawingsStyleKitsCell: UITableViewCell?
     @IBOutlet var colorsStyleKitsCell: UITableViewCell?
 
-    enum Section: Int {
-        case sizes = 1
+    // MARK: - Private constants
+
+    private enum Section: Int {
+        case Sizes = 1
     }
     
-    struct Key {
+    private struct Key {
         static let exportDirectoryURL = "exportDirectoryURL"
         static let includeAnimations = "includeAnimations"
         static let drawingsStyleKitNames = "drawingsStyleKitNames"
         static let colorsStyleKitNames = "colorsStyleKitNames"
     }
     
-    let androidTitle = "Android";
+    private let androidTitle = "Android";
 
-    // MARK: - Accessors
+    // MARK: - Private variables
 
-    var pathScaleDict: [String: Double] {
+    private var pathScaleDict: [String: Double] {
         var pathScaleDict = [String: Double]()
         for cell in exportSizeCells! {
             if cell.accessoryType == .Checkmark {
@@ -52,21 +58,21 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate {
         return pathScaleDict
     }
     
-    lazy var drawingsStyleKitNames: [String]? = {
+    private lazy var drawingsStyleKitNames: [String]? = {
         return self.exporter?[Key.drawingsStyleKitNames] as? [String] ?? BFWStyleKit.styleKitNames() as? [String]
     }()
 
-    lazy var colorsStyleKitNames: [String]? = {
+    private lazy var colorsStyleKitNames: [String]? = {
         return self.exporter?[Key.colorsStyleKitNames] as? [String] ?? BFWStyleKit.styleKitNames() as? [String]
     }()
 
-    var documentsURL = NSURL(fileURLWithPath: BFWDrawExport.documentsDirectoryPath(), isDirectory: true)
+    private var documentsURL = NSURL(fileURLWithPath: BFWDrawExport.documentsDirectoryPath(), isDirectory: true)
     
-    var defaultDirectoryURL: NSURL {
+    private var defaultDirectoryURL: NSURL {
         return documentsURL.URLByAppendingPathComponent("android_drawables", isDirectory: true)
     }
 
-    var directoryURL: NSURL? {
+    private var directoryURL: NSURL? {
         get {
             return exporter?[Key.exportDirectoryURL] as? NSURL
         }
@@ -75,7 +81,7 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate {
         }
     }
 
-    var includeAnimations: Bool {
+    private var includeAnimations: Bool {
         get {
             return exporter?[Key.includeAnimations] as? Bool ?? false
         }
@@ -83,6 +89,8 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate {
             exporter?[Key.includeAnimations] = newValue
         }
     }
+
+    private var activeStyleKitsCell: UITableViewCell?
 
     // MARK - Actions
 
@@ -142,7 +150,7 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate {
         directoryTextField?.placeholder = defaultDirectoryURL.path
         directoryTextField?.text = directoryURL?.path
         includeAnimationsSwitch?.on = includeAnimations
-}
+    }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -154,10 +162,15 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate {
         if let styleKitsViewController = segue.destinationViewController as? StyleKitsViewController,
             cell = sender as? UITableViewCell
         {
-            if cell == drawingsStyleKitsCell {
+            activeStyleKitsCell = cell
+            styleKitsViewController.delegate = self
+            switch activeStyleKitsCell! {
+            case drawingsStyleKitsCell!:
                 styleKitsViewController.selectedStyleKitNames = drawingsStyleKitNames
-            } else if cell == colorsStyleKitsCell {
+            case colorsStyleKitsCell!:
                 styleKitsViewController.selectedStyleKitNames = colorsStyleKitNames
+            default:
+                break
             }
         }
     }
@@ -166,7 +179,7 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate {
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-            if indexPath.section == Section.sizes.rawValue {
+            if indexPath.section == Section.Sizes.rawValue {
                 let wasSelected = cell.accessoryType == .Checkmark
                 let isSelected = !wasSelected
                 cell.accessoryType = isSelected ? .Checkmark : .None
@@ -175,4 +188,17 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate {
         }
     }
 
+    // MARK: - StyleKitsDelegate
+    
+    func styleKitsViewController(styleKitsViewController: StyleKitsViewController, didChangeNames names: [String]) {
+        switch activeStyleKitsCell! {
+        case drawingsStyleKitsCell!:
+            drawingsStyleKitNames = names
+        case colorsStyleKitsCell!:
+            colorsStyleKitNames = names
+        default:
+            break
+        }
+    }
+    
 }

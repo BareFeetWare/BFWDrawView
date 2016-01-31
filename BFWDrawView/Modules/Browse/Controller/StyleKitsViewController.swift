@@ -14,6 +14,8 @@ class StyleKitsViewController: UITableViewController {
 
     var selectedStyleKitNames: [String]?
 
+    var delegate: StyleKitsDelegate?
+    
     private var styleKitNames: [String] = (BFWStyleKit.styleKitNames() as! [String]).sort()
 
     // MARK: - Actions
@@ -35,6 +37,7 @@ class StyleKitsViewController: UITableViewController {
                     }
                 }
             }
+            delegate?.styleKitsViewController(self, didChangeNames: selectedStyleKitNames!)
         }
     }
 
@@ -72,6 +75,10 @@ class StyleKitsViewController: UITableViewController {
         }
     }
 
+}
+
+protocol StyleKitsDelegate {
+    func styleKitsViewController(styleKitsViewController: StyleKitsViewController, didChangeNames names: [String])
 }
 
 extension UIView {
