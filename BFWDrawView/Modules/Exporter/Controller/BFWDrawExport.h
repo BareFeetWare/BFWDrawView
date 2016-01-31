@@ -19,8 +19,8 @@
                     pathScaleDict:(NSDictionary *)pathScaleDict
                         tintColor:(UIColor *)tintColor
                           android:(BOOL)isAndroid
-                         duration:(CGFloat)duration
-                  framesPerSecond:(CGFloat)framesPerSecond;
+                         duration:(NSTimeInterval)duration
+                  framesPerSecond:(double)framesPerSecond;
 
 + (void)exportForAndroid:(BOOL)isAndroid
              toDirectory:(NSString *)directory
@@ -28,13 +28,13 @@
      colorsStyleKitNames:(NSArray *)colorsStyleKitNames
            pathScaleDict:(NSDictionary *)pathScaleDict
                tintColor:(UIColor *)tintColor
-                duration:(CGFloat)duration
-         framesPerSecond:(CGFloat)framesPerSecond;
+                duration:(NSTimeInterval)duration
+         framesPerSecond:(double)framesPerSecond;
 
 + (void)exportForAndroidToDocumentsStyleKits:(NSArray *)styleKits
                                pathScaleDict:(NSDictionary *)pathScaleDict
                                    tintColor:(UIColor *)tintColor
-                                    duration:(CGFloat)duration
-                             framesPerSecond:(CGFloat)framesPerSecond;
+                                    duration:(NSTimeInterval)duration
+                             framesPerSecond:(double)framesPerSecond;
 
 @end

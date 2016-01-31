@@ -103,8 +103,8 @@ static NSString * const arraysKey = @"arrays";
                     pathScaleDict:(NSDictionary *)pathScaleDict
                         tintColor:(UIColor *)tintColor
                           android:(BOOL)isAndroid
-                         duration:(CGFloat)duration
-                  framesPerSecond:(CGFloat)framesPerSecond
+                         duration:(NSTimeInterval)duration
+                  framesPerSecond:(double)framesPerSecond
 {
     NSMutableSet *excludeFileNames = [[NSMutableSet alloc] init];
     for (NSString *styleKitName in styleKitArray) {
@@ -188,8 +188,8 @@ static NSString * const arraysKey = @"arrays";
                   pathScaleDict:(NSDictionary *)pathScaleDict
                        fileName:(NSString *)fileName
                         android:(BOOL)isAndroid
-                       duration:(CGFloat)duration
-                framesPerSecond:(CGFloat)framesPerSecond
+                       duration:(NSTimeInterval)duration
+                framesPerSecond:(double)framesPerSecond
                excludeFileNames:(NSMutableSet *)excludeFileNames
 {
     NSString *fileNameLowercaseWords = fileName.lowercaseWords;
@@ -200,7 +200,7 @@ static NSString * const arraysKey = @"arrays";
     NSString *useFileName = isAndroid ? [fileName androidFileName] : fileName;
     for (NSString *path in pathScaleDict) {
         NSNumber *scaleNumber = pathScaleDict[path];
-        CGFloat scale = [scaleNumber floatValue];
+        double scale = [scaleNumber doubleValue];
         NSString *relativePath;
         if ([path containsString:@"%@"]) {
             relativePath = [NSString stringWithFormat:path, useFileName];
@@ -239,8 +239,8 @@ static NSString * const arraysKey = @"arrays";
      colorsStyleKitNames:(NSArray *)colorsStyleKitNames
            pathScaleDict:(NSDictionary *)pathScaleDict
                tintColor:(UIColor *)tintColor
-                duration:(CGFloat)duration
-         framesPerSecond:(CGFloat)framesPerSecond
+                duration:(NSTimeInterval)duration
+         framesPerSecond:(double)framesPerSecond
 {
     DLog(@"writing images to %@", directory);
     [self writeAllImagesToDirectory:directory
@@ -276,8 +276,8 @@ static NSString * const arraysKey = @"arrays";
 + (void)exportForAndroidToDocumentsStyleKits:(NSArray *)styleKits
                                pathScaleDict:(NSDictionary *)pathScaleDict
                                    tintColor:(UIColor *)tintColor
-                                    duration:(CGFloat)duration
-                             framesPerSecond:(CGFloat)framesPerSecond
+                                    duration:(NSTimeInterval)duration
+                             framesPerSecond:(double)framesPerSecond
 {
     NSString *directory = [[self documentsDirectoryPath] stringByAppendingPathComponent:@"android_drawables"];
     [[NSFileManager defaultManager] removeItemAtPath:directory error:nil];
