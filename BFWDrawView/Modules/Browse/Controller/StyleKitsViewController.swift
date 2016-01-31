@@ -1,100 +1,93 @@
 //
-//  BFWStyleKitsViewController.m
+//  StyleKitsViewController.swift
 //  BFWDrawView
 //
 //  Created by Tom Brodhurst-Hill on 30/07/2015.
 //  Copyright (c) 2015 BareFeetWare. All rights reserved.
 //
 
-#import "BFWDrawView-Swift.h" // For SwitchCell.
-#import "BFWStyleKitsViewController.h"
-#import "BFWStyleKit.h"
-#import "BFWStyleKitViewController.h"
-#import "NSArray+BFW.h"
+import UIKit
 
-@interface BFWStyleKitsViewController ()
+class StyleKitsViewController: UITableViewController {
 
-@property (nonatomic, strong) NSMutableArray *selectedStyleKitNames;
-@property (nonatomic, copy) NSArray *styleKitNames;
+    // MARK: - Variables
 
-@end
+    var selectedStyleKitNames: [String]?
 
-@implementation BFWStyleKitsViewController
+    private var styleKitNames: [String] = (BFWStyleKit.styleKitNames() as! [String]).sort()
 
-#pragma mark - accessors
+    // MARK: - Actions
 
-- (NSArray *)styleKitNames
-{
-    if (!_styleKitNames) {
-        _styleKitNames = [[BFWStyleKit styleKitNames] arrayOfStringsSortedCaseInsensitive];
-    }
-    return _styleKitNames;
-}
-
-#pragma mark - Actions
-
-- (IBAction)changedSwitch:(UISwitch *)sender
-{
-    UITableViewCell *cell = [self cellContainingView:sender];
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    NSString* styleKitName = self.styleKitNames[indexPath.row];
-    BOOL isInList = [self.selectedStyleKitNames containsObject:styleKitName];
-    if (sender.isOn) {
-        if (!isInList) {
-            [self.selectedStyleKitNames addObject:styleKitName];
-        }
-    } else {
-        if (isInList) {
-            [self.selectedStyleKitNames removeObject:styleKitName];
+    @IBAction func changedSwitch(sender: UISwitch) {
+        if let cell = sender.superviewCell,
+            indexPath = tableView.indexPathForCell(cell)
+        {
+            let styleKitName = styleKitNames[indexPath.row]
+            let isInList = selectedStyleKitNames?.contains(styleKitName) ?? true
+            if sender.on {
+                if !isInList {
+                    selectedStyleKitNames?.append(styleKitName)
+                }
+            } else {
+                if (isInList) {
+                    if let index = selectedStyleKitNames?.indexOf(styleKitName) {
+                        selectedStyleKitNames?.removeAtIndex(index)
+                    }
+                }
+            }
         }
     }
-}
 
-- (UITableViewCell*)cellContainingView:(UIView*)view
-{
-    UITableViewCell* cell = (UITableViewCell*)view;
-    while (cell && ![cell isKindOfClass:[UITableViewCell class]]) {
-        cell = (UITableViewCell*)cell.superview;
+    // MARK: - Table view data source
+
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.styleKitNames.count
     }
-    return cell;
-}
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cellIdentifier = "Cell"
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! SwitchCell
+        let styleKitName = self.styleKitNames[indexPath.row]
+        cell.textLabel?.text = styleKitName
+        let styleKit = BFWStyleKit(forName:styleKitName)
+        // TODO: Get drawingNames and colorNames on background thread since it is CPU expensive and pauses UI.
+        cell.detailTextLabel?.text = "\(styleKit.drawingNames.count) drawings, \(styleKit.colorNames.count) colors"
+        if let selectedStyleKitNames = selectedStyleKitNames {
+            cell.onSwitch?.on = selectedStyleKitNames.contains(styleKitName)
+        } else {
+            cell.onSwitch?.hidden = true
+        }
+        return cell
+    }
 
-#pragma mark - Table view data source
+    // MARK: - UIViewController
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.styleKitNames.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString * const cellIdentifier = @"Cell";
-    SwitchCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier
-                                                            forIndexPath:indexPath];
-    NSString *styleKitName = self.styleKitNames[indexPath.row];
-    cell.textLabel.text = styleKitName;
-    BFWStyleKit *styleKit = [BFWStyleKit styleKitForName:styleKitName];
-    // TODO: Get drawingNames and colorNames on background thread since it is CPU expensive and pauses UI.
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu drawings, %lu colors", (unsigned long)styleKit.drawingNames.count, (unsigned long)styleKit.colorNames.count];
-    cell.onSwitch.hidden = self.selectedStyleKitNames == nil;
-    cell.onSwitch.on = [self.selectedStyleKitNames containsObject:styleKitName];
-    return cell;
-}
-
-#pragma mark - UIViewController
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.destinationViewController isKindOfClass:[BFWStyleKitViewController class]]) {
-        BFWStyleKitViewController *destinationViewController = segue.destinationViewController;
-        if ([sender isKindOfClass:[UITableViewCell class]]) {
-            UITableViewCell *cell = (UITableViewCell *)sender;
-            NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-            NSString *styleKitName = self.styleKitNames[indexPath.row];
-            destinationViewController.styleKit = [BFWStyleKit styleKitForName:styleKitName];
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destinationViewController = segue.destinationViewController as? BFWStyleKitViewController,
+            cell = sender as? UITableViewCell,
+            indexPath = tableView.indexPathForCell(cell)
+        {
+            let styleKitName = styleKitNames[indexPath.row]
+            destinationViewController.styleKit = BFWStyleKit(forName:styleKitName)
         }
     }
+
 }
 
-@end
+extension UIView {
+    
+    var superviewCell: UITableViewCell? {
+        var cell: UITableViewCell?
+        var view: UIView? = self
+        while view != nil {
+            if let tryCell = view as? UITableViewCell {
+                cell = tryCell
+                break
+            } else {
+                view = view?.superview
+            }
+        }
+        return cell;
+    }
+
+}

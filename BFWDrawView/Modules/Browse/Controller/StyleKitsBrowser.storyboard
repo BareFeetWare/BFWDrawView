@@ -10,7 +10,7 @@
         <!--StyleKits-->
         <scene sceneID="R0B-dr-TNP">
             <objects>
-                <tableViewController id="wNx-QG-6wm" customClass="BFWStyleKitsViewController" sceneMemberID="viewController">
+                <tableViewController id="wNx-QG-6wm" customClass="StyleKitsViewController" customModule="BFWDrawView" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Hjm-FA-etw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -298,7 +298,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MTd-6B-JnC" customClass="BFWAnimationView">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MTd-6B-JnC" customClass="BFWAnimationView">
                                 <rect key="frame" x="150" y="296" width="74" height="74"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>

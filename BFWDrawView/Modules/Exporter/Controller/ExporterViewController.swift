@@ -151,13 +151,13 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate {
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let styleKitsViewController = segue.destinationViewController as? BFWStyleKitsViewController,
+        if let styleKitsViewController = segue.destinationViewController as? StyleKitsViewController,
             cell = sender as? UITableViewCell
         {
             if cell == drawingsStyleKitsCell {
-                styleKitsViewController.selectedStyleKitNames = NSMutableArray(array: drawingsStyleKitNames!)
+                styleKitsViewController.selectedStyleKitNames = drawingsStyleKitNames
             } else if cell == colorsStyleKitsCell {
-                styleKitsViewController.selectedStyleKitNames = NSMutableArray(array: colorsStyleKitNames!)
+                styleKitsViewController.selectedStyleKitNames = colorsStyleKitNames
             }
         }
     }
