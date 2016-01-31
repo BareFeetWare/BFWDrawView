@@ -25,7 +25,7 @@
 		E20FADB61C5B3F5700C78BDC /* BFWDrawingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E20FADAF1C5B3F5700C78BDC /* BFWDrawingCell.m */; };
 		E20FADB81C5B45E900C78BDC /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADB71C5B45E900C78BDC /* SwitchCell.swift */; };
 		E20FADBD1C5C724700C78BDC /* Exporter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20FADBC1C5C724700C78BDC /* Exporter.storyboard */; };
-		E20FADC01C5C729700C78BDC /* BFWAndroidExportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E20FADBF1C5C729700C78BDC /* BFWAndroidExportViewController.m */; };
+		E20FADC01C5C729700C78BDC /* ExporterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADBF1C5C729700C78BDC /* ExporterViewController.swift */; };
 		E20FADC31C5C730800C78BDC /* BFWDrawExport.m in Sources */ = {isa = PBXBuildFile; fileRef = E20FADC21C5C730800C78BDC /* BFWDrawExport.m */; };
 		E20FADC51C5C73D300C78BDC /* ExportersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADC41C5C73D300C78BDC /* ExportersViewController.swift */; };
 		E20FADC81C5D862000C78BDC /* ExportersRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADC71C5D862000C78BDC /* ExportersRoot.swift */; };
@@ -90,8 +90,7 @@
 		E20FADAF1C5B3F5700C78BDC /* BFWDrawingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawingCell.m; sourceTree = "<group>"; };
 		E20FADB71C5B45E900C78BDC /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		E20FADBC1C5C724700C78BDC /* Exporter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Exporter.storyboard; sourceTree = "<group>"; };
-		E20FADBE1C5C729700C78BDC /* BFWAndroidExportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWAndroidExportViewController.h; sourceTree = "<group>"; };
-		E20FADBF1C5C729700C78BDC /* BFWAndroidExportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWAndroidExportViewController.m; sourceTree = "<group>"; };
+		E20FADBF1C5C729700C78BDC /* ExporterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExporterViewController.swift; sourceTree = "<group>"; };
 		E20FADC11C5C730800C78BDC /* BFWDrawExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawExport.h; sourceTree = "<group>"; };
 		E20FADC21C5C730800C78BDC /* BFWDrawExport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawExport.m; sourceTree = "<group>"; };
 		E20FADC41C5C73D300C78BDC /* ExportersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportersViewController.swift; sourceTree = "<group>"; };
@@ -267,12 +266,11 @@
 		E20FADBB1C5C722D00C78BDC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E20FADBE1C5C729700C78BDC /* BFWAndroidExportViewController.h */,
-				E20FADBF1C5C729700C78BDC /* BFWAndroidExportViewController.m */,
 				E20FADC11C5C730800C78BDC /* BFWDrawExport.h */,
 				E20FADC21C5C730800C78BDC /* BFWDrawExport.m */,
 				E20FADBC1C5C724700C78BDC /* Exporter.storyboard */,
 				E20FADC41C5C73D300C78BDC /* ExportersViewController.swift */,
+				E20FADBF1C5C729700C78BDC /* ExporterViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -503,7 +501,7 @@
 				E20FADC31C5C730800C78BDC /* BFWDrawExport.m in Sources */,
 				E221178F1AF4FE40007B515F /* main.m in Sources */,
 				E20ED1181A9F24CC0045FA69 /* NSString+BFW.m in Sources */,
-				E20FADC01C5C729700C78BDC /* BFWAndroidExportViewController.m in Sources */,
+				E20FADC01C5C729700C78BDC /* ExporterViewController.swift in Sources */,
 				E20FADB81C5B45E900C78BDC /* SwitchCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

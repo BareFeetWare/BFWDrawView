@@ -15,6 +15,9 @@
 
 @interface BFWAndroidExportViewController () <UITextFieldDelegate>
 
+@property (nonatomic, strong) ExportersRoot *exportersRoot;
+@property (nonatomic, strong) NSMutableDictionary *exporter; // [String: AnyObject]
+
 @property (weak, nonatomic) IBOutlet UISegmentedControl *namingSegmentedControl;
 @property (strong, nonatomic) IBOutletCollection(UITableViewCell) NSArray *exportSizeCells;
 @property (weak, nonatomic) IBOutlet UITextField *directoryTextField;
