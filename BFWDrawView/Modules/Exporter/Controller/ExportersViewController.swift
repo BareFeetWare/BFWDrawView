@@ -74,7 +74,10 @@ class ExportersViewController: UITableViewController {
             switch section {
             case .Exporter:
                 cell = tableView.dequeueReusableCellWithIdentifier(Cell.Exporter.rawValue, forIndexPath: indexPath)
-                cell.textLabel?.text = exportersRoot.exporterNameAtIndex(indexPath.row)
+                let exporter = exportersRoot.exporterAtIndex(indexPath.row)
+                cell.textLabel?.text = exporter.name
+                let platformString = (exporter.isAndroid ?? true) ? "Android" : "iOS"
+                cell.detailTextLabel?.text = platformString + ": " + (exporter.drawingsStyleKitNames?.joinWithSeparator(", ") ?? "")
             case .Add:
                 cell = tableView.dequeueReusableCellWithIdentifier(Cell.Exporter.rawValue, forIndexPath: indexPath)
             }
