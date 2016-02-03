@@ -35,8 +35,4 @@
 - (BFWStyleKitDrawing *)drawingForName:(NSString *)drawingName;
 - (NSString *)classMethodNameForDrawingName:(NSString *)drawingName;
 
-#pragma mark - Android export
-
-+ (NSString *)colorsXmlForStyleKits:(NSArray *)styleKits;
-
 @end
