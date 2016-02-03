@@ -279,7 +279,15 @@ static NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
     NSString *colorsXmlString = nil;
     NSMutableDictionary *colorsDict = [[NSMutableDictionary alloc] init];
     for (BFWStyleKit *styleKit in styleKits) {
-        [colorsDict addEntriesFromDictionary:[styleKit colorForNameDict]];
+        for (NSString *colorName in styleKit.colorNames) {
+            UIColor *existingColor = colorsDict[colorName];
+            UIColor *addingColor = styleKit.colorForNameDict[colorName];
+            if (existingColor && ![existingColor isEqual:addingColor]) {
+                DLog(@"Skipping color \"%@\" = #%@, from styleKit \"%@\", which would overwrite existing #%@", colorName, addingColor.hexString, styleKit.name, existingColor.hexString);
+            } else {
+                colorsDict[colorName] = addingColor;
+            }
+        }
     }
     NSArray* colorNames = [colorsDict.allKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     if (colorNames.count) {
