@@ -95,7 +95,7 @@ static NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 - (NSDictionary *)returnValueForClassMethodNameDict
 {
     if (!_returnValueForClassMethodNameDict) {
-        DLog(@"**** warning: calling BFWStyleKit returnValueForClassMethodNameDict, which has a large up front caching hit for the app. Only call this if you want to browse the entire list of drawings and colors available from the styleKit");
+        DLog(@"**** warning: calling returnValueForClassMethodNameDict for BFWStyleKit name \"%@\", which has a large up front caching hit for the app. Only call this if you want to browse the entire list of drawings and colors available from the styleKit", self.name);
         _returnValueForClassMethodNameDict = [self.paintCodeClass returnValueForClassMethodNameDict];
     }
     return _returnValueForClassMethodNameDict;
