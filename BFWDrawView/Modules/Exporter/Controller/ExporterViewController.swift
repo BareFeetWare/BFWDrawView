@@ -12,8 +12,7 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
 
     // MARK: - Public variables
     
-    var exportersRoot: ExportersRoot?
-    var exporter: [String: AnyObject]?
+    var exporter: Exporter?
     
     // MARK: - IBOutlets
 
@@ -30,13 +29,6 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
 
     private enum Section: Int {
         case Sizes = 1
-    }
-    
-    private struct Key {
-        static let exportDirectoryURL = "exportDirectoryURL"
-        static let includeAnimations = "includeAnimations"
-        static let drawingsStyleKitNames = "drawingsStyleKitNames"
-        static let colorsStyleKitNames = "colorsStyleKitNames"
     }
     
     private let androidTitle = "Android";
@@ -58,82 +50,63 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
         return pathScaleDict
     }
     
-    private lazy var drawingsStyleKitNames: [String]? = {
-        return self.exporter?[Key.drawingsStyleKitNames] as? [String] ?? BFWStyleKit.styleKitNames() as? [String]
-    }()
+    private var drawingsStyleKitNames: [String]?
 
-    private lazy var colorsStyleKitNames: [String]? = {
-        return self.exporter?[Key.colorsStyleKitNames] as? [String] ?? BFWStyleKit.styleKitNames() as? [String]
-    }()
-
-    private var documentsURL = NSURL(fileURLWithPath: BFWDrawExport.documentsDirectoryPath(), isDirectory: true)
-    
-    private var defaultDirectoryURL: NSURL {
-        return documentsURL.URLByAppendingPathComponent("android_drawables", isDirectory: true)
-    }
-
-    private var directoryURL: NSURL? {
-        get {
-            return exporter?[Key.exportDirectoryURL] as? NSURL
-        }
-        set {
-            exporter?[Key.exportDirectoryURL] = newValue
-        }
-    }
-
-    private var includeAnimations: Bool {
-        get {
-            return exporter?[Key.includeAnimations] as? Bool ?? false
-        }
-        set {
-            exporter?[Key.includeAnimations] = newValue
-        }
-    }
+    private var colorsStyleKitNames: [String]?
 
     private var activeStyleKitsCell: UITableViewCell?
 
-    // MARK - Actions
+    // MARK: - Model to View to Model
+
+    private func readModelIntoView() {
+        if let exporter = exporter {
+            let isAndroidFirst = self.namingSegmentedControl?.titleForSegmentAtIndex(0) == androidTitle
+            self.namingSegmentedControl?.selectedSegmentIndex = exporter.isAndroid == isAndroidFirst ? 0 : 1
+            // TODO: pathToScaleDict
+            directoryTextField?.text = exporter.exportDirectoryURL?.path
+            directoryTextField?.placeholder = exporter.defaultDirectoryURL.path
+            drawingsStyleKitNames = exporter.drawingsStyleKitNames ?? BFWStyleKit.styleKitNames() as? [String]
+            colorsStyleKitNames = exporter.colorsStyleKitNames ?? BFWStyleKit.styleKitNames() as? [String]
+            updateStyleKitsCells()
+            includeAnimationsSwitch?.on = exporter.includeAnimations ?? false
+            durationTextField?.text = exporter.duration == nil ? nil : String(exporter.duration)
+            framesPerSecondTextField?.text = exporter.framesPerSecond == nil ? nil : String(exporter.framesPerSecond)
+        }
+    }
+    
+    private func updateStyleKitsCells() {
+        drawingsStyleKitsCell?.detailTextLabel?.text = drawingsStyleKitNames?.joinWithSeparator(", ")
+        colorsStyleKitsCell?.detailTextLabel?.text = colorsStyleKitNames?.joinWithSeparator(", ")
+    }
+    
+    private func writeViewToModel() {
+        if let exporter = exporter {
+            if let selectedSegmentTitle = namingSegmentedControl?.titleForSegmentAtIndex(namingSegmentedControl!.selectedSegmentIndex) {
+                exporter.isAndroid = selectedSegmentTitle == androidTitle
+            }
+            exporter.pathScaleDict = pathScaleDict
+            if let directoryURLString = directoryTextField?.text where directoryTextField?.text?.characters.count > 0 {
+                exporter.exportDirectoryURL = NSURL(fileURLWithPath: directoryURLString, isDirectory: true)
+            }
+            exporter.drawingsStyleKitNames = drawingsStyleKitNames
+            exporter.colorsStyleKitNames = colorsStyleKitNames
+            exporter.includeAnimations = includeAnimationsSwitch?.on
+            if let durationText = durationTextField?.text, duration = NSTimeInterval(durationText) {
+                exporter.duration = duration
+            }
+            if let framesPerSecondText = framesPerSecondTextField?.text, framesPerSecond = Double(framesPerSecondText) {
+                exporter.framesPerSecond = framesPerSecond
+            }
+        }
+    }
+    
+    // MARK: - Actions
 
     @IBAction func export(sender: AnyObject) {
         view.endEditing(true)
-        var duration = 0.0
-        var framesPerSecond = 0.0 // 0.0 = do not include animations
-        includeAnimations = includeAnimationsSwitch?.on ?? false
-        if includeAnimations {
-            if let durationString = durationTextField?.text ?? durationTextField?.placeholder {
-                duration = Double(durationString) ?? 0.0
-            }
-            if let framesPerSecondString = self.framesPerSecondTextField?.text ?? self.framesPerSecondTextField?.placeholder {
-                framesPerSecond = Double(framesPerSecondString) ?? 0.0
-            }
-        }
-        var useDirectoryURL: NSURL?
-        if let directoryText = directoryTextField?.text {
-            directoryURL = NSURL(fileURLWithPath: directoryText, isDirectory: true)
-            useDirectoryURL = directoryURL
-        } else {
-            useDirectoryURL = defaultDirectoryURL
-        }
-        if let contents = try? NSFileManager.defaultManager().contentsOfDirectoryAtURL(useDirectoryURL!, includingPropertiesForKeys: nil, options: .SkipsHiddenFiles) {
-            contents.forEach { (url) in
-                try! NSFileManager.defaultManager().removeItemAtURL(url)
-            }
-        }
-        var isAndroid = true
-        if let selectedSegmentTitle = namingSegmentedControl?.titleForSegmentAtIndex(namingSegmentedControl!.selectedSegmentIndex) {
-            isAndroid = selectedSegmentTitle == androidTitle
-        }
-        exportersRoot?.saveExporters()
-        BFWDrawExport.exportForAndroid(
-            isAndroid,
-            toDirectory: directoryURL?.path,
-            drawingsStyleKitNames: drawingsStyleKitNames,
-            colorsStyleKitNames: colorsStyleKitNames,
-            pathScaleDict: pathScaleDict,
-            tintColor: UIColor.blackColor(), // TODO: get color from UI
-            duration: duration,
-            framesPerSecond: framesPerSecond
-            )
+        writeViewToModel()
+        exporter?.root.saveExporters()
+        exporter?.export()
         let alertView = UIAlertView(
             title: "Export complete",
             message: "",
@@ -147,15 +120,7 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        directoryTextField?.placeholder = defaultDirectoryURL.path
-        directoryTextField?.text = directoryURL?.path
-        includeAnimationsSwitch?.on = includeAnimations
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        drawingsStyleKitsCell?.detailTextLabel?.text = drawingsStyleKitNames?.joinWithSeparator(", ")
-        colorsStyleKitsCell?.detailTextLabel?.text = colorsStyleKitNames?.joinWithSeparator(", ")
+        readModelIntoView()
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -166,9 +131,9 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
             styleKitsViewController.delegate = self
             switch activeStyleKitsCell! {
             case drawingsStyleKitsCell!:
-                styleKitsViewController.selectedStyleKitNames = drawingsStyleKitNames
+                styleKitsViewController.selectedStyleKitNames = drawingsStyleKitNames ?? BFWStyleKit.styleKitNames() as! [String]
             case colorsStyleKitsCell!:
-                styleKitsViewController.selectedStyleKitNames = colorsStyleKitNames
+                styleKitsViewController.selectedStyleKitNames = colorsStyleKitNames ?? BFWStyleKit.styleKitNames() as! [String]
             default:
                 break
             }
@@ -199,6 +164,7 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
         default:
             break
         }
+        updateStyleKitsCells()
     }
     
 }

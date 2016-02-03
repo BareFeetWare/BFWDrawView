@@ -44,6 +44,7 @@
 		E2A073651B6A4D400054AD1A /* NSArray+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A073641B6A4D400054AD1A /* NSArray+BFW.m */; };
 		E2A073661B6A4D400054AD1A /* NSArray+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A073641B6A4D400054AD1A /* NSArray+BFW.m */; };
 		E2D2174D1C5EC9A900E28B4B /* UIViewCellExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D2174C1C5EC9A900E28B4B /* UIViewCellExtension.swift */; };
+		E2D2174F1C5ECA0400E28B4B /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D2174E1C5ECA0400E28B4B /* Exporter.swift */; };
 		E2F58CFC1B5B7C0300F3CFF3 /* BFWStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F58CFB1B5B7C0300F3CFF3 /* BFWStyleKit.m */; };
 		E2F58CFF1B5B7C9B00F3CFF3 /* BFWStyleKitDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F58CFE1B5B7C9B00F3CFF3 /* BFWStyleKitDrawing.m */; };
 /* End PBXBuildFile section */
@@ -118,6 +119,7 @@
 		E2A073631B6A4D400054AD1A /* NSArray+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+BFW.h"; sourceTree = "<group>"; };
 		E2A073641B6A4D400054AD1A /* NSArray+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+BFW.m"; sourceTree = "<group>"; };
 		E2D2174C1C5EC9A900E28B4B /* UIViewCellExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewCellExtension.swift; sourceTree = "<group>"; };
+		E2D2174E1C5ECA0400E28B4B /* Exporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
 		E2F58CFA1B5B7C0300F3CFF3 /* BFWStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWStyleKit.h; sourceTree = "<group>"; };
 		E2F58CFB1B5B7C0300F3CFF3 /* BFWStyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWStyleKit.m; sourceTree = "<group>"; };
 		E2F58CFD1B5B7C9B00F3CFF3 /* BFWStyleKitDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWStyleKitDrawing.h; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				E20FADC71C5D862000C78BDC /* ExportersRoot.swift */,
+				E2D2174E1C5ECA0400E28B4B /* Exporter.swift */,
 			);
 			name = Model;
 			path = BFWDrawView/Modules/Exporter/Model;
@@ -494,6 +497,7 @@
 				E20FADB01C5B3F5700C78BDC /* AnimationCountViewController.m in Sources */,
 				E22117921AF4FE92007B515F /* AppDelegate.m in Sources */,
 				E2A073651B6A4D400054AD1A /* NSArray+BFW.m in Sources */,
+				E2D2174F1C5ECA0400E28B4B /* Exporter.swift in Sources */,
 				E2F58CFC1B5B7C0300F3CFF3 /* BFWStyleKit.m in Sources */,
 				E20FADC81C5D862000C78BDC /* ExportersRoot.swift in Sources */,
 				E21CEF141B0B2A49006B137F /* UIView+BFW.m in Sources */,

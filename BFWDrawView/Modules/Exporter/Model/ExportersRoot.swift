@@ -12,59 +12,89 @@ class ExportersRoot {
     
     // MARK: - Structs
 
-    struct DefaultsKey {
+    private struct DefaultsKey {
         static let exporters = "exporters"
     }
     
-    // MARK: - Variables
+    // MARK: - Private Variables
     
-    private var exporters: [String: AnyObject] = {
-        var exporters = [String: AnyObject]()
-        if let savedExporters = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKey.exporters) as? [String: AnyObject] {
-            savedExporters.forEach { (key, value) in
-                exporters[key] = value
-            }
+    private lazy var exporters: [Exporter] = {
+        var exporters = [Exporter]()
+        self.loadingDictArray.forEach { exporterDict in
+            let exporter = Exporter(dictionary: exporterDict)
+            exporters.append(exporter)
         }
         return exporters
     }()
     
+    private var loadingDictArray: [[String: AnyObject]] = {
+        var exportersDict: [[String: AnyObject]]
+        if let savedExportersDict = NSUserDefaults.standardUserDefaults().arrayForKey(DefaultsKey.exporters) as? [[String: AnyObject]] {
+            exportersDict = savedExportersDict
+        } else {
+            exportersDict = [[String: AnyObject]]()
+        }
+        return exportersDict
+    }()
+    
+    private var savingDictArray: [[String: AnyObject]] {
+        var exportersDictArray = [[String: AnyObject]]()
+        exporters.forEach { exporter in
+            exportersDictArray.append(exporter.dictionary)
+        }
+        return exportersDictArray
+    }
+    
+    // MARK: - Public Variables
+
     var count: Int {
         return exporters.count
     }
     
     var exporterNames: [String] {
-        return exporters.keys.sort()
+        return exporters.map { exporter in
+            exporter.name
+        }
     }
     
     // MARK: - Functions
 
     func saveExporters() {
-        NSUserDefaults.standardUserDefaults().setObject(exporters, forKey: DefaultsKey.exporters)
+        NSUserDefaults.standardUserDefaults().setObject(savingDictArray, forKey: DefaultsKey.exporters)
         NSUserDefaults.standardUserDefaults().synchronize()
     }
     
-    func exporterForName(name: String) -> [String: AnyObject]? {
-        return exporters[name] as? [String: AnyObject]
+    func exporterForName(name: String) -> Exporter? {
+        return exporters.filter { exporter -> Bool in
+            exporter.name == name
+        }.first
     }
 
     func exporterNameAtIndex(index: Int) -> String {
-        return exporterNames[index]
+        return exporters[index].name
     }
     
-    func exporterAtIndex(index: Int) -> [String: AnyObject]? {
-        return exporters[exporterNames[index]] as? [String: AnyObject]
+    func exporterAtIndex(index: Int) -> Exporter {
+        return exporters[index]
     }
     
     func removeExporterForName(name: String) {
-        exporters.removeValueForKey(name)
+        var deletedCount = 0
+        exporters.enumerate().forEach { (index, exporter) in
+            if exporter.name == name {
+                exporters.removeAtIndex(index + deletedCount)
+                deletedCount++
+            }
+        }
     }
     
     func removeExporterAtIndex(index: Int) {
-        exporters.removeValueForKey(exporterNames[index])
+        exporters.removeAtIndex(index)
     }
     
-    func addExporterWithName(name: String) {
-        exporters[name] = [String: AnyObject]();
+    func addExporter(exporter: Exporter) {
+        exporter.root = self
+        exporters.append(exporter)
     }
     
 }

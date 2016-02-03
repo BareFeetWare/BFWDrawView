@@ -38,11 +38,8 @@ class ExportersViewController: UITableViewController {
         if let exporterViewController = segue.destinationViewController as? ExporterViewController,
             cell = sender as? UITableViewCell
         {
-            if let indexPath = tableView.indexPathForCell(cell),
-                exporter = exportersRoot.exporterAtIndex(indexPath.row)
-            {
-                exporterViewController.exportersRoot = exportersRoot
-                exporterViewController.exporter = exporter
+            if let indexPath = tableView.indexPathForCell(cell) {
+                exporterViewController.exporter = exportersRoot.exporterAtIndex(indexPath.row)
             }
         }
     }
@@ -122,7 +119,9 @@ class ExportersViewController: UITableViewController {
         }
         alertController.addAction(UIAlertAction(title: "Add", style: .Default, handler: { (alertAction) in
             if let exporterName = alertController.textFields?.first?.text {
-                self.exportersRoot.addExporterWithName(exporterName)
+                let exporter = Exporter()
+                exporter.name = exporterName
+                self.exportersRoot.addExporter(exporter)
             }
         }))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (alertAction) in
