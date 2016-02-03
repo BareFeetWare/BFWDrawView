@@ -107,7 +107,7 @@ class ExportersViewController: UITableViewController {
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             addExporter()
-        }    
+        }
     }
 
     // MARK: - Actions
@@ -122,6 +122,8 @@ class ExportersViewController: UITableViewController {
                 let exporter = Exporter()
                 exporter.name = exporterName
                 self.exportersRoot.addExporter(exporter)
+                let indexPath = NSIndexPath(forRow: self.exportersRoot.count - 1, inSection: 0)
+                self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Top)
             }
         }))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (alertAction) in
