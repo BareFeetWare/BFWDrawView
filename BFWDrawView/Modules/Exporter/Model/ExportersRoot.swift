@@ -22,6 +22,7 @@ class ExportersRoot {
         var exporters = [Exporter]()
         self.loadingDictArray.forEach { exporterDict in
             let exporter = Exporter(dictionary: exporterDict)
+            exporter.root = self
             exporters.append(exporter)
         }
         return exporters
