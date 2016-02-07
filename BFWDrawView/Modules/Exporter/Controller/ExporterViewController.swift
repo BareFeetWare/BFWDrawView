@@ -46,11 +46,12 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
             let isAndroidFirst = self.namingSegmentedControl?.titleForSegmentAtIndex(0) == androidTitle
             namingSegmentedControl?.selectedSegmentIndex = exporter.isAndroid == isAndroidFirst ? 0 : 1
             resolutions = exporter.resolutions ?? exporter.defaultResolutions
+            updateResolutionsCell()
             directoryTextField?.text = exporter.exportDirectoryURL?.path
             directoryTextField?.placeholder = exporter.defaultDirectoryURL.path
             drawingsStyleKitNames = exporter.drawingsStyleKitNames ?? BFWStyleKit.styleKitNames() as? [String]
             colorsStyleKitNames = exporter.colorsStyleKitNames ?? BFWStyleKit.styleKitNames() as? [String]
-            updateListCells()
+            updateStyleKitCells()
             includeAnimationsSwitch?.on = exporter.includeAnimations ?? false
             durationTextField?.text = exporter.duration == nil ? nil : String(exporter.duration)
             framesPerSecondTextField?.text = exporter.framesPerSecond == nil ? nil : String(exporter.framesPerSecond)
@@ -74,7 +75,7 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
         return choices
     }
     
-    private func updateListCells() {
+    private func updateResolutionsCell() {
         resolutionsCell?.detailTextLabel?.text = resolutions?.map { (name, scale) in
             (name: name, scale: scale)
             }.sort{ (tuple1, tuple2) -> Bool in
@@ -83,6 +84,9 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
                 let previous = string == "" ? "" : "\(string), "
                 return previous + "\(tuple.scale)x"
         }
+    }
+    
+    private func updateStyleKitCells() {
         drawingsStyleKitsCell?.detailTextLabel?.text = drawingsStyleKitNames?.joinWithSeparator(", ")
         colorsStyleKitsCell?.detailTextLabel?.text = colorsStyleKitNames?.joinWithSeparator(", ")
     }
@@ -167,7 +171,7 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
         default:
             break
         }
-        updateListCells()
+        updateStyleKitCells()
     }
     
     func choicesViewController(choicesViewController: ChoicesViewController, didChangeChoice choice: Choice) {
@@ -177,7 +181,7 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
             } else {
                 resolutions?.removeValueForKey(choice.title)
             }
-            updateListCells()
+            updateResolutionsCell()
         }
     }
     
