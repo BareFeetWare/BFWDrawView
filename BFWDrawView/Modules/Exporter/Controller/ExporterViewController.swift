@@ -58,8 +58,14 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
     }
     
     private func updateListCells() {
-        // TODO: Sort resolutions.
-        resolutionsCell?.detailTextLabel?.text = resolutions?.values.map { String($0) + "x" }.joinWithSeparator(", ")
+        resolutionsCell?.detailTextLabel?.text = resolutions?.map { (name, scale) in
+            (name: name, scale: scale)
+            }.sort{ (tuple1, tuple2) -> Bool in
+                tuple1.scale < tuple2.scale
+            }.reduce("") { (string, tuple) -> String in
+                let previous = string == "" ? "" : "\(string), "
+                return previous + "\(tuple.scale)x"
+        }
         drawingsStyleKitsCell?.detailTextLabel?.text = drawingsStyleKitNames?.joinWithSeparator(", ")
         colorsStyleKitsCell?.detailTextLabel?.text = colorsStyleKitNames?.joinWithSeparator(", ")
     }
