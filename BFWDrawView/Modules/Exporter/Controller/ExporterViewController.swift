@@ -86,9 +86,17 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
         }
     }
     
+    private func shortStringOfStyleKitNames(styleKitNames: [String]) -> String {
+        let suffix = "StyleKit"
+        let shortNames: [String] = styleKitNames.map { name -> String in
+            name.hasSuffix(suffix) ? name[name.startIndex ..< name.endIndex.advancedBy(-suffix.characters.count)] : name
+        }
+        return shortNames.joinWithSeparator(", ")
+    }
+    
     private func updateStyleKitCells() {
-        drawingsStyleKitsCell?.detailTextLabel?.text = drawingsStyleKitNames?.joinWithSeparator(", ")
-        colorsStyleKitsCell?.detailTextLabel?.text = colorsStyleKitNames?.joinWithSeparator(", ")
+        drawingsStyleKitsCell?.detailTextLabel?.text = shortStringOfStyleKitNames(drawingsStyleKitNames!)
+        colorsStyleKitsCell?.detailTextLabel?.text = shortStringOfStyleKitNames(colorsStyleKitNames!)
     }
     
     // MARK: - View to Model
