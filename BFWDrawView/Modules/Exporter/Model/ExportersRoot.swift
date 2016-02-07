@@ -39,11 +39,11 @@ class ExportersRoot {
     }()
     
     private var savingDictArray: [[String: AnyObject]] {
-        var exportersDictArray = [[String: AnyObject]]()
+        var exporterDictArray = [[String: AnyObject]]()
         exporters.forEach { exporter in
-            exportersDictArray.append(exporter.dictionary)
+            exporterDictArray.append(exporter.dictionary)
         }
-        return exportersDictArray
+        return exporterDictArray
     }
     
     // MARK: - Public Variables

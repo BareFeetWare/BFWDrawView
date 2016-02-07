@@ -37,6 +37,7 @@
 		E24CAA7F1BF44F7300BDBE59 /* Sample.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E24CAA7D1BF44F7300BDBE59 /* Sample.storyboard */; };
 		E26B1DB01B02B0FB005EACDE /* SampleDrawButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E26B1DAF1B02B0FB005EACDE /* SampleDrawButton.m */; };
 		E29478011C6183CD001F78DA /* BFWDrawExport.m in Sources */ = {isa = PBXBuildFile; fileRef = E29478001C6183CD001F78DA /* BFWDrawExport.m */; };
+		E29478371C6402A9001F78DA /* ChoicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29478361C6402A9001F78DA /* ChoicesViewController.swift */; };
 		E29917041AF4FEE500F0DEDE /* SampleStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E29917021AF4FEE500F0DEDE /* SampleStyleKit.m */; };
 		E29917051AF4FEE500F0DEDE /* SampleStyleKit.plist in Resources */ = {isa = PBXBuildFile; fileRef = E29917031AF4FEE500F0DEDE /* SampleStyleKit.plist */; };
 		E29F35961AFE07BF009A12FE /* NSDictionary+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E29F35951AFE07BF009A12FE /* NSDictionary+BFW.m */; };
@@ -110,6 +111,7 @@
 		E26B1DAF1B02B0FB005EACDE /* SampleDrawButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleDrawButton.m; sourceTree = "<group>"; };
 		E29477FF1C6183CD001F78DA /* BFWDrawExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawExport.h; sourceTree = "<group>"; };
 		E29478001C6183CD001F78DA /* BFWDrawExport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawExport.m; sourceTree = "<group>"; };
+		E29478361C6402A9001F78DA /* ChoicesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoicesViewController.swift; sourceTree = "<group>"; };
 		E29917011AF4FEE500F0DEDE /* SampleStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleStyleKit.h; sourceTree = "<group>"; };
 		E29917021AF4FEE500F0DEDE /* SampleStyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleStyleKit.m; sourceTree = "<group>"; };
 		E29917031AF4FEE500F0DEDE /* SampleStyleKit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SampleStyleKit.plist; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 		E20FADBB1C5C722D00C78BDC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E29478361C6402A9001F78DA /* ChoicesViewController.swift */,
 				E20FADBC1C5C724700C78BDC /* Exporter.storyboard */,
 				E20FADC41C5C73D300C78BDC /* ExportersViewController.swift */,
 				E20FADBF1C5C729700C78BDC /* ExporterViewController.swift */,
@@ -281,8 +284,8 @@
 			children = (
 				E29477FF1C6183CD001F78DA /* BFWDrawExport.h */,
 				E29478001C6183CD001F78DA /* BFWDrawExport.m */,
-				E20FADC71C5D862000C78BDC /* ExportersRoot.swift */,
 				E2D2174E1C5ECA0400E28B4B /* Exporter.swift */,
+				E20FADC71C5D862000C78BDC /* ExportersRoot.swift */,
 			);
 			name = Model;
 			path = BFWDrawView/Modules/Exporter/Model;
@@ -509,6 +512,7 @@
 				E20ED1181A9F24CC0045FA69 /* NSString+BFW.m in Sources */,
 				E20FADC01C5C729700C78BDC /* ExporterViewController.swift in Sources */,
 				E20FADB81C5B45E900C78BDC /* SwitchCell.swift in Sources */,
+				E29478371C6402A9001F78DA /* ChoicesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

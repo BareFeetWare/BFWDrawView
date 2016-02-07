@@ -15,7 +15,7 @@ class Exporter {
     var root: ExportersRoot!
     var name: String!
     var isAndroid: Bool?
-    var pathScaleDict: [String: Double]?
+    var resolutions: [String: Double]?
     var exportDirectoryURL: NSURL?
     var drawingsStyleKitNames: [String]?
     var colorsStyleKitNames: [String]?
@@ -28,12 +28,35 @@ class Exporter {
     var defaultDirectoryURL: NSURL {
         return documentsURL.URLByAppendingPathComponent("android_drawables", isDirectory: true)
     }
-
+    
+    var defaultResolutions: [String: Double] {
+        var resolutions: [String: Double]
+        if (isAndroid ?? true) {
+            resolutions = [
+                "drawable-ldpi": 0.75,
+                "drawable-mdpi": 1.0,
+                "drawable-hdpi": 1.5,
+                "drawable-xhdpi": 2.0,
+                "drawable-xxhdpi": 3.0,
+                "drawable-xxxhdpi": 4.0
+            ]
+        } else {
+            resolutions = [
+                "1x": 1.0,
+                "2x": 2.0,
+                "3x": 3.0
+            ]
+        }
+        // TODO: Move the resolution lists to something configurable, such as a plist.
+        return resolutions
+    }
+    
     // MARK: - Structs
     
     private struct DefaultsKey {
         static let name = "name"
         static let isAndroid = "isAndroid"
+        static let resolutions = "resolutions"
         static let pathScaleDict = "pathScaleDict"
         static let exportDirectoryURL = "exportDirectoryURL"
         static let drawingsStyleKitNames = "drawingsStyleKitNames"
@@ -45,15 +68,11 @@ class Exporter {
     
     // MARK: - Init
     
-    init() {
-        
-    }
-    
     convenience init(dictionary: [String: AnyObject]) {
         self.init()
         self.name = dictionary[DefaultsKey.name] as? String
         self.isAndroid = dictionary[DefaultsKey.isAndroid] as? Bool
-        self.pathScaleDict = dictionary[DefaultsKey.pathScaleDict] as? [String: Double]
+        self.resolutions = dictionary[DefaultsKey.resolutions] as? [String: Double]
         if let exportDirectoryURLString = dictionary[DefaultsKey.exportDirectoryURL] as? String {
             self.exportDirectoryURL = NSURL(string: exportDirectoryURLString)
         }
@@ -70,7 +89,7 @@ class Exporter {
         var dictionary = [String: AnyObject]()
         dictionary[DefaultsKey.name] = self.name
         dictionary[DefaultsKey.isAndroid] = self.isAndroid
-        dictionary[DefaultsKey.pathScaleDict] = self.pathScaleDict
+        dictionary[DefaultsKey.resolutions] = self.resolutions
         dictionary[DefaultsKey.exportDirectoryURL] = self.exportDirectoryURL?.absoluteString
         dictionary[DefaultsKey.drawingsStyleKitNames] = self.drawingsStyleKitNames
         dictionary[DefaultsKey.colorsStyleKitNames] = self.colorsStyleKitNames
@@ -94,7 +113,7 @@ class Exporter {
             toDirectory: exportDirectoryURL?.path ?? defaultDirectoryURL.path,
             drawingsStyleKitNames: drawingsStyleKitNames ?? BFWStyleKit.styleKitNames(),
             colorsStyleKitNames: colorsStyleKitNames ?? BFWStyleKit.styleKitNames(),
-            pathScaleDict: pathScaleDict,
+            pathScaleDict: resolutions ?? defaultResolutions,
             tintColor: UIColor.blackColor(), // TODO: get color from UI
             duration: duration ?? 0.0,
             framesPerSecond: framesPerSecond ?? 00
