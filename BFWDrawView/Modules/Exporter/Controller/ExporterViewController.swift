@@ -39,7 +39,7 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
 
     private var activeListCell: UITableViewCell?
 
-    // MARK: - Model to View to Model
+    // MARK: - Model to View
 
     private func readModelIntoView() {
         if let exporter = exporter {
@@ -57,6 +57,23 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
         }
     }
     
+    private func resolutionChoices() -> [Choice] {
+        var choices = [Choice]()
+        if let defaultResolutions = exporter?.defaultResolutions {
+            choices = defaultResolutions.map { (name, scale) -> Choice in
+                Choice(
+                    title: name,
+                    detail: "\(scale)x",
+                    value: scale,
+                    chosen: resolutions?.keys.contains(name) ?? true
+                )
+                }.sort { (choice1, choice2) -> Bool in
+                    (choice1.value as! Double) < (choice2.value as! Double)
+            }
+        }
+        return choices
+    }
+    
     private func updateListCells() {
         resolutionsCell?.detailTextLabel?.text = resolutions?.map { (name, scale) in
             (name: name, scale: scale)
@@ -70,6 +87,8 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
         colorsStyleKitsCell?.detailTextLabel?.text = colorsStyleKitNames?.joinWithSeparator(", ")
     }
     
+    // MARK: - View to Model
+
     private func writeViewToModel() {
         if let exporter = exporter {
             if let selectedSegmentTitle = namingSegmentedControl?.titleForSegmentAtIndex(namingSegmentedControl!.selectedSegmentIndex) {
@@ -91,23 +110,6 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
         }
     }
     
-    private func resolutionChoices() -> [Choice] {
-        var choices = [Choice]()
-        if let defaultResolutions = exporter?.defaultResolutions {
-            choices = defaultResolutions.map { (name, scale) -> Choice in
-                Choice(
-                    title: name,
-                    detail: "\(scale)x",
-                    value: scale,
-                    chosen: resolutions?.keys.contains(name) ?? true
-                )
-                }.sort { (choice1, choice2) -> Bool in
-                    (choice1.value as! Double) < (choice2.value as! Double)
-            }
-        }
-        return choices
-    }
-
     // MARK: - Actions
 
     @IBAction func export(sender: AnyObject) {
