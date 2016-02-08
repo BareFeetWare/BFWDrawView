@@ -270,7 +270,7 @@
         <!--Navigation Controller-->
         <scene sceneID="5IF-On-H8u">
             <objects>
-                <navigationController storyboardIdentifier="navigation" automaticallyAdjustsScrollViewInsets="NO" id="4ff-fd-QXy" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="StylekitsBrowser navigation" automaticallyAdjustsScrollViewInsets="NO" id="4ff-fd-QXy" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cD7-CM-gxw">
