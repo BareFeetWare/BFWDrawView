@@ -33,6 +33,13 @@ class ExportersViewController: UITableViewController {
         self.clearsSelectionOnViewWillAppear = false
         self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if exportersRoot.count == 0 {
+            setEditing(true, animated: true)
+        }
+    }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let exporterViewController = segue.destinationViewController as? ExporterViewController,
@@ -46,7 +53,12 @@ class ExportersViewController: UITableViewController {
     
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        tableView.reloadData()
+        let indexSet = NSIndexSet(index: Section.Add.rawValue)
+        if editing {
+            tableView.insertSections(indexSet, withRowAnimation: .Left)
+        } else {
+            tableView.deleteSections(indexSet, withRowAnimation: .Left)
+        }
     }
 
     // MARK: - UITableViewController
