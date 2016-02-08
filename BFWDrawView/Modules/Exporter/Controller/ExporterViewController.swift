@@ -31,11 +31,17 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
 
     // MARK: - Private variables
 
-    private var resolutions: [String: Double]?
-    
-    private var drawingsStyleKitNames: [String]?
+    private var resolutions: [String: Double]? {
+        return exporter?.resolutions ?? exporter?.defaultResolutions
+    }
 
-    private var colorsStyleKitNames: [String]?
+    private var drawingsStyleKitNames: [String]? {
+        return exporter?.drawingsStyleKitNames ?? BFWStyleKit.styleKitNames() as? [String]
+    }
+    
+    private var colorsStyleKitNames: [String]? {
+        return exporter?.colorsStyleKitNames ?? BFWStyleKit.styleKitNames() as? [String]
+    }
 
     private var activeListCell: UITableViewCell?
 
@@ -45,12 +51,9 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
         if let exporter = exporter {
             let isAndroidFirst = self.namingSegmentedControl?.titleForSegmentAtIndex(0) == androidTitle
             namingSegmentedControl?.selectedSegmentIndex = exporter.isAndroid == isAndroidFirst ? 0 : 1
-            resolutions = exporter.resolutions ?? exporter.defaultResolutions
             updateResolutionsCell()
             directoryTextField?.text = exporter.exportDirectoryURL?.path
             directoryTextField?.placeholder = exporter.defaultDirectoryURL.path
-            drawingsStyleKitNames = exporter.drawingsStyleKitNames ?? BFWStyleKit.styleKitNames() as? [String]
-            colorsStyleKitNames = exporter.colorsStyleKitNames ?? BFWStyleKit.styleKitNames() as? [String]
             updateStyleKitCells()
             includeAnimationsSwitch?.on = exporter.includeAnimations ?? false
             durationTextField?.text = exporter.duration == nil ? nil : String(exporter.duration)
@@ -103,15 +106,9 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
 
     private func writeViewToModel() {
         if let exporter = exporter {
-            if let selectedSegmentTitle = namingSegmentedControl?.titleForSegmentAtIndex(namingSegmentedControl!.selectedSegmentIndex) {
-                exporter.isAndroid = selectedSegmentTitle == androidTitle
-            }
-            exporter.resolutions = resolutions
             if let directoryURLString = directoryTextField?.text where directoryTextField?.text?.characters.count > 0 {
                 exporter.exportDirectoryURL = NSURL(fileURLWithPath: directoryURLString, isDirectory: true)
             }
-            exporter.drawingsStyleKitNames = drawingsStyleKitNames
-            exporter.colorsStyleKitNames = colorsStyleKitNames
             exporter.includeAnimations = includeAnimationsSwitch?.on
             if let durationText = durationTextField?.text, duration = NSTimeInterval(durationText) {
                 exporter.duration = duration
@@ -124,6 +121,13 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
     
     // MARK: - Actions
 
+    @IBAction func didChangePlatformControl(sender: UISegmentedControl) {
+        if let selectedSegmentTitle = namingSegmentedControl?.titleForSegmentAtIndex(namingSegmentedControl!.selectedSegmentIndex) {
+            exporter?.isAndroid = selectedSegmentTitle == androidTitle
+            updateResolutionsCell()
+        }
+    }
+    
     @IBAction func export(sender: AnyObject) {
         view.endEditing(true)
         writeViewToModel()
@@ -173,9 +177,9 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
     func styleKitsViewController(styleKitsViewController: StyleKitsViewController, didChangeNames names: [String]) {
         switch activeListCell! {
         case drawingsStyleKitsCell!:
-            drawingsStyleKitNames = names
+            exporter?.drawingsStyleKitNames = names
         case colorsStyleKitsCell!:
-            colorsStyleKitNames = names
+            exporter?.colorsStyleKitNames = names
         default:
             break
         }
@@ -185,9 +189,9 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
     func choicesViewController(choicesViewController: ChoicesViewController, didChangeChoice choice: Choice) {
         if activeListCell == resolutionsCell {
             if choice.chosen {
-                resolutions?[choice.title] = choice.value as? Double
+                exporter?.resolutions?[choice.title] = choice.value as? Double
             } else {
-                resolutions?.removeValueForKey(choice.title)
+                exporter?.resolutions?.removeValueForKey(choice.title)
             }
             updateResolutionsCell()
         }

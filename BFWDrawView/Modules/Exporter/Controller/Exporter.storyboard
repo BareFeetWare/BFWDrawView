@@ -176,6 +176,9 @@
                                                         <segment title="iOS"/>
                                                         <segment title="Android"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="didChangePlatformControl:" destination="C2Z-ut-XwB" eventType="valueChanged" id="3uf-Od-mNJ"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>
