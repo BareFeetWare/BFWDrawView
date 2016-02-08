@@ -16,6 +16,7 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
     
     // MARK: - IBOutlets
 
+    @IBOutlet var nameTextField: UITextField?
     @IBOutlet var namingSegmentedControl: UISegmentedControl?
     @IBOutlet var resolutionsCell: UITableViewCell?
     @IBOutlet var directoryTextField: UITextField?
@@ -49,6 +50,7 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
 
     private func readModelIntoView() {
         if let exporter = exporter {
+            nameTextField?.text = exporter.name
             let isAndroidFirst = self.namingSegmentedControl?.titleForSegmentAtIndex(0) == androidTitle
             namingSegmentedControl?.selectedSegmentIndex = exporter.isAndroid == isAndroidFirst ? 0 : 1
             updateResolutionsCell()
@@ -106,6 +108,7 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
 
     private func writeViewToModel() {
         if let exporter = exporter {
+            exporter.name = nameTextField?.text
             if let directoryURLString = directoryTextField?.text where directoryTextField?.text?.characters.count > 0 {
                 exporter.exportDirectoryURL = NSURL(fileURLWithPath: directoryURLString, isDirectory: true)
             }
