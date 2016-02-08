@@ -91,7 +91,7 @@ class ExportersViewController: UITableViewController {
                 let platformString = (exporter.isAndroid ?? true) ? "Android" : "iOS"
                 cell.detailTextLabel?.text = platformString + ": " + (exporter.drawingsStyleKitNames?.joinWithSeparator(", ") ?? "")
             case .Add:
-                cell = tableView.dequeueReusableCellWithIdentifier(Cell.Exporter.rawValue, forIndexPath: indexPath)
+                cell = tableView.dequeueReusableCellWithIdentifier(Cell.Add.rawValue, forIndexPath: indexPath)
             }
         } else {
             cell = UITableViewCell()
