@@ -29,13 +29,18 @@ class ExportersRoot {
     }()
     
     private var loadingDictArray: [[String: AnyObject]] = {
-        var exportersDict: [[String: AnyObject]]
-        if let savedExportersDict = NSUserDefaults.standardUserDefaults().arrayForKey(DefaultsKey.exporters) as? [[String: AnyObject]] {
-            exportersDict = savedExportersDict
+        var dictArray: [[String: AnyObject]]
+        if let savedExportersDictArray = NSUserDefaults.standardUserDefaults().arrayForKey(DefaultsKey.exporters) as? [[String: AnyObject]] {
+            dictArray = savedExportersDictArray
+        } else if let bundledPlistPath = NSBundle.mainBundle().pathForResource("ExporterDefaults", ofType: "plist"),
+            let defaultsDict = NSDictionary(contentsOfFile: bundledPlistPath) as? [String: AnyObject],
+            let bundledDictArray = defaultsDict[DefaultsKey.exporters] as? [[String: AnyObject]]
+        {
+            dictArray = bundledDictArray
         } else {
-            exportersDict = [[String: AnyObject]]()
+            dictArray = [[String: AnyObject]]()
         }
-        return exportersDict
+        return dictArray
     }()
     
     private var savingDictArray: [[String: AnyObject]] {
