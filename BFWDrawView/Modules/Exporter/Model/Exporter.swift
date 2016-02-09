@@ -42,9 +42,9 @@ class Exporter {
             ]
         } else {
             resolutions = [
-                "1x": 1.0,
-                "2x": 2.0,
-                "3x": 3.0
+                "@1x": 1.0,
+                "@2x": 2.0,
+                "@3x": 3.0
             ]
         }
         // TODO: Move the resolution lists to something configurable, such as a plist.
@@ -101,6 +101,20 @@ class Exporter {
     
     // MARK: - Private variables
     
+    private var pathScaleDict: [String: Double] {
+        let resolutions = self.resolutions ?? defaultResolutions
+        var pathScaleDict = resolutions
+        let isIos = !(isAndroid ?? true)
+        if isIos {
+            pathScaleDict = [String: Double]()
+            for (path, scale) in resolutions {
+                let format = "%@" + path
+                pathScaleDict[format] = scale
+            }
+        }
+        return pathScaleDict
+    }
+    
     private var documentsURL: NSURL {
         return NSURL(fileURLWithPath: BFWDrawExport.documentsDirectoryPath(), isDirectory: true)
     }
@@ -108,12 +122,12 @@ class Exporter {
     // MARK - Actions
     
     func export() {
-       BFWDrawExport.exportForAndroid(
+        BFWDrawExport.exportForAndroid(
             isAndroid ?? true,
             toDirectory: exportDirectoryURL?.path ?? defaultDirectoryURL.path,
             drawingsStyleKitNames: drawingsStyleKitNames ?? BFWStyleKit.styleKitNames(),
             colorsStyleKitNames: colorsStyleKitNames ?? BFWStyleKit.styleKitNames(),
-            pathScaleDict: resolutions ?? defaultResolutions,
+            pathScaleDict: pathScaleDict,
             tintColor: UIColor.blackColor(), // TODO: get color from UI
             duration: duration ?? 0.0,
             framesPerSecond: framesPerSecond ?? 00
