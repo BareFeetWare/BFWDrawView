@@ -34,6 +34,11 @@ class ExportersViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if exportersRoot.count == 0 {
@@ -123,6 +128,7 @@ class ExportersViewController: UITableViewController {
         } else if editingStyle == .Insert {
             addExporter()
         }
+        exportersRoot.saveExporters()
     }
 
     // MARK: - Actions
