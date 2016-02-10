@@ -1,98 +1,82 @@
 //
-//  BFWStyleKitViewController.m
+//  StyleKitViewController.swift
 //  BFWDrawView
 //
 //  Created by Tom Brodhurst-Hill on 30/07/2015.
 //  Copyright (c) 2015 BareFeetWare. All rights reserved.
 //
 
-#import "BFWStyleKitViewController.h"
-#import "BFWStyleKit.h"
-#import "BFWStyleKitDrawing.h"
-#import "BFWDrawingCell.h"
-#import "BFWDrawView.h"
-#import "BFWDrawViewController.h"
-#import "NSArray+BFW.h"
-#import "NSString+BFW.h"
+import UIKit
 
-@interface BFWStyleKitViewController ()
+class StyleKitViewController: UITableViewController {
 
-@property (nonatomic, copy) NSArray *drawingNames;
-
-@end
-
-@implementation BFWStyleKitViewController
-
-#pragma mark - accessors
-
-- (NSArray *)drawingNames
-{
-    if (!_drawingNames) {
-        NSMutableArray *wordsArray = [[NSMutableArray alloc] init];
-        NSArray *camelCaseNames = [self.styleKit.drawingNames arrayOfStringsSortedCaseInsensitive];
-        for (NSString *camelCaseName in camelCaseNames) {
-            [wordsArray addObject:camelCaseName.lowercaseWords];
+    // MARK: - Public variables
+    
+    var styleKit: BFWStyleKit?
+    
+    // MARK: - Structs
+    
+    private struct CellIdentifier {
+        static let drawing = "drawing"
+        static let animation = "animation"
+    }
+    
+    // MARK: - Private variables
+    
+    lazy private var drawingNames: [String] = {
+        let drawingNames = self.styleKit?.drawingNames as! [String]
+        return drawingNames.map{ drawingName in
+            drawingName.lowercaseWords()
         }
-        _drawingNames = [wordsArray copy];
+    }()
+
+    // MARK: - UIViewController
+        
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = styleKit?.name
     }
-    return _drawingNames;
-}
 
-#pragma mark - UIViewController
+    // MARK: - UITableViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.title = self.styleKit.name;
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.drawingNames.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *drawingName = self.drawingNames[indexPath.row];
-    BFWStyleKitDrawing *drawing = [self.styleKit drawingForName:drawingName];
-    BOOL isAnimation = [drawing.methodParameters containsObject:@"animation"];
-    NSString *cellIdentifier = isAnimation ? @"animation" : @"drawing";
-    
-    BFWDrawingCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier
-                                                            forIndexPath:indexPath];
-    
-    cell.textLabel.text = drawingName;
-    NSMutableArray *detailComponents = [NSMutableArray arrayWithArray:drawing.methodParameters];
-    cell.drawView.styleKit = self.styleKit.name;
-    cell.drawView.name = drawingName;
-    CGSize drawnSize = drawing.drawnSize;
-    if (!CGSizeEqualToSize(drawnSize, CGSizeZero)) {
-        [detailComponents addObject:[NSString stringWithFormat:@"size = {%1.1f, %1.1f}", drawnSize.width, drawnSize.height]];
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: NSInteger) -> NSInteger {
+        return drawingNames.count
     }
-    cell.detailTextLabel.text = [detailComponents componentsJoinedByString:@", "];
-    
-    return cell;
-}
 
-#pragma mark - UIViewController
+    override func tableView(tableView: UITableView,
+        cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
+        let drawingName = drawingNames[indexPath.row]
+        let drawing = styleKit?.drawingForName(drawingName)
+        let methodParameters = drawing?.methodParameters as? [String]
+        let isAnimation = methodParameters?.contains("animation") ?? false
+        let cellIdentifier = isAnimation ? CellIdentifier.animation : CellIdentifier.drawing
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier,
+            forIndexPath: indexPath) as! DrawingCell
+        cell.textLabel?.text = drawingName
+        var detailComponents = methodParameters
+        cell.drawView?.styleKit = styleKit?.name
+        cell.drawView?.name = drawingName
+        if let drawnSize = drawing?.drawnSize {
+            if !CGSizeEqualToSize(drawnSize, CGSizeZero) {
+                detailComponents?.append("size = {\(drawnSize.width), \(drawnSize.height)}")
+            }
+        }
+        cell.detailTextLabel?.text = detailComponents?.joinWithSeparator(", ")
+        return cell;
+    }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.destinationViewController isKindOfClass:[BFWDrawViewController class]]) {
-        BFWDrawViewController *destinationViewController = (BFWDrawViewController *)segue.destinationViewController;
-        if ([sender isKindOfClass:[UITableViewCell class]]) {
-            UITableViewCell *cell = (UITableViewCell *)sender;
-            NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-            NSString *drawingName = self.drawingNames[indexPath.row];
-            BFWStyleKitDrawing *drawing = [self.styleKit drawingForName:drawingName];
-            destinationViewController.drawing = drawing;
+    // MARK: - UIViewController
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let drawViewController = segue.destinationViewController as? BFWDrawViewController,
+            let cell = sender as? UITableViewCell,
+            let indexPath = tableView.indexPathForCell(cell)
+        {
+            let drawingName = drawingNames[indexPath.row]
+            let drawing = styleKit?.drawingForName(drawingName)
+            drawViewController.drawing = drawing
         }
     }
+    
 }
-
-@end

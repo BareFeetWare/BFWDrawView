@@ -26,7 +26,6 @@
 		E20FADB31C5B3F5700C78BDC /* StyleKitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADA91C5B3F5700C78BDC /* StyleKitsViewController.swift */; };
 		E20FADB41C5B3F5700C78BDC /* BFWStyleKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADAB1C5B3F5700C78BDC /* BFWStyleKitViewController.swift */; };
 		E20FADB51C5B3F5700C78BDC /* StyleKitsBrowser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20FADAC1C5B3F5700C78BDC /* StyleKitsBrowser.storyboard */; };
-		E20FADB61C5B3F5700C78BDC /* BFWDrawingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E20FADAF1C5B3F5700C78BDC /* BFWDrawingCell.m */; };
 		E20FADB81C5B45E900C78BDC /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADB71C5B45E900C78BDC /* SwitchCell.swift */; };
 		E20FADBD1C5C724700C78BDC /* Exporter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20FADBC1C5C724700C78BDC /* Exporter.storyboard */; };
 		E20FADC01C5C729700C78BDC /* ExporterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADBF1C5C729700C78BDC /* ExporterViewController.swift */; };
@@ -46,6 +45,7 @@
 		E29917051AF4FEE500F0DEDE /* SampleStyleKit.plist in Resources */ = {isa = PBXBuildFile; fileRef = E29917031AF4FEE500F0DEDE /* SampleStyleKit.plist */; };
 		E2D2174D1C5EC9A900E28B4B /* UIViewCellExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D2174C1C5EC9A900E28B4B /* UIViewCellExtension.swift */; };
 		E2D2174F1C5ECA0400E28B4B /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D2174E1C5ECA0400E28B4B /* Exporter.swift */; };
+		E2DAEEEA1C6ACB4D0017671F /* DrawingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADAE1C5B3F5700C78BDC /* DrawingCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,8 +93,7 @@
 		E20FADA91C5B3F5700C78BDC /* StyleKitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKitsViewController.swift; sourceTree = "<group>"; };
 		E20FADAB1C5B3F5700C78BDC /* BFWStyleKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BFWStyleKitViewController.swift; sourceTree = "<group>"; };
 		E20FADAC1C5B3F5700C78BDC /* StyleKitsBrowser.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StyleKitsBrowser.storyboard; sourceTree = "<group>"; };
-		E20FADAE1C5B3F5700C78BDC /* BFWDrawingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawingCell.h; sourceTree = "<group>"; };
-		E20FADAF1C5B3F5700C78BDC /* BFWDrawingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawingCell.m; sourceTree = "<group>"; };
+		E20FADAE1C5B3F5700C78BDC /* DrawingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingCell.swift; sourceTree = "<group>"; };
 		E20FADB71C5B45E900C78BDC /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		E20FADBC1C5C724700C78BDC /* Exporter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Exporter.storyboard; sourceTree = "<group>"; };
 		E20FADBF1C5C729700C78BDC /* ExporterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExporterViewController.swift; sourceTree = "<group>"; };
@@ -247,8 +246,7 @@
 		E20FADAD1C5B3F5700C78BDC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E20FADAE1C5B3F5700C78BDC /* BFWDrawingCell.h */,
-				E20FADAF1C5B3F5700C78BDC /* BFWDrawingCell.m */,
+				E20FADAE1C5B3F5700C78BDC /* DrawingCell.swift */,
 				E20FADB71C5B45E900C78BDC /* SwitchCell.swift */,
 				E2D2174C1C5EC9A900E28B4B /* UIViewCellExtension.swift */,
 			);
@@ -480,8 +478,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E20FADB31C5B3F5700C78BDC /* StyleKitsViewController.swift in Sources */,
+				E2DAEEEA1C6ACB4D0017671F /* DrawingCell.swift in Sources */,
 				E20357991A7F5144002BC3F4 /* BFWDrawButton.m in Sources */,
-				E20FADB61C5B3F5700C78BDC /* BFWDrawingCell.m in Sources */,
 				E20FADC51C5C73D300C78BDC /* ExportersViewController.swift in Sources */,
 				E20357981A7F5144002BC3F4 /* BFWAnimationView.m in Sources */,
 				E29917041AF4FEE500F0DEDE /* SampleStyleKit.m in Sources */,

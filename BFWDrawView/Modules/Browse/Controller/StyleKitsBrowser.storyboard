@@ -113,13 +113,13 @@
         <!--Drawings & Animations-->
         <scene sceneID="J0R-Gn-jh3">
             <objects>
-                <tableViewController title="Drawings &amp; Animations" id="apG-T0-ts3" customClass="BFWStyleKitViewController" sceneMemberID="viewController">
+                <tableViewController title="Drawings &amp; Animations" id="apG-T0-ts3" customClass="StyleKitViewController" customModule="BFWDrawView" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bLr-eL-kGT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="drawing" id="nS8-Bm-5y0" customClass="BFWDrawingCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="drawing" id="nS8-Bm-5y0" customClass="DrawingCell" customModule="BFWDrawView" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="86" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nS8-Bm-5y0" id="b97-5c-PqJ">
@@ -167,7 +167,7 @@
                                     <segue destination="WWu-9N-Gvg" kind="show" id="bYB-3Y-0Nb"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="animation" id="da5-Af-fw8" customClass="BFWDrawingCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="animation" id="da5-Af-fw8" customClass="DrawingCell" customModule="BFWDrawView" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="130" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="da5-Af-fw8" id="TmH-I8-btP">

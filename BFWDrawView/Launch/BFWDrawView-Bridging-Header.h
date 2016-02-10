@@ -3,5 +3,9 @@
 //
 
 #import "BFWDrawExport.h"
+#import "BFWDrawView.h"
+#import "BFWDrawViewController.h"
 #import "BFWStyleKit.h"
-#import "BFWStyleKitViewController.h"
+#import "BFWStyleKitDrawing.h"
+#import "NSArray+BFW.h"
+#import "NSString+BFW.h"

@@ -66,7 +66,7 @@ class StyleKitsViewController: UITableViewController {
     // MARK: - UIViewController
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let destinationViewController = segue.destinationViewController as? BFWStyleKitViewController,
+        if let destinationViewController = segue.destinationViewController as? StyleKitViewController,
             cell = sender as? UITableViewCell,
             indexPath = tableView.indexPathForCell(cell)
         {
