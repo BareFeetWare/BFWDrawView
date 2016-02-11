@@ -24,17 +24,12 @@
 
 + (void)exportForAndroid:(BOOL)isAndroid
              toDirectory:(NSString *)directory
+     deleteExistingFiles:(BOOL)deleteExistingFiles
    drawingsStyleKitNames:(NSArray *)drawingsStyleKitNames
      colorsStyleKitNames:(NSArray *)colorsStyleKitNames
            pathScaleDict:(NSDictionary *)pathScaleDict
                tintColor:(UIColor *)tintColor
                 duration:(NSTimeInterval)duration
          framesPerSecond:(double)framesPerSecond;
-
-+ (void)exportForAndroidToDocumentsStyleKits:(NSArray *)styleKits
-                               pathScaleDict:(NSDictionary *)pathScaleDict
-                                   tintColor:(UIColor *)tintColor
-                                    duration:(NSTimeInterval)duration
-                             framesPerSecond:(double)framesPerSecond;
 
 @end

@@ -125,6 +125,7 @@ class Exporter {
         BFWDrawExport.exportForAndroid(
             isAndroid ?? true,
             toDirectory: exportDirectoryURL?.path ?? defaultDirectoryURL.path,
+            deleteExistingFiles: true,
             drawingsStyleKitNames: drawingsStyleKitNames ?? BFWStyleKit.styleKitNames(),
             colorsStyleKitNames: colorsStyleKitNames ?? BFWStyleKit.styleKitNames(),
             pathScaleDict: pathScaleDict,

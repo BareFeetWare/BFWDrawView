@@ -236,6 +236,7 @@ static NSString * const arraysKey = @"arrays";
 
 + (void)exportForAndroid:(BOOL)isAndroid
              toDirectory:(NSString *)directory
+     deleteExistingFiles:(BOOL)deleteExistingFiles
    drawingsStyleKitNames:(NSArray *)drawingsStyleKitNames
      colorsStyleKitNames:(NSArray *)colorsStyleKitNames
            pathScaleDict:(NSDictionary *)pathScaleDict
@@ -243,6 +244,19 @@ static NSString * const arraysKey = @"arrays";
                 duration:(NSTimeInterval)duration
          framesPerSecond:(double)framesPerSecond
 {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *directoryURL = [NSURL fileURLWithPath:directory isDirectory:YES];
+    NSArray *existingItems = [fileManager contentsOfDirectoryAtURL:directoryURL
+                                        includingPropertiesForKeys:nil
+                                                           options:NSDirectoryEnumerationSkipsHiddenFiles
+                                                             error:nil
+                              ];
+    if (existingItems.count) {
+        DLog(@"Deleting %lu existing files from %@", (unsigned long)existingItems.count, directory);
+        for (NSURL *file in existingItems) {
+            [fileManager removeItemAtURL:file error:nil];
+        }
+    }
     DLog(@"writing images to %@", directory);
     [self writeAllImagesToDirectory:directory
                           styleKits:drawingsStyleKitNames
@@ -252,7 +266,6 @@ static NSString * const arraysKey = @"arrays";
                            duration:duration
                     framesPerSecond:framesPerSecond];
     if (isAndroid) {
-        /// Note: currently exports colors only from the first styleKit
         NSMutableArray *styleKits = [[NSMutableArray alloc] init];
         for (NSString *styleKitName in colorsStyleKitNames) {
             BFWStyleKit *styleKit = [BFWStyleKit styleKitForName:styleKitName];
@@ -272,24 +285,6 @@ static NSString * const arraysKey = @"arrays";
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsPath = [paths firstObject];
     return documentsPath;
-}
-
-+ (void)exportForAndroidToDocumentsStyleKits:(NSArray *)styleKits
-                               pathScaleDict:(NSDictionary *)pathScaleDict
-                                   tintColor:(UIColor *)tintColor
-                                    duration:(NSTimeInterval)duration
-                             framesPerSecond:(double)framesPerSecond
-{
-    NSString *directory = [[self documentsDirectoryPath] stringByAppendingPathComponent:@"android_drawables"];
-    [[NSFileManager defaultManager] removeItemAtPath:directory error:nil];
-    [self exportForAndroid:YES
-               toDirectory:directory
-     drawingsStyleKitNames:styleKits
-       colorsStyleKitNames:styleKits
-             pathScaleDict:pathScaleDict
-                 tintColor:tintColor
-                  duration:duration
-           framesPerSecond:framesPerSecond];
 }
 
 + (NSString *)colorsXmlForStyleKits:(NSArray *)styleKits
