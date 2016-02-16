@@ -10,10 +10,12 @@ import UIKit
 
 extension BFWDrawView {
     
-    func isMorphableTo(drawView: BFWDrawView) -> Bool {
-        var isMorphable = tag != 0 && tag == drawView.tag
+    override func isMorphableTo(view: UIView) -> Bool {
+        var isMorphable = tag != 0 && tag == view.tag
         if !isMorphable {
-            isMorphable = drawView.styleKit == styleKit && drawView.name == name
+            if let drawView = view as? BFWDrawView {
+                isMorphable = drawView.styleKit == styleKit && drawView.name == name
+            }
         }
         return isMorphable
     }
