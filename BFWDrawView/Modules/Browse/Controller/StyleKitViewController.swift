@@ -25,9 +25,9 @@ class StyleKitViewController: UITableViewController {
     
     lazy private var drawingNames: [String] = {
         let drawingNames = self.styleKit?.drawingNames as! [String]
-        return drawingNames.map{ drawingName in
+        return drawingNames.map { drawingName in
             drawingName.lowercaseWords()
-        }
+            }.sort( < )
     }()
 
     // MARK: - UIViewController
