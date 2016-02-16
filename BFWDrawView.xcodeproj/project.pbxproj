@@ -24,7 +24,7 @@
 		E20FADB01C5B3F5700C78BDC /* AnimationCountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E20FADA31C5B3F5700C78BDC /* AnimationCountViewController.m */; };
 		E20FADB21C5B3F5700C78BDC /* BFWDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E20FADA71C5B3F5700C78BDC /* BFWDrawViewController.m */; };
 		E20FADB31C5B3F5700C78BDC /* StyleKitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADA91C5B3F5700C78BDC /* StyleKitsViewController.swift */; };
-		E20FADB41C5B3F5700C78BDC /* BFWStyleKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADAB1C5B3F5700C78BDC /* BFWStyleKitViewController.swift */; };
+		E20FADB41C5B3F5700C78BDC /* StyleKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADAB1C5B3F5700C78BDC /* StyleKitViewController.swift */; };
 		E20FADB51C5B3F5700C78BDC /* StyleKitsBrowser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20FADAC1C5B3F5700C78BDC /* StyleKitsBrowser.storyboard */; };
 		E20FADB81C5B45E900C78BDC /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADB71C5B45E900C78BDC /* SwitchCell.swift */; };
 		E20FADBD1C5C724700C78BDC /* Exporter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20FADBC1C5C724700C78BDC /* Exporter.storyboard */; };
@@ -91,7 +91,7 @@
 		E20FADA61C5B3F5700C78BDC /* BFWDrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawViewController.h; sourceTree = "<group>"; };
 		E20FADA71C5B3F5700C78BDC /* BFWDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawViewController.m; sourceTree = "<group>"; };
 		E20FADA91C5B3F5700C78BDC /* StyleKitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKitsViewController.swift; sourceTree = "<group>"; };
-		E20FADAB1C5B3F5700C78BDC /* BFWStyleKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BFWStyleKitViewController.swift; sourceTree = "<group>"; };
+		E20FADAB1C5B3F5700C78BDC /* StyleKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKitViewController.swift; sourceTree = "<group>"; };
 		E20FADAC1C5B3F5700C78BDC /* StyleKitsBrowser.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StyleKitsBrowser.storyboard; sourceTree = "<group>"; };
 		E20FADAE1C5B3F5700C78BDC /* DrawingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingCell.swift; sourceTree = "<group>"; };
 		E20FADB71C5B45E900C78BDC /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
@@ -236,7 +236,7 @@
 				E20FADA31C5B3F5700C78BDC /* AnimationCountViewController.m */,
 				E20FADA61C5B3F5700C78BDC /* BFWDrawViewController.h */,
 				E20FADA71C5B3F5700C78BDC /* BFWDrawViewController.m */,
-				E20FADAB1C5B3F5700C78BDC /* BFWStyleKitViewController.swift */,
+				E20FADAB1C5B3F5700C78BDC /* StyleKitViewController.swift */,
 				E20FADAC1C5B3F5700C78BDC /* StyleKitsBrowser.storyboard */,
 				E20FADA91C5B3F5700C78BDC /* StyleKitsViewController.swift */,
 			);
@@ -483,7 +483,7 @@
 				E20FADC51C5C73D300C78BDC /* ExportersViewController.swift in Sources */,
 				E20357981A7F5144002BC3F4 /* BFWAnimationView.m in Sources */,
 				E29917041AF4FEE500F0DEDE /* SampleStyleKit.m in Sources */,
-				E20FADB41C5B3F5700C78BDC /* BFWStyleKitViewController.swift in Sources */,
+				E20FADB41C5B3F5700C78BDC /* StyleKitViewController.swift in Sources */,
 				E29478011C6183CD001F78DA /* BFWDrawExport.m in Sources */,
 				E26B1DB01B02B0FB005EACDE /* SampleDrawButton.m in Sources */,
 				E20AA0C31C677A5200B8EEF7 /* BFWStyleKitDrawing.m in Sources */,
