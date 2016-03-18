@@ -86,7 +86,7 @@
     }
 }
 
-- (void)setAnimation:(CGFloat)animation
+- (void)setAnimation:(double)animation
 {
     if (_animation != animation) {
         _animation = animation;
