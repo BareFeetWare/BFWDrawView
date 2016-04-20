@@ -89,7 +89,7 @@ class ExportersRoot {
         exporters.enumerate().forEach { (index, exporter) in
             if exporter.name == name {
                 exporters.removeAtIndex(index + deletedCount)
-                deletedCount++
+                deletedCount += 1
             }
         }
     }
