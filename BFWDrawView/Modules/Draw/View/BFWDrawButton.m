@@ -129,6 +129,7 @@
                                                               drawingName:stateNameDict[stateNumber]];
         BFWDrawView *icon = [[BFWDrawView alloc] initWithFrame:drawing.intrinsicFrame];
         icon.drawing = drawing;
+        icon.tintColor = self.tintColor;
         icon.contentMode = UIViewContentModeRedraw;
         [self setIconDrawView:icon
                      forState:stateNumber.integerValue];
