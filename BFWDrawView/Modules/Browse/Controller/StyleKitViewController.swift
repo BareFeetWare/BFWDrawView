@@ -24,6 +24,7 @@ class StyleKitViewController: UITableViewController {
     // MARK: - Private variables
     
     lazy private var drawingNames: [String] = {
+        [unowned self] in
         let drawingNames = self.styleKit?.drawingNames as! [String]
         return drawingNames.map { drawingName in
             drawingName.lowercaseWords()

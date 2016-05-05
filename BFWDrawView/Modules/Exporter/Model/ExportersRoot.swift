@@ -19,6 +19,7 @@ class ExportersRoot {
     // MARK: - Private Variables
     
     private lazy var exporters: [Exporter] = {
+        [unowned self] in
         var exporters = [Exporter]()
         self.loadingDictArray.forEach { exporterDict in
             let exporter = Exporter(dictionary: exporterDict)
