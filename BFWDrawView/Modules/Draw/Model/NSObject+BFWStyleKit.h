@@ -7,12 +7,6 @@
 
 #import <UIKit/UIKit.h>
 
-#ifdef DEBUG
-#    define DLog(...) NSLog(__VA_ARGS__)
-#else
-#    define DLog(...) /* Disable Debug logging for release builds */
-#endif
-
 @interface NSObject (BFWStyleKit)
 
 #pragma mark - Introspection for NSObject subclasses
