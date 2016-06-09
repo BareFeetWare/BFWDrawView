@@ -126,6 +126,7 @@
 		E2A9E5F71CD47AAE00B2641E /* DrawingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
 		E2D2174C1C5EC9A900E28B4B /* UIViewCellExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewCellExtension.swift; sourceTree = "<group>"; };
 		E2D2174E1C5ECA0400E28B4B /* Exporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
+		E2E6D8371D094B6A00C0A87D /* BFWDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDLog.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +205,7 @@
 		E20ED1121A9F24CC0045FA69 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E2E6D8371D094B6A00C0A87D /* BFWDLog.h */,
 				E20AA0B01C677A5200B8EEF7 /* BFWStyleKit.h */,
 				E20AA0B11C677A5200B8EEF7 /* BFWStyleKit.m */,
 				E20AA0B21C677A5200B8EEF7 /* BFWStyleKitDrawing.h */,

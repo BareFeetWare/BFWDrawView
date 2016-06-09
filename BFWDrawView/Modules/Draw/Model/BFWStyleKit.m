@@ -7,6 +7,7 @@
 //
 
 #import "BFWStyleKit.h"
+#import "BFWDLog.h"
 #import "NSObject+BFWStyleKit.h"
 #import "UIColor+BFW.h"
 #import "NSString+BFW.h"
@@ -95,7 +96,7 @@ static NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 - (NSDictionary *)returnValueForClassMethodNameDict
 {
     if (!_returnValueForClassMethodNameDict) {
-        DLog(@"**** warning: calling returnValueForClassMethodNameDict for BFWStyleKit name \"%@\", which has a large up front caching hit for the app. Only call this if you want to browse the entire list of drawings and colors available from the styleKit", self.name);
+        BFWDLog(@"**** warning: calling returnValueForClassMethodNameDict for BFWStyleKit name \"%@\", which has a large up front caching hit for the app. Only call this if you want to browse the entire list of drawings and colors available from the styleKit", self.name);
         _returnValueForClassMethodNameDict = [self.paintCodeClass returnValueForClassMethodNameDict];
     }
     return _returnValueForClassMethodNameDict;
@@ -206,7 +207,7 @@ static NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
             color = (UIColor *)returnValue;
             self.colorForNameDict[methodName] = color;
         } else {
-            DLog(@"**** error: failed to find color for name: %@", colorName);
+            BFWDLog(@"**** error: failed to find color for name: %@", colorName);
         }
     }
     return color;
@@ -264,7 +265,7 @@ static NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
                                                                       name:drawingName];
                     self.drawingForNameDict[drawingKey] = drawing;
                 } else {
-                    DLog(@"failed to find drawing name: %@", drawingName);
+                    BFWDLog(@"failed to find drawing name: %@", drawingName);
                 }
             }
         }

@@ -9,7 +9,6 @@
 #import "BFWAnimationView.h"
 #import "NSString+BFW.h"
 #import "NSInvocation+BFW.h"
-#import "NSObject+BFWStyleKit.h" // for DLog
 #import "BFWStyleKitDrawing.h"
 #import "BFWStyleKit.h"
 
