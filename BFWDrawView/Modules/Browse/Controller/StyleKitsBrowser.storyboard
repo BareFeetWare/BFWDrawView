@@ -233,7 +233,7 @@
         <!--drawing-->
         <scene sceneID="lIL-Hl-qJe">
             <objects>
-                <viewController id="WWu-9N-Gvg" customClass="BFWDrawViewController" sceneMemberID="viewController">
+                <viewController id="WWu-9N-Gvg" customClass="DrawingViewController" customModule="BFWDrawView" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XDc-Ao-mcf"/>
                         <viewControllerLayoutGuide type="bottom" id="2PQ-CR-SxI"/>
@@ -260,7 +260,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="drawing" id="DDX-md-llz"/>
                     <connections>
-                        <outlet property="drawView" destination="WGy-Bv-Jfo" id="zJj-oY-e7O"/>
+                        <outlet property="drawingView" destination="WGy-Bv-Jfo" id="4mc-Mq-GRj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jcj-zL-hhQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

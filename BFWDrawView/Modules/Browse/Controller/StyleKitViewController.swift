@@ -69,7 +69,7 @@ class StyleKitViewController: UITableViewController {
     // MARK: - UIViewController
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let drawViewController = segue.destinationViewController as? BFWDrawViewController,
+        if let drawViewController = segue.destinationViewController as? DrawingViewController,
             let cell = sender as? UITableViewCell,
             let indexPath = tableView.indexPathForCell(cell)
         {
