@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wNx-QG-6wm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wNx-QG-6wm">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -20,18 +20,18 @@
                                 <rect key="frame" x="0.0" y="86" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WeK-DR-WK5" id="pKj-Bf-efW">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="StyleKitName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Ry-iy-GvF">
-                                            <rect key="frame" x="15" y="5" width="99" height="20"/>
+                                            <rect key="frame" x="15" y="6" width="98.5" height="19.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="xx drawings, yy animations" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ehl-ba-Rqk">
-                                            <rect key="frame" x="15" y="25" width="141" height="14"/>
+                                            <rect key="frame" x="15" y="25.5" width="141" height="13.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -47,7 +47,7 @@
                                 <rect key="frame" x="0.0" y="130" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="14O-Iz-bwt" id="Epz-qA-TBg">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q0a-mH-MN7">
@@ -123,10 +123,10 @@
                                 <rect key="frame" x="0.0" y="86" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nS8-Bm-5y0" id="b97-5c-PqJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleAspectFit" placeholderIntrinsicWidth="43" placeholderIntrinsicHeight="43" translatesAutoresizingMaskIntoConstraints="NO" id="FCf-ck-jnt" customClass="BFWDrawView">
+                                        <view contentMode="scaleAspectFit" placeholderIntrinsicWidth="43" placeholderIntrinsicHeight="43" translatesAutoresizingMaskIntoConstraints="NO" id="FCf-ck-jnt" customClass="DrawingView" customModule="BFWDrawView" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="43" height="43"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -171,10 +171,10 @@
                                 <rect key="frame" x="0.0" y="130" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="da5-Af-fw8" id="TmH-I8-btP">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleAspectFit" placeholderIntrinsicWidth="43" placeholderIntrinsicHeight="43" translatesAutoresizingMaskIntoConstraints="NO" id="HgO-Vw-ah4" customClass="BFWAnimationView">
+                                        <view contentMode="scaleAspectFit" placeholderIntrinsicWidth="43" placeholderIntrinsicHeight="43" translatesAutoresizingMaskIntoConstraints="NO" id="HgO-Vw-ah4" customClass="AnimationView" customModule="BFWDrawView" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="43" height="43"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -242,7 +242,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="74" placeholderIntrinsicHeight="74" translatesAutoresizingMaskIntoConstraints="NO" id="WGy-Bv-Jfo" customClass="BFWAnimationView">
+                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="74" placeholderIntrinsicHeight="74" translatesAutoresizingMaskIntoConstraints="NO" id="WGy-Bv-Jfo" customClass="AnimationView" customModule="BFWDrawView" customModuleProvider="target">
                                 <rect key="frame" x="151" y="297" width="74" height="74"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
@@ -298,7 +298,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="74" placeholderIntrinsicHeight="74" translatesAutoresizingMaskIntoConstraints="NO" id="MTd-6B-JnC" customClass="BFWAnimationView">
+                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="74" placeholderIntrinsicHeight="74" translatesAutoresizingMaskIntoConstraints="NO" id="MTd-6B-JnC" customClass="AnimationView" customModule="BFWDrawView" customModuleProvider="target">
                                 <rect key="frame" x="150" y="296" width="74" height="74"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>

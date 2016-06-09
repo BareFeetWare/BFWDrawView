@@ -29,7 +29,7 @@ class DrawingCell: UITableViewCell {
             overridingDetailTextLabel = newValue
         }
     }
-    @IBOutlet var drawView: BFWDrawView?
+    @IBOutlet var drawView: DrawingView?
 
     // MARK: - Private variables
     
