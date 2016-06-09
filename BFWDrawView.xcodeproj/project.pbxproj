@@ -48,6 +48,7 @@
 		E2D2174D1C5EC9A900E28B4B /* UIViewCellExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D2174C1C5EC9A900E28B4B /* UIViewCellExtension.swift */; };
 		E2D2174F1C5ECA0400E28B4B /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D2174E1C5ECA0400E28B4B /* Exporter.swift */; };
 		E2DAEEEA1C6ACB4D0017671F /* DrawingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADAE1C5B3F5700C78BDC /* DrawingCell.swift */; };
+		E2E6D8401D095E0700C0A87D /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6D83F1D095E0700C0A87D /* AnimationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +128,7 @@
 		E2D2174C1C5EC9A900E28B4B /* UIViewCellExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewCellExtension.swift; sourceTree = "<group>"; };
 		E2D2174E1C5ECA0400E28B4B /* Exporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
 		E2E6D8371D094B6A00C0A87D /* BFWDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDLog.h; sourceTree = "<group>"; };
+		E2E6D83F1D095E0700C0A87D /* AnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 		E20357841A7F5144002BC3F4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E2E6D83F1D095E0700C0A87D /* AnimationView.swift */,
 				E20357851A7F5144002BC3F4 /* BFWAnimationView.h */,
 				E20357861A7F5144002BC3F4 /* BFWAnimationView.m */,
 				E20357871A7F5144002BC3F4 /* BFWDrawButton.h */,
@@ -503,6 +506,7 @@
 				E29917041AF4FEE500F0DEDE /* SampleStyleKit.m in Sources */,
 				E20FADB41C5B3F5700C78BDC /* StyleKitViewController.swift in Sources */,
 				E29478011C6183CD001F78DA /* BFWDrawExport.m in Sources */,
+				E2E6D8401D095E0700C0A87D /* AnimationView.swift in Sources */,
 				E26B1DB01B02B0FB005EACDE /* SampleDrawButton.m in Sources */,
 				E20AA0C31C677A5200B8EEF7 /* BFWStyleKitDrawing.m in Sources */,
 				E203579A1A7F5144002BC3F4 /* BFWDrawView.m in Sources */,
