@@ -5,6 +5,7 @@
 //  Copyright (c) 2015 BareFeetWare. All rights reserved.
 //
 
+#import "BFWDLog.h"
 #import "NSObject+BFWStyleKit.h"
 #import "NSInvocation+BFW.h"
 #import <objc/runtime.h>
@@ -50,7 +51,7 @@
         returnValue= [NSNull null];
     }
     else {
-        DLog(@"**** unexpected returnType = %s", returnType);
+        BFWDLog(@"**** unexpected returnType = %s", returnType);
     }
     free(returnType);
     return returnValue;

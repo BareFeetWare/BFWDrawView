@@ -6,6 +6,7 @@
 //  Free to use at your own risk, with acknowledgement to BareFeetWare.
 //
 
+#import "BFWDLog.h"
 #import "BFWDrawView.h"
 #import "UIImage+BFW.h"
 #import "NSInvocation+BFW.h"
@@ -89,7 +90,7 @@
 
 - (void)setFillColor:(UIColor *)fillColor // Deprecated. Use UIView's tintColor.
 {
-    DLog(@"BFWDrawView called deprecated fillColor. Use tintColor instead. %@", fillColor
+    BFWDLog(@"BFWDrawView called deprecated fillColor. Use tintColor instead. %@", fillColor
          );
     self.tintColor = fillColor;
     _fillColor = fillColor;
@@ -242,7 +243,7 @@
                 BOOL success = [self updateArgumentForParameter:parameter];
                 if (!success) {
                     _drawInvocation = nil;
-                    DLog(@"**** error: unexpected parameter: %@", parameter);
+                    BFWDLog(@"**** error: unexpected parameter: %@", parameter);
                     break;
                 }
             }
@@ -312,7 +313,7 @@
         }
     }
     else {
-        DLog(@"**** error: Missing name or styleKit");
+        BFWDLog(@"**** error: Missing name or styleKit");
     }
     return image;
 }

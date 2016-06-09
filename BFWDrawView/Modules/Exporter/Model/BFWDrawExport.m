@@ -7,6 +7,7 @@
 //
 
 #import "BFWAnimationView.h"
+#import "BFWDLog.h"
 #import "BFWDrawExport.h"
 #import "BFWStyleKit.h"
 #import "BFWStyleKitDrawing.h"
@@ -73,7 +74,7 @@ static NSString * const arraysKey = @"arrays";
         drawView.contentMode = UIViewContentModeScaleAspectFit;
         drawView.tintColor = tintColor;
     } else {
-        DLog(@"missing size for drawing: %@", drawingName);
+        BFWDLog(@"missing size for drawing: %@", drawingName);
     }
     return drawView;
 }
@@ -195,7 +196,7 @@ static NSString * const arraysKey = @"arrays";
 {
     NSString *fileNameLowercaseWords = fileName.lowercaseWords;
     if ([excludeFileNames containsObject:fileNameLowercaseWords]) {
-        DLog(@"skipping excluded or existing file: %@", fileNameLowercaseWords);
+        BFWDLog(@"skipping excluded or existing file: %@", fileNameLowercaseWords);
         return;
     }
     NSString *useFileName = isAndroid ? [fileName androidFileName] : fileName;
@@ -252,12 +253,12 @@ static NSString * const arraysKey = @"arrays";
                                                              error:nil
                               ];
     if (existingItems.count) {
-        DLog(@"Deleting %lu existing files from %@", (unsigned long)existingItems.count, directory);
+        BFWDLog(@"Deleting %lu existing files from %@", (unsigned long)existingItems.count, directory);
         for (NSURL *file in existingItems) {
             [fileManager removeItemAtURL:file error:nil];
         }
     }
-    DLog(@"writing images to %@", directory);
+    BFWDLog(@"writing images to %@", directory);
     [self writeAllImagesToDirectory:directory
                           styleKits:drawingsStyleKitNames
                       pathScaleDict:pathScaleDict
@@ -296,7 +297,7 @@ static NSString * const arraysKey = @"arrays";
             UIColor *existingColor = colorsDict[colorName];
             UIColor *addingColor = [styleKit colorForName:colorName];
             if (existingColor && ![existingColor isEqual:addingColor]) {
-                DLog(@"Skipping color \"%@\" = #%@, from styleKit \"%@\", which would overwrite existing #%@", colorName, addingColor.hexString, styleKit.name, existingColor.hexString);
+                BFWDLog(@"Skipping color \"%@\" = #%@, from styleKit \"%@\", which would overwrite existing #%@", colorName, addingColor.hexString, styleKit.name, existingColor.hexString);
             } else {
                 colorsDict[colorName] = addingColor;
             }
