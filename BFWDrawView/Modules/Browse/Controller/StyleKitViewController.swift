@@ -69,13 +69,16 @@ class StyleKitViewController: UITableViewController {
     // MARK: - UIViewController
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let drawViewController = segue.destinationViewController as? DrawingViewController,
-            let cell = sender as? UITableViewCell,
+        if let cell = sender as? UITableViewCell,
             let indexPath = tableView.indexPathForCell(cell)
         {
             let drawingName = drawingNames[indexPath.row]
             let drawing = styleKit?.drawingForName(drawingName)
-            drawViewController.drawing = drawing
+            if let drawViewController = segue.destinationViewController as? DrawingViewController {
+                drawViewController.drawing = drawing
+            } else if let animationCountViewController = segue.destinationViewController as? AnimationCountViewController {
+                animationCountViewController.drawing = drawing
+            }
         }
     }
     

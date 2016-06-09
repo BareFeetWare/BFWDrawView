@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class BFWStyleKitDrawing;
+
 @interface AnimationCountViewController : UIViewController
+
+@property (strong, nonatomic) BFWStyleKitDrawing *drawing;
 
 @end

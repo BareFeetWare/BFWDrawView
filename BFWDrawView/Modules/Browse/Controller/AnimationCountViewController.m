@@ -36,6 +36,7 @@ static double const defaultDesiredFramesPerSecond = 60.0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.animationView.drawing = self.drawing;
     self.animationView.framesPerSecond = defaultDesiredFramesPerSecond;
     self.desiredFramesPerSecondTextField.placeholder = [NSString stringWithFormat:@"%1.1f", defaultDesiredFramesPerSecond];
     [self startObserving];
