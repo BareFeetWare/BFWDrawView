@@ -9,7 +9,7 @@
 
 import UIKit
 
-class DrawingButton: BFWDrawButton {
+@IBDesignable class DrawingButton: BFWDrawButton {
 
     // MARK: - Variables
 
@@ -34,7 +34,7 @@ class DrawingButton: BFWDrawButton {
     
     private var needsUpdateView = true
     
-    private func updateView() {
+    func updateView() {
         if let iconName = iconName, iconStyleKit = iconStyleKit {
             makeIconDrawViewsFromStateNameDict([UIControlState.Normal.rawValue: iconName],
                                                styleKit: iconStyleKit)
