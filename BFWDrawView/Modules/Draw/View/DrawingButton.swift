@@ -9,7 +9,7 @@
 
 import UIKit
 
-class DrawingButton: BFWDrawButton {
+@IBDesignable class DrawingButton: BFWDrawButton {
 
     // MARK: - Variables
 
@@ -25,6 +25,28 @@ class DrawingButton: BFWDrawButton {
         }
     }
     
+    // MARK: - Functions
+    
+    func makeIconWithSize(size: CGSize?,
+                          name: String,
+                          styleKit: String,
+                          state: UIControlState,
+                          tintColor: UIColor)
+    {
+        let drawing = BFWStyleKit.drawingForStyleKitName(styleKit, drawingName: name)
+        let frame: CGRect
+        if let size = size where size != CGSizeZero {
+            frame = CGRect(origin: CGPointZero, size: size)
+        } else {
+            frame = drawing.intrinsicFrame
+        }
+        let icon = BFWDrawView(frame: frame)
+        icon.drawing = drawing
+        icon.tintColor = tintColor
+        icon.contentMode = .Redraw
+        setIconDrawView(icon, forState: state)
+    }
+
     // MARK: - UpdateView
     
     private func setNeedsUpdateView() {
@@ -34,7 +56,7 @@ class DrawingButton: BFWDrawButton {
     
     private var needsUpdateView = true
     
-    private func updateView() {
+    func updateView() {
         if let iconName = iconName, iconStyleKit = iconStyleKit {
             makeIconDrawViewsFromStateNameDict([UIControlState.Normal.rawValue: iconName],
                                                styleKit: iconStyleKit)
