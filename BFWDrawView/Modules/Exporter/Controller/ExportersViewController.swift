@@ -86,7 +86,7 @@ class ExportersViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: UITableViewCell
+        let cell: UITableViewCell
         if let section = Section(rawValue: indexPath.section) {
             switch section {
             case .Exporter:
