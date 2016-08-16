@@ -19,13 +19,11 @@ class ExportersRoot {
     // MARK: - Private Variables
     
     private lazy var exporters: [Exporter] = {
-        var exporters = [Exporter]()
-        self.loadingDictArray.forEach { exporterDict in
+        return self.loadingDictArray.map { exporterDict in
             let exporter = Exporter(dictionary: exporterDict)
             exporter.root = self
-            exporters.append(exporter)
+            return exporter
         }
-        return exporters
     }()
     
     private var loadingDictArray: [[String: AnyObject]] = {
@@ -44,11 +42,9 @@ class ExportersRoot {
     }()
     
     private var savingDictArray: [[String: AnyObject]] {
-        var exporterDictArray = [[String: AnyObject]]()
-        exporters.forEach { exporter in
-            exporterDictArray.append(exporter.dictionary)
+        return exporters.map { exporter in
+            exporter.dictionary
         }
-        return exporterDictArray
     }
     
     // MARK: - Public Variables
