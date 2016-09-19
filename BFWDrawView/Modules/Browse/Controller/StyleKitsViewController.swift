@@ -22,7 +22,7 @@ class StyleKitsViewController: UITableViewController {
 
     @IBAction func changedSwitch(sender: UISwitch) {
         if let cell = sender.superviewCell,
-            indexPath = tableView.indexPathForCell(cell)
+            let indexPath = tableView.indexPathForCell(cell)
         {
             let styleKitName = styleKitNames[indexPath.row]
             let isInList = selectedStyleKitNames?.contains(styleKitName) ?? true
@@ -67,8 +67,8 @@ class StyleKitsViewController: UITableViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destinationViewController = segue.destinationViewController as? StyleKitViewController,
-            cell = sender as? UITableViewCell,
-            indexPath = tableView.indexPathForCell(cell)
+            let cell = sender as? UITableViewCell,
+            let indexPath = tableView.indexPathForCell(cell)
         {
             let styleKitName = styleKitNames[indexPath.row]
             destinationViewController.styleKit = BFWStyleKit(forName:styleKitName)
