@@ -26,7 +26,11 @@ class Exporter {
     // MARK: - Public read only variables
     
     var defaultDirectoryURL: NSURL {
-        return documentsURL.URLByAppendingPathComponent("android_drawables", isDirectory: true)!
+        #if swift(>=2.3)
+            return documentsURL.URLByAppendingPathComponent("android_drawables", isDirectory: true)!
+        #else
+            return documentsURL.URLByAppendingPathComponent("android_drawables", isDirectory: true)
+        #endif
     }
     
     var defaultResolutions: [String: Double] {
