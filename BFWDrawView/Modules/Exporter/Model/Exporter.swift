@@ -108,7 +108,8 @@ class Exporter {
         if isIos {
             pathScaleDict = [String: Double]()
             for (path, scale) in resolutions {
-                let format = "%@" + path
+                // Only append @2x or @3x, but no suffix for @1x since xcassets doesn't want it.
+                let format = "%@" + (scale == 1.0 ? "" : path)
                 pathScaleDict[format] = scale
             }
         }
