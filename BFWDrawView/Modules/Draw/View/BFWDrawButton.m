@@ -32,6 +32,8 @@
 @property (nonatomic, strong) NSMutableDictionary *backgroundDrawViewForStateDict;
 @property (nonatomic, strong) NSMutableDictionary *shadowForStateDict;
 @property (nonatomic, assign) BOOL needsUpdateShadow;
+@property (nonatomic, readonly) BOOL needsUpdateBackgrounds;
+@property (nonatomic, assign) CGSize backgroundSize;
 
 @end
 
@@ -111,13 +113,9 @@
 - (void)setBackgroundDrawView:(BFWDrawView *)drawView
                      forState:(UIControlState)state
 {
-    BOOL canDraw = drawView.canDraw;
-    if (!canDraw) {
-        drawView = nil;
-    }
-    [self.backgroundDrawViewForStateDict setValueOrRemoveNil:drawView
-                                                   forKey:@(state)];
-    [self setNeedsLayout];
+    [self.backgroundDrawViewForStateDict setValueOrRemoveNil:drawView.canDraw ? drawView : nil
+                                                      forKey:@(state)];
+    [self setNeedsUpdateBackgrounds];
 }
 
 - (void)makeIconDrawViewsFromStateNameDict:(NSDictionary *)stateNameDict
@@ -160,37 +158,56 @@
 {
     [self.shadowForStateDict setValueOrRemoveNil:shadow
                                           forKey:@(state)];
-    self.needsUpdateShadow = YES;
+    [self setNeedsUpdateShadow];
 }
 
-- (void)setNeedsUpdateShadow:(BOOL)needsUpdateShadow
+- (void)setNeedsUpdateShadow
 {
-    _needsUpdateShadow = needsUpdateShadow;
-    if (needsUpdateShadow) {
-        [self setNeedsDisplay];
-    }
+    self.needsUpdateShadow = YES;
+    [self setNeedsDisplay];
+}
+
+- (void)setNeedsUpdateBackgrounds
+{
+    self.backgroundSize = CGSizeZero;
+    [self setNeedsLayout];
+}
+
+- (BOOL)needsUpdateBackgrounds
+{
+    return !CGSizeEqualToSize(self.backgroundSize, self.bounds.size);
+
 }
 
 #pragma mark - updates
 
 - (void)updateBackgrounds
 {
-    for (NSNumber *stateNumber in self.backgroundDrawViewForStateDict) {
+    for (NSNumber *stateNumber in @[@(UIControlStateNormal), @(UIControlStateDisabled), @(UIControlStateSelected), @(UIControlStateHighlighted)])
+    {
         BFWDrawView *background = self.backgroundDrawViewForStateDict[stateNumber];
         background.frame = self.bounds;
         [self setBackgroundImage:background.image forState:stateNumber.integerValue];
     }
 }
 
+- (void)updateBackgroundsIfNeeded
+{
+    if (self.needsUpdateBackgrounds) {
+        self.backgroundSize = self.bounds.size;
+        [self updateBackgrounds];
+    }
+}
+
 - (void)updateShadowIfNeeded
 {
     if (self.needsUpdateShadow) {
+        self.needsUpdateShadow = NO;
         NSShadow *shadow = [self shadowForState:self.state];
         if (!shadow) {
             shadow = [self shadowForState:UIControlStateNormal];
         }
         [self applyShadow:shadow];
-        self.needsUpdateShadow = NO;
     }
 }
 
@@ -199,26 +216,26 @@
 - (void)setHighlighted:(BOOL)highlighted
 {
     [super setHighlighted:highlighted];
-    self.needsUpdateShadow = YES;
+    [self setNeedsUpdateShadow];
 }
 
 - (void)setSelected:(BOOL)selected
 {
     [super setSelected:selected];
-    self.needsUpdateShadow = YES;
+    [self setNeedsUpdateShadow];
 }
 
 - (void)setEnabled:(BOOL)enabled
 {
     [super setEnabled:enabled];
-    self.needsUpdateShadow = YES;
+    [self setNeedsUpdateShadow];
 }
 
 #pragma mark - UIView
 
 - (void)layoutSubviews
 {
-    [self updateBackgrounds];
+    [self updateBackgroundsIfNeeded];
     [super layoutSubviews];
 }
 
