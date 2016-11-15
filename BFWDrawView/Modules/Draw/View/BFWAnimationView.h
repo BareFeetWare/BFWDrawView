@@ -24,6 +24,7 @@ IB_DESIGNABLE
 
 - (void)restart;
 - (BOOL)writeImagesAtScale:(CGFloat)scale
+                  isOpaque:(BOOL)iOpaque
                     toFile:(NSString *)filePath;
 
 @end
