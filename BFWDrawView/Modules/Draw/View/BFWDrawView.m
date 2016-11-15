@@ -326,6 +326,7 @@
 #pragma mark - image output
 
 - (BOOL)writeImageAtScale:(CGFloat)scale
+                 isOpaque:(BOOL)isOpaque
                    toFile:(NSString *)savePath
 {
     NSString *directoryPath = [savePath stringByDeletingLastPathComponent];
@@ -336,20 +337,19 @@
                                                         error:nil];
     }
     BOOL success = NO;
-    UIImage *image = [self imageAtScale:scale];
+    UIImage *image = [self imageAtScale:scale isOpaque:isOpaque];
     if (image) {
         success = [UIImagePNGRepresentation(image) writeToFile:savePath atomically:YES];
     }
     return success;
 }
 
-- (UIImage *)imageAtScale:(CGFloat)scale
+- (UIImage *)imageAtScale:(CGFloat)scale isOpaque:(BOOL)isOpaque
 {
     UIImage *image = nil;
     if (self.canDraw) {
         CGFloat savedContentsScale = self.contentScaleFactor;
         self.contentScaleFactor = scale;
-        BOOL isOpaque = NO;
         UIGraphicsBeginImageContextWithOptions(self.frame.size, isOpaque, scale);
         [self.layer renderInContext:UIGraphicsGetCurrentContext()];
         image = UIGraphicsGetImageFromCurrentImageContext();

@@ -50,6 +50,7 @@
 
 static NSString * const baseKey = @"base";
 static NSString * const sizeKey = @"size";
+static NSString * const isOpaqueKey = @"isOpaque";
 static NSString * const tintColorKey = @"tintColor";
 static NSString * const derivedKey = @"derived";
 static NSString * const exportBlacklistKey = @"exportBlacklist";
@@ -128,6 +129,7 @@ static NSString * const arraysKey = @"arrays";
             [self writeImagesFromDrawView:drawView
                               toDirectory:directoryPath
                             pathScaleDict:pathScaleDict
+                                 isOpaque:NO
                                  fileName:drawing.name
                                   android:isAndroid
                                  duration:duration
@@ -137,6 +139,7 @@ static NSString * const arraysKey = @"arrays";
         for (NSString *drawingName in parameterDict[derivedKey]) {
             NSDictionary *derivedDict = parameterDict[derivedKey][drawingName];
             NSString *baseName = derivedDict[baseKey];
+            BOOL isOpaque = [derivedDict[isOpaqueKey] boolValue];
             BFWDrawView *drawView = [self drawViewForName:baseName
                                                  styleKit:styleKitName
                                                 tintColor:tintColor];
@@ -162,6 +165,7 @@ static NSString * const arraysKey = @"arrays";
                     [self writeImagesFromDrawView:drawView
                                       toDirectory:directoryPath
                                     pathScaleDict:pathScaleDict
+                                         isOpaque:isOpaque
                                          fileName:itemDrawingName
                                           android:isAndroid
                                          duration:duration
@@ -172,9 +176,26 @@ static NSString * const arraysKey = @"arrays";
             else {
                 [self modifyDrawView:drawView
                      withDerivedDict:derivedDict];
+                NSArray *scales = derivedDict[@"scales"];
+                NSDictionary *usePathScaleDict = pathScaleDict;
+                if (scales.count) {
+                    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+                    for (NSString* path in pathScaleDict) {
+                        NSNumber* scaleNumber = pathScaleDict[path];
+                        NSInteger scale = scaleNumber.integerValue;
+                        for (NSNumber* allowedScaleNumber in scales) {
+                            if (allowedScaleNumber.integerValue == scale) {
+                                dictionary[path] = scaleNumber;
+                                break;
+                            }
+                        }
+                    }
+                    usePathScaleDict = [dictionary copy];
+                }
                 [self writeImagesFromDrawView:drawView
                                   toDirectory:directoryPath
-                                pathScaleDict:pathScaleDict
+                                pathScaleDict:usePathScaleDict
+                                     isOpaque:isOpaque
                                      fileName:drawingName
                                       android:isAndroid
                                      duration:duration
@@ -188,6 +209,7 @@ static NSString * const arraysKey = @"arrays";
 + (void)writeImagesFromDrawView:(BFWDrawView *)drawView
                     toDirectory:(NSString *)directoryPath
                   pathScaleDict:(NSDictionary *)pathScaleDict
+                       isOpaque:(BOOL)isOpaque
                        fileName:(NSString *)fileName
                         android:(BOOL)isAndroid
                        duration:(NSTimeInterval)duration
@@ -220,10 +242,12 @@ static NSString * const arraysKey = @"arrays";
             }
             animationView.framesPerSecond = framesPerSecond;
             success = [animationView writeImagesAtScale:scale
+                                               isOpaque:isOpaque
                                                  toFile:filePath];
         }
         else {
             success = [drawView writeImageAtScale:scale
+                                         isOpaque:isOpaque
                                            toFile:filePath];
         }
         if (success) {

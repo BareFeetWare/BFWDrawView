@@ -28,6 +28,7 @@ IB_DESIGNABLE
 #pragma mark - image output methods
 
 - (BOOL)writeImageAtScale:(CGFloat)scale
+                 isOpaque:(BOOL)isOpaque
                    toFile:(NSString *)savePath;
 
 @end

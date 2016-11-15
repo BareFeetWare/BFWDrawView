@@ -170,11 +170,13 @@
 }
 
 - (BOOL)writeImagesAtScale:(CGFloat)scale
+                  isOpaque:(BOOL)iOpaque
                     toFile:(NSString *)filePath;
 {
     BOOL success = NO;
     if (self.paused) {
         success = [self writeImageAtScale:scale
+                                 isOpaque:iOpaque
                                    toFile:filePath];
     }
     else {
@@ -186,6 +188,7 @@
             self.animation = (CGFloat)frameN / frameCount;
             NSString *imagePath = [NSString stringWithFormat:pathFormat, frameN];
             BOOL frameSuccess = [self writeImageAtScale:scale
+                                               isOpaque:iOpaque
                                                  toFile:imagePath];
             if (frameN == 0) {
                 success = frameSuccess;
