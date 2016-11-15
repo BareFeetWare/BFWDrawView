@@ -37,7 +37,7 @@ class StyleKitsViewController: UITableViewController {
                     }
                 }
             }
-            delegate?.styleKitsViewController(self, didChangeNames: selectedStyleKitNames!)
+            delegate?.styleKitsViewController(self, didChange: selectedStyleKitNames!)
         }
     }
 
@@ -47,14 +47,16 @@ class StyleKitsViewController: UITableViewController {
         return self.styleKitNames.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! SwitchCell
         let styleKitName = self.styleKitNames[indexPath.row]
         cell.textLabel?.text = styleKitName
-        let styleKit = BFWStyleKit(forName:styleKitName)
+        let styleKit = BFWStyleKit(forName:styleKitName)!
         // TODO: Get drawingNames and colorNames on background thread since it is CPU expensive and pauses UI.
-        cell.detailTextLabel?.text = "\(styleKit?.drawingNames.count) drawings, \(styleKit?.colorNames.count) colors"
+        cell.detailTextLabel?.text = "\(styleKit.drawingNames.count) drawings, \(styleKit.colorNames.count) colors"
         if let selectedStyleKitNames = selectedStyleKitNames {
             cell.onSwitch?.isOn = selectedStyleKitNames.contains(styleKitName)
         } else {
@@ -78,5 +80,5 @@ class StyleKitsViewController: UITableViewController {
 }
 
 protocol StyleKitsDelegate {
-    func styleKitsViewController(_ styleKitsViewController: StyleKitsViewController, didChangeNames names: [String])
+    func styleKitsViewController(_ styleKitsViewController: StyleKitsViewController, didChange names: [String])
 }

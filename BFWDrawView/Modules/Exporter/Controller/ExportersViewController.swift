@@ -51,7 +51,7 @@ class ExportersViewController: UITableViewController {
             let cell = sender as? UITableViewCell
         {
             if let indexPath = tableView.indexPath(for: cell) {
-                exporterViewController.exporter = exportersRoot.exporterAtIndex(indexPath.row)
+                exporterViewController.exporter = exportersRoot.exporter(at: indexPath.row)
             }
         }
     }
@@ -91,7 +91,7 @@ class ExportersViewController: UITableViewController {
             switch section {
             case .exporter:
                 cell = tableView.dequeueReusableCell(withIdentifier: Cell.Exporter.rawValue, for: indexPath)
-                let exporter = exportersRoot.exporterAtIndex(indexPath.row)
+                let exporter = exportersRoot.exporter(at: indexPath.row)
                 cell.textLabel?.text = exporter.name
                 let platformString = (exporter.isAndroid ?? true) ? "Android" : "iOS"
                 cell.detailTextLabel?.text = platformString + ": " + (exporter.drawingsStyleKitNames?.joined(separator: ", ") ?? "")
@@ -123,7 +123,7 @@ class ExportersViewController: UITableViewController {
         forRowAt indexPath: IndexPath)
     {
         if editingStyle == .delete {
-            exportersRoot.removeExporterAtIndex(indexPath.row)
+            exportersRoot.removeExporter(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             addExporter()
@@ -142,7 +142,7 @@ class ExportersViewController: UITableViewController {
             if let exporterName = alertController.textFields?.first?.text {
                 let exporter = Exporter()
                 exporter.name = exporterName
-                self.exportersRoot.addExporter(exporter)
+                self.exportersRoot.append(exporter: exporter)
                 let indexPath = IndexPath(row: self.exportersRoot.count - 1, section: 0)
                 self.tableView.insertRows(at: [indexPath], with: .top)
             }

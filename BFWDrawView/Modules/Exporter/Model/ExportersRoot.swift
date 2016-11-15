@@ -66,21 +66,21 @@ class ExportersRoot {
         UserDefaults.standard.synchronize()
     }
     
-    func exporterForName(_ name: String) -> Exporter? {
+    func exporter(for name: String) -> Exporter? {
         return exporters.filter { exporter -> Bool in
             exporter.name == name
         }.first
     }
 
-    func exporterNameAtIndex(_ index: Int) -> String {
+    func exporterName(at index: Int) -> String {
         return exporters[index].name
     }
     
-    func exporterAtIndex(_ index: Int) -> Exporter {
+    func exporter(at index: Int) -> Exporter {
         return exporters[index]
     }
     
-    func removeExporterForName(_ name: String) {
+    func removeExporter(for name: String) {
         var deletedCount = 0
         exporters.enumerated().forEach { (index, exporter) in
             if exporter.name == name {
@@ -90,11 +90,11 @@ class ExportersRoot {
         }
     }
     
-    func removeExporterAtIndex(_ index: Int) {
+    func removeExporter(at index: Int) {
         exporters.remove(at: index)
     }
     
-    func addExporter(_ exporter: Exporter) {
+    func append(exporter: Exporter) {
         exporter.root = self
         exporters.append(exporter)
     }

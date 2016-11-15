@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleKitsDelegate, ChoicesDelegate {
+class ExporterViewController: UITableViewController {
 
     // MARK: - Public variables
     
@@ -91,7 +91,7 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
         }
     }
     
-    fileprivate func shortStringOfStyleKitNames(_ styleKitNames: [String]) -> String {
+    fileprivate func shortString(of styleKitNames: [String]) -> String {
         let suffix = "StyleKit"
         let shortNames: [String] = styleKitNames.map { name -> String in
             name.hasSuffix(suffix) ? name[name.startIndex ..< name.characters.index(name.endIndex, offsetBy: -suffix.characters.count)] : name
@@ -100,8 +100,8 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
     }
     
     fileprivate func updateStyleKitCells() {
-        drawingsStyleKitsCell?.detailTextLabel?.text = shortStringOfStyleKitNames(drawingsStyleKitNames!)
-        colorsStyleKitsCell?.detailTextLabel?.text = shortStringOfStyleKitNames(colorsStyleKitNames!)
+        drawingsStyleKitsCell?.detailTextLabel?.text = shortString(of: drawingsStyleKitNames!)
+        colorsStyleKitsCell?.detailTextLabel?.text = shortString(of: colorsStyleKitNames!)
     }
     
     // MARK: - View to Model
@@ -181,9 +181,14 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
         }
     }
     
-    // MARK: - List Delegates
-    
-    func styleKitsViewController(_ styleKitsViewController: StyleKitsViewController, didChangeNames names: [String]) {
+}
+
+extension ExporterViewController: UITextFieldDelegate {
+
+}
+
+extension ExporterViewController: StyleKitsDelegate {
+    func styleKitsViewController(_ styleKitsViewController: StyleKitsViewController, didChange names: [String]) {
         switch activeListCell! {
         case drawingsStyleKitsCell!:
             exporter?.drawingsStyleKitNames = names
@@ -194,8 +199,10 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
         }
         updateStyleKitCells()
     }
-    
-    func choicesViewController(_ choicesViewController: ChoicesViewController, didChangeChoice choice: Choice) {
+}
+
+extension ExporterViewController: ChoicesDelegate {
+    func choicesViewController(_ choicesViewController: ChoicesViewController, didChange choice: Choice) {
         if activeListCell == resolutionsCell {
             if choice.chosen {
                 exporter?.resolutions?[choice.title] = choice.value as? Double
@@ -205,5 +212,4 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
             updateResolutionsCell()
         }
     }
-    
 }

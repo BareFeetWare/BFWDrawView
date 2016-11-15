@@ -40,7 +40,7 @@ class ChoicesViewController: UITableViewController {
         {
             var choice = choices[indexPath.row]
             choice.chosen = sender.isOn
-            delegate?.choicesViewController(self, didChangeChoice: choice)
+            delegate?.choicesViewController(self, didChange: choice)
         }
     }
     
@@ -48,6 +48,6 @@ class ChoicesViewController: UITableViewController {
 
 protocol ChoicesDelegate {
     
-    func choicesViewController(_ choicesViewController: ChoicesViewController, didChangeChoice choice: Choice)
+    func choicesViewController(_ choicesViewController: ChoicesViewController, didChange choice: Choice)
     
 }
