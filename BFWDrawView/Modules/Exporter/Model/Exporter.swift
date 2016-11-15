@@ -16,21 +16,17 @@ class Exporter {
     var name: String!
     var isAndroid: Bool?
     var resolutions: [String: Double]?
-    var exportDirectoryURL: NSURL?
+    var exportDirectoryURL: URL?
     var drawingsStyleKitNames: [String]?
     var colorsStyleKitNames: [String]?
     var includeAnimations: Bool?
-    var duration: NSTimeInterval?
+    var duration: TimeInterval?
     var framesPerSecond: Double?
 
     // MARK: - Public read only variables
     
-    var defaultDirectoryURL: NSURL {
-        #if swift(>=2.3)
-            return documentsURL.URLByAppendingPathComponent("android_drawables", isDirectory: true)!
-        #else
-            return documentsURL.URLByAppendingPathComponent("android_drawables", isDirectory: true)
-        #endif
+    var defaultDirectoryURL: URL {
+        return documentsURL.appendingPathComponent("android_drawables", isDirectory: true)
     }
     
     var defaultResolutions: [String: Double] {
@@ -57,7 +53,7 @@ class Exporter {
     
     // MARK: - Structs
     
-    private struct DefaultsKey {
+    fileprivate struct DefaultsKey {
         static let name = "name"
         static let isAndroid = "isAndroid"
         static let resolutions = "resolutions"
@@ -78,12 +74,12 @@ class Exporter {
         self.isAndroid = dictionary[DefaultsKey.isAndroid] as? Bool
         self.resolutions = dictionary[DefaultsKey.resolutions] as? [String: Double]
         if let exportDirectoryURLString = dictionary[DefaultsKey.exportDirectoryURL] as? String {
-            self.exportDirectoryURL = NSURL(string: exportDirectoryURLString)
+            self.exportDirectoryURL = URL(string: exportDirectoryURLString)
         }
         self.drawingsStyleKitNames = dictionary[DefaultsKey.drawingsStyleKitNames] as? [String]
         self.colorsStyleKitNames = dictionary[DefaultsKey.colorsStyleKitNames] as? [String]
         self.includeAnimations = dictionary[DefaultsKey.includeAnimations] as? Bool
-        self.duration = dictionary[DefaultsKey.duration] as? NSTimeInterval
+        self.duration = dictionary[DefaultsKey.duration] as? TimeInterval
         self.framesPerSecond = dictionary[DefaultsKey.framesPerSecond] as? Double
     }
     
@@ -91,21 +87,21 @@ class Exporter {
     
     var dictionary: [String: AnyObject] {
         var dictionary = [String: AnyObject]()
-        dictionary[DefaultsKey.name] = self.name
-        dictionary[DefaultsKey.isAndroid] = self.isAndroid
-        dictionary[DefaultsKey.resolutions] = self.resolutions
-        dictionary[DefaultsKey.exportDirectoryURL] = self.exportDirectoryURL?.absoluteString
-        dictionary[DefaultsKey.drawingsStyleKitNames] = self.drawingsStyleKitNames
-        dictionary[DefaultsKey.colorsStyleKitNames] = self.colorsStyleKitNames
-        dictionary[DefaultsKey.includeAnimations] = self.includeAnimations
-        dictionary[DefaultsKey.duration] = self.duration
-        dictionary[DefaultsKey.framesPerSecond] = self.framesPerSecond
+        dictionary[DefaultsKey.name] = self.name as AnyObject?
+        dictionary[DefaultsKey.isAndroid] = self.isAndroid as AnyObject?
+        dictionary[DefaultsKey.resolutions] = self.resolutions as AnyObject?
+        dictionary[DefaultsKey.exportDirectoryURL] = self.exportDirectoryURL?.absoluteString as AnyObject?
+        dictionary[DefaultsKey.drawingsStyleKitNames] = self.drawingsStyleKitNames as AnyObject?
+        dictionary[DefaultsKey.colorsStyleKitNames] = self.colorsStyleKitNames as AnyObject?
+        dictionary[DefaultsKey.includeAnimations] = self.includeAnimations as AnyObject?
+        dictionary[DefaultsKey.duration] = self.duration as AnyObject?
+        dictionary[DefaultsKey.framesPerSecond] = self.framesPerSecond as AnyObject?
         return dictionary
     }
     
     // MARK: - Private variables
     
-    private var pathScaleDict: [String: Double] {
+    fileprivate var pathScaleDict: [String: Double] {
         let resolutions = self.resolutions ?? defaultResolutions
         var pathScaleDict = resolutions
         let isIos = !(isAndroid ?? true)
@@ -120,21 +116,21 @@ class Exporter {
         return pathScaleDict
     }
     
-    private var documentsURL: NSURL {
-        return NSURL(fileURLWithPath: BFWDrawExport.documentsDirectoryPath(), isDirectory: true)
+    fileprivate var documentsURL: URL {
+        return URL(fileURLWithPath: BFWDrawExport.documentsDirectoryPath(), isDirectory: true)
     }
     
     // MARK - Actions
     
     func export() {
-        BFWDrawExport.exportForAndroid(
-            isAndroid ?? true,
+        BFWDrawExport.export(
+            forAndroid: isAndroid ?? true,
             toDirectory: exportDirectoryURL?.path ?? defaultDirectoryURL.path,
             deleteExistingFiles: true,
             drawingsStyleKitNames: drawingsStyleKitNames ?? BFWStyleKit.styleKitNames(),
             colorsStyleKitNames: colorsStyleKitNames ?? BFWStyleKit.styleKitNames(),
             pathScaleDict: pathScaleDict,
-            tintColor: UIColor.blackColor(), // TODO: get color from UI
+            tintColor: UIColor.black, // TODO: get color from UI
             duration: duration ?? 0.0,
             framesPerSecond: framesPerSecond ?? 00
         )

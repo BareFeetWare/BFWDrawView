@@ -13,8 +13,8 @@ class ExportersViewController: UITableViewController {
     // MARK: - Enums
     
     enum Section: Int {
-        case Exporter = 0
-        case Add = 1
+        case exporter = 0
+        case add = 1
     }
     
     enum Cell: String {
@@ -31,72 +31,72 @@ class ExportersViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.clearsSelectionOnViewWillAppear = false
-        self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if exportersRoot.count == 0 {
             setEditing(true, animated: true)
         }
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let exporterViewController = segue.destinationViewController as? ExporterViewController,
-            cell = sender as? UITableViewCell
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let exporterViewController = segue.destination as? ExporterViewController,
+            let cell = sender as? UITableViewCell
         {
-            if let indexPath = tableView.indexPathForCell(cell) {
+            if let indexPath = tableView.indexPath(for: cell) {
                 exporterViewController.exporter = exportersRoot.exporterAtIndex(indexPath.row)
             }
         }
     }
     
-    override func setEditing(editing: Bool, animated: Bool) {
+    override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        let indexSet = NSIndexSet(index: Section.Add.rawValue)
+        let indexSet = IndexSet(integer: Section.add.rawValue)
         if editing {
-            tableView.insertSections(indexSet, withRowAnimation: .Left)
+            tableView.insertSections(indexSet, with: .left)
         } else {
-            tableView.deleteSections(indexSet, withRowAnimation: .Left)
+            tableView.deleteSections(indexSet, with: .left)
         }
     }
 
     // MARK: - UITableViewController
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return self.editing ? 2 : 1
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return self.isEditing ? 2 : 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count = 0
         if let section = Section(rawValue: section) {
             switch section {
-            case .Exporter:
+            case .exporter:
                 count = exportersRoot.count
-            case .Add:
+            case .add:
                 count = 1
             }
         }
         return count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell
         if let section = Section(rawValue: indexPath.section) {
             switch section {
-            case .Exporter:
-                cell = tableView.dequeueReusableCellWithIdentifier(Cell.Exporter.rawValue, forIndexPath: indexPath)
+            case .exporter:
+                cell = tableView.dequeueReusableCell(withIdentifier: Cell.Exporter.rawValue, for: indexPath)
                 let exporter = exportersRoot.exporterAtIndex(indexPath.row)
                 cell.textLabel?.text = exporter.name
                 let platformString = (exporter.isAndroid ?? true) ? "Android" : "iOS"
-                cell.detailTextLabel?.text = platformString + ": " + (exporter.drawingsStyleKitNames?.joinWithSeparator(", ") ?? "")
-            case .Add:
-                cell = tableView.dequeueReusableCellWithIdentifier(Cell.Add.rawValue, forIndexPath: indexPath)
+                cell.detailTextLabel?.text = platformString + ": " + (exporter.drawingsStyleKitNames?.joined(separator: ", ") ?? "")
+            case .add:
+                cell = tableView.dequeueReusableCell(withIdentifier: Cell.Add.rawValue, for: indexPath)
             }
         } else {
             cell = UITableViewCell()
@@ -104,28 +104,28 @@ class ExportersViewController: UITableViewController {
         return cell
     }
 
-    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        var style: UITableViewCellEditingStyle = .None
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        var style: UITableViewCellEditingStyle = .none
         if let section = Section(rawValue: indexPath.section) {
             switch section {
-            case .Exporter:
-                style = .Delete
-            case .Add:
-                style = .Insert
+            case .exporter:
+                style = .delete
+            case .add:
+                style = .insert
             }
         }
         return style
     }
     
     override func tableView(
-        tableView: UITableView,
-        commitEditingStyle editingStyle: UITableViewCellEditingStyle,
-        forRowAtIndexPath indexPath: NSIndexPath)
+        _ tableView: UITableView,
+        commit editingStyle: UITableViewCellEditingStyle,
+        forRowAt indexPath: IndexPath)
     {
-        if editingStyle == .Delete {
+        if editingStyle == .delete {
             exportersRoot.removeExporterAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
             addExporter()
         }
         exportersRoot.saveExporters()
@@ -133,24 +133,24 @@ class ExportersViewController: UITableViewController {
 
     // MARK: - Actions
     
-    private func addExporter() {
-        let alertController = UIAlertController(title: "Exporter Name", message: "Enter the name of the new exporter", preferredStyle: .Alert)
-        alertController.addTextFieldWithConfigurationHandler { (textField) in
+    fileprivate func addExporter() {
+        let alertController = UIAlertController(title: "Exporter Name", message: "Enter the name of the new exporter", preferredStyle: .alert)
+        alertController.addTextField { (textField) in
             textField.placeholder = "New exporter name"
         }
-        alertController.addAction(UIAlertAction(title: "Add", style: .Default, handler: { (alertAction) in
+        alertController.addAction(UIAlertAction(title: "Add", style: .default, handler: { (alertAction) in
             if let exporterName = alertController.textFields?.first?.text {
                 let exporter = Exporter()
                 exporter.name = exporterName
                 self.exportersRoot.addExporter(exporter)
-                let indexPath = NSIndexPath(forRow: self.exportersRoot.count - 1, inSection: 0)
-                self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Top)
+                let indexPath = IndexPath(row: self.exportersRoot.count - 1, section: 0)
+                self.tableView.insertRows(at: [indexPath], with: .top)
             }
         }))
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (alertAction) in
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (alertAction) in
             // Just dismiss.
         }))
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
 }

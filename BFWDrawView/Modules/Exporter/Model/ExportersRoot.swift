@@ -12,13 +12,13 @@ class ExportersRoot {
     
     // MARK: - Structs
 
-    private struct DefaultsKey {
+    fileprivate struct DefaultsKey {
         static let exporters = "exporters"
     }
     
     // MARK: - Private Variables
     
-    private lazy var exporters: [Exporter] = {
+    fileprivate lazy var exporters: [Exporter] = {
         return self.loadingDictArray.map { exporterDict in
             let exporter = Exporter(dictionary: exporterDict)
             exporter.root = self
@@ -26,11 +26,11 @@ class ExportersRoot {
         }
     }()
     
-    private var loadingDictArray: [[String: AnyObject]] = {
+    fileprivate var loadingDictArray: [[String: AnyObject]] = {
         var dictArray: [[String: AnyObject]]
-        if let savedExportersDictArray = NSUserDefaults.standardUserDefaults().arrayForKey(DefaultsKey.exporters) as? [[String: AnyObject]] {
+        if let savedExportersDictArray = UserDefaults.standard.array(forKey: DefaultsKey.exporters) as? [[String: AnyObject]] {
             dictArray = savedExportersDictArray
-        } else if let bundledPlistPath = NSBundle.mainBundle().pathForResource("ExporterDefaults", ofType: "plist"),
+        } else if let bundledPlistPath = Bundle.main.path(forResource: "ExporterDefaults", ofType: "plist"),
             let defaultsDict = NSDictionary(contentsOfFile: bundledPlistPath) as? [String: AnyObject],
             let bundledDictArray = defaultsDict[DefaultsKey.exporters] as? [[String: AnyObject]]
         {
@@ -41,7 +41,7 @@ class ExportersRoot {
         return dictArray
     }()
     
-    private var savingDictArray: [[String: AnyObject]] {
+    fileprivate var savingDictArray: [[String: AnyObject]] {
         return exporters.map { exporter in
             exporter.dictionary
         }
@@ -62,39 +62,39 @@ class ExportersRoot {
     // MARK: - Functions
 
     func saveExporters() {
-        NSUserDefaults.standardUserDefaults().setObject(savingDictArray, forKey: DefaultsKey.exporters)
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.set(savingDictArray, forKey: DefaultsKey.exporters)
+        UserDefaults.standard.synchronize()
     }
     
-    func exporterForName(name: String) -> Exporter? {
+    func exporterForName(_ name: String) -> Exporter? {
         return exporters.filter { exporter -> Bool in
             exporter.name == name
         }.first
     }
 
-    func exporterNameAtIndex(index: Int) -> String {
+    func exporterNameAtIndex(_ index: Int) -> String {
         return exporters[index].name
     }
     
-    func exporterAtIndex(index: Int) -> Exporter {
+    func exporterAtIndex(_ index: Int) -> Exporter {
         return exporters[index]
     }
     
-    func removeExporterForName(name: String) {
+    func removeExporterForName(_ name: String) {
         var deletedCount = 0
-        exporters.enumerate().forEach { (index, exporter) in
+        exporters.enumerated().forEach { (index, exporter) in
             if exporter.name == name {
-                exporters.removeAtIndex(index + deletedCount)
+                exporters.remove(at: index + deletedCount)
                 deletedCount += 1
             }
         }
     }
     
-    func removeExporterAtIndex(index: Int) {
-        exporters.removeAtIndex(index)
+    func removeExporterAtIndex(_ index: Int) {
+        exporters.remove(at: index)
     }
     
-    func addExporter(exporter: Exporter) {
+    func addExporter(_ exporter: Exporter) {
         exporter.root = self
         exporters.append(exporter)
     }

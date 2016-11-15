@@ -10,8 +10,8 @@ import UIKit
 
 class SwitchCell: UITableViewCell {
 
-    private var overridingTextLabel: UILabel?
-    private var overridingDetailTextLabel: UILabel?
+    fileprivate var overridingTextLabel: UILabel?
+    fileprivate var overridingDetailTextLabel: UILabel?
     
     @IBOutlet override var textLabel: UILabel? {
         get {

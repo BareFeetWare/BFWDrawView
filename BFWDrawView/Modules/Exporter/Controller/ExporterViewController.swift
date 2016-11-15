@@ -28,62 +28,62 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
 
     // MARK: - Private constants
 
-    private let androidTitle = "Android";
+    fileprivate let androidTitle = "Android";
 
     // MARK: - Private variables
 
-    private var resolutions: [String: Double]? {
+    fileprivate var resolutions: [String: Double]? {
         return exporter?.resolutions ?? exporter?.defaultResolutions
     }
 
-    private var drawingsStyleKitNames: [String]? {
+    fileprivate var drawingsStyleKitNames: [String]? {
         return exporter?.drawingsStyleKitNames ?? BFWStyleKit.styleKitNames() as? [String]
     }
     
-    private var colorsStyleKitNames: [String]? {
+    fileprivate var colorsStyleKitNames: [String]? {
         return exporter?.colorsStyleKitNames ?? BFWStyleKit.styleKitNames() as? [String]
     }
 
-    private var activeListCell: UITableViewCell?
+    fileprivate var activeListCell: UITableViewCell?
 
     // MARK: - Model to View
 
-    private func readModelIntoView() {
+    fileprivate func readModelIntoView() {
         if let exporter = exporter {
             nameTextField?.text = exporter.name
-            let isAndroidFirst = self.namingSegmentedControl?.titleForSegmentAtIndex(0) == androidTitle
+            let isAndroidFirst = self.namingSegmentedControl?.titleForSegment(at: 0) == androidTitle
             namingSegmentedControl?.selectedSegmentIndex = exporter.isAndroid == isAndroidFirst ? 0 : 1
             updateResolutionsCell()
             directoryTextField?.text = exporter.exportDirectoryURL?.path
             directoryTextField?.placeholder = exporter.defaultDirectoryURL.path
             updateStyleKitCells()
-            includeAnimationsSwitch?.on = exporter.includeAnimations ?? false
-            durationTextField?.text = exporter.duration == nil ? nil : String(exporter.duration)
-            framesPerSecondTextField?.text = exporter.framesPerSecond == nil ? nil : String(exporter.framesPerSecond)
+            includeAnimationsSwitch?.isOn = exporter.includeAnimations ?? false
+            durationTextField?.text = exporter.duration == nil ? nil : String(describing: exporter.duration)
+            framesPerSecondTextField?.text = exporter.framesPerSecond == nil ? nil : String(describing: exporter.framesPerSecond)
         }
     }
     
-    private func resolutionChoices() -> [Choice] {
+    fileprivate func resolutionChoices() -> [Choice] {
         var choices = [Choice]()
         if let defaultResolutions = exporter?.defaultResolutions {
             choices = defaultResolutions.map { (name, scale) -> Choice in
                 Choice(
                     title: name,
                     detail: "\(scale)x",
-                    value: scale,
+                    value: scale as AnyObject,
                     chosen: resolutions?.keys.contains(name) ?? true
                 )
-                }.sort { (choice1, choice2) -> Bool in
+                }.sorted { (choice1, choice2) -> Bool in
                     (choice1.value as! Double) < (choice2.value as! Double)
             }
         }
         return choices
     }
     
-    private func updateResolutionsCell() {
+    fileprivate func updateResolutionsCell() {
         resolutionsCell?.detailTextLabel?.text = resolutions?.map { (name, scale) in
             (name: name, scale: scale)
-            }.sort{ (tuple1, tuple2) -> Bool in
+            }.sorted{ (tuple1, tuple2) -> Bool in
                 tuple1.scale < tuple2.scale
             }.reduce("") { (string, tuple) -> String in
                 let previous = string == "" ? "" : "\(string), "
@@ -91,32 +91,38 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
         }
     }
     
-    private func shortStringOfStyleKitNames(styleKitNames: [String]) -> String {
+    fileprivate func shortStringOfStyleKitNames(_ styleKitNames: [String]) -> String {
         let suffix = "StyleKit"
         let shortNames: [String] = styleKitNames.map { name -> String in
-            name.hasSuffix(suffix) ? name[name.startIndex ..< name.endIndex.advancedBy(-suffix.characters.count)] : name
+            name.hasSuffix(suffix) ? name[name.startIndex ..< name.characters.index(name.endIndex, offsetBy: -suffix.characters.count)] : name
         }
-        return shortNames.joinWithSeparator(", ")
+        return shortNames.joined(separator: ", ")
     }
     
-    private func updateStyleKitCells() {
+    fileprivate func updateStyleKitCells() {
         drawingsStyleKitsCell?.detailTextLabel?.text = shortStringOfStyleKitNames(drawingsStyleKitNames!)
         colorsStyleKitsCell?.detailTextLabel?.text = shortStringOfStyleKitNames(colorsStyleKitNames!)
     }
     
     // MARK: - View to Model
 
-    private func writeViewToModel() {
+    fileprivate func writeViewToModel() {
         if let exporter = exporter {
             exporter.name = nameTextField?.text
-            if let directoryURLString = directoryTextField?.text where directoryTextField?.text?.characters.count > 0 {
-                exporter.exportDirectoryURL = NSURL(fileURLWithPath: directoryURLString, isDirectory: true)
+            if let directoryURLString = directoryTextField?.text,
+                !directoryURLString.isEmpty
+            {
+                exporter.exportDirectoryURL = URL(fileURLWithPath: directoryURLString, isDirectory: true)
             }
-            exporter.includeAnimations = includeAnimationsSwitch?.on
-            if let durationText = durationTextField?.text, duration = NSTimeInterval(durationText) {
+            exporter.includeAnimations = includeAnimationsSwitch?.isOn
+            if let durationText = durationTextField?.text,
+                let duration = TimeInterval(durationText)
+            {
                 exporter.duration = duration
             }
-            if let framesPerSecondText = framesPerSecondTextField?.text, framesPerSecond = Double(framesPerSecondText) {
+            if let framesPerSecondText = framesPerSecondTextField?.text,
+                let framesPerSecond = Double(framesPerSecondText)
+            {
                 exporter.framesPerSecond = framesPerSecond
             }
         }
@@ -124,14 +130,14 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
     
     // MARK: - Actions
 
-    @IBAction func didChangePlatformControl(sender: UISegmentedControl) {
-        if let selectedSegmentTitle = namingSegmentedControl?.titleForSegmentAtIndex(namingSegmentedControl!.selectedSegmentIndex) {
+    @IBAction func didChangePlatformControl(_ sender: UISegmentedControl) {
+        if let selectedSegmentTitle = namingSegmentedControl?.titleForSegment(at: namingSegmentedControl!.selectedSegmentIndex) {
             exporter?.isAndroid = selectedSegmentTitle == androidTitle
             updateResolutionsCell()
         }
     }
     
-    @IBAction func export(sender: AnyObject) {
+    @IBAction func export(_ sender: AnyObject) {
         view.endEditing(true)
         writeViewToModel()
         exporter?.root.saveExporters()
@@ -152,9 +158,9 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
         readModelIntoView()
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let styleKitsViewController = segue.destinationViewController as? StyleKitsViewController,
-            cell = sender as? UITableViewCell
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let styleKitsViewController = segue.destination as? StyleKitsViewController,
+            let cell = sender as? UITableViewCell
         {
             activeListCell = cell
             styleKitsViewController.delegate = self
@@ -166,8 +172,8 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
             default:
                 break
             }
-        } else if let choicesViewController = segue.destinationViewController as? ChoicesViewController,
-            cell = sender as? UITableViewCell
+        } else if let choicesViewController = segue.destination as? ChoicesViewController,
+            let cell = sender as? UITableViewCell
         {
             activeListCell = cell
             choicesViewController.delegate = self
@@ -177,7 +183,7 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
     
     // MARK: - List Delegates
     
-    func styleKitsViewController(styleKitsViewController: StyleKitsViewController, didChangeNames names: [String]) {
+    func styleKitsViewController(_ styleKitsViewController: StyleKitsViewController, didChangeNames names: [String]) {
         switch activeListCell! {
         case drawingsStyleKitsCell!:
             exporter?.drawingsStyleKitNames = names
@@ -189,12 +195,12 @@ class ExporterViewController: UITableViewController, UITextFieldDelegate, StyleK
         updateStyleKitCells()
     }
     
-    func choicesViewController(choicesViewController: ChoicesViewController, didChangeChoice choice: Choice) {
+    func choicesViewController(_ choicesViewController: ChoicesViewController, didChangeChoice choice: Choice) {
         if activeListCell == resolutionsCell {
             if choice.chosen {
                 exporter?.resolutions?[choice.title] = choice.value as? Double
             } else {
-                exporter?.resolutions?.removeValueForKey(choice.title)
+                let _ = exporter?.resolutions?.removeValue(forKey: choice.title)
             }
             updateResolutionsCell()
         }

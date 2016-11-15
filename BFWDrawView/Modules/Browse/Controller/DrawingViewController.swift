@@ -10,7 +10,7 @@ class DrawingViewController: UIViewController {
 
     var drawing: BFWStyleKitDrawing?
     
-    @IBOutlet private var drawingView: AnimationView?
+    @IBOutlet fileprivate var drawingView: AnimationView?
     
     override func viewDidLoad() {
         super.viewDidLoad()

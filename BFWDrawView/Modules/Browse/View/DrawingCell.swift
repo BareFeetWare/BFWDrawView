@@ -33,7 +33,7 @@ class DrawingCell: UITableViewCell {
 
     // MARK: - Private variables
     
-    private var overridingTextLabel: UILabel?
-    private var overridingDetailTextLabel: UILabel?
+    fileprivate var overridingTextLabel: UILabel?
+    fileprivate var overridingDetailTextLabel: UILabel?
     
 }

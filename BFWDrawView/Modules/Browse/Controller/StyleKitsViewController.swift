@@ -16,24 +16,24 @@ class StyleKitsViewController: UITableViewController {
 
     var delegate: StyleKitsDelegate?
     
-    private var styleKitNames: [String] = (BFWStyleKit.styleKitNames() as! [String]).sort()
+    fileprivate var styleKitNames: [String] = (BFWStyleKit.styleKitNames() as! [String]).sorted()
 
     // MARK: - Actions
 
-    @IBAction func changedSwitch(sender: UISwitch) {
+    @IBAction func changedSwitch(_ sender: UISwitch) {
         if let cell = sender.superviewCell,
-            let indexPath = tableView.indexPathForCell(cell)
+            let indexPath = tableView.indexPath(for: cell)
         {
             let styleKitName = styleKitNames[indexPath.row]
             let isInList = selectedStyleKitNames?.contains(styleKitName) ?? true
-            if sender.on {
+            if sender.isOn {
                 if !isInList {
                     selectedStyleKitNames?.append(styleKitName)
                 }
             } else {
                 if (isInList) {
-                    if let index = selectedStyleKitNames?.indexOf(styleKitName) {
-                        selectedStyleKitNames?.removeAtIndex(index)
+                    if let index = selectedStyleKitNames?.index(of: styleKitName) {
+                        selectedStyleKitNames?.remove(at: index)
                     }
                 }
             }
@@ -43,32 +43,32 @@ class StyleKitsViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.styleKitNames.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "Cell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! SwitchCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! SwitchCell
         let styleKitName = self.styleKitNames[indexPath.row]
         cell.textLabel?.text = styleKitName
         let styleKit = BFWStyleKit(forName:styleKitName)
         // TODO: Get drawingNames and colorNames on background thread since it is CPU expensive and pauses UI.
-        cell.detailTextLabel?.text = "\(styleKit.drawingNames.count) drawings, \(styleKit.colorNames.count) colors"
+        cell.detailTextLabel?.text = "\(styleKit?.drawingNames.count) drawings, \(styleKit?.colorNames.count) colors"
         if let selectedStyleKitNames = selectedStyleKitNames {
-            cell.onSwitch?.on = selectedStyleKitNames.contains(styleKitName)
+            cell.onSwitch?.isOn = selectedStyleKitNames.contains(styleKitName)
         } else {
-            cell.onSwitch?.hidden = true
+            cell.onSwitch?.isHidden = true
         }
         return cell
     }
 
     // MARK: - UIViewController
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let destinationViewController = segue.destinationViewController as? StyleKitViewController,
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationViewController = segue.destination as? StyleKitViewController,
             let cell = sender as? UITableViewCell,
-            let indexPath = tableView.indexPathForCell(cell)
+            let indexPath = tableView.indexPath(for: cell)
         {
             let styleKitName = styleKitNames[indexPath.row]
             destinationViewController.styleKit = BFWStyleKit(forName:styleKitName)
@@ -78,5 +78,5 @@ class StyleKitsViewController: UITableViewController {
 }
 
 protocol StyleKitsDelegate {
-    func styleKitsViewController(styleKitsViewController: StyleKitsViewController, didChangeNames names: [String])
+    func styleKitsViewController(_ styleKitsViewController: StyleKitsViewController, didChangeNames names: [String])
 }

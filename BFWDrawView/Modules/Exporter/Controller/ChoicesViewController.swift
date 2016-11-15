@@ -19,27 +19,27 @@ class ChoicesViewController: UITableViewController {
     
     // MARK: - Table view data source
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return choices.count ?? 0
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return choices.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("switch", forIndexPath: indexPath) as! SwitchCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "switch", for: indexPath) as! SwitchCell
         let choice = choices[indexPath.row]
         cell.textLabel?.text = choice.title
         cell.detailTextLabel?.text = choice.detail
-        cell.onSwitch?.on = choice.chosen
+        cell.onSwitch?.isOn = choice.chosen
         return cell
     }
 
     // MARK: - Actions
     
-    @IBAction func changedSwitch(sender: UISwitch) {
+    @IBAction func changedSwitch(_ sender: UISwitch) {
         if let cell = sender.superviewCell,
-            let indexPath = tableView.indexPathForCell(cell)
+            let indexPath = tableView.indexPath(for: cell)
         {
             var choice = choices[indexPath.row]
-            choice.chosen = sender.on
+            choice.chosen = sender.isOn
             delegate?.choicesViewController(self, didChangeChoice: choice)
         }
     }
@@ -48,6 +48,6 @@ class ChoicesViewController: UITableViewController {
 
 protocol ChoicesDelegate {
     
-    func choicesViewController(choicesViewController: ChoicesViewController, didChangeChoice choice: Choice)
+    func choicesViewController(_ choicesViewController: ChoicesViewController, didChangeChoice choice: Choice)
     
 }
