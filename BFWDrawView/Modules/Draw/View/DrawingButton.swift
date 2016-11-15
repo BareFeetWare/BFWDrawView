@@ -33,18 +33,21 @@ import UIKit
                           state: UIControlState,
                           tintColor: UIColor)
     {
-        let drawing = BFWStyleKit.drawingForStyleKitName(styleKit, drawingName: name)
-        let frame: CGRect
-        if let size = size where size != CGSizeZero {
-            frame = CGRect(origin: CGPointZero, size: size)
-        } else {
-            frame = drawing.intrinsicFrame
+        if let drawing = BFWStyleKit.drawing(forStyleKitName: styleKit,
+                                             drawingName: name)
+        {
+            let frame: CGRect
+            if let size = size, size != CGSize.zero {
+                frame = CGRect(origin: CGPoint.zero, size: size)
+            } else {
+                frame = drawing.intrinsicFrame
+            }
+            let icon = BFWDrawView(frame: frame)
+            icon.drawing = drawing
+            icon.tintColor = tintColor
+            icon.contentMode = .redraw
+            setIconDrawView(icon, for: state)
         }
-        let icon = BFWDrawView(frame: frame)
-        icon.drawing = drawing
-        icon.tintColor = tintColor
-        icon.contentMode = .Redraw
-        setIconDrawView(icon, forState: state)
     }
 
     // MARK: - UpdateView
@@ -57,9 +60,11 @@ import UIKit
     private var needsUpdateView = true
     
     func updateView() {
-        if let iconName = iconName, iconStyleKit = iconStyleKit {
-            makeIconDrawViewsFromStateNameDict([UIControlState.Normal.rawValue: iconName],
-                                               styleKit: iconStyleKit)
+        if let iconName = iconName,
+            let iconStyleKit = iconStyleKit
+        {
+            makeIconDrawViews(fromStateNameDict: [UIControlState.normal.rawValue: iconName],
+                              styleKit: iconStyleKit)
         }
     }
     
