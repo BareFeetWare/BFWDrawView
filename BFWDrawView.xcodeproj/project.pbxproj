@@ -39,7 +39,7 @@
 		E22117921AF4FE92007B515F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E22117911AF4FE92007B515F /* AppDelegate.m */; };
 		E24CAA7F1BF44F7300BDBE59 /* Sample.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E24CAA7D1BF44F7300BDBE59 /* Sample.storyboard */; };
 		E24FE2271C9FAFDD00B8F268 /* ExporterDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = E24FE2261C9FAFDD00B8F268 /* ExporterDefaults.plist */; };
-		E26B1DB01B02B0FB005EACDE /* SampleDrawButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E26B1DAF1B02B0FB005EACDE /* SampleDrawButton.m */; };
+		E26B1DB01B02B0FB005EACDE /* SampleDrawingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26B1DAF1B02B0FB005EACDE /* SampleDrawingButton.swift */; };
 		E27F0E931DDAE0BF00640D6F /* DrawingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27F0E921DDAE0BF00640D6F /* DrawingButton.swift */; };
 		E29478011C6183CD001F78DA /* BFWDrawExport.m in Sources */ = {isa = PBXBuildFile; fileRef = E29478001C6183CD001F78DA /* BFWDrawExport.m */; };
 		E29478371C6402A9001F78DA /* ChoicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29478361C6402A9001F78DA /* ChoicesViewController.swift */; };
@@ -115,8 +115,7 @@
 		E22117911AF4FE92007B515F /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		E24CAA7D1BF44F7300BDBE59 /* Sample.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Sample.storyboard; sourceTree = "<group>"; };
 		E24FE2261C9FAFDD00B8F268 /* ExporterDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = ExporterDefaults.plist; sourceTree = "<group>"; };
-		E26B1DAE1B02B0FB005EACDE /* SampleDrawButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleDrawButton.h; sourceTree = "<group>"; };
-		E26B1DAF1B02B0FB005EACDE /* SampleDrawButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleDrawButton.m; sourceTree = "<group>"; };
+		E26B1DAF1B02B0FB005EACDE /* SampleDrawingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleDrawingButton.swift; sourceTree = "<group>"; };
 		E27F0E921DDAE0BF00640D6F /* DrawingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingButton.swift; sourceTree = "<group>"; };
 		E29477FF1C6183CD001F78DA /* BFWDrawExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawExport.h; sourceTree = "<group>"; };
 		E29478001C6183CD001F78DA /* BFWDrawExport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawExport.m; sourceTree = "<group>"; };
@@ -368,8 +367,7 @@
 		E26B1DAD1B02B0CD005EACDE /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E26B1DAE1B02B0FB005EACDE /* SampleDrawButton.h */,
-				E26B1DAF1B02B0FB005EACDE /* SampleDrawButton.m */,
+				E26B1DAF1B02B0FB005EACDE /* SampleDrawingButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -510,7 +508,7 @@
 				E20FADB41C5B3F5700C78BDC /* StyleKitViewController.swift in Sources */,
 				E29478011C6183CD001F78DA /* BFWDrawExport.m in Sources */,
 				E2E6D8401D095E0700C0A87D /* AnimationView.swift in Sources */,
-				E26B1DB01B02B0FB005EACDE /* SampleDrawButton.m in Sources */,
+				E26B1DB01B02B0FB005EACDE /* SampleDrawingButton.swift in Sources */,
 				E20AA0C31C677A5200B8EEF7 /* BFWStyleKitDrawing.m in Sources */,
 				E203579A1A7F5144002BC3F4 /* BFWDrawView.m in Sources */,
 				E20FADB01C5B3F5700C78BDC /* AnimationCountViewController.m in Sources */,
