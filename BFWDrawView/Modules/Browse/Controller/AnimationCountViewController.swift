@@ -1,5 +1,5 @@
 //
-//  AnimationCountViewController.m
+//  AnimationCountViewController.swift
 //  BFWDrawView
 //
 //  Created by Tom Brodhurst-Hill on 26/07/2015.
@@ -10,6 +10,8 @@
 #import "BFWAnimationView.h"
 
 @interface AnimationCountViewController () <UITextFieldDelegate>
+
+@property (strong, nonatomic) BFWStyleKitDrawing *drawing;
 
 @property (weak, nonatomic) IBOutlet BFWAnimationView *animationView;
 @property (weak, nonatomic) IBOutlet UITextField *desiredFramesPerSecondTextField;
