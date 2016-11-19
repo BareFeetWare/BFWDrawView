@@ -15,13 +15,13 @@ class Exporter {
     var root: ExportersRoot!
     var name: String!
     var isAndroid: Bool?
-    var resolutions: [String: Double]?
+    var resolutions: DrawingExport.PathScale?
     var exportDirectoryURL: URL?
     var drawingsStyleKitNames: [String]?
     var colorsStyleKitNames: [String]?
     var includeAnimations: Bool?
     var duration: TimeInterval?
-    var framesPerSecond: Double?
+    var framesPerSecond: CGFloat?
 
     // MARK: - Public read only variables
     
@@ -29,8 +29,8 @@ class Exporter {
         return documentsURL.appendingPathComponent("android_drawables", isDirectory: true)
     }
     
-    var defaultResolutions: [String: Double] {
-        var resolutions: [String: Double]
+    var defaultResolutions: DrawingExport.PathScale {
+        var resolutions: DrawingExport.PathScale
         if (isAndroid ?? true) {
             resolutions = [
                 "drawable-ldpi": 0.75,
@@ -72,7 +72,7 @@ class Exporter {
         self.init()
         self.name = dictionary[DefaultsKey.name] as? String
         self.isAndroid = dictionary[DefaultsKey.isAndroid] as? Bool
-        self.resolutions = dictionary[DefaultsKey.resolutions] as? [String: Double]
+        self.resolutions = dictionary[DefaultsKey.resolutions] as? DrawingExport.PathScale
         if let exportDirectoryURLString = dictionary[DefaultsKey.exportDirectoryURL] as? String {
             self.exportDirectoryURL = URL(string: exportDirectoryURLString)
         }
@@ -80,7 +80,7 @@ class Exporter {
         self.colorsStyleKitNames = dictionary[DefaultsKey.colorsStyleKitNames] as? [String]
         self.includeAnimations = dictionary[DefaultsKey.includeAnimations] as? Bool
         self.duration = dictionary[DefaultsKey.duration] as? TimeInterval
-        self.framesPerSecond = dictionary[DefaultsKey.framesPerSecond] as? Double
+        self.framesPerSecond = dictionary[DefaultsKey.framesPerSecond] as? CGFloat
     }
     
     // MARK: - Dictionary for archiving
@@ -101,12 +101,12 @@ class Exporter {
     
     // MARK: - Private variables
     
-    fileprivate var pathScaleDict: [String: Double] {
+    fileprivate var pathScaleDict: DrawingExport.PathScale {
         let resolutions = self.resolutions ?? defaultResolutions
         var pathScaleDict = resolutions
         let isIos = !(isAndroid ?? true)
         if isIos {
-            pathScaleDict = [String: Double]()
+            pathScaleDict = DrawingExport.PathScale()
             for (path, scale) in resolutions {
                 // Only append @2x or @3x, but no suffix for @1x since xcassets doesn't want it.
                 let format = "%@" + (scale == 1.0 ? "" : path)
@@ -117,22 +117,22 @@ class Exporter {
     }
     
     fileprivate var documentsURL: URL {
-        return URL(fileURLWithPath: BFWDrawExport.documentsDirectoryPath(), isDirectory: true)
+        return DrawingExport.documentsDirectory
     }
     
     // MARK - Actions
     
     func export() {
-        BFWDrawExport.export(
-            forAndroid: isAndroid ?? true,
-            toDirectory: exportDirectoryURL?.path ?? defaultDirectoryURL.path,
+        DrawingExport.export(
+            isAndroid: isAndroid ?? true,
+            to: exportDirectoryURL ?? defaultDirectoryURL,
             deleteExistingFiles: true,
-            drawingsStyleKitNames: drawingsStyleKitNames ?? BFWStyleKit.styleKitNames(),
-            colorsStyleKitNames: colorsStyleKitNames ?? BFWStyleKit.styleKitNames(),
+            drawingsStyleKitNames: drawingsStyleKitNames ?? BFWStyleKit.styleKitNames() as! [String],
+            colorsStyleKitNames: colorsStyleKitNames ?? BFWStyleKit.styleKitNames() as! [String],
             pathScaleDict: pathScaleDict,
             tintColor: UIColor.black, // TODO: get color from UI
             duration: duration ?? 0.0,
-            framesPerSecond: framesPerSecond ?? 00
+            framesPerSecond: framesPerSecond ?? 0.0
         )
     }
 

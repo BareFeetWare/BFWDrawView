@@ -32,7 +32,7 @@ class ExporterViewController: UITableViewController {
 
     // MARK: - Private variables
 
-    fileprivate var resolutions: [String: Double]? {
+    fileprivate var resolutions: DrawingExport.PathScale? {
         return exporter?.resolutions ?? exporter?.defaultResolutions
     }
 
@@ -123,7 +123,7 @@ class ExporterViewController: UITableViewController {
             if let framesPerSecondText = framesPerSecondTextField?.text,
                 let framesPerSecond = Double(framesPerSecondText)
             {
-                exporter.framesPerSecond = framesPerSecond
+                exporter.framesPerSecond = CGFloat(framesPerSecond)
             }
         }
     }
@@ -205,7 +205,7 @@ extension ExporterViewController: ChoicesDelegate {
     func choicesViewController(_ choicesViewController: ChoicesViewController, didChange choice: Choice) {
         if activeListCell == resolutionsCell {
             if choice.chosen {
-                exporter?.resolutions?[choice.title] = choice.value as? Double
+                exporter?.resolutions?[choice.title] = choice.value as? CGFloat
             } else {
                 let _ = exporter?.resolutions?.removeValue(forKey: choice.title)
             }
