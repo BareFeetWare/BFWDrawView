@@ -292,7 +292,7 @@
         <!--Animation Speed Test-->
         <scene sceneID="I9k-vf-04M">
             <objects>
-                <viewController id="qF8-s5-kuv" customClass="AnimationCountViewController" sceneMemberID="viewController">
+                <viewController id="qF8-s5-kuv" customClass="AnimationCountViewController" customModule="BFWDrawView" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cze-sB-jnU"/>
                         <viewControllerLayoutGuide type="bottom" id="JPa-ee-cKP"/>
@@ -344,7 +344,7 @@
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="restart:" destination="qF8-s5-kuv" eventType="touchUpInside" id="U2g-QK-bxU"/>
+                                    <action selector="restart:" destination="qF8-s5-kuv" eventType="touchUpInside" id="3x7-Wr-fLF"/>
                                 </connections>
                             </button>
                         </subviews>

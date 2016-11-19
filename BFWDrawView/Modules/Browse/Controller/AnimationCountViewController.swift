@@ -3,90 +3,75 @@
 //  BFWDrawView
 //
 //  Created by Tom Brodhurst-Hill on 26/07/2015.
-//  Copyright (c) 2015 BareFeetWare. All rights reserved.
+//  Copyright (c) 2015 BareFeetWare.
 //
 
-#import "AnimationCountViewController.h"
-#import "BFWAnimationView.h"
+import UIKit
 
-@interface AnimationCountViewController () <UITextFieldDelegate>
-
-@property (strong, nonatomic) BFWStyleKitDrawing *drawing;
-
-@property (weak, nonatomic) IBOutlet BFWAnimationView *animationView;
-@property (weak, nonatomic) IBOutlet UITextField *desiredFramesPerSecondTextField;
-@property (weak, nonatomic) IBOutlet UILabel *drawnFramesPerSecondLabel;
-@property (strong, nonatomic) NSDate *startDate;
-@property (assign, nonatomic) NSUInteger startCount;
-@property (strong, nonatomic) NSString *animationKeyPath;
-
-@end
-
-static double const defaultDesiredFramesPerSecond = 60.0;
-
-@implementation AnimationCountViewController
-
-#pragma mark - dealloc
-
-- (void)dealloc
-{
-    [self stopObserving];
-}
-
-#pragma mark - UIViewController
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.animationView.drawing = self.drawing;
-    self.animationView.framesPerSecond = defaultDesiredFramesPerSecond;
-    self.desiredFramesPerSecondTextField.placeholder = [NSString stringWithFormat:@"%1.1f", defaultDesiredFramesPerSecond];
-    [self startObserving];
-}
-
-#pragma mark - KVO
-
-- (NSString *)animationKeyPath
-{
-    if (!_animationKeyPath) {
-        _animationKeyPath = NSStringFromSelector(@selector(animation));
+class AnimationCountViewController: UIViewController {
+    
+    // MARK: - Variables
+    
+    var drawing: BFWStyleKitDrawing!
+    
+    @IBOutlet var animationView: BFWAnimationView!
+    @IBOutlet var desiredFramesPerSecondTextField: UITextField?
+    @IBOutlet var drawnFramesPerSecondLabel: UILabel?
+    
+    lazy var animationKeyPath: String = {
+        #keyPath(AnimationView.animation)
+    }()
+    
+    struct Default {
+        static let desiredFramesPerSecond: CGFloat = 60.0
     }
-    return _animationKeyPath;
-}
-
-- (void)startObserving
-{
-    [self.animationView addObserver:self
-                         forKeyPath:self.animationKeyPath
-                            options:0
-                            context:nil];
-}
-
-- (void)stopObserving
-{
-    [self.animationView removeObserver:self
-                            forKeyPath:self.animationKeyPath];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context
-{
-    if ([keyPath isEqualToString:self.animationKeyPath]) {
-        self.drawnFramesPerSecondLabel.text = [NSString stringWithFormat:@"%1.1f", round(self.animationView.drawnFramesPerSecond * 10.0) / 10.0];
+    
+    // MARK: - Init
+    
+    deinit {
+        stopObserving()
     }
+    
+    // MARK: - UIViewController
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        animationView?.drawing = drawing
+        animationView?.framesPerSecond = Default.desiredFramesPerSecond
+        desiredFramesPerSecondTextField?.placeholder = String(format: "%1.1f", Default.desiredFramesPerSecond)
+        startObserving()
+    }
+    
+    // MARK: - KVO
+    
+    fileprivate func startObserving() {
+        animationView.addObserver(self,
+                                  forKeyPath: animationKeyPath,
+                                  options: [],
+                                  context: nil)
+    }
+    
+    fileprivate func stopObserving() {
+        animationView.removeObserver(self,
+                                     forKeyPath: animationKeyPath)
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?,
+                               of object: Any?,
+                               change: [NSKeyValueChangeKey : Any]?,
+                               context: UnsafeMutableRawPointer?)
+    {
+        if keyPath == animationKeyPath {
+            drawnFramesPerSecondLabel?.text = String(format: "%1.1f", round(animationView.drawnFramesPerSecond * 10.0) / 10.0)
+        }
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func restart(_ sender: UIButton) {
+        view.endEditing(false)
+        animationView.framesPerSecond = desiredFramesPerSecondTextField?.text.map { CGFloat(Double($0)!) } ?? Default.desiredFramesPerSecond
+        animationView.restart()
+    }
+    
 }
-
-#pragma mark - UITextFieldDelegate
-
-#pragma mark - actions
-
-- (IBAction)restart:(id)sender
-{
-    [self.view endEditing:NO];
-    self.animationView.framesPerSecond = self.desiredFramesPerSecondTextField.text.doubleValue ?: defaultDesiredFramesPerSecond;
-    [self.animationView restart];
-}
-
-@end

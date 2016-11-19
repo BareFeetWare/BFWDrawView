@@ -2,7 +2,6 @@
 //  Use this file to import your target's public headers that you would like to expose to Swift.
 //
 
-#import "AnimationCountViewController.h"
 #import "BFWAnimationView.h"
 #import "BFWDrawButton.h"
 #import "BFWDrawView.h"
