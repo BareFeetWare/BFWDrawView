@@ -31,7 +31,7 @@ class Exporter {
     
     var defaultResolutions: DrawingExport.PathScale {
         var resolutions: DrawingExport.PathScale
-        if (isAndroid ?? true) {
+        if isAndroid ?? true {
             resolutions = [
                 "drawable-ldpi": 0.75,
                 "drawable-mdpi": 1.0,

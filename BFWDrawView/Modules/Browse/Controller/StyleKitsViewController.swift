@@ -31,7 +31,7 @@ class StyleKitsViewController: UITableViewController {
                     selectedStyleKitNames?.append(styleKitName)
                 }
             } else {
-                if (isInList) {
+                if isInList {
                     if let index = selectedStyleKitNames?.index(of: styleKitName) {
                         selectedStyleKitNames?.remove(at: index)
                     }
