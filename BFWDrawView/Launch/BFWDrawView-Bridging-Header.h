@@ -3,7 +3,6 @@
 //
 
 #import "BFWAnimationView.h"
-#import "BFWDrawButton.h"
 #import "BFWDrawView.h"
 #import "BFWStyleKit.h"
 #import "BFWStyleKitDrawing.h"

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2023CEEA1AFE2BAE00BBA2FA /* UIColor+BFW_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2023CEE91AFE2BAE00BBA2FA /* UIColor+BFW_Tests.m */; };
 		E20357981A7F5144002BC3F4 /* BFWAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E20357861A7F5144002BC3F4 /* BFWAnimationView.m */; };
-		E20357991A7F5144002BC3F4 /* BFWDrawButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E20357881A7F5144002BC3F4 /* BFWDrawButton.m */; };
 		E203579A1A7F5144002BC3F4 /* BFWDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = E203578A1A7F5144002BC3F4 /* BFWDrawView.m */; };
 		E20AA0C21C677A5200B8EEF7 /* BFWStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E20AA0B11C677A5200B8EEF7 /* BFWStyleKit.m */; };
 		E20AA0C31C677A5200B8EEF7 /* BFWStyleKitDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = E20AA0B31C677A5200B8EEF7 /* BFWStyleKitDrawing.m */; };
@@ -32,7 +31,6 @@
 		E20FADC51C5C73D300C78BDC /* ExportersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADC41C5C73D300C78BDC /* ExportersViewController.swift */; };
 		E20FADC81C5D862000C78BDC /* ExportersRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADC71C5D862000C78BDC /* ExportersRoot.swift */; };
 		E211058B1A7E003A0025BDA0 /* NSString+BFW_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E211058A1A7E003A0025BDA0 /* NSString+BFW_Tests.m */; };
-		E21CEF141B0B2A49006B137F /* UIView+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E21CEF131B0B2A49006B137F /* UIView+BFW.m */; };
 		E221178C1AF4FE40007B515F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E22117881AF4FE40007B515F /* Images.xcassets */; };
 		E221178E1AF4FE40007B515F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E221178A1AF4FE40007B515F /* LaunchScreen.xib */; };
 		E221178F1AF4FE40007B515F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E221178B1AF4FE40007B515F /* main.m */; };
@@ -67,8 +65,6 @@
 		E200F23F1C55D94E00CD868D /* BFWDrawView-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BFWDrawView-Bridging-Header.h"; sourceTree = "<group>"; };
 		E20357851A7F5144002BC3F4 /* BFWAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWAnimationView.h; sourceTree = "<group>"; };
 		E20357861A7F5144002BC3F4 /* BFWAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWAnimationView.m; sourceTree = "<group>"; };
-		E20357871A7F5144002BC3F4 /* BFWDrawButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawButton.h; sourceTree = "<group>"; };
-		E20357881A7F5144002BC3F4 /* BFWDrawButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawButton.m; sourceTree = "<group>"; };
 		E20357891A7F5144002BC3F4 /* BFWDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawView.h; sourceTree = "<group>"; };
 		E203578A1A7F5144002BC3F4 /* BFWDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawView.m; sourceTree = "<group>"; };
 		E20AA0B01C677A5200B8EEF7 /* BFWStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWStyleKit.h; sourceTree = "<group>"; };
@@ -105,8 +101,6 @@
 		E21105841A7E003A0025BDA0 /* BFWDrawViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BFWDrawViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E21105891A7E003A0025BDA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E211058A1A7E003A0025BDA0 /* NSString+BFW_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+BFW_Tests.m"; sourceTree = "<group>"; };
-		E21CEF121B0B2A49006B137F /* UIView+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+BFW.h"; sourceTree = "<group>"; };
-		E21CEF131B0B2A49006B137F /* UIView+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BFW.m"; sourceTree = "<group>"; };
 		E22117881AF4FE40007B515F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E221178A1AF4FE40007B515F /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		E221178B1AF4FE40007B515F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -174,14 +168,10 @@
 				E2E6D83F1D095E0700C0A87D /* AnimationView.swift */,
 				E20357851A7F5144002BC3F4 /* BFWAnimationView.h */,
 				E20357861A7F5144002BC3F4 /* BFWAnimationView.m */,
-				E20357871A7F5144002BC3F4 /* BFWDrawButton.h */,
-				E20357881A7F5144002BC3F4 /* BFWDrawButton.m */,
 				E20357891A7F5144002BC3F4 /* BFWDrawView.h */,
 				E203578A1A7F5144002BC3F4 /* BFWDrawView.m */,
 				E27F0E921DDAE0BF00640D6F /* DrawingButton.swift */,
 				E2A9E5F71CD47AAE00B2641E /* DrawingView.swift */,
-				E21CEF121B0B2A49006B137F /* UIView+BFW.h */,
-				E21CEF131B0B2A49006B137F /* UIView+BFW.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -496,7 +486,6 @@
 			files = (
 				E20FADB31C5B3F5700C78BDC /* StyleKitsViewController.swift in Sources */,
 				E2DAEEEA1C6ACB4D0017671F /* DrawingCell.swift in Sources */,
-				E20357991A7F5144002BC3F4 /* BFWDrawButton.m in Sources */,
 				E20FADC51C5C73D300C78BDC /* ExportersViewController.swift in Sources */,
 				E2A9E5F81CD47AAE00B2641E /* DrawingView.swift in Sources */,
 				E20357981A7F5144002BC3F4 /* BFWAnimationView.m in Sources */,
@@ -514,7 +503,6 @@
 				E20AA0CA1C677A5200B8EEF7 /* UIImage+BFW.m in Sources */,
 				E20FADC81C5D862000C78BDC /* ExportersRoot.swift in Sources */,
 				E20AA0C21C677A5200B8EEF7 /* BFWStyleKit.m in Sources */,
-				E21CEF141B0B2A49006B137F /* UIView+BFW.m in Sources */,
 				E20AA0C61C677A5200B8EEF7 /* NSInvocation+BFW.m in Sources */,
 				E20FADB21C5B3F5700C78BDC /* DrawingViewController.swift in Sources */,
 				E20AA0C71C677A5200B8EEF7 /* NSObject+BFWStyleKit.m in Sources */,
