@@ -10,15 +10,15 @@
 import UIKit
 
 @IBDesignable class DrawingButton: UIButton {
-
+    
     // MARK: - Variables
-
-    private var iconDrawViewForStateDict = [NSNumber: DrawingView]()
-    private var backgroundDrawViewForStateDict = [NSNumber: DrawingView]()
-    private var shadowForStateDict = [NSNumber: NSShadow]()
+    
+    private var iconDrawViewForStateDict = [UInt: DrawingView]()
+    private var backgroundDrawViewForStateDict = [UInt: DrawingView]()
+    private var shadowForStateDict = [UInt: NSShadow]()
     private var needsUpdateShadow = true
     private var backgroundSize = CGSize.zero
-
+    
     @IBInspectable var iconName: String? {
         didSet {
             setNeedsUpdateView()
@@ -50,32 +50,32 @@ import UIKit
     // MARK: - Accessors for state
     
     func iconDrawView(for state: UIControlState) -> DrawingView? {
-        return iconDrawViewForStateDict[NSNumber(value: state.rawValue)]
+        return iconDrawViewForStateDict[state.rawValue]
     }
     
     func backgroundDrawView(for state: UIControlState) -> DrawingView? {
-        return backgroundDrawViewForStateDict[NSNumber(value: state.rawValue)]
+        return backgroundDrawViewForStateDict[state.rawValue]
     }
     
     func setIconDrawView(_ drawView: DrawingView, for state: UIControlState) {
-        iconDrawViewForStateDict.setValueOrRemoveNil(drawView, forKey: NSNumber(value: state.rawValue))
+        iconDrawViewForStateDict.setValueOrRemoveNil(drawView, forKey: state.rawValue)
         setImage(drawView.image, for: state)
     }
     
     func setBackgroundDrawView(_ drawView: DrawingView, for state: UIControlState) {
-        backgroundDrawViewForStateDict.setValueOrRemoveNil(drawView.canDraw ? drawView : nil, forKey: NSNumber(value: state.rawValue))
+        backgroundDrawViewForStateDict.setValueOrRemoveNil(drawView.canDraw ? drawView : nil, forKey: state.rawValue)
         setNeedsUpdateBackgrounds()
     }
     
     func shadow(for state: UIControlState) -> NSShadow? {
-        return shadowForStateDict[NSNumber(value: state.rawValue)]
+        return shadowForStateDict[state.rawValue]
     }
     
     func setShadow(_ shadow: NSShadow, for state: UIControlState) {
-        shadowForStateDict.setValueOrRemoveNil(shadow, forKey: NSNumber(value: state.rawValue))
+        shadowForStateDict.setValueOrRemoveNil(shadow, forKey: state.rawValue)
         setNeedsUpdateShadow()
     }
-
+    
     func setNeedsUpdateShadow() {
         needsUpdateShadow = true
         setNeedsDisplay()
@@ -94,7 +94,7 @@ import UIKit
     
     func updateBackgrounds() {
         for state: UIControlState in [.normal, .disabled, .selected, .highlighted] {
-            if let background = backgroundDrawViewForStateDict[NSNumber(value: state.rawValue)] {
+            if let background = backgroundDrawViewForStateDict[state.rawValue] {
                 background.frame = bounds
                 setBackgroundImage(background.image, for: state)
             }
@@ -172,34 +172,34 @@ import UIKit
             setIconDrawView(icon, for: state)
         }
     }
-
     
-    func makeIconDrawViews(from stateNameDict: [NSNumber: String], styleKit: String) {
+    
+    func makeIconDrawViews(from stateNameDict: [UInt: String], styleKit: String) {
         iconDrawViewForStateDict.removeAll()
-        for (stateNumber, drawingName) in stateNameDict {
+        for (stateInt, drawingName) in stateNameDict {
             if let drawing = BFWStyleKit.drawing(forStyleKitName: styleKit, drawingName: drawingName) {
                 let icon = DrawingView(frame: drawing.intrinsicFrame)
                 icon.drawing = drawing
                 icon.tintColor = tintColor
                 icon.contentMode = .redraw
-                setIconDrawView(icon, for: UIControlState(rawValue: stateNumber.uintValue))
+                setIconDrawView(icon, for: UIControlState(rawValue: stateInt))
             }
         }
     }
     
-    func makeBackgroundDrawViews(from stateNameDict: [NSNumber: String], styleKit: String) {
+    func makeBackgroundDrawViews(from stateNameDict: [UInt: String], styleKit: String) {
         backgroundDrawViewForStateDict.removeAll()
-        for (stateNumber, drawingName) in stateNameDict {
+        for (stateInt, drawingName) in stateNameDict {
             let background = DrawingView(frame: self.bounds)
             background.name = drawingName
             background.styleKit = styleKit
             background.contentMode = .redraw
             setBackgroundDrawView(background,
-                for: UIControlState(rawValue: stateNumber.uintValue))
+                                  for: UIControlState(rawValue: stateInt))
         }
     }
-
-
+    
+    
     // MARK: - UpdateView
     
     private func setNeedsUpdateView() {
@@ -213,7 +213,7 @@ import UIKit
         if let iconName = iconName,
             let iconStyleKit = iconStyleKit
         {
-            makeIconDrawViews(from: [NSNumber(value: UIControlState.normal.rawValue): iconName],
+            makeIconDrawViews(from: [UIControlState.normal.rawValue: iconName],
                               styleKit: iconStyleKit)
         }
     }
