@@ -58,12 +58,14 @@ import UIKit
     }
     
     func setIconDrawView(_ drawView: DrawingView, for state: UIControlState) {
-        iconDrawViewForStateDict.setValueOrRemoveNil(drawView, forKey: state.rawValue)
+        iconDrawViewForStateDict.setValueOrRemoveNil(drawView,
+                                                     forKey: state.rawValue)
         setImage(drawView.image, for: state)
     }
     
     func setBackgroundDrawView(_ drawView: DrawingView, for state: UIControlState) {
-        backgroundDrawViewForStateDict.setValueOrRemoveNil(drawView.canDraw ? drawView : nil, forKey: state.rawValue)
+        backgroundDrawViewForStateDict.setValueOrRemoveNil(drawView.canDraw ? drawView : nil,
+                                                           forKey: state.rawValue)
         setNeedsUpdateBackgrounds()
     }
     
@@ -174,10 +176,14 @@ import UIKit
     }
     
     
-    func makeIconDrawViews(from stateNameDict: [UInt: String], styleKit: String) {
+    func makeIconDrawViews(from stateNameDict: [UInt: String],
+                           styleKit: String)
+    {
         iconDrawViewForStateDict.removeAll()
         for (stateInt, drawingName) in stateNameDict {
-            if let drawing = BFWStyleKit.drawing(forStyleKitName: styleKit, drawingName: drawingName) {
+            if let drawing = BFWStyleKit.drawing(forStyleKitName: styleKit,
+                                                 drawingName: drawingName)
+            {
                 let icon = DrawingView(frame: drawing.intrinsicFrame)
                 icon.drawing = drawing
                 icon.tintColor = tintColor
@@ -187,7 +193,9 @@ import UIKit
         }
     }
     
-    func makeBackgroundDrawViews(from stateNameDict: [UInt: String], styleKit: String) {
+    func makeBackgroundDrawViews(from stateNameDict: [UInt: String],
+                                 styleKit: String)
+    {
         backgroundDrawViewForStateDict.removeAll()
         for (stateInt, drawingName) in stateNameDict {
             let background = DrawingView(frame: self.bounds)
@@ -198,7 +206,6 @@ import UIKit
                                   for: UIControlState(rawValue: stateInt))
         }
     }
-    
     
     // MARK: - UpdateView
     
