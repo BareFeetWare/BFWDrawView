@@ -70,7 +70,7 @@ class AnimationCountViewController: UIViewController {
     
     @IBAction func restart(_ sender: UIButton) {
         view.endEditing(false)
-        animationView.framesPerSecond = desiredFramesPerSecondTextField?.text.map { CGFloat(Double($0)!) } ?? Default.desiredFramesPerSecond
+        animationView.framesPerSecond = desiredFramesPerSecondTextField?.text.flatMap { Double($0) }.flatMap { CGFloat($0) } ?? Default.desiredFramesPerSecond
         animationView.restart()
     }
     
