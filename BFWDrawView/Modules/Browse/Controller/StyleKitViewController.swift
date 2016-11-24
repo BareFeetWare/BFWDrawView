@@ -44,7 +44,7 @@ class StyleKitViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView,
-        cellForRowAt indexPath: IndexPath) -> UITableViewCell
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let drawingName = drawingNames[indexPath.row]
         let drawing = styleKit?.drawing(forName: drawingName)
@@ -55,8 +55,7 @@ class StyleKitViewController: UITableViewController {
             for: indexPath) as! DrawingCell
         cell.textLabel?.text = drawingName
         var detailComponents = methodParameters
-        cell.drawView?.styleKit = styleKit?.name
-        cell.drawView?.name = drawingName
+        cell.drawView?.drawing = styleKit?.drawing(forName: drawingName)
         if let drawnSize = drawing?.drawnSize {
             if !drawnSize.equalTo(CGSize.zero) {
                 detailComponents?.append("size = {\(drawnSize.width), \(drawnSize.height)}")

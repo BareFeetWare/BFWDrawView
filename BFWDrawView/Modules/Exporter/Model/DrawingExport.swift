@@ -43,9 +43,9 @@ class DrawingExport {
     
     class func drawingView(name drawingName: String,
                            styleKit: String,
-                           tintColor: UIColor) -> BFWDrawView?
+                           tintColor: UIColor) -> DrawingView?
     {
-        var drawingView: BFWDrawView?
+        var drawingView: DrawingView?
         if let drawing = BFWStyleKit.drawing(forStyleKitName: styleKit,
                                              drawingName: drawingName)
         {
@@ -67,12 +67,12 @@ class DrawingExport {
         return drawingView
     }
     
-    class func modify(drawingView: BFWDrawView,
+    class func modify(drawingView: DrawingView,
                       with derivedDict: [String: Any])
     {
         // TODO: allow for "Tint Color" & "tintColor"
         if let tintColorString = derivedDict[Key.tintColor.rawValue] as? String,
-            let styleKit = BFWStyleKit(forName: drawingView.styleKit)
+            let styleKit = drawingView.drawing?.styleKit
         {
             drawingView.tintColor = styleKit.color(forName: tintColorString)
         }
@@ -86,7 +86,7 @@ class DrawingExport {
             let animationView = drawingView as? AnimationView
         {
             animationView.animation = animation
-            animationView.paused = true; // so it only creates one image
+            animationView.isPaused = true; // so it only creates one image
         }
     }
     
@@ -200,7 +200,7 @@ class DrawingExport {
         }
     }
     
-    class func writeImages(from drawingView: BFWDrawView,
+    class func writeImages(from drawingView: DrawingView,
                            to directory: URL,
                            pathScaleDict: PathScale,
                            isOpaque: Bool,
@@ -236,9 +236,9 @@ class DrawingExport {
                                                     isOpaque: isOpaque,
                                                     to: fileUrl)
             } else {
-                success = drawingView.writeImage(atScale: scale,
+                success = drawingView.writeImage(at: scale,
                                                  isOpaque: isOpaque,
-                                                 toFile: fileUrl.path)
+                                                 to: fileUrl)
             }
             if success {
                 excludeFileNames.insert(fileNameLowercaseWords)

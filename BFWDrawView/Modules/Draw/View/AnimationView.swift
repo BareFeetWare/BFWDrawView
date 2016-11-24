@@ -178,9 +178,9 @@ import UIKit
     {
         var success = false
         if isPaused {
-            success = writeImage(atScale: scale,
+            success = writeImage(at: scale,
                                  isOpaque: isOpaque,
-                                 toFile: fileURL.path)
+                                 to: fileURL)
         } else {
             let frameCount = duration * framesPerSecond
             let digits = Int(log10(frameCount) + 1)
@@ -192,9 +192,9 @@ import UIKit
                 animation = Double(frameN) / frameCount
                 let fileName = String(format: nameFormat, frameN)
                 let frameURL = directory.appendingPathComponent(fileName).appendingPathExtension(fileExtension)
-                let frameSuccess = writeImage(atScale: scale,
+                let frameSuccess = writeImage(at: scale,
                                               isOpaque: isOpaque,
-                                              toFile: frameURL.path)
+                                              to: frameURL)
                 success = (success || frameN == 0) && frameSuccess
             }
         }
@@ -226,21 +226,19 @@ import UIKit
         }
     }
     
-}
-
-extension AnimationView {
-    
     // MARK: - protocols for UIView+BFW
     
-    func copyProperties(from view: AnimationView) {
+    override func copyProperties(from view: UIView) {
         super.copyProperties(from: view)
-        animation = view.animation
-        start = view.start
-        end = view.end
-        duration = view.duration
-        cycles = view.cycles
-        isPaused = view.isPaused
-        framesPerSecond = view.framesPerSecond
+        if let view = view as? AnimationView {
+            animation = view.animation
+            start = view.start
+            end = view.end
+            duration = view.duration
+            cycles = view.cycles
+            isPaused = view.isPaused
+            framesPerSecond = view.framesPerSecond
+        }
     }
     
 }

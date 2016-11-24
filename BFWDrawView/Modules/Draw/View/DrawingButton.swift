@@ -199,8 +199,7 @@ import UIKit
         backgroundDrawViewForStateDict.removeAll()
         for (stateInt, drawingName) in stateNameDict {
             let background = DrawingView(frame: self.bounds)
-            background.name = drawingName
-            background.styleKit = styleKit
+            background.drawing = BFWStyleKit.drawing(forStyleKitName: styleKit, drawingName: drawingName)
             background.contentMode = .redraw
             setBackgroundDrawView(background,
                                   for: UIControlState(rawValue: stateInt))
