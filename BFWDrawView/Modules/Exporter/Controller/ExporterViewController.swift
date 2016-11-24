@@ -58,8 +58,8 @@ class ExporterViewController: UITableViewController {
             directoryTextField?.placeholder = exporter.defaultDirectoryURL.path
             updateStyleKitCells()
             includeAnimationsSwitch?.isOn = exporter.includeAnimations ?? false
-            durationTextField?.text = exporter.duration == nil ? nil : String(describing: exporter.duration)
-            framesPerSecondTextField?.text = exporter.framesPerSecond == nil ? nil : String(describing: exporter.framesPerSecond)
+            durationTextField?.text = exporter.duration.map { String(describing: $0) }
+            framesPerSecondTextField?.text = exporter.framesPerSecond.map { String(describing: $0) }
         }
     }
     
@@ -115,15 +115,15 @@ class ExporterViewController: UITableViewController {
                 exporter.exportDirectoryURL = URL(fileURLWithPath: directoryURLString, isDirectory: true)
             }
             exporter.includeAnimations = includeAnimationsSwitch?.isOn
-            if let durationText = durationTextField?.text,
+            if let durationText = durationTextField?.text?.nilIfEmpty ?? durationTextField?.placeholder?.nilIfEmpty,
                 let duration = TimeInterval(durationText)
             {
                 exporter.duration = duration
             }
-            if let framesPerSecondText = framesPerSecondTextField?.text,
+            if let framesPerSecondText = framesPerSecondTextField?.text?.nilIfEmpty ?? framesPerSecondTextField?.placeholder?.nilIfEmpty,
                 let framesPerSecond = Double(framesPerSecondText)
             {
-                exporter.framesPerSecond = CGFloat(framesPerSecond)
+                exporter.framesPerSecond = framesPerSecond
             }
         }
     }
@@ -140,6 +140,7 @@ class ExporterViewController: UITableViewController {
     @IBAction func export(_ sender: AnyObject) {
         view.endEditing(true)
         writeViewToModel()
+        // TODO: Don't save placeholder values.
         exporter?.root.saveExporters()
         exporter?.export()
         let alertView = UIAlertView(
@@ -212,4 +213,12 @@ extension ExporterViewController: ChoicesDelegate {
             updateResolutionsCell()
         }
     }
+}
+
+private extension String {
+    
+    var nilIfEmpty: String? {
+        return isEmpty ? nil : self
+    }
+    
 }

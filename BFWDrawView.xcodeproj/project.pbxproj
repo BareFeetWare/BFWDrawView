@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2023CEEA1AFE2BAE00BBA2FA /* UIColor+BFW_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2023CEE91AFE2BAE00BBA2FA /* UIColor+BFW_Tests.m */; };
-		E20357981A7F5144002BC3F4 /* BFWAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E20357861A7F5144002BC3F4 /* BFWAnimationView.m */; };
 		E203579A1A7F5144002BC3F4 /* BFWDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = E203578A1A7F5144002BC3F4 /* BFWDrawView.m */; };
 		E20AA0C21C677A5200B8EEF7 /* BFWStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E20AA0B11C677A5200B8EEF7 /* BFWStyleKit.m */; };
 		E20AA0C31C677A5200B8EEF7 /* BFWStyleKitDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = E20AA0B31C677A5200B8EEF7 /* BFWStyleKitDrawing.m */; };
@@ -63,8 +62,6 @@
 /* Begin PBXFileReference section */
 		2023CEE91AFE2BAE00BBA2FA /* UIColor+BFW_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BFW_Tests.m"; sourceTree = "<group>"; };
 		E200F23F1C55D94E00CD868D /* BFWDrawView-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BFWDrawView-Bridging-Header.h"; sourceTree = "<group>"; };
-		E20357851A7F5144002BC3F4 /* BFWAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWAnimationView.h; sourceTree = "<group>"; };
-		E20357861A7F5144002BC3F4 /* BFWAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWAnimationView.m; sourceTree = "<group>"; };
 		E20357891A7F5144002BC3F4 /* BFWDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDrawView.h; sourceTree = "<group>"; };
 		E203578A1A7F5144002BC3F4 /* BFWDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWDrawView.m; sourceTree = "<group>"; };
 		E20AA0B01C677A5200B8EEF7 /* BFWStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWStyleKit.h; sourceTree = "<group>"; };
@@ -166,8 +163,6 @@
 			isa = PBXGroup;
 			children = (
 				E2E6D83F1D095E0700C0A87D /* AnimationView.swift */,
-				E20357851A7F5144002BC3F4 /* BFWAnimationView.h */,
-				E20357861A7F5144002BC3F4 /* BFWAnimationView.m */,
 				E20357891A7F5144002BC3F4 /* BFWDrawView.h */,
 				E203578A1A7F5144002BC3F4 /* BFWDrawView.m */,
 				E27F0E921DDAE0BF00640D6F /* DrawingButton.swift */,
@@ -488,7 +483,6 @@
 				E2DAEEEA1C6ACB4D0017671F /* DrawingCell.swift in Sources */,
 				E20FADC51C5C73D300C78BDC /* ExportersViewController.swift in Sources */,
 				E2A9E5F81CD47AAE00B2641E /* DrawingView.swift in Sources */,
-				E20357981A7F5144002BC3F4 /* BFWAnimationView.m in Sources */,
 				E29917041AF4FEE500F0DEDE /* SampleStyleKit.m in Sources */,
 				E20FADB41C5B3F5700C78BDC /* StyleKitViewController.swift in Sources */,
 				E29478011C6183CD001F78DA /* DrawingExport.swift in Sources */,

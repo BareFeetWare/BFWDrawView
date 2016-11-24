@@ -8,8 +8,7 @@
 
 import UIKit
 
-/// AnimationView is a Swift class that will eventually replace BFWAnimationView
-@IBDesignable class AnimationView: BFWAnimationView {
+@IBDesignable class AnimationView: DrawingView {
 
     enum Curve: Int {
         
@@ -40,6 +39,53 @@ import UIKit
         }
     }
     
+    // MARK: - Variables
+    
+    /// Fraction 0.0 to 1.0. Set internally but exposed for storyboard preview.
+    @IBInspectable dynamic var animation = 0.0 {
+        didSet {
+            updateArgument(forParameter: "animation")
+            setNeedsDisplay()
+        }
+    }
+    
+    /// Fraction 0.0 to 1.0. Start of animation.
+    @IBInspectable var start = 0.0
+    
+    /// Fraction 0.0 to 1.0. End of animation.
+    @IBInspectable var end = 1.0
+    
+    @IBInspectable var duration: TimeInterval = 3.0
+    
+    /// Default 0 = infinite cycles (repetitions).
+    @IBInspectable var cycles = 0.0
+    
+    @IBInspectable var isPaused: Bool {
+        get {
+            return pausedDate != nil
+        }
+        set {
+            if isPaused != newValue {
+                if newValue {
+                    pausedDate = Date()
+                    timer?.invalidate()
+                    timer = nil
+                } else {
+                    if let _ = startDate,
+                        let pausedDate = pausedDate
+                    {
+                        let morePausedTimeInterval = NSDate().timeIntervalSince(pausedDate)
+                        pausedTimeInterval += morePausedTimeInterval
+                    }
+                    pausedDate = nil
+                    startTimerIfNeeded()
+                }
+            }
+        }
+    }
+    
+    var framesPerSecond = 30.0
+
     var curve: Curve = .linear
     
     @IBInspectable var curve_: Int {
@@ -51,14 +97,150 @@ import UIKit
         }
     }
     
-    // Overriding BFWAnimationView
+    // MARK: Public diagnostic variables
+
+    var drawnFramesPerSecond: Double {
+        var framesPerSecond = 0.0
+        if let startDate = startDate {
+            let interval = NSDate().timeIntervalSince(startDate)
+            if interval > 0 {
+                framesPerSecond = Double(drawnFrameCount) / interval
+            }
+        }
+        return framesPerSecond
+    }
     
-    var animationBetweenStartAndEnd: CGFloat {
+    // MARK: Private variables
+    
+    fileprivate weak var timer: Timer? // Weak because NSRunLoop holds a strong reference
+    fileprivate var startDate: Date?
+    fileprivate var pausedDate: Date?
+    fileprivate var pausedTimeInterval: TimeInterval = 0.0
+    fileprivate var finished = false
+    fileprivate var drawnFrameCount: UInt = 0 // to count actual frames drawn
+    
+    override var animationBetweenStartAndEnd: CGFloat {
         var curved = curve.function(animation)
         if start != 0.0 || end != 0.0 {
             curved = start + curved * (end - start)
         }
         return CGFloat(curved)
+    }
+    
+    fileprivate var isAnimation: Bool {
+        return (parameters as? [String])?.contains("animation") ?? false
+    }
+    
+    // MARK: - Animation
+    
+    func restart() {
+        pausedDate = nil
+        timer?.invalidate()
+        timer = nil
+        finished = false
+        startDate = nil
+        startTimerIfNeeded()
+    }
+    
+    fileprivate func startTimerIfNeeded() {
+        if timer == nil && !isPaused && !finished && isAnimation {
+            if startDate == nil {
+                startDate = Date()
+                drawnFrameCount = 0
+            }
+            timer = Timer.scheduledTimer(timeInterval: 1.0 / Double(framesPerSecond),
+                                         target: self,
+                                         selector: #selector(tick(timer:)),
+                                         userInfo: nil,
+                                         repeats: true)
+        }
+    }
+    
+    func tick(timer: Timer) {
+        let elapsed = NSDate().timeIntervalSince(startDate!) - pausedTimeInterval
+        let complete = elapsed / duration
+        finished = cycles > 0.0 && complete > cycles
+        if isPaused || finished || superview == nil {
+            timer.invalidate()
+            self.timer = nil
+            if finished {
+                animation = 1.0 // Ensure it draws final frame
+            }
+        } else {
+            // Get the fractional part of the current time (ensures 0..1 interval)
+            animation = complete - floor(complete)
+        }
+    }
+    
+    func writeImages(at scale: CGFloat,
+                     isOpaque: Bool,
+                     to fileURL: URL) -> Bool
+    {
+        var success = false
+        if isPaused {
+            success = writeImage(atScale: scale,
+                                 isOpaque: isOpaque,
+                                 toFile: fileURL.path)
+        } else {
+            let frameCount = duration * framesPerSecond
+            let digits = Int(log10(frameCount) + 1)
+            let fileExtension = fileURL.pathExtension
+            let baseName = fileURL.deletingPathExtension().lastPathComponent
+            let nameFormat = baseName + "%0\(digits)d"
+            let directory = fileURL.deletingLastPathComponent()
+            for frameN in 0 ..< Int(frameCount) {
+                animation = Double(frameN) / frameCount
+                let fileName = String(format: nameFormat, frameN)
+                let frameURL = directory.appendingPathComponent(fileName).appendingPathExtension(fileExtension)
+                let frameSuccess = writeImage(atScale: scale,
+                                              isOpaque: isOpaque,
+                                              toFile: frameURL.path)
+                success = (success || frameN == 0) && frameSuccess
+            }
+        }
+        return success
+    }
+    
+    // MARK: - UIView
+    
+    override func draw(_ rect: CGRect) {
+        startTimerIfNeeded()
+        drawnFrameCount += 1
+        super.draw(rect)
+    }
+    
+    override var isHidden: Bool {
+        get {
+            return super.isHidden
+        }
+        set {
+            let wasHidden = super.isHidden
+            super.isHidden = newValue
+            if newValue != wasHidden {
+                if newValue {
+                    timer?.invalidate()
+                } else {
+                    startTimerIfNeeded()
+                }
+            }
+        }
+    }
+    
+}
+
+extension AnimationView {
+    
+    // MARK: - protocols for UIView+BFW
+    
+    func copyProperties(from view: AnimationView) {
+        super.copyProperties(from: view)
+        animation = view.animation
+        start = view.start
+        end = view.end
+        duration = view.duration
+        cycles = view.cycles
+        isPaused = view.isPaused
+        framesPerSecond = view.framesPerSecond
     }
     
 }

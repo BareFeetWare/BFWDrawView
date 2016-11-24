@@ -14,16 +14,16 @@ class AnimationCountViewController: UIViewController {
     
     var drawing: BFWStyleKitDrawing!
     
-    @IBOutlet var animationView: BFWAnimationView!
+    @IBOutlet var animationView: AnimationView!
     @IBOutlet var desiredFramesPerSecondTextField: UITextField?
     @IBOutlet var drawnFramesPerSecondLabel: UILabel?
     
     lazy var animationKeyPath: String = {
-        #keyPath(AnimationView.animation)
+        return #keyPath(AnimationView.animation)
     }()
     
     struct Default {
-        static let desiredFramesPerSecond: CGFloat = 60.0
+        static let desiredFramesPerSecond = 25.0
     }
     
     // MARK: - Init
@@ -37,7 +37,7 @@ class AnimationCountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         animationView?.drawing = drawing
-        animationView?.framesPerSecond = Default.desiredFramesPerSecond
+        animationView?.framesPerSecond = Double(Default.desiredFramesPerSecond)
         desiredFramesPerSecondTextField?.placeholder = String(format: "%1.1f", Default.desiredFramesPerSecond)
         startObserving()
     }
@@ -70,7 +70,7 @@ class AnimationCountViewController: UIViewController {
     
     @IBAction func restart(_ sender: UIButton) {
         view.endEditing(false)
-        animationView.framesPerSecond = desiredFramesPerSecondTextField?.text.flatMap { Double($0) }.flatMap { CGFloat($0) } ?? Default.desiredFramesPerSecond
+        animationView.framesPerSecond = desiredFramesPerSecondTextField?.text.flatMap { Double($0) } ?? Default.desiredFramesPerSecond
         animationView.restart()
     }
     

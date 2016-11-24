@@ -29,9 +29,9 @@
 @property (nonatomic, readonly) Class styleKitClass;
 @property (nonatomic, assign) BOOL didCheckCanDraw;
 @property (nonatomic, readonly) CGSize drawInFrameSize;
-@property (nonatomic, copy) NSArray *parameters;
 @property (nonatomic, assign) CGRect invokedDrawFrame;
 @property (nonatomic, strong) UIColor *invokedTintColor; // retains reference to tintColor so NSInvocation doesn't crash if the "darken colors" is enabled in System Preferences in iOS 9
+@property (nonatomic, assign) CGFloat invokedAnimation;
 
 @end
 
@@ -222,6 +222,11 @@
         self.invokedTintColor = self.tintColor;
         argument = &_invokedTintColor;
     }
+    else if ([parameter isEqualToString:@"animation"]) {
+        self.invokedAnimation = [self animationBetweenStartAndEnd];
+        argument = &_invokedAnimation;
+    }
+
     return argument;
 }
 

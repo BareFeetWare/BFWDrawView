@@ -41,7 +41,7 @@ class ExportersRoot {
         return dictArray
     }()
     
-    fileprivate var savingDictArray: [[String: AnyObject]] {
+    fileprivate var savingDictArray: [[String: Any]] {
         return exporters.map { exporter in
             exporter.dictionary
         }

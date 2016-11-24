@@ -96,7 +96,7 @@ class DrawingExport {
                               tintColor: UIColor,
                               isAndroid: Bool,
                               duration: TimeInterval,
-                              framesPerSecond: CGFloat)
+                              framesPerSecond: Double)
     {
         var excludeFileNames = Set<String>()
         for styleKitName in styleKitNames {
@@ -207,7 +207,7 @@ class DrawingExport {
                            fileName: String,
                            isAndroid: Bool,
                            duration: TimeInterval,
-                           framesPerSecond: CGFloat,
+                           framesPerSecond: Double,
                            excludeFileNames: inout Set<String>)
     {
         var excludeFileNames = excludeFileNames
@@ -227,14 +227,14 @@ class DrawingExport {
             }
             let fileUrl = baseFileUrl.appendingPathExtension("png")
             let success : Bool
-            if let animationView = drawingView as? BFWAnimationView {
+            if let animationView = drawingView as? AnimationView {
                 if duration > 0 {
                     animationView.duration = duration
                 }
                 animationView.framesPerSecond = framesPerSecond
-                success = animationView.writeImages(atScale: scale,
+                success = animationView.writeImages(at: scale,
                                                     isOpaque: isOpaque,
-                                                    toFile: fileUrl.path)
+                                                    to: fileUrl)
             } else {
                 success = drawingView.writeImage(atScale: scale,
                                                  isOpaque: isOpaque,
@@ -256,7 +256,7 @@ class DrawingExport {
                       pathScaleDict: PathScale,
                       tintColor: UIColor,
                       duration: TimeInterval,
-                      framesPerSecond: CGFloat)
+                      framesPerSecond: Double)
     {
         let fileManager = FileManager.default
         if let existingUrls = try? fileManager.contentsOfDirectory(at: directory,

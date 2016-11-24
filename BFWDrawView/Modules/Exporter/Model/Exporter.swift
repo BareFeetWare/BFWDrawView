@@ -21,7 +21,7 @@ class Exporter {
     var colorsStyleKitNames: [String]?
     var includeAnimations: Bool?
     var duration: TimeInterval?
-    var framesPerSecond: CGFloat?
+    var framesPerSecond: Double?
 
     // MARK: - Public read only variables
     
@@ -68,7 +68,7 @@ class Exporter {
     
     // MARK: - Init
     
-    convenience init(dictionary: [String: AnyObject]) {
+    convenience init(dictionary: [String: Any]) {
         self.init()
         self.name = dictionary[DefaultsKey.name] as? String
         self.isAndroid = dictionary[DefaultsKey.isAndroid] as? Bool
@@ -80,22 +80,22 @@ class Exporter {
         self.colorsStyleKitNames = dictionary[DefaultsKey.colorsStyleKitNames] as? [String]
         self.includeAnimations = dictionary[DefaultsKey.includeAnimations] as? Bool
         self.duration = dictionary[DefaultsKey.duration] as? TimeInterval
-        self.framesPerSecond = dictionary[DefaultsKey.framesPerSecond] as? CGFloat
+        self.framesPerSecond = dictionary[DefaultsKey.framesPerSecond] as? Double
     }
     
     // MARK: - Dictionary for archiving
     
-    var dictionary: [String: AnyObject] {
-        var dictionary = [String: AnyObject]()
-        dictionary[DefaultsKey.name] = self.name as AnyObject?
-        dictionary[DefaultsKey.isAndroid] = self.isAndroid as AnyObject?
-        dictionary[DefaultsKey.resolutions] = self.resolutions as AnyObject?
-        dictionary[DefaultsKey.exportDirectoryURL] = self.exportDirectoryURL?.absoluteString as AnyObject?
-        dictionary[DefaultsKey.drawingsStyleKitNames] = self.drawingsStyleKitNames as AnyObject?
-        dictionary[DefaultsKey.colorsStyleKitNames] = self.colorsStyleKitNames as AnyObject?
-        dictionary[DefaultsKey.includeAnimations] = self.includeAnimations as AnyObject?
-        dictionary[DefaultsKey.duration] = self.duration as AnyObject?
-        dictionary[DefaultsKey.framesPerSecond] = self.framesPerSecond as AnyObject?
+    var dictionary: [String: Any] {
+        var dictionary = [String: Any]()
+        dictionary[DefaultsKey.name] = name
+        dictionary[DefaultsKey.isAndroid] = isAndroid
+        dictionary[DefaultsKey.resolutions] = resolutions
+        dictionary[DefaultsKey.exportDirectoryURL] = exportDirectoryURL?.absoluteString
+        dictionary[DefaultsKey.drawingsStyleKitNames] = drawingsStyleKitNames
+        dictionary[DefaultsKey.colorsStyleKitNames] = colorsStyleKitNames
+        dictionary[DefaultsKey.includeAnimations] = includeAnimations
+        dictionary[DefaultsKey.duration] = duration
+        dictionary[DefaultsKey.framesPerSecond] = framesPerSecond
         return dictionary
     }
     

@@ -25,10 +25,18 @@ IB_DESIGNABLE
 @property (nonatomic, readonly) UIImage *image;
 @property (nonatomic, readonly) BOOL canDraw;
 
+@property (nonatomic, copy) NSArray *parameters;
+
 #pragma mark - image output methods
 
 - (BOOL)writeImageAtScale:(CGFloat)scale
                  isOpaque:(BOOL)isOpaque
                    toFile:(NSString *)savePath;
+
+#pragma mark - for subclasses to call or override
+
+- (BOOL)updateArgumentForParameter:(NSString *)parameter;
+- (void)copyPropertiesFromView:(BFWDrawView *)view;
+@property (nonatomic, readonly) CGFloat animationBetweenStartAndEnd;
 
 @end
