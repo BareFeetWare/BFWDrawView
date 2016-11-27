@@ -21,7 +21,7 @@ extension UIView {
                 view = view?.superview
             }
         }
-        return cell;
+        return cell
     }
     
 }

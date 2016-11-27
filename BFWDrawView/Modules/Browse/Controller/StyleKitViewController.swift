@@ -62,7 +62,7 @@ class StyleKitViewController: UITableViewController {
             }
         }
         cell.detailTextLabel?.text = detailComponents?.joined(separator: ", ")
-        return cell;
+        return cell
     }
 
     // MARK: - UIViewController

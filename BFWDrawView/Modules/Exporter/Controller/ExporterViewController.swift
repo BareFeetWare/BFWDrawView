@@ -28,7 +28,7 @@ class ExporterViewController: UITableViewController {
 
     // MARK: - Private constants
 
-    fileprivate let androidTitle = "Android";
+    fileprivate let androidTitle = "Android"
 
     // MARK: - Private variables
 

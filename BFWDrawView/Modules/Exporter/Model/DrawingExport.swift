@@ -86,7 +86,7 @@ class DrawingExport {
             let animationView = drawingView as? AnimationView
         {
             animationView.animation = animation
-            animationView.isPaused = true; // so it only creates one image
+            animationView.isPaused = true // so it only creates one image
         }
     }
     
@@ -322,7 +322,7 @@ class DrawingExport {
         }
         components += ["</resources>"]
         let colorsXmlString = components.joined(separator: "\n")
-        return colorsXmlString;
+        return colorsXmlString
     }
     
 }
