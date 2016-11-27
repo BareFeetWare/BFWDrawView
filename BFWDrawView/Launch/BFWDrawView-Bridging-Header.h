@@ -5,7 +5,6 @@
 #import "BFWDrawView.h"
 #import "BFWStyleKit.h"
 #import "BFWStyleKitDrawing.h"
-#import "NSArray+BFW.h"
 #import "NSString+BFW.h"
 #import "UIColor+BFW.h"
 #import "UIImage+BFW.h"
