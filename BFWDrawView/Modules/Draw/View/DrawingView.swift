@@ -225,16 +225,16 @@ import UIKit
         {
             let parameters = drawing?.methodParameters as? [String] ?? []
             if parameters == [] {
-                if let method = emptyMethod(from: styleKitClass, selector: drawingSelector) {
-                    method()
+                if let drawFunction = drawFunction(from: styleKitClass, selector: drawingSelector) {
+                    drawFunction()
                 }
             } else if parameters == ["frame"] {
-                if let method = rectMethod(from: styleKitClass, selector: drawingSelector) {
-                    method(drawFrame)
+                if let drawFunction = drawRectFunction(from: styleKitClass, selector: drawingSelector) {
+                    drawFunction(drawFrame)
                 }
             } else if parameters == ["frame", "tintColor"] {
-                if let method = rectColorMethod(from: styleKitClass, selector: drawingSelector) {
-                    method(drawFrame, tintColor)
+                if let drawFunction = drawRectColorFunction(from: styleKitClass, selector: drawingSelector) {
+                    drawFunction(drawFrame, tintColor)
                 }
             } else {
                 // TODO: Implement in DrawingView so we don't have to call super.
@@ -271,39 +271,39 @@ extension DrawingView {
         return method_getImplementation(method)
     }
     
-    func imageMethod(from owner: AnyObject, selector: Selector) -> ((Bool) -> UIImage)? {
-        typealias Function = @convention(c) (AnyObject, Selector, Bool) -> Unmanaged<UIImage>
+    func imageFunction(from owner: AnyObject, selector: Selector) -> ((Bool) -> UIImage)? {
+        typealias CFunction = @convention(c) (AnyObject, Selector, Bool) -> Unmanaged<UIImage>
         let implementation = self.implementation(for: owner, selector: selector)
-        let function = unsafeBitCast(implementation, to: Function.self)
+        let cFunction = unsafeBitCast(implementation, to: CFunction.self)
         return { bool in
-            function(owner, selector, bool).takeUnretainedValue()
+            cFunction(owner, selector, bool).takeUnretainedValue()
         }
     }
     
-    func emptyMethod(from owner: AnyObject, selector: Selector) -> (() -> Void)? {
-        typealias Function = @convention(c) (AnyObject, Selector) -> Void
+    func drawFunction(from owner: AnyObject, selector: Selector) -> (() -> Void)? {
+        typealias CFunction = @convention(c) (AnyObject, Selector) -> Void
         let implementation = self.implementation(for: owner, selector: selector)
-        let function = unsafeBitCast(implementation, to: Function.self)
+        let cFunction = unsafeBitCast(implementation, to: CFunction.self)
         return {
-            function(owner, selector)
+            cFunction(owner, selector)
         }
     }
     
-    func rectMethod(from owner: AnyObject, selector: Selector) -> ((CGRect) -> Void)? {
-        typealias Function = @convention(c) (AnyObject, Selector, CGRect) -> Void
+    func drawRectFunction(from owner: AnyObject, selector: Selector) -> ((CGRect) -> Void)? {
+        typealias CFunction = @convention(c) (AnyObject, Selector, CGRect) -> Void
         let implementation = self.implementation(for: owner, selector: selector)
-        let function = unsafeBitCast(implementation, to: Function.self)
+        let cFunction = unsafeBitCast(implementation, to: CFunction.self)
         return { rect in
-            function(owner, selector, rect)
+            cFunction(owner, selector, rect)
         }
     }
 
-    func rectColorMethod(from owner: AnyObject, selector: Selector) -> ((CGRect, UIColor) -> Void)? {
-        typealias Function = @convention(c) (AnyObject, Selector, CGRect, UIColor) -> Void
+    func drawRectColorFunction(from owner: AnyObject, selector: Selector) -> ((CGRect, UIColor) -> Void)? {
+        typealias CFunction = @convention(c) (AnyObject, Selector, CGRect, UIColor) -> Void
         let implementation = self.implementation(for: owner, selector: selector)
-        let function = unsafeBitCast(implementation, to: Function.self)
+        let cFunction = unsafeBitCast(implementation, to: CFunction.self)
         return { rect, tintColor in
-            function(owner, selector, rect, tintColor)
+            cFunction(owner, selector, rect, tintColor)
         }
     }
 
