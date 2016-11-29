@@ -220,26 +220,10 @@ import UIKit
     }
     
     override func draw(_ rect: CGRect) {
-        if let drawingSelector = drawingSelector,
-            let styleKitClass = drawing?.styleKit.paintCodeClass
-        {
-            let parameters = drawing?.methodParameters as? [String] ?? []
-            if parameters == [] {
-                if let drawFunction = drawFunction(from: styleKitClass, selector: drawingSelector) {
-                    drawFunction()
-                }
-            } else if parameters == ["frame"] {
-                if let drawFunction = drawRectFunction(from: styleKitClass, selector: drawingSelector) {
-                    drawFunction(drawFrame)
-                }
-            } else if parameters == ["frame", "tintColor"] {
-                if let drawFunction = drawRectColorFunction(from: styleKitClass, selector: drawingSelector) {
-                    drawFunction(drawFrame, tintColor)
-                }
-            } else {
-                // TODO: Implement in DrawingView so we don't have to call super.
-                super.draw(rect)
-            }
+        let parameters = drawing?.methodParameters as? [String] ?? []
+        if !draw(parameters: parameters) {
+            // TODO: Implement in DrawingView so we don't have to call super.
+            super.draw(rect)
         }
     }
     
@@ -259,6 +243,31 @@ extension DrawingView {
     
     var drawingSelector: Selector? {
         return drawing.map { NSSelectorFromString($0.methodName) }
+    }
+    
+    func draw(parameters: [String]) -> Bool {
+        var success = false
+        if let drawingSelector = drawingSelector,
+            let styleKitClass = drawing?.styleKit.paintCodeClass
+        {
+            success = true
+            if parameters == [] {
+                if let drawFunction = drawFunction(from: styleKitClass, selector: drawingSelector) {
+                    drawFunction()
+                }
+            } else if parameters == ["frame"] {
+                if let drawFunction = drawRectFunction(from: styleKitClass, selector: drawingSelector) {
+                    drawFunction(drawFrame)
+                }
+            } else if parameters == ["frame", "tintColor"] {
+                if let drawFunction = drawRectColorFunction(from: styleKitClass, selector: drawingSelector) {
+                    drawFunction(drawFrame, tintColor)
+                }
+            } else {
+                success = false
+            }
+        }
+        return success
     }
     
     func implementation(for owner: AnyObject, selector: Selector) -> IMP {
