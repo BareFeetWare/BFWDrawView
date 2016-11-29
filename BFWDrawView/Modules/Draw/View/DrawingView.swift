@@ -221,13 +221,20 @@ import UIKit
     
     override func draw(_ rect: CGRect) {
         if let drawingSelector = drawingSelector,
-            let styleKitClass = drawing?.styleKit.paintCodeClass,
-            let parameters = drawing?.methodParameters as? [String]
+            let styleKitClass = drawing?.styleKit.paintCodeClass
         {
-            if parameters.count == 1 && parameters.first == "frame"
-            {
+            let parameters = drawing?.methodParameters as? [String] ?? []
+            if parameters == [] {
+                if let method = emptyMethod(from: styleKitClass, selector: drawingSelector) {
+                    method()
+                }
+            } else if parameters == ["frame"] {
                 if let method = rectMethod(from: styleKitClass, selector: drawingSelector) {
                     method(drawFrame)
+                }
+            } else if parameters == ["frame", "tintColor"] {
+                if let method = rectColorMethod(from: styleKitClass, selector: drawingSelector) {
+                    method(drawFrame, tintColor)
                 }
             } else {
                 // TODO: Implement in DrawingView so we don't have to call super.
@@ -273,12 +280,30 @@ extension DrawingView {
         }
     }
     
+    func emptyMethod(from owner: AnyObject, selector: Selector) -> (() -> Void)? {
+        typealias Function = @convention(c) (AnyObject, Selector) -> Void
+        let implementation = self.implementation(for: owner, selector: selector)
+        let function = unsafeBitCast(implementation, to: Function.self)
+        return {
+            function(owner, selector)
+        }
+    }
+    
     func rectMethod(from owner: AnyObject, selector: Selector) -> ((CGRect) -> Void)? {
         typealias Function = @convention(c) (AnyObject, Selector, CGRect) -> Void
         let implementation = self.implementation(for: owner, selector: selector)
         let function = unsafeBitCast(implementation, to: Function.self)
         return { rect in
             function(owner, selector, rect)
+        }
+    }
+
+    func rectColorMethod(from owner: AnyObject, selector: Selector) -> ((CGRect, UIColor) -> Void)? {
+        typealias Function = @convention(c) (AnyObject, Selector, CGRect, UIColor) -> Void
+        let implementation = self.implementation(for: owner, selector: selector)
+        let function = unsafeBitCast(implementation, to: Function.self)
+        return { rect, tintColor in
+            function(owner, selector, rect, tintColor)
         }
     }
 
