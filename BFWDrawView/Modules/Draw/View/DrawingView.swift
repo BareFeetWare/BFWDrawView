@@ -28,6 +28,31 @@ import UIKit
     @IBInspectable var name: String? { didSet { updateDrawing() }}
     @IBInspectable var styleKit: String? { didSet { updateDrawing() }}
 
+    // MARK: - Private variables
+
+    fileprivate static var moduleName: String? {
+        let moduleName: String?
+        let components = NSStringFromClass(self).components(separatedBy: ".")
+        if components.count == 2 {
+            moduleName = components.first
+        } else {
+            moduleName = nil
+        }
+        return moduleName
+    }
+    
+    fileprivate var moduleStyleKitName: String? {
+        let moduleClassName: String?
+        if let styleKit = styleKit,
+            let moduleName = type(of: self).moduleName
+        {
+            moduleClassName = [moduleName, styleKit].joined(separator: ".")
+        } else {
+            moduleClassName = styleKit
+        }
+        return moduleClassName
+    }
+    
     // MARK: - Frame calculations
     
     var drawnSize: CGSize {
@@ -90,7 +115,7 @@ import UIKit
     
     fileprivate func updateDrawing() {
         // TODO: Call this only once for each stylekit and drawing name pair change.
-        drawing = BFWStyleKit.drawing(forStyleKitName: styleKit,
+        drawing = BFWStyleKit.drawing(forStyleKitName: moduleStyleKitName,
                                       drawingName: name)
     }
     

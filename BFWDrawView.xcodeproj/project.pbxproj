@@ -39,9 +39,9 @@
 		E27F0E931DDAE0BF00640D6F /* DrawingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27F0E921DDAE0BF00640D6F /* DrawingButton.swift */; };
 		E29478011C6183CD001F78DA /* DrawingExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29478001C6183CD001F78DA /* DrawingExport.swift */; };
 		E29478371C6402A9001F78DA /* ChoicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29478361C6402A9001F78DA /* ChoicesViewController.swift */; };
-		E29917041AF4FEE500F0DEDE /* SampleStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E29917021AF4FEE500F0DEDE /* SampleStyleKit.m */; };
 		E29917051AF4FEE500F0DEDE /* SampleStyleKit.plist in Resources */ = {isa = PBXBuildFile; fileRef = E29917031AF4FEE500F0DEDE /* SampleStyleKit.plist */; };
 		E2A9E5F81CD47AAE00B2641E /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A9E5F71CD47AAE00B2641E /* DrawingView.swift */; };
+		E2CD964B1DED20EF00600B09 /* SampleStyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CD964A1DED20EF00600B09 /* SampleStyleKit.swift */; };
 		E2D2174D1C5EC9A900E28B4B /* UIViewCellExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D2174C1C5EC9A900E28B4B /* UIViewCellExtension.swift */; };
 		E2D2174F1C5ECA0400E28B4B /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D2174E1C5ECA0400E28B4B /* Exporter.swift */; };
 		E2DAEEEA1C6ACB4D0017671F /* DrawingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADAE1C5B3F5700C78BDC /* DrawingCell.swift */; };
@@ -106,11 +106,10 @@
 		E27F0E921DDAE0BF00640D6F /* DrawingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingButton.swift; sourceTree = "<group>"; };
 		E29478001C6183CD001F78DA /* DrawingExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingExport.swift; sourceTree = "<group>"; };
 		E29478361C6402A9001F78DA /* ChoicesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoicesViewController.swift; sourceTree = "<group>"; };
-		E29917011AF4FEE500F0DEDE /* SampleStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleStyleKit.h; sourceTree = "<group>"; };
-		E29917021AF4FEE500F0DEDE /* SampleStyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleStyleKit.m; sourceTree = "<group>"; };
 		E29917031AF4FEE500F0DEDE /* SampleStyleKit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SampleStyleKit.plist; sourceTree = "<group>"; };
 		E29917061AF4FF6F00F0DEDE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BFWDrawView/Info.plist; sourceTree = SOURCE_ROOT; };
 		E2A9E5F71CD47AAE00B2641E /* DrawingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
+		E2CD964A1DED20EF00600B09 /* SampleStyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleStyleKit.swift; sourceTree = "<group>"; };
 		E2D2174C1C5EC9A900E28B4B /* UIViewCellExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewCellExtension.swift; sourceTree = "<group>"; };
 		E2D2174E1C5ECA0400E28B4B /* Exporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
 		E2E6D8371D094B6A00C0A87D /* BFWDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDLog.h; sourceTree = "<group>"; };
@@ -359,9 +358,8 @@
 		E29917001AF4FEE500F0DEDE /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E29917011AF4FEE500F0DEDE /* SampleStyleKit.h */,
-				E29917021AF4FEE500F0DEDE /* SampleStyleKit.m */,
 				E29917031AF4FEE500F0DEDE /* SampleStyleKit.plist */,
+				E2CD964A1DED20EF00600B09 /* SampleStyleKit.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -478,7 +476,6 @@
 				E2DAEEEA1C6ACB4D0017671F /* DrawingCell.swift in Sources */,
 				E20FADC51C5C73D300C78BDC /* ExportersViewController.swift in Sources */,
 				E2A9E5F81CD47AAE00B2641E /* DrawingView.swift in Sources */,
-				E29917041AF4FEE500F0DEDE /* SampleStyleKit.m in Sources */,
 				E20FADB41C5B3F5700C78BDC /* StyleKitViewController.swift in Sources */,
 				E29478011C6183CD001F78DA /* DrawingExport.swift in Sources */,
 				E2E6D8401D095E0700C0A87D /* AnimationView.swift in Sources */,
@@ -494,6 +491,7 @@
 				E20AA0C21C677A5200B8EEF7 /* BFWStyleKit.m in Sources */,
 				E20AA0C61C677A5200B8EEF7 /* NSInvocation+BFW.m in Sources */,
 				E20FADB21C5B3F5700C78BDC /* DrawingViewController.swift in Sources */,
+				E2CD964B1DED20EF00600B09 /* SampleStyleKit.swift in Sources */,
 				E20AA0C71C677A5200B8EEF7 /* NSObject+BFWStyleKit.m in Sources */,
 				E2D2174D1C5EC9A900E28B4B /* UIViewCellExtension.swift in Sources */,
 				E221178F1AF4FE40007B515F /* main.m in Sources */,

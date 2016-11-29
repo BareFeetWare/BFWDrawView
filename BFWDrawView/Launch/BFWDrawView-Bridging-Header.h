@@ -8,6 +8,3 @@
 #import "NSString+BFW.h"
 #import "UIColor+BFW.h"
 #import "UIImage+BFW.h"
-
-// Sample:
-#import "SampleStyleKit.h"

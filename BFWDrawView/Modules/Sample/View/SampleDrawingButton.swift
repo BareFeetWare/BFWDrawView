@@ -15,9 +15,9 @@ import UIKit
         makeBackgroundDrawViews(from: [UIControlState.normal.rawValue: "Button",
                                        UIControlState.highlighted.rawValue: "Button Highlighted"],
                                 styleKit: "SampleStyleKit")
-        setShadow(SampleStyleKit.buttonShadow(),
+        setShadow(SampleStyleKit.buttonShadow,
                   for:.normal)
-        setShadow(SampleStyleKit.buttonShadowHighlighted(),
+        setShadow(SampleStyleKit.buttonShadowHighlighted,
                   for:.highlighted)
     }
     

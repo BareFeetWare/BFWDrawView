@@ -54,7 +54,7 @@ class StyleKitsViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! SwitchCell
         let styleKitName = self.styleKitNames[indexPath.row]
         cell.textLabel?.text = styleKitName
-        let styleKit = BFWStyleKit(forName:styleKitName)!
+        let styleKit = BFWStyleKit(forName: styleKitName)!
         // TODO: Get drawingNames and colorNames on background thread since it is CPU expensive and pauses UI.
         cell.detailTextLabel?.text = "\(styleKit.drawingNames.count) drawings, \(styleKit.colorNames.count) colors"
         if let selectedStyleKitNames = selectedStyleKitNames {

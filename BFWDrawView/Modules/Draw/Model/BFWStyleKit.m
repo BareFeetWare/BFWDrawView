@@ -61,12 +61,17 @@ static NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
 
 + (instancetype)styleKitForName:(NSString *)name
 {
-    BFWStyleKit* styleKit = [self styleKitForNameDict][name];
-    if (!styleKit && name) {
+    // Remove the <ModuleName>. prefix that Swift adds:
+    NSString *className = [name componentsSeparatedByString:@"."].lastObject;
+    BFWStyleKit* styleKit = [self styleKitForNameDict][className];
+    if (!styleKit && className) {
         styleKit = [[BFWStyleKit alloc] init];
-        styleKit.name = name;
+        styleKit.name = className;
         styleKit.paintCodeClass = NSClassFromString(name);
-        [self styleKitForNameDict][name] = styleKit;
+        if (!styleKit.paintCodeClass) {
+            BFWDLog(@"**** error: failed to make a class from \"%@\"", name);
+        }
+        [self styleKitForNameDict][className] = styleKit;
     }
     return styleKit;
 }
