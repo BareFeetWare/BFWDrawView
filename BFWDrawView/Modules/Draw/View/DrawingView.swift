@@ -219,12 +219,66 @@ import UIKit
         super.layoutSubviews()
     }
     
+    override func draw(_ rect: CGRect) {
+        if let drawingSelector = drawingSelector,
+            let styleKitClass = drawing?.styleKit.paintCodeClass,
+            let parameters = drawing?.methodParameters as? [String]
+        {
+            if parameters.count == 1 && parameters.first == "frame"
+            {
+                if let method = rectMethod(from: styleKitClass, selector: drawingSelector) {
+                    method(drawFrame)
+                }
+            } else {
+                // TODO: Implement in DrawingView so we don't have to call super.
+                super.draw(rect)
+            }
+        }
+    }
+    
     // MARK: - Protocols for UIView+BFW
     
     override func copyProperties(from view: UIView) {
         super.copyProperties(from: view)
         if let view = view as? DrawingView {
             drawing = view.drawing
+        }
+    }
+
+}
+
+// Introspection
+extension DrawingView {
+    
+    var drawingSelector: Selector? {
+        return drawing.map { NSSelectorFromString($0.methodName) }
+    }
+    
+    func implementation(for owner: AnyObject, selector: Selector) -> IMP {
+        let method: Method
+        if owner is AnyClass {
+            method = class_getClassMethod(owner as! AnyClass, selector)
+        } else {
+            method = class_getInstanceMethod(type(of: owner), selector)
+        }
+        return method_getImplementation(method)
+    }
+    
+    func imageMethod(from owner: AnyObject, selector: Selector) -> ((Bool) -> UIImage)? {
+        typealias Function = @convention(c) (AnyObject, Selector, Bool) -> Unmanaged<UIImage>
+        let implementation = self.implementation(for: owner, selector: selector)
+        let function = unsafeBitCast(implementation, to: Function.self)
+        return { bool in
+            function(owner, selector, bool).takeUnretainedValue()
+        }
+    }
+    
+    func rectMethod(from owner: AnyObject, selector: Selector) -> ((CGRect) -> Void)? {
+        typealias Function = @convention(c) (AnyObject, Selector, CGRect) -> Void
+        let implementation = self.implementation(for: owner, selector: selector)
+        let function = unsafeBitCast(implementation, to: Function.self)
+        return { rect in
+            function(owner, selector, rect)
         }
     }
 
