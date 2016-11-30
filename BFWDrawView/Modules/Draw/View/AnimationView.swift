@@ -44,8 +44,8 @@ import UIKit
     /// Fraction 0.0 to 1.0. Set internally but exposed for storyboard preview.
     @IBInspectable dynamic var animation = 0.0 {
         didSet {
-            updateArgument(forParameter: "animation")
-            setNeedsDisplay()
+//            updateArgument(forParameter: "animation")
+            setNeedsDraw()
         }
     }
     
@@ -119,7 +119,7 @@ import UIKit
     fileprivate var finished = false
     fileprivate var drawnFrameCount: UInt = 0 // to count actual frames drawn
     
-    override var animationBetweenStartAndEnd: CGFloat {
+    var animationBetweenStartAndEnd: CGFloat {
         var curved = curve.function(animation)
         if start != 0.0 || end != 0.0 {
             curved = start + curved * (end - start)
@@ -128,7 +128,7 @@ import UIKit
     }
     
     fileprivate var isAnimation: Bool {
-        return (parameters as? [String])?.contains("animation") ?? false
+        return parameters.contains("animation") 
     }
     
     // MARK: - Animation
@@ -228,8 +228,7 @@ import UIKit
     
     // MARK: - protocols for UIView+BFW
     
-    override func copyProperties(from view: UIView) {
-        super.copyProperties(from: view)
+    func copyProperties(from view: UIView) {
         if let view = view as? AnimationView {
             animation = view.animation
             start = view.start
@@ -241,4 +240,49 @@ import UIKit
         }
     }
     
+}
+
+extension AnimationView {
+    
+    // MARK: - DrawingView
+    
+    override func draw(parameters: [String]) -> Bool {
+        var success = false
+        if let drawingSelector = drawingSelector,
+            let styleKitClass = drawing?.styleKit.paintCodeClass
+        {
+            success = true
+            if parameters == ["frame", "animation"] {
+                if let drawFunction = drawRectAnimationFunction(from: styleKitClass, selector: drawingSelector) {
+                    drawFunction(drawFrame, animationBetweenStartAndEnd)
+                }
+            } else if parameters == ["frame", "tintColor", "animation"] {
+                if let drawFunction = drawRectColorAnimationFunction(from: styleKitClass, selector: drawingSelector) {
+                    drawFunction(drawFrame, tintColor, animationBetweenStartAndEnd)
+                }
+            } else {
+                success = super.draw(parameters: parameters)
+            }
+        }
+        return success
+    }
+    
+    func drawRectAnimationFunction(from owner: AnyObject, selector: Selector) -> ((CGRect, CGFloat) -> Void)? {
+        typealias CFunction = @convention(c) (AnyObject, Selector, CGRect, CGFloat) -> Void
+        let implementation = self.implementation(for: owner, selector: selector)
+        let cFunction = unsafeBitCast(implementation, to: CFunction.self)
+        return { rect, animation in
+            cFunction(owner, selector, rect, animation)
+        }
+    }
+    
+    func drawRectColorAnimationFunction(from owner: AnyObject, selector: Selector) -> ((CGRect, UIColor, CGFloat) -> Void)? {
+        typealias CFunction = @convention(c) (AnyObject, Selector, CGRect, UIColor, CGFloat) -> Void
+        let implementation = self.implementation(for: owner, selector: selector)
+        let cFunction = unsafeBitCast(implementation, to: CFunction.self)
+        return { rect, tintColor, animation in
+            cFunction(owner, selector, rect, tintColor, animation)
+        }
+    }
+
 }

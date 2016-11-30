@@ -9,7 +9,7 @@
 import UIKit
 
 /// DrawingView is a Swift class that will eventually replace BFWDrawView
-@IBDesignable class DrawingView: BFWDrawView {
+@IBDesignable class DrawingView: UIView {
 
     // MARK: - Init
     
@@ -25,9 +25,14 @@ import UIKit
 
     // MARK: - Variables
     
+    var drawing: BFWStyleKitDrawing?
     @IBInspectable var name: String? { didSet { updateDrawing() }}
     @IBInspectable var styleKit: String? { didSet { updateDrawing() }}
-
+    
+    var styleKitClass: AnyClass? {
+        return drawing?.styleKit.paintCodeClass
+    }
+    
     // MARK: - Private variables
 
     fileprivate static var moduleName: String? {
@@ -63,7 +68,7 @@ import UIKit
         return (drawing?.hasDrawnSize ?? false) ? drawing!.drawnSize : frame.size
     }
     
-    override var drawFrame: CGRect {
+    var drawFrame: CGRect {
         let drawFrame: CGRect
         switch contentMode {
         case .scaleAspectFit, .scaleAspectFill:
@@ -117,6 +122,10 @@ import UIKit
         // TODO: Call this only once for each stylekit and drawing name pair change.
         drawing = BFWStyleKit.drawing(forStyleKitName: moduleStyleKitName,
                                       drawingName: name)
+    }
+    
+    func setNeedsDraw() {
+        setNeedsDisplay()
     }
     
     // MARK: - Image rendering
@@ -220,35 +229,50 @@ import UIKit
     }
     
     override func draw(_ rect: CGRect) {
-        let parameters = drawing?.methodParameters as? [String] ?? []
-        if !draw(parameters: parameters) {
-            // TODO: Implement in DrawingView so we don't have to call super.
-            super.draw(rect)
-        }
+        let _ = draw(parameters: parameters)
     }
     
-    // MARK: - Protocols for UIView+BFW
-    
-    override func copyProperties(from view: UIView) {
-        super.copyProperties(from: view)
-        if let view = view as? DrawingView {
-            drawing = view.drawing
-        }
-    }
-
 }
 
 // Introspection
 extension DrawingView {
     
+    var parameters: [String] {
+        return drawing?.methodParameters as? [String] ?? []
+    }
+    
     var drawingSelector: Selector? {
         return drawing.map { NSSelectorFromString($0.methodName) }
+    }
+    
+    var parametersFunctionTuple: [(parameters: [String], function: Any)] {
+        // TODO: Cache. Make use of it?
+        guard let drawingSelector = drawingSelector,
+            let styleKitClass = styleKitClass else
+        {
+            return []
+        }
+        return [
+            ([], { self.drawFunction(from: styleKitClass, selector: drawingSelector) }),
+            (["frame"], { self.drawRectFunction(from: styleKitClass, selector: drawingSelector)!(self.drawFrame) }),
+            (["frame", "tintColor"], { self.drawRectColorFunction(from: styleKitClass, selector: drawingSelector)!(self.drawFrame, self.tintColor) })
+        ]
+    }
+    
+    var handledParametersArray: [[String]] {
+        return [[], ["frame"], ["frame", "tintColor"]]
+    }
+
+    var canDraw: Bool {
+        return handledParametersArray.contains(where: { (parameters) -> Bool in
+            parameters == self.parameters
+        })
     }
     
     func draw(parameters: [String]) -> Bool {
         var success = false
         if let drawingSelector = drawingSelector,
-            let styleKitClass = drawing?.styleKit.paintCodeClass
+            let styleKitClass = styleKitClass
         {
             success = true
             if parameters == [] {
@@ -264,6 +288,8 @@ extension DrawingView {
                     drawFunction(drawFrame, tintColor)
                 }
             } else {
+                debugPrint("**** error: Failed to find a drawing for " + NSStringFromSelector(drawingSelector)
+                    + " with parameters [" + parameters.joined(separator: ", ") + "]")
                 success = false
             }
         }
