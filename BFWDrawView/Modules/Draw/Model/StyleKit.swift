@@ -14,6 +14,20 @@
 #import "NSDictionary+BFW.h"
 #import "BFWStyleKitDrawing.h"
 
+@interface BFWStyleKit : NSObject
+
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, strong) Class paintCodeClass; // class exported by PaintCode
+
+@property (nonatomic, copy) NSArray *classMethodNames; // @[NSString]
+@property (nonatomic, copy) NSArray *colorNames; // @[NSString]
+@property (nonatomic, copy) NSArray *drawingNames; // @[NSString]
+
+@property (nonatomic, copy) NSDictionary *parameterDict;
+@property (nonatomic, copy) NSDictionary *drawParameterDict;
+
+@end
+
 @interface BFWStyleKit ()
 
 @property (nonatomic, copy) NSDictionary *returnValueForClassMethodNameDict; // @{NSString : NSObject}
