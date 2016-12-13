@@ -11,6 +11,20 @@
 #import "NSDictionary+BFW.h"
 #import "NSString+BFW.h"
 
+@interface BFWStyleKitDrawing : NSObject
+
+extern NSString * const drawPrefix;
+
+@property (nonatomic, weak, readonly) StyleKit *styleKit;
+@property (nonatomic, copy, readonly) NSString *name;
+@property (nonatomic, copy, readonly) NSArray *methodParameters;
+@property (nonatomic, copy, readonly) NSString *methodName;
+@property (nonatomic, readonly) CGSize drawnSize;
+@property (nonatomic, readonly) BOOL hasDrawnSize;
+@property (nonatomic, readonly) CGRect intrinsicFrame;
+
+@end
+
 @interface BFWStyleKitDrawing ()
 
 @property (nonatomic, weak, readwrite) BFWStyleKit *styleKit;

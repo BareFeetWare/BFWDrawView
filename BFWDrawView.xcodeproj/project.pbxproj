@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		2023CEEA1AFE2BAE00BBA2FA /* UIColor+BFW_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2023CEE91AFE2BAE00BBA2FA /* UIColor+BFW_Tests.m */; };
 		E20AA0C21C677A5200B8EEF7 /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20AA0B11C677A5200B8EEF7 /* StyleKit.swift */; };
-		E20AA0C31C677A5200B8EEF7 /* BFWStyleKitDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = E20AA0B31C677A5200B8EEF7 /* BFWStyleKitDrawing.m */; };
+		E20AA0C31C677A5200B8EEF7 /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20AA0B31C677A5200B8EEF7 /* Drawing.swift */; };
 		E20AA0C51C677A5200B8EEF7 /* NSDictionary+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E20AA0B71C677A5200B8EEF7 /* NSDictionary+BFW.m */; };
 		E20AA0C61C677A5200B8EEF7 /* NSInvocation+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E20AA0B91C677A5200B8EEF7 /* NSInvocation+BFW.m */; };
 		E20AA0C71C677A5200B8EEF7 /* NSObject+BFWStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E20AA0BB1C677A5200B8EEF7 /* NSObject+BFWStyleKit.m */; };
@@ -61,8 +61,7 @@
 		2023CEE91AFE2BAE00BBA2FA /* UIColor+BFW_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BFW_Tests.m"; sourceTree = "<group>"; };
 		E200F23F1C55D94E00CD868D /* BFWDrawView-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BFWDrawView-Bridging-Header.h"; sourceTree = "<group>"; };
 		E20AA0B11C677A5200B8EEF7 /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
-		E20AA0B21C677A5200B8EEF7 /* BFWStyleKitDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWStyleKitDrawing.h; sourceTree = "<group>"; };
-		E20AA0B31C677A5200B8EEF7 /* BFWStyleKitDrawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWStyleKitDrawing.m; sourceTree = "<group>"; };
+		E20AA0B31C677A5200B8EEF7 /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
 		E20AA0B61C677A5200B8EEF7 /* NSDictionary+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BFW.h"; sourceTree = "<group>"; };
 		E20AA0B71C677A5200B8EEF7 /* NSDictionary+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BFW.m"; sourceTree = "<group>"; };
 		E20AA0B81C677A5200B8EEF7 /* NSInvocation+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSInvocation+BFW.h"; sourceTree = "<group>"; };
@@ -184,8 +183,7 @@
 			children = (
 				E2E6D8371D094B6A00C0A87D /* BFWDLog.h */,
 				E20AA0B11C677A5200B8EEF7 /* StyleKit.swift */,
-				E20AA0B21C677A5200B8EEF7 /* BFWStyleKitDrawing.h */,
-				E20AA0B31C677A5200B8EEF7 /* BFWStyleKitDrawing.m */,
+				E20AA0B31C677A5200B8EEF7 /* Drawing.swift */,
 				E20AA0B61C677A5200B8EEF7 /* NSDictionary+BFW.h */,
 				E20AA0B71C677A5200B8EEF7 /* NSDictionary+BFW.m */,
 				E20AA0B81C677A5200B8EEF7 /* NSInvocation+BFW.h */,
@@ -473,7 +471,7 @@
 				E29478011C6183CD001F78DA /* DrawingExport.swift in Sources */,
 				E2E6D8401D095E0700C0A87D /* AnimationView.swift in Sources */,
 				E26B1DB01B02B0FB005EACDE /* SampleDrawingButton.swift in Sources */,
-				E20AA0C31C677A5200B8EEF7 /* BFWStyleKitDrawing.m in Sources */,
+				E20AA0C31C677A5200B8EEF7 /* Drawing.swift in Sources */,
 				E20FADB01C5B3F5700C78BDC /* AnimationCountViewController.swift in Sources */,
 				E22117921AF4FE92007B515F /* AppDelegate.m in Sources */,
 				E20AA0C51C677A5200B8EEF7 /* NSDictionary+BFW.m in Sources */,
