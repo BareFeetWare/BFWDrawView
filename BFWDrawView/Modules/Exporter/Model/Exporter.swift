@@ -127,8 +127,8 @@ class Exporter {
             isAndroid: isAndroid ?? true,
             to: exportDirectoryURL ?? defaultDirectoryURL,
             deleteExistingFiles: true,
-            drawingsStyleKitNames: drawingsStyleKitNames ?? BFWStyleKit.styleKitNames() as! [String],
-            colorsStyleKitNames: colorsStyleKitNames ?? BFWStyleKit.styleKitNames() as! [String],
+            drawingsStyleKitNames: drawingsStyleKitNames ?? StyleKit.styleKitNames,
+            colorsStyleKitNames: colorsStyleKitNames ?? StyleKit.styleKitNames,
             pathScaleDict: pathScaleDict,
             tintColor: UIColor.black, // TODO: get color from UI
             duration: duration ?? 0.0,

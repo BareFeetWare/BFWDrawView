@@ -25,7 +25,7 @@ import UIKit
 
     // MARK: - Variables
     
-    var drawing: BFWStyleKitDrawing?
+    var drawing: Drawing?
     @IBInspectable var name: String? { didSet { updateDrawing() }}
     @IBInspectable var styleKit: String? { didSet { updateDrawing() }}
     
@@ -65,7 +65,7 @@ import UIKit
     }
     
     var drawInFrameSize: CGSize {
-        return (drawing?.hasDrawnSize ?? false) ? drawing!.drawnSize : frame.size
+        return drawing?.drawnSize ?? frame.size
     }
     
     var drawFrame: CGRect {
@@ -120,8 +120,12 @@ import UIKit
     
     fileprivate func updateDrawing() {
         // TODO: Call this only once for each stylekit and drawing name pair change.
-        drawing = BFWStyleKit.drawing(forStyleKitName: moduleStyleKitName,
-                                      drawingName: name)
+        if let moduleStyleKitName = moduleStyleKitName,
+            let name = name
+        {
+            drawing = StyleKit.drawing(forStyleKitName: moduleStyleKitName,
+                                       drawingName: name)
+        }
     }
     
     func setNeedsDraw() {
@@ -206,13 +210,7 @@ import UIKit
     // MARK: - UIView
     
     override var intrinsicContentSize: CGSize {
-        let size: CGSize
-        if let drawing = drawing, drawing.hasDrawnSize {
-            size = drawing.drawnSize
-        } else {
-            size = CGSize(width: UIViewNoIntrinsicMetric, height: UIViewNoIntrinsicMetric)
-        }
-        return size
+        return drawing?.drawnSize ?? CGSize(width: UIViewNoIntrinsicMetric, height: UIViewNoIntrinsicMetric)
     }
     
     override var tintColor: UIColor! {
@@ -238,11 +236,14 @@ import UIKit
 extension DrawingView {
     
     var parameters: [String] {
-        return drawing?.methodParameters as? [String] ?? []
+        return drawing?.methodParameters ?? []
     }
     
     var drawingSelector: Selector? {
-        return drawing.map { NSSelectorFromString($0.methodName) }
+        guard let drawing = drawing,
+            let methodName = drawing.methodName
+            else { return nil }
+        return NSSelectorFromString(methodName)
     }
     
     var parametersFunctionTuple: [(parameters: [String], function: Any)] {

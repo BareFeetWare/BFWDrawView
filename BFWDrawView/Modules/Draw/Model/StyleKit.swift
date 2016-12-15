@@ -1,295 +1,232 @@
 //
-//  BFWStyleKit.m
+//  StyleKit.swift
 //  BFWDrawView
 //
 //  Created by Tom Brodhurst-Hill on 19/07/2015.
 //  Copyright (c) 2015 BareFeetWare. All rights reserved.
 //
 
-#import "BFWStyleKit.h"
-#import "BFWDLog.h"
-#import "NSObject+BFWStyleKit.h"
-#import "UIColor+BFW.h"
-#import "NSString+BFW.h"
-#import "NSDictionary+BFW.h"
-#import "BFWStyleKitDrawing.h"
+import Foundation
 
-@interface BFWStyleKit : NSObject
+class StyleKit: NSObject {
 
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, strong) Class paintCodeClass; // class exported by PaintCode
+    var name: String!
+    
+    var paintCodeClass: AnyClass? { // class exported by PaintCode
+        return NSClassFromString(name)
+    }
 
-@property (nonatomic, copy) NSArray *classMethodNames; // @[NSString]
-@property (nonatomic, copy) NSArray *colorNames; // @[NSString]
-@property (nonatomic, copy) NSArray *drawingNames; // @[NSString]
+    // MARK: - Init
+    
+    init(name: String) {
+        self.name = name
+    }
 
-@property (nonatomic, copy) NSDictionary *parameterDict;
-@property (nonatomic, copy) NSDictionary *drawParameterDict;
-
-@end
-
-@interface BFWStyleKit ()
-
-@property (nonatomic, copy) NSDictionary *returnValueForClassMethodNameDict; // @{NSString : NSObject}
-@property (nonatomic, strong) NSMutableDictionary *colorForNameDict; // @{NSString : UIColor}
-@property (nonatomic, strong) NSMutableDictionary *drawingForNameDict; // @{NSString : BFWStyleKitDrawing}
-
-@end
-
-@implementation BFWStyleKit
-
-#pragma mark - constants
-
-static NSString * const styleKitSuffix = @"StyleKit";
-static NSString * const styleKitByPrefixKey = @"styleKitByPrefix";
-
-#pragma mark - class methods
-
-+ (NSMutableDictionary *)styleKitForNameDict
-{
-    static NSMutableDictionary *styleKitForNameDict = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        styleKitForNameDict = [[NSMutableDictionary alloc] init];
-    });
-    return styleKitForNameDict;
-}
-
-+ (NSArray *)styleKitNames
-{
-    static NSArray *styleKitNames = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        NSMutableArray* mutableStyleKitNames = [[NSMutableArray alloc] init];
-        for (Class class in [NSObject subclassesOf:[NSObject class]]) {
-            NSString *className = NSStringFromClass(class);
-            if ([className hasSuffix:styleKitSuffix] && class != self) {
+    // MARK: - Constants
+    
+    struct FileNameSuffix {
+        static let styleKit = "StyleKit"
+    }
+    
+    enum Key: String {
+        case styleKitByPrefix
+    }
+    
+    // MARK: - Class variables & functions
+    
+    static var styleKitForNameDict = [String: StyleKit]()
+    
+    static var styleKitNames: [String] = {
+        var styleKitNames = [String]()
+        for aClass in (NSObject.subclasses(of: NSObject.self) as! [AnyClass]) {
+            let className = NSStringFromClass(aClass)
+            if className.hasSuffix(FileNameSuffix.styleKit),
+                className != NSStringFromClass(StyleKit.self)
+            {
                 // TODO: implement a more robust filter than suffix when PaintCode offers it
-                [mutableStyleKitNames addObject:className];
+                styleKitNames += [className]
             }
         }
-        styleKitNames = [mutableStyleKitNames copy];
-    });
-    return styleKitNames;
-}
+        return styleKitNames
+    }()
 
-+ (instancetype)styleKitForName:(NSString *)name
-{
-    // Remove the <ModuleName>. prefix that Swift adds:
-    NSString *className = [name componentsSeparatedByString:@"."].lastObject;
-    BFWStyleKit* styleKit = [self styleKitForNameDict][className];
-    if (!styleKit && className) {
-        styleKit = [[BFWStyleKit alloc] init];
-        styleKit.name = className;
-        styleKit.paintCodeClass = NSClassFromString(name);
-        if (!styleKit.paintCodeClass) {
-            BFWDLog(@"**** error: failed to make a class from \"%@\"", name);
-        }
-        [self styleKitForNameDict][className] = styleKit;
-    }
-    return styleKit;
-}
 
-+ (BFWStyleKitDrawing *)drawingForStyleKitName:(NSString *)styleKitName
-                                   drawingName:(NSString *)drawingName
-{
-    BFWStyleKit *styleKit = [self styleKitForName:styleKitName];
-    BFWStyleKitDrawing *drawing = [styleKit drawingForName:drawingName];
-    return drawing;
-}
-
-#pragma mark - Class method names
-
-- (NSArray *)classMethodNames
-{
-    if (!_classMethodNames) {
-        _classMethodNames = [self.paintCodeClass classMethodNames];
-    }
-    return _classMethodNames;
-}
-
-#pragma mark - Full list methods
-
-// Calling any of these methods is expensive, since it executes every method and caches the returnValue. Use only for discovery, eg showing a browser of all drawings.
-
-- (NSDictionary *)returnValueForClassMethodNameDict
-{
-    if (!_returnValueForClassMethodNameDict) {
-        BFWDLog(@"**** warning: calling returnValueForClassMethodNameDict for BFWStyleKit name \"%@\", which has a large up front caching hit for the app. Only call this if you want to browse the entire list of drawings and colors available from the styleKit", self.name);
-        _returnValueForClassMethodNameDict = [self.paintCodeClass returnValueForClassMethodNameDict];
-    }
-    return _returnValueForClassMethodNameDict;
-}
-
-- (NSArray *)colorNames
-{
-    if (!_colorNames) {
-        NSMutableDictionary *colorsDict = [[NSMutableDictionary alloc] init];
-        NSDictionary *methodValueDict = self.returnValueForClassMethodNameDict;
-        for (NSString *methodName in methodValueDict) {
-            id returnValue = methodValueDict[methodName];
-            if ([returnValue isKindOfClass:[UIColor class]]) {
-                // TODO: filter out non color methods
-                colorsDict[methodName] = returnValue;
+    static func styleKit(for name: String) -> StyleKit? {
+        var styleKit: StyleKit? = nil
+        // Remove the <ModuleName>. prefix that Swift adds:
+        if let className = name.components(separatedBy: ".").last {
+            if let existingStyleKit = styleKitForNameDict[className] {
+                styleKit = existingStyleKit
+            } else {
+                styleKit = StyleKit(name: className)
+                styleKitForNameDict[className] = styleKit
             }
         }
-        _colorForNameDict = [colorsDict copy];
-        _colorNames = colorsDict.allKeys;
+        return styleKit
     }
-    return _colorNames;
-}
 
-- (NSArray *)drawingNames
-{
-    if (!_drawingNames) {
-        NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
-        NSDictionary *methodValueDict = [self returnValueForClassMethodNameDict];
-        for (NSString *methodName in methodValueDict) {
-            id returnValue = methodValueDict[methodName];
-            if ([returnValue isEqual:[NSNull null]] && [methodName hasPrefix:drawPrefix]) {
-                NSString *drawingName = [self drawingNameForMethodName:methodName];
-                [mutableArray addObject:drawingName];
+    static func drawing(forStyleKitName styleKitName: String,
+                        drawingName: String) -> Drawing?
+    {
+        return styleKit(for: styleKitName)?.drawing(for: drawingName)
+    }
+    
+    lazy var classMethodNames: [String]? = {
+        return self.paintCodeClass?.classMethodNames() as? [String]
+    }()
+    
+    // MARK: - Full list functions
+    
+    // Calling any of these methods is expensive, since it executes every method and caches the returnValue. Use only for discovery, eg showing a browser of all drawings.
+    
+    lazy var returnValueForClassMethodNameDict: [String: Any]? = {
+        debugPrint("**** warning: calling returnValueForClassMethodNameDict for BFWStyleKit name \"%@\", which has a large up front caching hit for the app. Only call this if you want to browse the entire list of drawings and colors available from the styleKit", self.name)
+        return self.paintCodeClass?.returnValueForClassMethodNameDict() as? [String: Any]
+    }()
+    
+    fileprivate lazy var colorsDict: [String: UIColor] = {
+        var colorsDict = [String: UIColor]()
+        if let methodValueDict = self.returnValueForClassMethodNameDict {
+            for (methodName, returnValue) in methodValueDict {
+                if let color = returnValue as? UIColor {
+                    // TODO: filter out non color methods
+                    colorsDict[methodName] = color
+                }
             }
         }
-        _drawingNames = [mutableArray copy];
-    }
-    return _drawingNames;
-}
+        return colorsDict
+    }()
+    
+    lazy var colorNames: [String] = {
+        return Array(self.colorsDict.keys)
+    }()
+    
+    lazy var drawingNames: [String] = {
+        var drawingNames = [String]()
+        if let methodValueDict = self.returnValueForClassMethodNameDict {
+            for (methodName, returnValue) in methodValueDict {
+                if returnValue is NSNull && methodName.hasPrefix(Drawing.FileName.drawPrefix),
+                    let drawingName = self.drawingName(forMethodName: methodName)
+                {
+                    drawingNames += [drawingName]
+                }
+            }
+        }
+        return drawingNames
+    }()
 
-#pragma mark - Use cache if already created
+    // MARK: - Use cache if already created.
 
-- (id)returnValueForClassMethodName:(NSString *)methodName
-{
-    id returnValue = nil;
-    if (methodName) {
-        if (_returnValueForClassMethodNameDict) {
-            returnValue = _returnValueForClassMethodNameDict[methodName];
+    func returnValue(forClassMethodName methodName: String) -> Any? {
+        let returnValue: Any?
+        if let returnValueForClassMethodNameDict = self.returnValueForClassMethodNameDict {
+            returnValue = returnValueForClassMethodNameDict[methodName]
         } else {
-            returnValue = [self.paintCodeClass returnValueForClassMethodName:methodName];
+            returnValue = self.paintCodeClass?.returnValue(forClassMethodName: methodName)
         }
+        return returnValue
     }
-    return returnValue;
-}
 
-#pragma mark - Plist
+    // MARK: - Plist
 
-- (NSBundle *)bundle
-{
-#if TARGET_INTERFACE_BUILDER // rendering in storyboard using IBDesignable
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-#else
-    NSBundle *bundle = [NSBundle mainBundle];
-#endif
-    return bundle;
-}
+    var bundle: Bundle {
+        #if TARGET_INTERFACE_BUILDER // rendering in storyboard using IBDesignable
+            let bundle = Bundle.bundleForClass(Self)
+        #else
+            let bundle = Bundle.main
+        #endif
+        return bundle
+    }
 
-- (NSDictionary *)parameterDict
-{
-    if (!_parameterDict) {
-        NSString *path = [[self bundle] pathForResource:self.name ofType:@"plist"];
-        NSMutableDictionary *parameterDict = [[NSDictionary dictionaryWithContentsOfFile:path] mutableCopy];
+    lazy var parameterDict: [String: [String: Any]] = {
+        guard let path = self.bundle.path(forResource: self.name, ofType: "plist"),
+            var parameterDict = NSDictionary(contentsOfFile: path) as? [String: [String: Any]]
+            else { return [:] }
         //TODO: move filtering to another class with references to consts for keys
-        for (NSString *key in @[@"sizes", @"sizesByPrefix", @"derived"]) {
-            NSDictionary *dictionary = parameterDict[key];
-            if (dictionary) {
-                NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc] init];
-                for (NSString *oldKey in dictionary) {
-                    NSString *newKey = oldKey.lowercaseWords;
-                    mutableDict[newKey] = dictionary[oldKey];
+        for key in ["sizes", "sizesByPrefix", "derived"] {
+            if let dictionary = parameterDict[key] {
+                var mutableDict = [String: Any]()
+                for (oldKey, value) in dictionary {
+                    let newKey = oldKey.lowercaseWords
+                    mutableDict[newKey] = value
                 }
-                parameterDict[key] = [mutableDict copy];
+                parameterDict[key] = mutableDict
             }
         }
-        _parameterDict = [parameterDict copy];
-    }
-    return _parameterDict;
-}
+        return parameterDict
+    }()
 
-#pragma mark - Colors
+    // MARK: - Colors
 
-- (NSMutableDictionary *)colorForNameDict
-{
-    if (!_colorForNameDict) {
-        _colorForNameDict = [[NSMutableDictionary alloc] init];
-    }
-    return _colorForNameDict;
-}
+    var colorForNameDict = [String: UIColor]()
 
-- (UIColor *)colorForName:(NSString *)colorName
-{
-    UIColor *color = [self.colorForNameDict objectForWordsKey:colorName];
-    if (!color) {
-        NSString *methodName = [colorName wordsMatchingWordsArray:self.classMethodNames];
-        id returnValue = [self returnValueForClassMethodName:methodName];
-        if ([returnValue isKindOfClass:[UIColor class]]) {
-            // TODO: filter out non color methods
-            color = (UIColor *)returnValue;
-            self.colorForNameDict[methodName] = color;
+    func color(for colorName: String) -> UIColor? {
+        let color: UIColor?
+        if let existingColor = (colorForNameDict as NSDictionary).object(forWordsKey: colorName) as? UIColor {
+            color = existingColor
+        } else if let classMethodNames = classMethodNames {
+            let methodName = colorName.words(matchingWordsArray: classMethodNames)
+            if let existingColor = returnValue(forClassMethodName: methodName) as? UIColor {
+                // TODO: filter out non color methods
+                color = existingColor
+                colorForNameDict[methodName] = color
+            } else {
+                color = nil
+                debugPrint("**** error: failed to find color for name: %@", colorName)
+            }
         } else {
-            BFWDLog(@"**** error: failed to find color for name: %@", colorName);
+            color = nil
         }
+        return color
     }
-    return color;
-}
 
-#pragma mark - Drawings
+    // MARK: - Drawings
 
-- (NSMutableDictionary *)drawingForNameDict
-{
-    if (!_drawingForNameDict) {
-        _drawingForNameDict = [[NSMutableDictionary alloc] init];
+    var drawingForNameDict = [String: Drawing]()
+    
+    func drawingName(forMethodName methodName: String) -> String? {
+        return (methodName.methodNameComponents as? [String])?
+            .first?.substring(from: Drawing.FileName.drawPrefix.endIndex).lowercaseFirstCharacter
     }
-    return _drawingForNameDict;
-}
-
-- (NSString *)drawingNameForMethodName:(NSString *)methodName
-{
-    NSString *drawingName = nil;
-    NSArray *methodNameComponents = [methodName methodNameComponents];
-    if (methodNameComponents.count) {
-        drawingName = [[methodNameComponents.firstObject substringFromIndex:drawPrefix.length] lowercaseFirstCharacter];
-    }
-    return drawingName;
-}
-
-- (NSString *)classMethodNameForDrawingName:(NSString *)drawingName
-{
-    NSString *methodName = nil;
-    NSString *drawingWords = [NSString stringWithFormat:@"%@ %@", drawPrefix, drawingName.lowercaseWords];
-    for (NSString *searchMethodName in self.classMethodNames) {
-        NSString *baseName = searchMethodName.methodNameComponents.firstObject;
-        if ([baseName.lowercaseWords isEqualToString:drawingWords]) {
-            methodName = searchMethodName;
-            break;
-        }
-    }
-    return methodName;
-}
-
-- (BFWStyleKitDrawing *)drawingForName:(NSString *)drawingName
-{
-    BFWStyleKitDrawing *drawing = nil;
-    if (drawingName) {
-        BFWStyleKit *styleKit;
-        NSString *redirectStyleKitName = [self.parameterDict[styleKitByPrefixKey] objectForLongestPrefixKeyMatchingWordsInString:drawingName];
-        if (redirectStyleKitName && ![redirectStyleKitName isEqualToString:self.name]) {
-            styleKit = [[self class] styleKitForName:redirectStyleKitName];
-            drawing = [styleKit drawingForName:drawingName];
-        } else {
-            NSString *drawingKey = drawingName.lowercaseWords;
-            drawing = self.drawingForNameDict[drawingKey];
-            if (!drawing) {
-                if ([self classMethodNameForDrawingName:drawingName]) {
-                    drawing = [[BFWStyleKitDrawing alloc] initWithStyleKit:self
-                                                                      name:drawingName];
-                    self.drawingForNameDict[drawingKey] = drawing;
-                } else {
-                    BFWDLog(@"failed to find drawing name: %@", drawingName);
+    
+    func classMethodName(forDrawingName drawingName: String) -> String? {
+        var methodName: String? = nil
+        let drawingWords = Drawing.FileName.drawPrefix + " " + drawingName.lowercaseWords
+        if let classMethodNames = classMethodNames {
+            for searchMethodName in classMethodNames {
+                if let baseName = (searchMethodName.methodNameComponents as? [String])?.first,
+                    baseName.lowercaseWords == drawingWords
+                {
+                    methodName = searchMethodName
+                    break
                 }
             }
         }
+        return methodName
     }
-    return drawing;
-}
 
-@end
+    func drawing(for drawingName: String) -> Drawing? {
+        let drawing: Drawing?
+        if let prefixDict = parameterDict[Key.styleKitByPrefix.rawValue],
+            let redirectStyleKitName = (prefixDict as NSDictionary)
+                .objectForLongestPrefixKeyMatchingWords(in: drawingName) as? String,
+            redirectStyleKitName != name
+        {
+            let styleKit = StyleKit.styleKit(for: redirectStyleKitName)
+            drawing = styleKit?.drawing(for: drawingName)
+        } else {
+            let drawingKey = drawingName.lowercaseWords
+            if let dictDrawing = drawingForNameDict[drawingKey] {
+                drawing = dictDrawing
+            } else if let _ = classMethodName(forDrawingName: drawingName) {
+                drawing = Drawing(styleKit: self, name: drawingName)
+                drawingForNameDict[drawingKey] = drawing
+            } else {
+                drawing = nil
+                debugPrint("failed to find drawing name: %@", drawingName)
+            }
+        }
+        return drawing
+    }
+
+}

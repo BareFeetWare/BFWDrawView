@@ -158,20 +158,22 @@ import UIKit
                           state: UIControlState,
                           tintColor: UIColor)
     {
-        if let drawing = BFWStyleKit.drawing(forStyleKitName: styleKit,
-                                             drawingName: name)
+        if let drawing = StyleKit.drawing(forStyleKitName: styleKit,
+                                          drawingName: name)
         {
-            let frame: CGRect
+            let frame: CGRect?
             if let size = size, size != CGSize.zero {
                 frame = CGRect(origin: CGPoint.zero, size: size)
             } else {
                 frame = drawing.intrinsicFrame
             }
-            let icon = DrawingView(frame: frame)
-            icon.drawing = drawing
-            icon.tintColor = tintColor
-            icon.contentMode = .redraw
-            setIconDrawView(icon, for: state)
+            if let frame = frame {
+                let icon = DrawingView(frame: frame)
+                icon.drawing = drawing
+                icon.tintColor = tintColor
+                icon.contentMode = .redraw
+                setIconDrawView(icon, for: state)
+            }
         }
     }
     
@@ -181,10 +183,11 @@ import UIKit
     {
         iconDrawViewForStateDict.removeAll()
         for (stateInt, drawingName) in stateNameDict {
-            if let drawing = BFWStyleKit.drawing(forStyleKitName: styleKit,
-                                                 drawingName: drawingName)
+            if let drawing = StyleKit.drawing(forStyleKitName: styleKit,
+                                              drawingName: drawingName),
+                let frame = drawing.intrinsicFrame
             {
-                let icon = DrawingView(frame: drawing.intrinsicFrame)
+                let icon = DrawingView(frame: frame)
                 icon.drawing = drawing
                 icon.tintColor = tintColor
                 icon.contentMode = .redraw
@@ -199,7 +202,8 @@ import UIKit
         backgroundDrawViewForStateDict.removeAll()
         for (stateInt, drawingName) in stateNameDict {
             let background = DrawingView(frame: self.bounds)
-            background.drawing = BFWStyleKit.drawing(forStyleKitName: styleKit, drawingName: drawingName)
+            background.drawing = StyleKit.drawing(forStyleKitName: styleKit,
+                                                  drawingName: drawingName)
             background.contentMode = .redraw
             setBackgroundDrawView(background,
                                   for: UIControlState(rawValue: stateInt))

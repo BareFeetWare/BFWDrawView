@@ -12,7 +12,7 @@ class AnimationCountViewController: UIViewController {
     
     // MARK: - Variables
     
-    var drawing: BFWStyleKitDrawing!
+    var drawing: Drawing!
     
     @IBOutlet var animationView: AnimationView!
     @IBOutlet var desiredFramesPerSecondTextField: UITextField?

@@ -1,114 +1,76 @@
 //
-//  BFWStyleKitDrawing.m
+//  BFWStyleKitDrawing.swift
 //  BFWDrawView
 //
 //  Created by Tom Brodhurst-Hill on 19/07/2015.
 //  Copyright (c) 2015 BareFeetWare. All rights reserved.
 //
 
-#import "BFWStyleKitDrawing.h"
-#import "BFWStyleKit.h"
-#import "NSDictionary+BFW.h"
-#import "NSString+BFW.h"
+import Foundation
 
-@interface BFWStyleKitDrawing : NSObject
+class Drawing {
 
-extern NSString * const drawPrefix;
-
-@property (nonatomic, weak, readonly) StyleKit *styleKit;
-@property (nonatomic, copy, readonly) NSString *name;
-@property (nonatomic, copy, readonly) NSArray *methodParameters;
-@property (nonatomic, copy, readonly) NSString *methodName;
-@property (nonatomic, readonly) CGSize drawnSize;
-@property (nonatomic, readonly) BOOL hasDrawnSize;
-@property (nonatomic, readonly) CGRect intrinsicFrame;
-
-@end
-
-@interface BFWStyleKitDrawing ()
-
-@property (nonatomic, weak, readwrite) BFWStyleKit *styleKit;
-@property (nonatomic, copy, readwrite) NSString *name;
-@property (nonatomic, copy, readwrite) NSArray *methodParameters;
-@property (nonatomic, copy, readwrite) NSString *methodName;
-@property (nonatomic, assign, readwrite) CGSize drawnSize;
-@property (nonatomic, assign) BOOL didSetDrawnSize;
-@property (nonatomic, copy) NSString *lookupName;
-
-@end
-
-NSString * const drawPrefix = @"draw";
-static NSString * const sizesKey = @"sizes";
-static NSString * const sizesByPrefixKey = @"sizesByPrefix";
-
-@implementation BFWStyleKitDrawing
-
-#pragma mark - Init
-
-- (instancetype)initWithStyleKit:(BFWStyleKit *)styleKit
-                            name:(NSString *)name
-{
-    self = [super init];
-    if (self) {
-        _styleKit = styleKit;
-        _name = name;
+    struct FileName {
+        static let drawPrefix = "draw"
     }
-    return self;
-}
 
-#pragma mark - Accessors
+    var styleKit: StyleKit
+    var name: String
+    fileprivate var didSetDrawnSize = false
 
-- (NSString *)methodName
-{
-    if (!_methodName) {
-        _methodName = [self.styleKit classMethodNameForDrawingName:self.name];
+    enum Key: String {
+        case sizes, sizesByPrefix
     }
-    return _methodName;
-}
+    
+    // MARK: - Init
 
-- (NSArray *)methodParameters
-{
-    if (!_methodParameters) {
-        NSArray *methodNameComponents = [self.methodName methodNameComponents];
-        if (methodNameComponents.count) {
-            if (methodNameComponents.count > 1) {
-                _methodParameters = [methodNameComponents subarrayWithRange:NSMakeRange(1, methodNameComponents.count - 1)];
-            }
+    init(styleKit: StyleKit, name: String) {
+        self.styleKit = styleKit
+        self.name = name
+    }
+    
+    // MARK: Variables
+
+    lazy var methodName: String? = {
+        return self.styleKit.classMethodName(forDrawingName: self.name)
+    }()
+
+    lazy var methodParameters: [String] = {
+        let methodParameters: [String]
+        if let methodNameComponents = self.methodName?.methodNameComponents as? [String],
+            methodNameComponents.count > 1
+        {
+            methodParameters = Array(methodNameComponents.suffix(from: 1))
+        } else {
+            methodParameters = []
         }
-    }
-    return _methodParameters;
-}
+        return methodParameters
+    }()
+    
+    lazy var lookupName: String = {
+        return self.name.lowercaseWords
+    }()
 
-- (NSString *)lookupName
-{
-    if (!_lookupName) {
-        _lookupName = self.name.lowercaseWords;
-    }
-    return _lookupName;
-}
-
-- (CGSize)drawnSize
-{
-    if (!self.didSetDrawnSize) {
-        self.didSetDrawnSize = YES;
-        NSDictionary *parameterDict = self.styleKit.parameterDict;
-        NSString *sizeString = [parameterDict[sizesKey] objectForWordsKey:self.lookupName];
-        if (!sizeString) {
-            sizeString = [parameterDict[sizesByPrefixKey] objectForLongestPrefixKeyMatchingWordsInString:self.lookupName];
+    lazy var drawnSize: CGSize? = {
+        let parameterDict = self.styleKit.parameterDict
+        let sizeString: String?
+        if let sizesDict = parameterDict[Key.sizes.rawValue],
+            let matchedSizeString = (sizesDict as NSDictionary).object(forWordsKey: self.lookupName) as? String
+        {
+            //        if let matchedSizeString = (parameterDict[Key.sizes.rawValue] as? NSDictionary).objectForWordsKey(self.lookupName) {
+            sizeString = matchedSizeString
+        } else if let sizesDict = parameterDict[Key.sizesByPrefix.rawValue] {
+            sizeString = (sizesDict as NSDictionary).objectForLongestPrefixKeyMatchingWords(in: self.lookupName) as? String
+        } else {
+            sizeString = nil
         }
-        _drawnSize = sizeString ? CGSizeFromString(sizeString) : CGSizeZero;
+        return sizeString.flatMap { CGSizeFromString($0) }
+    }()
+
+    var intrinsicFrame: CGRect? {
+        guard let drawnSize = drawnSize
+            else { return nil }
+        return CGRect(origin: CGPoint.zero, size: drawnSize)
     }
-    return _drawnSize;
-}
 
-- (BOOL)hasDrawnSize
-{
-    return !CGSizeEqualToSize(self.drawnSize, CGSizeZero);
 }
-
-- (CGRect)intrinsicFrame
-{
-    return CGRectMake(0, 0, self.drawnSize.width, self.drawnSize.height);
-}
-
-@end

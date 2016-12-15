@@ -12,7 +12,7 @@ class StyleKitViewController: UITableViewController {
 
     // MARK: - Public variables
     
-    var styleKit: BFWStyleKit?
+    var styleKit: StyleKit?
     
     // MARK: - Structs
     
@@ -24,10 +24,7 @@ class StyleKitViewController: UITableViewController {
     // MARK: - Private variables
     
     lazy fileprivate var drawingNames: [String] = {
-        let drawingNames = self.styleKit?.drawingNames as! [String]
-        return drawingNames.map { drawingName in
-            drawingName.lowercaseWords()
-            }.sorted(by: <)
+        return self.styleKit?.drawingNames.map { $0.lowercaseWords }.sorted(by: <) ?? []
     }()
 
     // MARK: - UIViewController
@@ -47,15 +44,15 @@ class StyleKitViewController: UITableViewController {
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let drawingName = drawingNames[indexPath.row]
-        let drawing = styleKit?.drawing(forName: drawingName)
-        let methodParameters = drawing?.methodParameters as? [String]
+        let drawing = styleKit?.drawing(for: drawingName)
+        let methodParameters = drawing?.methodParameters
         let isAnimation = methodParameters?.contains("animation") ?? false
         let cellIdentifier = isAnimation ? CellIdentifier.animation : CellIdentifier.drawing
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
             for: indexPath) as! DrawingCell
         cell.textLabel?.text = drawingName
         var detailComponents = methodParameters
-        cell.drawView?.drawing = styleKit?.drawing(forName: drawingName)
+        cell.drawView?.drawing = styleKit?.drawing(for: drawingName)
         if let drawnSize = drawing?.drawnSize {
             if !drawnSize.equalTo(CGSize.zero) {
                 detailComponents?.append("size = {\(drawnSize.width), \(drawnSize.height)}")
@@ -72,7 +69,7 @@ class StyleKitViewController: UITableViewController {
             let indexPath = tableView.indexPath(for: cell)
         {
             let drawingName = drawingNames[indexPath.row]
-            let drawing = styleKit?.drawing(forName: drawingName)
+            let drawing = styleKit?.drawing(for: drawingName)
             if let drawViewController = segue.destination as? DrawingViewController {
                 drawViewController.drawing = drawing
             } else if let animationCountViewController = segue.destination as? AnimationCountViewController {

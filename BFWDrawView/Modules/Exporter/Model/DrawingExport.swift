@@ -15,7 +15,7 @@ fileprivate extension String {
             "button": "btn",
             "icon": "ic"
         ]
-        let words = self.camelCaseToWords().components(separatedBy: " ")
+        let words = self.camelCaseToWords.components(separatedBy: " ")
         let fileNameWords: [String]
         if let firstWord = words.first,
             let replacementWord = replacePrefixDict[firstWord.lowercased()]
@@ -46,16 +46,15 @@ class DrawingExport {
                            tintColor: UIColor) -> DrawingView?
     {
         var drawingView: DrawingView?
-        if let drawing = BFWStyleKit.drawing(forStyleKitName: styleKit,
-                                             drawingName: drawingName)
+        if let drawing = StyleKit.drawing(forStyleKitName: styleKit,
+                                          drawingName: drawingName)
         {
-            if drawing.hasDrawnSize {
-                if let parameters = drawing.methodParameters as? [String],
-                    parameters.contains("animation")
+            if let frame = drawing.intrinsicFrame {
+                if drawing.methodParameters.contains("animation")
                 {
-                    drawingView = AnimationView(frame: drawing.intrinsicFrame)
+                    drawingView = AnimationView(frame: frame)
                 } else {
-                    drawingView = DrawingView(frame: drawing.intrinsicFrame)
+                    drawingView = DrawingView(frame: frame)
                 }
                 drawingView?.drawing = drawing
                 drawingView?.contentMode = .scaleAspectFit
@@ -74,7 +73,7 @@ class DrawingExport {
         if let tintColorString = derivedDict[Key.tintColor.rawValue] as? String,
             let styleKit = drawingView.drawing?.styleKit
         {
-            drawingView.tintColor = styleKit.color(forName: tintColorString)
+            drawingView.tintColor = styleKit.color(for: tintColorString)
         }
         if let sizeString = derivedDict[Key.size.rawValue] as? String {
             let size = CGSizeFromString(sizeString)
@@ -100,14 +99,14 @@ class DrawingExport {
     {
         var excludeFileNames = Set<String>()
         for styleKitName in styleKitNames {
-            if let styleKit = BFWStyleKit(forName: styleKitName) {
+            if let styleKit = StyleKit.styleKit(for: styleKitName) {
                 if let blacklist = styleKit.parameterDict[Key.exportBlacklist.rawValue] as? [String] {
                     for fileName in blacklist {
-                        excludeFileNames.insert(fileName.lowercaseWords())
+                        excludeFileNames.insert(fileName.lowercaseWords)
                     }
                 }
                 for drawingName in (styleKit.drawingNames as! [String]) {
-                    if let drawing = styleKit.drawing(forName: drawingName),
+                    if let drawing = styleKit.drawing(for: drawingName),
                         let parameters = drawing.methodParameters as? [String],
                         parameters.contains("frame"),
                         let drawingView = self.drawingView(name: drawing.name,
@@ -211,7 +210,7 @@ class DrawingExport {
                            excludeFileNames: inout Set<String>)
     {
         var excludeFileNames = excludeFileNames
-        let fileNameLowercaseWords = fileName.lowercaseWords() as String
+        let fileNameLowercaseWords = fileName.lowercaseWords
         if excludeFileNames.contains(fileNameLowercaseWords) {
             debugPrint("skipping excluded or existing file: " + fileNameLowercaseWords)
             return
@@ -278,7 +277,7 @@ class DrawingExport {
                        framesPerSecond: framesPerSecond)
         if isAndroid {
             let styleKits = colorsStyleKitNames.flatMap {styleKitName in
-                BFWStyleKit(forName: styleKitName)
+                StyleKit.styleKit(for: styleKitName)
             }
             let colorsXmlString = colorsXml(for: styleKits)
             let colorsFile = directory.appendingPathComponent("paintcode_colors.xml")
@@ -293,12 +292,12 @@ class DrawingExport {
                                         in: .userDomainMask).first!
     }
     
-    class func colorsXml(for styleKits: [BFWStyleKit]) -> String {
+    class func colorsXml(for styleKits: [StyleKit]) -> String {
         var colorsDict = [String: UIColor]()
         for styleKit in styleKits {
             for colorName in styleKit.colorNames as! [String] {
                 if let existingColor = colorsDict[colorName] {
-                    let addingColor = styleKit.color(forName: colorName)
+                    let addingColor = styleKit.color(for: colorName)
                     if existingColor != addingColor {
                         debugPrint("Skipping color \"\(colorName)\"") // = #\(addingColor.hexString), from styleKit \"\(styleKit.name)\", which would overwrite existing #\(existingColor.hexString)")
                     } else {
@@ -314,7 +313,7 @@ class DrawingExport {
         for colorName in colorNames {
             let color = colorsDict[colorName]!
             let colorHex = color.hexString()!
-            let wordsString = colorName.camelCaseToWords()!
+            let wordsString = colorName.camelCaseToWords
             let underscoreName = wordsString.replacingOccurrences(of: " ", with: "_")
             let androidColorName = underscoreName.lowercased()
             let colorString = String(format: "    <color name=\"%@\">#%@</color>", androidColorName, colorHex)

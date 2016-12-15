@@ -8,7 +8,7 @@
 
 class DrawingViewController: UIViewController {
 
-    var drawing: BFWStyleKitDrawing?
+    var drawing: Drawing?
     
     @IBOutlet fileprivate var drawingView: AnimationView?
     

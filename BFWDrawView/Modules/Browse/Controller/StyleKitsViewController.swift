@@ -16,7 +16,7 @@ class StyleKitsViewController: UITableViewController {
 
     var delegate: StyleKitsDelegate?
     
-    fileprivate var styleKitNames: [String] = (BFWStyleKit.styleKitNames() as! [String]).sorted()
+    fileprivate var styleKitNames: [String] = StyleKit.styleKitNames.sorted()
 
     // MARK: - Actions
 
@@ -54,7 +54,7 @@ class StyleKitsViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! SwitchCell
         let styleKitName = self.styleKitNames[indexPath.row]
         cell.textLabel?.text = styleKitName
-        let styleKit = BFWStyleKit(forName: styleKitName)!
+        let styleKit = StyleKit.styleKit(for: styleKitName)!
         // TODO: Get drawingNames and colorNames on background thread since it is CPU expensive and pauses UI.
         cell.detailTextLabel?.text = "\(styleKit.drawingNames.count) drawings, \(styleKit.colorNames.count) colors"
         if let selectedStyleKitNames = selectedStyleKitNames {
@@ -73,7 +73,7 @@ class StyleKitsViewController: UITableViewController {
             let indexPath = tableView.indexPath(for: cell)
         {
             let styleKitName = styleKitNames[indexPath.row]
-            destinationViewController.styleKit = BFWStyleKit(forName:styleKitName)
+            destinationViewController.styleKit = StyleKit.styleKit(for:styleKitName)
         }
     }
 

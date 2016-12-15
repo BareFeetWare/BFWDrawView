@@ -10,13 +10,14 @@
 
 @interface NSString (BFW)
 
-- (NSString *)uppercaseFirstCharacter; // only uppercase first character in string
-- (NSString *)lowercaseFirstCharacter; // only lowercase first character in string
-- (NSString *)camelCaseToWords; // convert camelCase to separate words
-- (NSString *)wordsToPaintCodeCase; // convert separate words to the case that PaintCode uses for methods
-- (NSString *)lowercaseWords;
-- (NSString *)longestWordsMatchInPrefixArray:(NSArray *)prefixArray;
-- (NSString *)wordsMatchingWordsArray:(NSArray *)wordsArray;
-- (NSArray *)methodNameComponents;
+@property (nonatomic, readonly, nonnull) NSArray *methodNameComponents;
+@property (nonatomic, readonly, nonnull) NSString *uppercaseFirstCharacter; // only uppercase first character in string
+@property (nonatomic, readonly, nonnull) NSString *lowercaseFirstCharacter; // only lowercase first character in string
+@property (nonatomic, readonly, nonnull) NSString *camelCaseToWords; // convert camelCase to separate words
+@property (nonatomic, readonly, nonnull) NSString *wordsToPaintCodeCase; // convert separate words to the case that PaintCode uses for methods
+@property (nonatomic, readonly, nonnull) NSString *lowercaseWords;
+
+- (NSString * _Nonnull)longestWordsMatchInPrefixArray:(NSArray * _Nonnull)prefixArray;
+- (NSString * _Nonnull)wordsMatchingWordsArray:(NSArray * _Nonnull)wordsArray;
 
 @end

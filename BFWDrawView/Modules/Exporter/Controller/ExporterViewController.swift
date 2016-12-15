@@ -37,11 +37,11 @@ class ExporterViewController: UITableViewController {
     }
 
     fileprivate var drawingsStyleKitNames: [String]? {
-        return exporter?.drawingsStyleKitNames ?? BFWStyleKit.styleKitNames() as? [String]
+        return exporter?.drawingsStyleKitNames ?? StyleKit.styleKitNames
     }
     
     fileprivate var colorsStyleKitNames: [String]? {
-        return exporter?.colorsStyleKitNames ?? BFWStyleKit.styleKitNames() as? [String]
+        return exporter?.colorsStyleKitNames ?? StyleKit.styleKitNames
     }
 
     fileprivate var activeListCell: UITableViewCell?
@@ -167,9 +167,9 @@ class ExporterViewController: UITableViewController {
             styleKitsViewController.delegate = self
             switch activeListCell! {
             case drawingsStyleKitsCell!:
-                styleKitsViewController.selectedStyleKitNames = drawingsStyleKitNames ?? BFWStyleKit.styleKitNames() as! [String]
+                styleKitsViewController.selectedStyleKitNames = drawingsStyleKitNames ?? StyleKit.styleKitNames
             case colorsStyleKitsCell!:
-                styleKitsViewController.selectedStyleKitNames = colorsStyleKitNames ?? BFWStyleKit.styleKitNames() as! [String]
+                styleKitsViewController.selectedStyleKitNames = colorsStyleKitNames ?? StyleKit.styleKitNames
             default:
                 break
             }
