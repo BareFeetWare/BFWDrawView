@@ -10,18 +10,40 @@ import Foundation
 
 class StyleKit: NSObject {
 
+    // MARK: - Stored variables
+    
     var name: String!
     
-    var paintCodeClass: AnyClass? { // class exported by PaintCode
-        return NSClassFromString(name)
-    }
-
     // MARK: - Init
     
     init(name: String) {
         self.name = name
     }
+    
+    // MARK: - Computed variables
 
+    var paintCodeClass: AnyClass? { // class exported by PaintCode
+        guard let moduleStyleKitName = moduleStyleKitName
+            else { return nil }
+        return NSClassFromString(moduleStyleKitName)
+    }
+
+    lazy var classMethodNames: [String]? = {
+        return self.paintCodeClass?.classMethodNames() as? [String]
+    }()
+    
+    var moduleStyleKitName: String? {
+        let moduleStyleKitName: String?
+        if let name = name,
+            let moduleName = type(of: self).moduleName
+        {
+            moduleStyleKitName = [moduleName, name].joined(separator: ".")
+        } else {
+            moduleStyleKitName = name
+        }
+        return moduleStyleKitName
+    }
+    
     // MARK: - Constants
     
     struct FileNameSuffix {
@@ -71,9 +93,18 @@ class StyleKit: NSObject {
         return styleKit(for: styleKitName)?.drawing(for: drawingName)
     }
     
-    lazy var classMethodNames: [String]? = {
-        return self.paintCodeClass?.classMethodNames() as? [String]
-    }()
+    // TODO: Move moduleName to extension on NSObject?
+    
+    static var moduleName: String? {
+        let moduleName: String?
+        let components = NSStringFromClass(self).components(separatedBy: ".")
+        if components.count == 2 {
+            moduleName = components.first
+        } else {
+            moduleName = nil
+        }
+        return moduleName
+    }
     
     // MARK: - Full list functions
     

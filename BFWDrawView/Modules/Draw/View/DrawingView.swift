@@ -33,31 +33,6 @@ import UIKit
         return drawing?.styleKit.paintCodeClass
     }
     
-    // MARK: - Private variables
-
-    fileprivate static var moduleName: String? {
-        let moduleName: String?
-        let components = NSStringFromClass(self).components(separatedBy: ".")
-        if components.count == 2 {
-            moduleName = components.first
-        } else {
-            moduleName = nil
-        }
-        return moduleName
-    }
-    
-    fileprivate var moduleStyleKitName: String? {
-        let moduleClassName: String?
-        if let styleKit = styleKit,
-            let moduleName = type(of: self).moduleName
-        {
-            moduleClassName = [moduleName, styleKit].joined(separator: ".")
-        } else {
-            moduleClassName = styleKit
-        }
-        return moduleClassName
-    }
-    
     // MARK: - Frame calculations
     
     var drawnSize: CGSize {
@@ -120,7 +95,7 @@ import UIKit
     
     fileprivate func updateDrawing() {
         // TODO: Call this only once for each stylekit and drawing name pair change.
-        if let moduleStyleKitName = moduleStyleKitName,
+        if let moduleStyleKitName = drawing?.styleKit.moduleStyleKitName,
             let name = name
         {
             drawing = StyleKit.drawing(forStyleKitName: moduleStyleKitName,
