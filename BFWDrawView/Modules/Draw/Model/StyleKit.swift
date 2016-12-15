@@ -169,7 +169,7 @@ class StyleKit: NSObject {
         return bundle
     }
 
-    lazy var parameterDict: [String: [String: Any]] = {
+    lazy var parameterDict: [String: Any] = {
         guard let path = self.bundle.path(forResource: self.name, ofType: "plist"),
             var parameterDict = NSDictionary(contentsOfFile: path) as? [String: [String: Any]]
             else { return [:] }
@@ -238,7 +238,7 @@ class StyleKit: NSObject {
 
     func drawing(for drawingName: String) -> Drawing? {
         let drawing: Drawing?
-        if let prefixDict = parameterDict[Key.styleKitByPrefix.rawValue],
+        if let prefixDict = parameterDict[Key.styleKitByPrefix.rawValue] as? [String: Any],
             let redirectStyleKitName = (prefixDict as NSDictionary)
                 .objectForLongestPrefixKeyMatchingWords(in: drawingName) as? String,
             redirectStyleKitName != name

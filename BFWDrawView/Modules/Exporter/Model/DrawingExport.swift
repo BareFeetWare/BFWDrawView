@@ -105,10 +105,9 @@ class DrawingExport {
                         excludeFileNames.insert(fileName.lowercaseWords)
                     }
                 }
-                for drawingName in (styleKit.drawingNames as! [String]) {
+                for drawingName in styleKit.drawingNames {
                     if let drawing = styleKit.drawing(for: drawingName),
-                        let parameters = drawing.methodParameters as? [String],
-                        parameters.contains("frame"),
+                        drawing.methodParameters.contains("frame"),
                         let drawingView = self.drawingView(name: drawing.name,
                                                            styleKit: styleKitName,
                                                            tintColor: tintColor)
@@ -295,7 +294,7 @@ class DrawingExport {
     class func colorsXml(for styleKits: [StyleKit]) -> String {
         var colorsDict = [String: UIColor]()
         for styleKit in styleKits {
-            for colorName in styleKit.colorNames as! [String] {
+            for colorName in styleKit.colorNames {
                 if let existingColor = colorsDict[colorName] {
                     let addingColor = styleKit.color(for: colorName)
                     if existingColor != addingColor {

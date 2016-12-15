@@ -54,12 +54,11 @@ class Drawing {
     lazy var drawnSize: CGSize? = {
         let parameterDict = self.styleKit.parameterDict
         let sizeString: String?
-        if let sizesDict = parameterDict[Key.sizes.rawValue],
+        if let sizesDict = parameterDict[Key.sizes.rawValue] as? [String: Any],
             let matchedSizeString = (sizesDict as NSDictionary).object(forWordsKey: self.lookupName) as? String
         {
-            //        if let matchedSizeString = (parameterDict[Key.sizes.rawValue] as? NSDictionary).objectForWordsKey(self.lookupName) {
             sizeString = matchedSizeString
-        } else if let sizesDict = parameterDict[Key.sizesByPrefix.rawValue] {
+        } else if let sizesDict = parameterDict[Key.sizesByPrefix.rawValue] as? [String: Any] {
             sizeString = (sizesDict as NSDictionary).objectForLongestPrefixKeyMatchingWords(in: self.lookupName) as? String
         } else {
             sizeString = nil
