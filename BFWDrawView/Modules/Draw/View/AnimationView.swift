@@ -228,7 +228,7 @@ import UIKit
     
     // MARK: - protocols for UIView+BFW
     
-    func copyProperties(from view: UIView) {
+    override func copyProperties(from view: UIView) {
         if let view = view as? AnimationView {
             animation = view.animation
             start = view.start
