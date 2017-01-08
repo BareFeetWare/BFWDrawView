@@ -226,20 +226,6 @@ import UIKit
         }
     }
     
-    // MARK: - protocols for UIView+BFW
-    
-    override func copyProperties(from view: UIView) {
-        if let view = view as? AnimationView {
-            animation = view.animation
-            start = view.start
-            end = view.end
-            duration = view.duration
-            cycles = view.cycles
-            isPaused = view.isPaused
-            framesPerSecond = view.framesPerSecond
-        }
-    }
-    
 }
 
 extension AnimationView {
