@@ -49,7 +49,8 @@ import UIKit
     fileprivate var moduleStyleKitName: String? {
         let moduleClassName: String?
         if let styleKit = styleKit,
-            let moduleName = type(of: self).moduleName
+            let moduleName = type(of: self).moduleName,
+            !styleKit.hasPrefix(moduleName)
         {
             moduleClassName = [moduleName, styleKit].joined(separator: ".")
         } else {
