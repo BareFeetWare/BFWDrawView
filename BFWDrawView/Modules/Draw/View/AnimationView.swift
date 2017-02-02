@@ -74,7 +74,7 @@ import UIKit
                     if let _ = startDate,
                         let pausedDate = pausedDate
                     {
-                        let morePausedTimeInterval = NSDate().timeIntervalSince(pausedDate)
+                        let morePausedTimeInterval = Date().timeIntervalSince(pausedDate)
                         pausedTimeInterval += morePausedTimeInterval
                     }
                     pausedDate = nil
@@ -102,7 +102,7 @@ import UIKit
     var drawnFramesPerSecond: Double {
         var framesPerSecond = 0.0
         if let startDate = startDate {
-            let interval = NSDate().timeIntervalSince(startDate)
+            let interval = Date().timeIntervalSince(startDate)
             if interval > 0 {
                 framesPerSecond = Double(drawnFrameCount) / interval
             }
@@ -157,7 +157,7 @@ import UIKit
     }
     
     func tick(timer: Timer) {
-        let elapsed = NSDate().timeIntervalSince(startDate!) - pausedTimeInterval
+        let elapsed = Date().timeIntervalSince(startDate!) - pausedTimeInterval
         let complete = elapsed / duration
         finished = cycles > 0.0 && complete > cycles
         if isPaused || finished || superview == nil {
