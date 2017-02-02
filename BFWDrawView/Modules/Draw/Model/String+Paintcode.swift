@@ -11,17 +11,17 @@ import Foundation
 extension String {
     
     var uppercasedFirstCharacter: String {
-        let index = startIndex.advancedBy(1)
-        return substringToIndex(index).uppercaseString + substringFromIndex(index)
+        let index = characters.index(startIndex, offsetBy: 1)
+        return substring(to: index).uppercased() + substring(from: index)
     }
 
     var lowercasedFirstCharacter: String {
-        let index = startIndex.advancedBy(1)
-        return substringToIndex(index).lowercaseString + substringFromIndex(index)
+        let index = characters.index(startIndex, offsetBy: 1)
+        return substring(to: index).lowercased() + substring(from: index)
     }
 
     var words: [String] {
-        return componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).filter { !$0.isEmpty }
+        return components(separatedBy: CharacterSet.whitespaces).filter { !$0.isEmpty }
     }
     
     var paintcodeCaseFromWords: String {
@@ -37,15 +37,15 @@ extension String {
     }
     
     var isUppercase: Bool {
-        return self == uppercaseString
+        return self == uppercased()
     }
     
     var wordsFromCamelCase: String {
         var wordString = ""
         var previousChar: String? = nil
         for charN in 0 ..< characters.count {
-            let thisChar = String(characters[startIndex.advancedBy(charN)])
-            let nextChar: String? = charN + 1 < characters.count ? String(characters[startIndex.advancedBy(charN + 1)]) : nil
+            let thisChar = String(characters[characters.index(startIndex, offsetBy: charN)])
+            let nextChar: String? = charN + 1 < characters.count ? String(characters[characters.index(startIndex, offsetBy: charN + 1)]) : nil
             if charN > 0
                 && previousChar != " "
                 && thisChar != " "
@@ -61,10 +61,10 @@ extension String {
     }
     
     var lowercasedWords: String {
-        return wordsFromCamelCase.lowercaseString
+        return wordsFromCamelCase.lowercased()
     }
     
-    func longestWordsMatchInPrefixes(prefixes: [String]) -> String {
+    func longestWordsMatch(inPrefixes prefixes: [String]) -> String {
         return prefixes.reduce("") { (longest, prefix) in
             return prefix.characters.count > longest.characters.count
                 && self.lowercasedWords.hasPrefix(prefix.lowercasedWords)
@@ -72,7 +72,7 @@ extension String {
         }
     }
 
-    func wordsMatchingWordsArray(wordsArray: [String]) -> String? {
+    func words(matching wordsArray: [String]) -> String? {
         let lowercasedWords = self.lowercasedWords
         return wordsArray.filter { words in
             return lowercasedWords == words.lowercasedWords
@@ -83,14 +83,13 @@ extension String {
         let withString = "With"
         var parameters: [String]?
         if hasSuffix(":") {
-            let parameterComponents = componentsSeparatedByString(":")
-            if let withComponents = parameterComponents.first?.componentsSeparatedByString(withString)
-                where !withComponents.isEmpty
+            let parameterComponents = components(separatedBy: ":")
+            if let withComponents = parameterComponents.first?.components(separatedBy: withString), !withComponents.isEmpty
             {
-                let methodBaseName = withComponents.dropLast().joinWithSeparator(withString)
+                let methodBaseName = withComponents.dropLast().joined(separator: withString)
                 let firstParameter = withComponents.last!.lowercasedFirstCharacter
                 parameters = [methodBaseName, firstParameter]
-                parameters?.appendContentsOf(parameterComponents.dropFirst().dropLast())
+                parameters?.append(contentsOf: parameterComponents.dropFirst().dropLast())
             }
         } else {
             parameters = [self]
