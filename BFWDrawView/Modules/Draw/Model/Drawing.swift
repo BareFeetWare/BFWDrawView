@@ -37,7 +37,7 @@ class Drawing {
 
     lazy var methodParameters: [String] = {
         let methodParameters: [String]
-        if let methodNameComponents = self.methodName?.methodNameComponents as? [String],
+        if let methodNameComponents = self.methodName?.methodNameComponents,
             methodNameComponents.count > 1
         {
             methodParameters = Array(methodNameComponents.suffix(from: 1))
