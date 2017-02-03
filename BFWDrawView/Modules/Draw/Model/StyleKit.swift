@@ -111,7 +111,7 @@ class StyleKit: NSObject {
     // Calling any of these methods is expensive, since it executes every method and caches the returnValue. Use only for discovery, eg showing a browser of all drawings.
     
     lazy var returnValueForClassMethodNameDict: [String: Any]? = {
-        debugPrint("**** warning: calling returnValueForClassMethodNameDict for BFWStyleKit name \"%@\", which has a large up front caching hit for the app. Only call this if you want to browse the entire list of drawings and colors available from the styleKit", self.name)
+        debugPrint("**** warning: calling returnValueForClassMethodNameDict for BFWStyleKit name [\(self.name ?? "nil")], which has a large up front caching hit for the app. Only call this if you want to browse the entire list of drawings and colors available from the styleKit")
         return self.paintCodeClass?.returnValueForClassMethodNameDict() as? [String: Any]
     }()
     
