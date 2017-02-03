@@ -279,7 +279,13 @@ class DrawingExport {
                 return StyleKit.styleKit(for: styleKitName)
             }
             let colorsXmlString = colorsXml(for: styleKits)
-            let colorsFile = directory.appendingPathComponent("paintcode_colors.xml")
+            let colorsDirectory = directory.appendingPathComponent("values", isDirectory: true)
+            let colorsFile = colorsDirectory.appendingPathComponent("colors.xml")
+            if !FileManager.default.fileExists(atPath: colorsDirectory.path) {
+                try? FileManager.default.createDirectory(at: colorsDirectory,
+                                                         withIntermediateDirectories: true,
+                                                         attributes: nil)
+            }
             try? colorsXmlString.write(to: colorsFile,
                                        atomically: true,
                                        encoding: String.Encoding.ascii)
