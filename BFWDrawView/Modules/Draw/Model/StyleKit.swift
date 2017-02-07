@@ -61,9 +61,9 @@ class StyleKit: NSObject {
     static var styleKitNames: [String] = {
         var styleKitNames = [String]()
         for aClass in (NSObject.subclasses(of: NSObject.self) as! [AnyClass]) {
-            let className = NSStringFromClass(aClass)
+            let className = NSStringFromClass(aClass).components(separatedBy: ".").last!
             if className.hasSuffix(FileNameSuffix.styleKit),
-                className != NSStringFromClass(StyleKit.self)
+                aClass != StyleKit.self
             {
                 // TODO: implement a more robust filter than suffix when PaintCode offers it
                 styleKitNames += [className]
@@ -71,7 +71,6 @@ class StyleKit: NSObject {
         }
         return styleKitNames
     }()
-
 
     static func styleKit(for name: String) -> StyleKit? {
         var styleKit: StyleKit? = nil
