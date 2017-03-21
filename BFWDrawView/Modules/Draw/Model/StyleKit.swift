@@ -177,11 +177,11 @@ class StyleKit: NSObject {
 
     lazy var parameterDict: [String: Any] = {
         guard let path = self.bundle.path(forResource: self.name, ofType: "plist"),
-            var parameterDict = NSDictionary(contentsOfFile: path) as? [String: [String: Any]]
+            var parameterDict = NSDictionary(contentsOfFile: path) as? [String: Any?]
             else { return [:] }
         //TODO: move filtering to another class with references to consts for keys
         for key in ["sizes", "sizesByPrefix", "derived"] {
-            if let dictionary = parameterDict[key] {
+            if let dictionary = parameterDict[key] as? [String: Any] {
                 var mutableDict = [String: Any]()
                 for (oldKey, value) in dictionary {
                     let newKey = oldKey.lowercaseWords
