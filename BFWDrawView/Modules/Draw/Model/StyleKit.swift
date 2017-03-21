@@ -161,11 +161,18 @@ class StyleKit: NSObject {
 
     var bundle: Bundle {
         #if TARGET_INTERFACE_BUILDER // rendering in storyboard using IBDesignable
-            let bundle = Bundle.bundleForClass(Self)
+            let isInterfaceBuilder = true
         #else
-            let bundle = Bundle.main
+            let isInterfaceBuilder = false
         #endif
-        return bundle
+        return StyleKit.bundle(isInterfaceBuilder: isInterfaceBuilder)
+    }
+    
+    fileprivate static func bundle(isInterfaceBuilder: Bool) -> Bundle {
+        let bundle = isInterfaceBuilder
+            ? Bundle(for: self)
+            : Bundle.main
+        return bundle;
     }
 
     lazy var parameterDict: [String: Any] = {
