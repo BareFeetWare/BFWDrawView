@@ -146,7 +146,7 @@ import UIKit
                     isOpaque: Bool,
                     to file: URL) -> Bool
     {
-        var success = true
+        var success = false
         let directory = file.deletingLastPathComponent()
         let directoryPath = directory.path
         if !FileManager.default.fileExists(atPath: directoryPath) {
@@ -155,10 +155,13 @@ import UIKit
             } catch {
                 success = false
             }
+        } else {
+            success = true
         }
         if success, let image = image(at: scale, isOpaque: isOpaque) {
             do {
                 try UIImagePNGRepresentation(image)?.write(to: file, options: Data.WritingOptions.atomic)
+                success = true
             } catch {
                 success = false
             }

@@ -232,6 +232,10 @@ extension AnimationView {
     
     // MARK: - DrawingView
     
+    override var handledParametersArray: [[String]] {
+        return super.handledParametersArray.map { $0 + ["animation"] }
+    }
+    
     override func draw(parameters: [String]) -> Bool {
         var success = false
         if let drawingSelector = drawingSelector,
