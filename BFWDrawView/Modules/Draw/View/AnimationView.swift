@@ -32,7 +32,7 @@ import UIKit
                 return { t in
                     let p = 0.3
                     let max = 1.375
-                    let outside = pow(2.0, -10 * t) * sin((t - p / 4) * (2 * M_PI) / p) + 1
+                    let outside = pow(2.0, -10 * t) * sin((t - p / 4) * (2 * .pi) / p) + 1
                     return outside / max
                 }
             }

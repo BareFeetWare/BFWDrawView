@@ -25,7 +25,7 @@ import UIKit
 
     // MARK: - Variables
     
-    var drawing: Drawing?
+    var drawing: Drawing? { didSet { setNeedsDraw() }}
     @IBInspectable var name: String? { didSet { updateDrawing() }}
     @IBInspectable var styleKit: String? { didSet { updateDrawing() }}
     
