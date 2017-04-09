@@ -8,7 +8,6 @@
 
 import UIKit
 
-/// DrawingView is a Swift class that will eventually replace BFWDrawView
 @IBDesignable class DrawingView: UIView {
 
     // MARK: - Init
@@ -95,10 +94,10 @@ import UIKit
     
     fileprivate func updateDrawing() {
         // TODO: Call this only once for each stylekit and drawing name pair change.
-        if let moduleStyleKitName = drawing?.styleKit.moduleStyleKitName,
+        if let styleKitName = styleKit,
             let name = name
         {
-            drawing = StyleKit.drawing(forStyleKitName: moduleStyleKitName,
+            drawing = StyleKit.drawing(forStyleKitName: styleKitName,
                                        drawingName: name)
         }
     }
