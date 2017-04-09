@@ -24,3 +24,4 @@ FOUNDATION_EXPORT const unsigned char BFWDrawViewVersionString[];
 
 #import <BFWDrawView/NSObject+BFWStyleKit.h>
 #import <BFWDrawView/NSDictionary+BFW.h>
+#import <BFWDrawView/NSInvocation+BFW.h>

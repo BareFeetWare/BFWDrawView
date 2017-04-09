@@ -222,7 +222,7 @@ class StyleKit: NSObject {
     var drawingForNameDict = [String: Drawing]()
     
     func drawingName(forMethodName methodName: String) -> String? {
-        return (methodName.methodNameComponents as? [String])?
+        return methodName.methodNameComponents?
             .first?.substring(from: Drawing.FileName.drawPrefix.endIndex).lowercaseFirstCharacter
     }
     
@@ -231,7 +231,7 @@ class StyleKit: NSObject {
         let drawingWords = Drawing.FileName.drawPrefix + " " + drawingName.lowercaseWords
         if let classMethodNames = classMethodNames {
             for searchMethodName in classMethodNames {
-                if let baseName = (searchMethodName.methodNameComponents as? [String])?.first,
+                if let baseName = searchMethodName.methodNameComponents?.first,
                     baseName.lowercaseWords == drawingWords
                 {
                     methodName = searchMethodName
