@@ -177,7 +177,7 @@ class StyleKit: NSObject {
 
     lazy var parameterDict: [String: Any] = {
         guard let path = self.bundle.path(forResource: self.name, ofType: "plist"),
-            var parameterDict = NSDictionary(contentsOfFile: path) as? [String: Any?]
+            var parameterDict = NSDictionary(contentsOfFile: path) as? [String: Any]
             else { return [:] }
         //TODO: move filtering to another class with references to consts for keys
         for key in ["sizes", "sizesByPrefix", "derived"] {
@@ -222,7 +222,7 @@ class StyleKit: NSObject {
     var drawingForNameDict = [String: Drawing]()
     
     func drawingName(forMethodName methodName: String) -> String? {
-        return methodName.methodNameComponents?
+        return (methodName.methodNameComponents as? [String])?
             .first?.substring(from: Drawing.FileName.drawPrefix.endIndex).lowercaseFirstCharacter
     }
     
@@ -231,7 +231,7 @@ class StyleKit: NSObject {
         let drawingWords = Drawing.FileName.drawPrefix + " " + drawingName.lowercaseWords
         if let classMethodNames = classMethodNames {
             for searchMethodName in classMethodNames {
-                if let baseName = searchMethodName.methodNameComponents?.first,
+                if let baseName = (searchMethodName.methodNameComponents as? [String])?.first,
                     baseName.lowercaseWords == drawingWords
                 {
                     methodName = searchMethodName

@@ -10,7 +10,7 @@
 
 @interface NSString (BFW)
 
-@property (nonatomic, readonly, nonnull) NSArray *methodNameComponents;
+@property (nonatomic, readonly, nullable) NSArray *methodNameComponents;
 @property (nonatomic, readonly, nonnull) NSString *uppercaseFirstCharacter; // only uppercase first character in string
 @property (nonatomic, readonly, nonnull) NSString *lowercaseFirstCharacter; // only lowercase first character in string
 @property (nonatomic, readonly, nonnull) NSString *camelCaseToWords; // convert camelCase to separate words

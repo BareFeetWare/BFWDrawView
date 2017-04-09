@@ -40,7 +40,7 @@ class Drawing {
         if let methodNameComponents = self.methodName?.methodNameComponents,
             methodNameComponents.count > 1
         {
-            methodParameters = Array(methodNameComponents.suffix(from: 1))
+            methodParameters = Array(methodNameComponents.suffix(from: 1)) as! [String]
         } else {
             methodParameters = []
         }
