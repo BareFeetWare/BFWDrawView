@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BFWDrawView
 
 @IBDesignable class SampleDrawingButton: DrawingButton {
     

@@ -9,7 +9,7 @@
 
 import UIKit
 
-@IBDesignable class DrawingButton: UIButton {
+@IBDesignable open class DrawingButton: UIButton {
     
     // MARK: - Variables
     
@@ -38,42 +38,42 @@ import UIKit
         commonInit()
     }
     
-    required init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         super.init(coder: coder)
         commonInit()
     }
     
-    func commonInit() {
+    open func commonInit() {
         // Implement in subclasses if required and call super.
     }
     
     // MARK: - Accessors for state
     
-    func iconDrawView(for state: UIControlState) -> DrawingView? {
+    open func iconDrawView(for state: UIControlState) -> DrawingView? {
         return iconDrawViewForStateDict[state.rawValue]
     }
     
-    func backgroundDrawView(for state: UIControlState) -> DrawingView? {
+    open func backgroundDrawView(for state: UIControlState) -> DrawingView? {
         return backgroundDrawViewForStateDict[state.rawValue]
     }
     
-    func setIconDrawView(_ drawView: DrawingView, for state: UIControlState) {
+    open func setIconDrawView(_ drawView: DrawingView, for state: UIControlState) {
         iconDrawViewForStateDict.setValueOrRemoveNil(drawView,
                                                      forKey: state.rawValue)
         setImage(drawView.image, for: state)
     }
     
-    func setBackgroundDrawView(_ drawView: DrawingView, for state: UIControlState) {
+    open func setBackgroundDrawView(_ drawView: DrawingView, for state: UIControlState) {
         backgroundDrawViewForStateDict.setValueOrRemoveNil(drawView.canDraw ? drawView : nil,
                                                            forKey: state.rawValue)
         setNeedsUpdateBackgrounds()
     }
     
-    func shadow(for state: UIControlState) -> NSShadow? {
+    open func shadow(for state: UIControlState) -> NSShadow? {
         return shadowForStateDict[state.rawValue]
     }
     
-    func setShadow(_ shadow: NSShadow, for state: UIControlState) {
+    open func setShadow(_ shadow: NSShadow, for state: UIControlState) {
         shadowForStateDict.setValueOrRemoveNil(shadow, forKey: state.rawValue)
         setNeedsUpdateShadow()
     }
@@ -120,7 +120,7 @@ import UIKit
     
     // MARK: - UIButton
     
-    override var isHighlighted: Bool {
+    open override var isHighlighted: Bool {
         get {
             return super.isHighlighted
         }
@@ -130,7 +130,7 @@ import UIKit
         }
     }
     
-    override var isSelected: Bool {
+    open override var isSelected: Bool {
         get {
             return super.isSelected
         }
@@ -140,7 +140,7 @@ import UIKit
         }
     }
     
-    override var isEnabled: Bool {
+    open override var isEnabled: Bool {
         get {
             return super.isEnabled
         }
@@ -152,11 +152,11 @@ import UIKit
     
     // MARK: - Functions
     
-    func makeIconWithSize(size: CGSize?,
-                          name: String,
-                          styleKit: String,
-                          state: UIControlState,
-                          tintColor: UIColor)
+    open func makeIconWithSize(size: CGSize?,
+                               name: String,
+                               styleKit: String,
+                               state: UIControlState,
+                               tintColor: UIColor)
     {
         if let drawing = StyleKit.drawing(forStyleKitName: styleKit,
                                           drawingName: name)
@@ -178,8 +178,8 @@ import UIKit
     }
     
     
-    func makeIconDrawViews(from stateNameDict: [UInt: String],
-                           styleKit: String)
+    open func makeIconDrawViews(from stateNameDict: [UInt: String],
+                                styleKit: String)
     {
         iconDrawViewForStateDict.removeAll()
         for (stateInt, drawingName) in stateNameDict {
@@ -196,8 +196,8 @@ import UIKit
         }
     }
     
-    func makeBackgroundDrawViews(from stateNameDict: [UInt: String],
-                                 styleKit: String)
+    open func makeBackgroundDrawViews(from stateNameDict: [UInt: String],
+                                      styleKit: String)
     {
         backgroundDrawViewForStateDict.removeAll()
         for (stateInt, drawingName) in stateNameDict {
@@ -219,7 +219,7 @@ import UIKit
     
     private var needsUpdateView = true
     
-    func updateView() {
+    open func updateView() {
         if let iconName = iconName,
             let iconStyleKit = iconStyleKit
         {
@@ -237,13 +237,13 @@ import UIKit
     
     // MARK: - UIView
     
-    override func layoutSubviews() {
+    open override func layoutSubviews() {
         updateBackgroundsIfNeeded()
         updateViewIfNeeded()
         super.layoutSubviews()
     }
     
-    override func draw(_ rect: CGRect) {
+    open override func draw(_ rect: CGRect) {
         super.draw(rect)
         updateShadowIfNeeded()
     }

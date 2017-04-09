@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wNx-QG-6wm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wNx-QG-6wm">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -136,10 +136,6 @@
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="FCf-ck-jnt" secondAttribute="height" multiplier="1:1" id="Df7-jn-4lL"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="styleKit" value="SampleStyleKit"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="name" value="icon pac man"/>
-                                            </userDefinedRuntimeAttributes>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="drawing name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rFg-Ga-2sh">
                                             <rect key="frame" x="51.5" y="8.5" width="107.5" height="20.5"/>
@@ -185,8 +181,6 @@
                                                 <constraint firstAttribute="width" secondItem="HgO-Vw-ah4" secondAttribute="height" multiplier="1:1" id="ICX-q7-8yY"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="styleKit" value="SampleStyleKit"/>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="name" value="pac man"/>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="animation">
                                                     <real key="value" value="0.5"/>
                                                 </userDefinedRuntimeAttribute>

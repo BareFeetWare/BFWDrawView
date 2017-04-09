@@ -7,364 +7,368 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2023CEEA1AFE2BAE00BBA2FA /* UIColor+BFW_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2023CEE91AFE2BAE00BBA2FA /* UIColor+BFW_Tests.m */; };
-		E20AA0C21C677A5200B8EEF7 /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20AA0B11C677A5200B8EEF7 /* StyleKit.swift */; };
-		E20AA0C31C677A5200B8EEF7 /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20AA0B31C677A5200B8EEF7 /* Drawing.swift */; };
-		E20AA0C51C677A5200B8EEF7 /* NSDictionary+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E20AA0B71C677A5200B8EEF7 /* NSDictionary+BFW.m */; };
-		E20AA0C61C677A5200B8EEF7 /* NSInvocation+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E20AA0B91C677A5200B8EEF7 /* NSInvocation+BFW.m */; };
-		E20AA0C71C677A5200B8EEF7 /* NSObject+BFWStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E20AA0BB1C677A5200B8EEF7 /* NSObject+BFWStyleKit.m */; };
-		E20AA0C81C677A5200B8EEF7 /* NSString+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E20AA0BD1C677A5200B8EEF7 /* NSString+BFW.m */; };
-		E20AA0C91C677A5200B8EEF7 /* UIColor+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E20AA0BF1C677A5200B8EEF7 /* UIColor+BFW.m */; };
-		E20AA0CA1C677A5200B8EEF7 /* UIImage+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E20AA0C11C677A5200B8EEF7 /* UIImage+BFW.m */; };
-		E20ED11F1A9FC43D0045FA69 /* NSString_BFW_Tests.plist in Resources */ = {isa = PBXBuildFile; fileRef = E20ED11E1A9FC43D0045FA69 /* NSString_BFW_Tests.plist */; };
-		E20FADB01C5B3F5700C78BDC /* AnimationCountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADA31C5B3F5700C78BDC /* AnimationCountViewController.swift */; };
-		E20FADB21C5B3F5700C78BDC /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADA71C5B3F5700C78BDC /* DrawingViewController.swift */; };
-		E20FADB31C5B3F5700C78BDC /* StyleKitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADA91C5B3F5700C78BDC /* StyleKitsViewController.swift */; };
-		E20FADB41C5B3F5700C78BDC /* StyleKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADAB1C5B3F5700C78BDC /* StyleKitViewController.swift */; };
-		E20FADB51C5B3F5700C78BDC /* StyleKitsBrowser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20FADAC1C5B3F5700C78BDC /* StyleKitsBrowser.storyboard */; };
-		E20FADB81C5B45E900C78BDC /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADB71C5B45E900C78BDC /* SwitchCell.swift */; };
-		E20FADBD1C5C724700C78BDC /* Exporter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20FADBC1C5C724700C78BDC /* Exporter.storyboard */; };
-		E20FADC01C5C729700C78BDC /* ExporterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADBF1C5C729700C78BDC /* ExporterViewController.swift */; };
-		E20FADC51C5C73D300C78BDC /* ExportersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADC41C5C73D300C78BDC /* ExportersViewController.swift */; };
-		E20FADC81C5D862000C78BDC /* ExportersRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADC71C5D862000C78BDC /* ExportersRoot.swift */; };
-		E211058B1A7E003A0025BDA0 /* NSString+BFW_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E211058A1A7E003A0025BDA0 /* NSString+BFW_Tests.m */; };
-		E221178C1AF4FE40007B515F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E22117881AF4FE40007B515F /* Images.xcassets */; };
-		E221178E1AF4FE40007B515F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E221178A1AF4FE40007B515F /* LaunchScreen.xib */; };
-		E221178F1AF4FE40007B515F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E221178B1AF4FE40007B515F /* main.m */; };
-		E22117921AF4FE92007B515F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E22117911AF4FE92007B515F /* AppDelegate.m */; };
-		E24CAA7F1BF44F7300BDBE59 /* Sample.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E24CAA7D1BF44F7300BDBE59 /* Sample.storyboard */; };
-		E24FE2271C9FAFDD00B8F268 /* ExporterDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = E24FE2261C9FAFDD00B8F268 /* ExporterDefaults.plist */; };
-		E26B1DB01B02B0FB005EACDE /* SampleDrawingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26B1DAF1B02B0FB005EACDE /* SampleDrawingButton.swift */; };
-		E27F0E931DDAE0BF00640D6F /* DrawingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27F0E921DDAE0BF00640D6F /* DrawingButton.swift */; };
-		E29478011C6183CD001F78DA /* DrawingExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29478001C6183CD001F78DA /* DrawingExport.swift */; };
-		E29478371C6402A9001F78DA /* ChoicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29478361C6402A9001F78DA /* ChoicesViewController.swift */; };
-		E29917051AF4FEE500F0DEDE /* SampleStyleKit.plist in Resources */ = {isa = PBXBuildFile; fileRef = E29917031AF4FEE500F0DEDE /* SampleStyleKit.plist */; };
-		E2A9E5F81CD47AAE00B2641E /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A9E5F71CD47AAE00B2641E /* DrawingView.swift */; };
-		E2CD964B1DED20EF00600B09 /* SampleStyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CD964A1DED20EF00600B09 /* SampleStyleKit.swift */; };
-		E2D2174D1C5EC9A900E28B4B /* UIViewCellExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D2174C1C5EC9A900E28B4B /* UIViewCellExtension.swift */; };
-		E2D2174F1C5ECA0400E28B4B /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D2174E1C5ECA0400E28B4B /* Exporter.swift */; };
-		E2DAEEEA1C6ACB4D0017671F /* DrawingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FADAE1C5B3F5700C78BDC /* DrawingCell.swift */; };
-		E2E6D8401D095E0700C0A87D /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6D83F1D095E0700C0A87D /* AnimationView.swift */; };
+		E220E40C1E9A2748008F6380 /* BFWDrawView.h in Headers */ = {isa = PBXBuildFile; fileRef = E220E40A1E9A2748008F6380 /* BFWDrawView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E220E43F1E9A2830008F6380 /* AnimationCountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E4151E9A2830008F6380 /* AnimationCountViewController.swift */; };
+		E220E4401E9A2830008F6380 /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E4161E9A2830008F6380 /* DrawingViewController.swift */; };
+		E220E4411E9A2830008F6380 /* StyleKitsBrowser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E220E4171E9A2830008F6380 /* StyleKitsBrowser.storyboard */; };
+		E220E4421E9A2830008F6380 /* StyleKitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E4181E9A2830008F6380 /* StyleKitsViewController.swift */; };
+		E220E4431E9A2830008F6380 /* StyleKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E4191E9A2830008F6380 /* StyleKitViewController.swift */; };
+		E220E4441E9A2830008F6380 /* DrawingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E41B1E9A2830008F6380 /* DrawingCell.swift */; };
+		E220E4451E9A2830008F6380 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E41C1E9A2830008F6380 /* SwitchCell.swift */; };
+		E220E4461E9A2830008F6380 /* UIViewCellExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E41D1E9A2830008F6380 /* UIViewCellExtension.swift */; };
+		E220E4471E9A2830008F6380 /* BFWDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = E220E4201E9A2830008F6380 /* BFWDLog.h */; };
+		E220E4481E9A2830008F6380 /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E4211E9A2830008F6380 /* Drawing.swift */; };
+		E220E4491E9A2830008F6380 /* NSDictionary+BFW.h in Headers */ = {isa = PBXBuildFile; fileRef = E220E4221E9A2830008F6380 /* NSDictionary+BFW.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E220E44A1E9A2830008F6380 /* NSDictionary+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E220E4231E9A2830008F6380 /* NSDictionary+BFW.m */; };
+		E220E44B1E9A2830008F6380 /* NSInvocation+BFW.h in Headers */ = {isa = PBXBuildFile; fileRef = E220E4241E9A2830008F6380 /* NSInvocation+BFW.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E220E44C1E9A2830008F6380 /* NSInvocation+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E220E4251E9A2830008F6380 /* NSInvocation+BFW.m */; };
+		E220E44D1E9A2830008F6380 /* NSObject+BFWStyleKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E220E4261E9A2830008F6380 /* NSObject+BFWStyleKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E220E44E1E9A2830008F6380 /* NSObject+BFWStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E220E4271E9A2830008F6380 /* NSObject+BFWStyleKit.m */; };
+		E220E44F1E9A2830008F6380 /* NSString+BFW.h in Headers */ = {isa = PBXBuildFile; fileRef = E220E4281E9A2830008F6380 /* NSString+BFW.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E220E4501E9A2830008F6380 /* NSString+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E220E4291E9A2830008F6380 /* NSString+BFW.m */; };
+		E220E4511E9A2830008F6380 /* String+Paintcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E42A1E9A2830008F6380 /* String+Paintcode.swift */; };
+		E220E4521E9A2830008F6380 /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E42B1E9A2830008F6380 /* StyleKit.swift */; };
+		E220E4531E9A2830008F6380 /* UIColor+BFW.h in Headers */ = {isa = PBXBuildFile; fileRef = E220E42C1E9A2830008F6380 /* UIColor+BFW.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E220E4541E9A2830008F6380 /* UIColor+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E220E42D1E9A2830008F6380 /* UIColor+BFW.m */; };
+		E220E4551E9A2830008F6380 /* UIImage+BFW.h in Headers */ = {isa = PBXBuildFile; fileRef = E220E42E1E9A2830008F6380 /* UIImage+BFW.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E220E4561E9A2830008F6380 /* UIImage+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E220E42F1E9A2830008F6380 /* UIImage+BFW.m */; };
+		E220E4571E9A2830008F6380 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E4311E9A2830008F6380 /* AnimationView.swift */; };
+		E220E4581E9A2830008F6380 /* DrawingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E4321E9A2830008F6380 /* DrawingButton.swift */; };
+		E220E45A1E9A2830008F6380 /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E4341E9A2830008F6380 /* DrawingView.swift */; };
+		E220E45B1E9A2830008F6380 /* ChoicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E4371E9A2830008F6380 /* ChoicesViewController.swift */; };
+		E220E45C1E9A2830008F6380 /* Exporter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E220E4381E9A2830008F6380 /* Exporter.storyboard */; };
+		E220E45D1E9A2830008F6380 /* ExportersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E4391E9A2830008F6380 /* ExportersViewController.swift */; };
+		E220E45E1E9A2830008F6380 /* ExporterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E43A1E9A2830008F6380 /* ExporterViewController.swift */; };
+		E220E45F1E9A2830008F6380 /* DrawingExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E43C1E9A2830008F6380 /* DrawingExport.swift */; };
+		E220E4601E9A2830008F6380 /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E43D1E9A2830008F6380 /* Exporter.swift */; };
+		E220E4611E9A2830008F6380 /* ExportersRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E43E1E9A2830008F6380 /* ExportersRoot.swift */; };
+		E220E4781E9A29E3008F6380 /* BFWDrawView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E220E4071E9A2748008F6380 /* BFWDrawView.framework */; };
+		E220E4851E9A2A4D008F6380 /* Sample.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E220E47C1E9A2A4D008F6380 /* Sample.storyboard */; };
+		E220E4861E9A2A4D008F6380 /* ExporterDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = E220E47E1E9A2A4D008F6380 /* ExporterDefaults.plist */; };
+		E220E4871E9A2A4D008F6380 /* SampleDrawingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E4801E9A2A4D008F6380 /* SampleDrawingButton.swift */; };
+		E220E4881E9A2A4D008F6380 /* SampleStyleKit.plist in Resources */ = {isa = PBXBuildFile; fileRef = E220E4831E9A2A4D008F6380 /* SampleStyleKit.plist */; };
+		E220E4891E9A2A4D008F6380 /* SampleStyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E4841E9A2A4D008F6380 /* SampleStyleKit.swift */; };
+		E220E48E1E9A2A8D008F6380 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E48B1E9A2A8D008F6380 /* AppDelegate.swift */; };
+		E220E48F1E9A2A8D008F6380 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E220E48C1E9A2A8D008F6380 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		E21105851A7E003A0025BDA0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E21105631A7E003A0025BDA0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E211056A1A7E003A0025BDA0;
-			remoteInfo = BFWDrawView;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		2023CEE91AFE2BAE00BBA2FA /* UIColor+BFW_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BFW_Tests.m"; sourceTree = "<group>"; };
-		E200F23F1C55D94E00CD868D /* BFWDrawView-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BFWDrawView-Bridging-Header.h"; sourceTree = "<group>"; };
-		E20AA0B11C677A5200B8EEF7 /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
-		E20AA0B31C677A5200B8EEF7 /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
-		E20AA0B61C677A5200B8EEF7 /* NSDictionary+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BFW.h"; sourceTree = "<group>"; };
-		E20AA0B71C677A5200B8EEF7 /* NSDictionary+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BFW.m"; sourceTree = "<group>"; };
-		E20AA0B81C677A5200B8EEF7 /* NSInvocation+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSInvocation+BFW.h"; sourceTree = "<group>"; };
-		E20AA0B91C677A5200B8EEF7 /* NSInvocation+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSInvocation+BFW.m"; sourceTree = "<group>"; };
-		E20AA0BA1C677A5200B8EEF7 /* NSObject+BFWStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+BFWStyleKit.h"; sourceTree = "<group>"; };
-		E20AA0BB1C677A5200B8EEF7 /* NSObject+BFWStyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+BFWStyleKit.m"; sourceTree = "<group>"; };
-		E20AA0BC1C677A5200B8EEF7 /* NSString+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BFW.h"; sourceTree = "<group>"; };
-		E20AA0BD1C677A5200B8EEF7 /* NSString+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BFW.m"; sourceTree = "<group>"; };
-		E20AA0BE1C677A5200B8EEF7 /* UIColor+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+BFW.h"; sourceTree = "<group>"; };
-		E20AA0BF1C677A5200B8EEF7 /* UIColor+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BFW.m"; sourceTree = "<group>"; };
-		E20AA0C01C677A5200B8EEF7 /* UIImage+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BFW.h"; sourceTree = "<group>"; };
-		E20AA0C11C677A5200B8EEF7 /* UIImage+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BFW.m"; sourceTree = "<group>"; };
-		E20ED11E1A9FC43D0045FA69 /* NSString_BFW_Tests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NSString_BFW_Tests.plist; sourceTree = "<group>"; };
-		E20FADA31C5B3F5700C78BDC /* AnimationCountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationCountViewController.swift; sourceTree = "<group>"; };
-		E20FADA71C5B3F5700C78BDC /* DrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
-		E20FADA91C5B3F5700C78BDC /* StyleKitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKitsViewController.swift; sourceTree = "<group>"; };
-		E20FADAB1C5B3F5700C78BDC /* StyleKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKitViewController.swift; sourceTree = "<group>"; };
-		E20FADAC1C5B3F5700C78BDC /* StyleKitsBrowser.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StyleKitsBrowser.storyboard; sourceTree = "<group>"; };
-		E20FADAE1C5B3F5700C78BDC /* DrawingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingCell.swift; sourceTree = "<group>"; };
-		E20FADB71C5B45E900C78BDC /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
-		E20FADBC1C5C724700C78BDC /* Exporter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Exporter.storyboard; sourceTree = "<group>"; };
-		E20FADBF1C5C729700C78BDC /* ExporterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExporterViewController.swift; sourceTree = "<group>"; };
-		E20FADC41C5C73D300C78BDC /* ExportersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportersViewController.swift; sourceTree = "<group>"; };
-		E20FADC71C5D862000C78BDC /* ExportersRoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportersRoot.swift; sourceTree = "<group>"; };
-		E211056B1A7E003A0025BDA0 /* BFWDrawView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BFWDrawView.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E21105841A7E003A0025BDA0 /* BFWDrawViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BFWDrawViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E21105891A7E003A0025BDA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E211058A1A7E003A0025BDA0 /* NSString+BFW_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+BFW_Tests.m"; sourceTree = "<group>"; };
-		E22117881AF4FE40007B515F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		E221178A1AF4FE40007B515F /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
-		E221178B1AF4FE40007B515F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		E22117901AF4FE92007B515F /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		E22117911AF4FE92007B515F /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E24CAA7D1BF44F7300BDBE59 /* Sample.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Sample.storyboard; sourceTree = "<group>"; };
-		E24FE2261C9FAFDD00B8F268 /* ExporterDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = ExporterDefaults.plist; sourceTree = "<group>"; };
-		E26B1DAF1B02B0FB005EACDE /* SampleDrawingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleDrawingButton.swift; sourceTree = "<group>"; };
-		E27F0E921DDAE0BF00640D6F /* DrawingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingButton.swift; sourceTree = "<group>"; };
-		E29478001C6183CD001F78DA /* DrawingExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingExport.swift; sourceTree = "<group>"; };
-		E29478361C6402A9001F78DA /* ChoicesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoicesViewController.swift; sourceTree = "<group>"; };
-		E29917031AF4FEE500F0DEDE /* SampleStyleKit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SampleStyleKit.plist; sourceTree = "<group>"; };
-		E29917061AF4FF6F00F0DEDE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BFWDrawView/Info.plist; sourceTree = SOURCE_ROOT; };
-		E2A9E5F71CD47AAE00B2641E /* DrawingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
-		E2CD964A1DED20EF00600B09 /* SampleStyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleStyleKit.swift; sourceTree = "<group>"; };
-		E2D2174C1C5EC9A900E28B4B /* UIViewCellExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewCellExtension.swift; sourceTree = "<group>"; };
-		E2D2174E1C5ECA0400E28B4B /* Exporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
-		E2E6D8371D094B6A00C0A87D /* BFWDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDLog.h; sourceTree = "<group>"; };
-		E2E6D83F1D095E0700C0A87D /* AnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
+		E220E4071E9A2748008F6380 /* BFWDrawView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BFWDrawView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E220E40A1E9A2748008F6380 /* BFWDrawView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFWDrawView.h; sourceTree = "<group>"; };
+		E220E40B1E9A2748008F6380 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E220E4151E9A2830008F6380 /* AnimationCountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationCountViewController.swift; sourceTree = "<group>"; };
+		E220E4161E9A2830008F6380 /* DrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
+		E220E4171E9A2830008F6380 /* StyleKitsBrowser.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StyleKitsBrowser.storyboard; sourceTree = "<group>"; };
+		E220E4181E9A2830008F6380 /* StyleKitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKitsViewController.swift; sourceTree = "<group>"; };
+		E220E4191E9A2830008F6380 /* StyleKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKitViewController.swift; sourceTree = "<group>"; };
+		E220E41B1E9A2830008F6380 /* DrawingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingCell.swift; sourceTree = "<group>"; };
+		E220E41C1E9A2830008F6380 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
+		E220E41D1E9A2830008F6380 /* UIViewCellExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewCellExtension.swift; sourceTree = "<group>"; };
+		E220E4201E9A2830008F6380 /* BFWDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDLog.h; sourceTree = "<group>"; };
+		E220E4211E9A2830008F6380 /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
+		E220E4221E9A2830008F6380 /* NSDictionary+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BFW.h"; sourceTree = "<group>"; };
+		E220E4231E9A2830008F6380 /* NSDictionary+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BFW.m"; sourceTree = "<group>"; };
+		E220E4241E9A2830008F6380 /* NSInvocation+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSInvocation+BFW.h"; sourceTree = "<group>"; };
+		E220E4251E9A2830008F6380 /* NSInvocation+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSInvocation+BFW.m"; sourceTree = "<group>"; };
+		E220E4261E9A2830008F6380 /* NSObject+BFWStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+BFWStyleKit.h"; sourceTree = "<group>"; };
+		E220E4271E9A2830008F6380 /* NSObject+BFWStyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+BFWStyleKit.m"; sourceTree = "<group>"; };
+		E220E4281E9A2830008F6380 /* NSString+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BFW.h"; sourceTree = "<group>"; };
+		E220E4291E9A2830008F6380 /* NSString+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BFW.m"; sourceTree = "<group>"; };
+		E220E42A1E9A2830008F6380 /* String+Paintcode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Paintcode.swift"; sourceTree = "<group>"; };
+		E220E42B1E9A2830008F6380 /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
+		E220E42C1E9A2830008F6380 /* UIColor+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+BFW.h"; sourceTree = "<group>"; };
+		E220E42D1E9A2830008F6380 /* UIColor+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BFW.m"; sourceTree = "<group>"; };
+		E220E42E1E9A2830008F6380 /* UIImage+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BFW.h"; sourceTree = "<group>"; };
+		E220E42F1E9A2830008F6380 /* UIImage+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BFW.m"; sourceTree = "<group>"; };
+		E220E4311E9A2830008F6380 /* AnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
+		E220E4321E9A2830008F6380 /* DrawingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingButton.swift; sourceTree = "<group>"; };
+		E220E4341E9A2830008F6380 /* DrawingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
+		E220E4371E9A2830008F6380 /* ChoicesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoicesViewController.swift; sourceTree = "<group>"; };
+		E220E4381E9A2830008F6380 /* Exporter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Exporter.storyboard; sourceTree = "<group>"; };
+		E220E4391E9A2830008F6380 /* ExportersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportersViewController.swift; sourceTree = "<group>"; };
+		E220E43A1E9A2830008F6380 /* ExporterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExporterViewController.swift; sourceTree = "<group>"; };
+		E220E43C1E9A2830008F6380 /* DrawingExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingExport.swift; sourceTree = "<group>"; };
+		E220E43D1E9A2830008F6380 /* Exporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
+		E220E43E1E9A2830008F6380 /* ExportersRoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportersRoot.swift; sourceTree = "<group>"; };
+		E220E4661E9A29DA008F6380 /* BFWDrawView Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BFWDrawView Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E220E47C1E9A2A4D008F6380 /* Sample.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Sample.storyboard; sourceTree = "<group>"; };
+		E220E47E1E9A2A4D008F6380 /* ExporterDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = ExporterDefaults.plist; sourceTree = "<group>"; };
+		E220E4801E9A2A4D008F6380 /* SampleDrawingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleDrawingButton.swift; sourceTree = "<group>"; };
+		E220E4831E9A2A4D008F6380 /* SampleStyleKit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SampleStyleKit.plist; sourceTree = "<group>"; };
+		E220E4841E9A2A4D008F6380 /* SampleStyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleStyleKit.swift; sourceTree = "<group>"; };
+		E220E48B1E9A2A8D008F6380 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E220E48C1E9A2A8D008F6380 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E220E48D1E9A2A8D008F6380 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		E21105681A7E003A0025BDA0 /* Frameworks */ = {
+		E220E4031E9A2748008F6380 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E21105811A7E003A0025BDA0 /* Frameworks */ = {
+		E220E4631E9A29DA008F6380 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E220E4781E9A29E3008F6380 /* BFWDrawView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E20357821A7F5144002BC3F4 /* Modules */ = {
+		E220E3FD1E9A2748008F6380 = {
 			isa = PBXGroup;
 			children = (
-				E20FADA01C5B3F5700C78BDC /* Browse */,
-				E20357831A7F5144002BC3F4 /* Draw */,
-				E20FADBA1C5C722D00C78BDC /* Exporter */,
-				E29916FF1AF4FEE500F0DEDE /* StyleKits */,
-				E203578D1A7F5144002BC3F4 /* Sample */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		E20357831A7F5144002BC3F4 /* Draw */ = {
-			isa = PBXGroup;
-			children = (
-				E20ED1121A9F24CC0045FA69 /* Model */,
-				E20357841A7F5144002BC3F4 /* View */,
-			);
-			path = Draw;
-			sourceTree = "<group>";
-		};
-		E20357841A7F5144002BC3F4 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				E2E6D83F1D095E0700C0A87D /* AnimationView.swift */,
-				E27F0E921DDAE0BF00640D6F /* DrawingButton.swift */,
-				E2A9E5F71CD47AAE00B2641E /* DrawingView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		E203578D1A7F5144002BC3F4 /* Sample */ = {
-			isa = PBXGroup;
-			children = (
-				E203578E1A7F5144002BC3F4 /* Controller */,
-				E24FE2251C9FAFDD00B8F268 /* Model */,
-				E26B1DAD1B02B0CD005EACDE /* View */,
-			);
-			path = Sample;
-			sourceTree = "<group>";
-		};
-		E203578E1A7F5144002BC3F4 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				E24CAA7D1BF44F7300BDBE59 /* Sample.storyboard */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		E20ED1121A9F24CC0045FA69 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				E2E6D8371D094B6A00C0A87D /* BFWDLog.h */,
-				E20AA0B11C677A5200B8EEF7 /* StyleKit.swift */,
-				E20AA0B31C677A5200B8EEF7 /* Drawing.swift */,
-				E20AA0B61C677A5200B8EEF7 /* NSDictionary+BFW.h */,
-				E20AA0B71C677A5200B8EEF7 /* NSDictionary+BFW.m */,
-				E20AA0B81C677A5200B8EEF7 /* NSInvocation+BFW.h */,
-				E20AA0B91C677A5200B8EEF7 /* NSInvocation+BFW.m */,
-				E20AA0BA1C677A5200B8EEF7 /* NSObject+BFWStyleKit.h */,
-				E20AA0BB1C677A5200B8EEF7 /* NSObject+BFWStyleKit.m */,
-				E20AA0BC1C677A5200B8EEF7 /* NSString+BFW.h */,
-				E20AA0BD1C677A5200B8EEF7 /* NSString+BFW.m */,
-				E20AA0BE1C677A5200B8EEF7 /* UIColor+BFW.h */,
-				E20AA0BF1C677A5200B8EEF7 /* UIColor+BFW.m */,
-				E20AA0C01C677A5200B8EEF7 /* UIImage+BFW.h */,
-				E20AA0C11C677A5200B8EEF7 /* UIImage+BFW.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		E20FADA01C5B3F5700C78BDC /* Browse */ = {
-			isa = PBXGroup;
-			children = (
-				E20FADA11C5B3F5700C78BDC /* Controller */,
-				E20FADAD1C5B3F5700C78BDC /* View */,
-			);
-			path = Browse;
-			sourceTree = "<group>";
-		};
-		E20FADA11C5B3F5700C78BDC /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				E20FADA31C5B3F5700C78BDC /* AnimationCountViewController.swift */,
-				E20FADA71C5B3F5700C78BDC /* DrawingViewController.swift */,
-				E20FADAB1C5B3F5700C78BDC /* StyleKitViewController.swift */,
-				E20FADAC1C5B3F5700C78BDC /* StyleKitsBrowser.storyboard */,
-				E20FADA91C5B3F5700C78BDC /* StyleKitsViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		E20FADAD1C5B3F5700C78BDC /* View */ = {
-			isa = PBXGroup;
-			children = (
-				E20FADAE1C5B3F5700C78BDC /* DrawingCell.swift */,
-				E20FADB71C5B45E900C78BDC /* SwitchCell.swift */,
-				E2D2174C1C5EC9A900E28B4B /* UIViewCellExtension.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		E20FADBA1C5C722D00C78BDC /* Exporter */ = {
-			isa = PBXGroup;
-			children = (
-				E20FADBB1C5C722D00C78BDC /* Controller */,
-				E20FADC61C5D85D000C78BDC /* Model */,
-			);
-			path = Exporter;
-			sourceTree = "<group>";
-		};
-		E20FADBB1C5C722D00C78BDC /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				E29478361C6402A9001F78DA /* ChoicesViewController.swift */,
-				E20FADBC1C5C724700C78BDC /* Exporter.storyboard */,
-				E20FADC41C5C73D300C78BDC /* ExportersViewController.swift */,
-				E20FADBF1C5C729700C78BDC /* ExporterViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		E20FADC61C5D85D000C78BDC /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				E29478001C6183CD001F78DA /* DrawingExport.swift */,
-				E2D2174E1C5ECA0400E28B4B /* Exporter.swift */,
-				E20FADC71C5D862000C78BDC /* ExportersRoot.swift */,
-			);
-			name = Model;
-			path = BFWDrawView/Modules/Exporter/Model;
-			sourceTree = SOURCE_ROOT;
-		};
-		E21105621A7E003A0025BDA0 = {
-			isa = PBXGroup;
-			children = (
-				E211056D1A7E003A0025BDA0 /* BFWDrawView */,
-				E21105871A7E003A0025BDA0 /* BFWDrawViewTests */,
-				E211056C1A7E003A0025BDA0 /* Products */,
+				E220E4091E9A2748008F6380 /* BFWDrawView */,
+				E220E4671E9A29DA008F6380 /* BFWDrawView Demo */,
+				E220E4081E9A2748008F6380 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		E211056C1A7E003A0025BDA0 /* Products */ = {
+		E220E4081E9A2748008F6380 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E211056B1A7E003A0025BDA0 /* BFWDrawView.app */,
-				E21105841A7E003A0025BDA0 /* BFWDrawViewTests.xctest */,
+				E220E4071E9A2748008F6380 /* BFWDrawView.framework */,
+				E220E4661E9A29DA008F6380 /* BFWDrawView Demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E211056D1A7E003A0025BDA0 /* BFWDrawView */ = {
+		E220E4091E9A2748008F6380 /* BFWDrawView */ = {
 			isa = PBXGroup;
 			children = (
-				E22117871AF4FE40007B515F /* Launch */,
-				E20357821A7F5144002BC3F4 /* Modules */,
+				E220E40A1E9A2748008F6380 /* BFWDrawView.h */,
+				E220E40B1E9A2748008F6380 /* Info.plist */,
+				E220E4121E9A2830008F6380 /* Modules */,
 			);
 			path = BFWDrawView;
 			sourceTree = "<group>";
 		};
-		E21105871A7E003A0025BDA0 /* BFWDrawViewTests */ = {
+		E220E4121E9A2830008F6380 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				E211058A1A7E003A0025BDA0 /* NSString+BFW_Tests.m */,
-				2023CEE91AFE2BAE00BBA2FA /* UIColor+BFW_Tests.m */,
-				E20ED11E1A9FC43D0045FA69 /* NSString_BFW_Tests.plist */,
-				E21105881A7E003A0025BDA0 /* Supporting Files */,
+				E220E4131E9A2830008F6380 /* Browse */,
+				E220E41E1E9A2830008F6380 /* Draw */,
+				E220E4351E9A2830008F6380 /* Exporter */,
 			);
-			path = BFWDrawViewTests;
+			path = Modules;
 			sourceTree = "<group>";
 		};
-		E21105881A7E003A0025BDA0 /* Supporting Files */ = {
+		E220E4131E9A2830008F6380 /* Browse */ = {
 			isa = PBXGroup;
 			children = (
-				E21105891A7E003A0025BDA0 /* Info.plist */,
+				E220E4141E9A2830008F6380 /* Controller */,
+				E220E41A1E9A2830008F6380 /* View */,
 			);
-			name = "Supporting Files";
+			path = Browse;
 			sourceTree = "<group>";
 		};
-		E22117871AF4FE40007B515F /* Launch */ = {
+		E220E4141E9A2830008F6380 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E22117901AF4FE92007B515F /* AppDelegate.h */,
-				E22117911AF4FE92007B515F /* AppDelegate.m */,
-				E200F23F1C55D94E00CD868D /* BFWDrawView-Bridging-Header.h */,
-				E29917061AF4FF6F00F0DEDE /* Info.plist */,
-				E22117881AF4FE40007B515F /* Images.xcassets */,
-				E221178A1AF4FE40007B515F /* LaunchScreen.xib */,
-				E221178B1AF4FE40007B515F /* main.m */,
+				E220E4151E9A2830008F6380 /* AnimationCountViewController.swift */,
+				E220E4161E9A2830008F6380 /* DrawingViewController.swift */,
+				E220E4171E9A2830008F6380 /* StyleKitsBrowser.storyboard */,
+				E220E4181E9A2830008F6380 /* StyleKitsViewController.swift */,
+				E220E4191E9A2830008F6380 /* StyleKitViewController.swift */,
 			);
-			path = Launch;
+			path = Controller;
 			sourceTree = "<group>";
 		};
-		E24FE2251C9FAFDD00B8F268 /* Model */ = {
+		E220E41A1E9A2830008F6380 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E24FE2261C9FAFDD00B8F268 /* ExporterDefaults.plist */,
+				E220E41B1E9A2830008F6380 /* DrawingCell.swift */,
+				E220E41C1E9A2830008F6380 /* SwitchCell.swift */,
+				E220E41D1E9A2830008F6380 /* UIViewCellExtension.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E220E41E1E9A2830008F6380 /* Draw */ = {
+			isa = PBXGroup;
+			children = (
+				E220E41F1E9A2830008F6380 /* Model */,
+				E220E4301E9A2830008F6380 /* View */,
+			);
+			path = Draw;
+			sourceTree = "<group>";
+		};
+		E220E41F1E9A2830008F6380 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E220E4201E9A2830008F6380 /* BFWDLog.h */,
+				E220E4211E9A2830008F6380 /* Drawing.swift */,
+				E220E4221E9A2830008F6380 /* NSDictionary+BFW.h */,
+				E220E4231E9A2830008F6380 /* NSDictionary+BFW.m */,
+				E220E4241E9A2830008F6380 /* NSInvocation+BFW.h */,
+				E220E4251E9A2830008F6380 /* NSInvocation+BFW.m */,
+				E220E4261E9A2830008F6380 /* NSObject+BFWStyleKit.h */,
+				E220E4271E9A2830008F6380 /* NSObject+BFWStyleKit.m */,
+				E220E4281E9A2830008F6380 /* NSString+BFW.h */,
+				E220E4291E9A2830008F6380 /* NSString+BFW.m */,
+				E220E42A1E9A2830008F6380 /* String+Paintcode.swift */,
+				E220E42B1E9A2830008F6380 /* StyleKit.swift */,
+				E220E42C1E9A2830008F6380 /* UIColor+BFW.h */,
+				E220E42D1E9A2830008F6380 /* UIColor+BFW.m */,
+				E220E42E1E9A2830008F6380 /* UIImage+BFW.h */,
+				E220E42F1E9A2830008F6380 /* UIImage+BFW.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		E26B1DAD1B02B0CD005EACDE /* View */ = {
+		E220E4301E9A2830008F6380 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E26B1DAF1B02B0FB005EACDE /* SampleDrawingButton.swift */,
+				E220E4311E9A2830008F6380 /* AnimationView.swift */,
+				E220E4321E9A2830008F6380 /* DrawingButton.swift */,
+				E220E4341E9A2830008F6380 /* DrawingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		E29916FF1AF4FEE500F0DEDE /* StyleKits */ = {
+		E220E4351E9A2830008F6380 /* Exporter */ = {
 			isa = PBXGroup;
 			children = (
-				E29917001AF4FEE500F0DEDE /* View */,
+				E220E4361E9A2830008F6380 /* Controller */,
+				E220E43B1E9A2830008F6380 /* Model */,
+			);
+			path = Exporter;
+			sourceTree = "<group>";
+		};
+		E220E4361E9A2830008F6380 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E220E4371E9A2830008F6380 /* ChoicesViewController.swift */,
+				E220E4381E9A2830008F6380 /* Exporter.storyboard */,
+				E220E4391E9A2830008F6380 /* ExportersViewController.swift */,
+				E220E43A1E9A2830008F6380 /* ExporterViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E220E43B1E9A2830008F6380 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E220E43C1E9A2830008F6380 /* DrawingExport.swift */,
+				E220E43D1E9A2830008F6380 /* Exporter.swift */,
+				E220E43E1E9A2830008F6380 /* ExportersRoot.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E220E4671E9A29DA008F6380 /* BFWDrawView Demo */ = {
+			isa = PBXGroup;
+			children = (
+				E220E48A1E9A2A8D008F6380 /* Launch */,
+				E220E4791E9A2A4D008F6380 /* Modules */,
+			);
+			path = "BFWDrawView Demo";
+			sourceTree = "<group>";
+		};
+		E220E4791E9A2A4D008F6380 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				E220E47A1E9A2A4D008F6380 /* Sample */,
+				E220E4811E9A2A4D008F6380 /* StyleKits */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		E220E47A1E9A2A4D008F6380 /* Sample */ = {
+			isa = PBXGroup;
+			children = (
+				E220E47B1E9A2A4D008F6380 /* Controller */,
+				E220E47D1E9A2A4D008F6380 /* Model */,
+				E220E47F1E9A2A4D008F6380 /* View */,
+			);
+			path = Sample;
+			sourceTree = "<group>";
+		};
+		E220E47B1E9A2A4D008F6380 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E220E47C1E9A2A4D008F6380 /* Sample.storyboard */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E220E47D1E9A2A4D008F6380 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E220E47E1E9A2A4D008F6380 /* ExporterDefaults.plist */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E220E47F1E9A2A4D008F6380 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E220E4801E9A2A4D008F6380 /* SampleDrawingButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E220E4811E9A2A4D008F6380 /* StyleKits */ = {
+			isa = PBXGroup;
+			children = (
+				E220E4821E9A2A4D008F6380 /* View */,
 			);
 			path = StyleKits;
 			sourceTree = "<group>";
 		};
-		E29917001AF4FEE500F0DEDE /* View */ = {
+		E220E4821E9A2A4D008F6380 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E29917031AF4FEE500F0DEDE /* SampleStyleKit.plist */,
-				E2CD964A1DED20EF00600B09 /* SampleStyleKit.swift */,
+				E220E4831E9A2A4D008F6380 /* SampleStyleKit.plist */,
+				E220E4841E9A2A4D008F6380 /* SampleStyleKit.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
+		E220E48A1E9A2A8D008F6380 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				E220E48B1E9A2A8D008F6380 /* AppDelegate.swift */,
+				E220E48C1E9A2A8D008F6380 /* Assets.xcassets */,
+				E220E48D1E9A2A8D008F6380 /* Info.plist */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		E220E4041E9A2748008F6380 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E220E4531E9A2830008F6380 /* UIColor+BFW.h in Headers */,
+				E220E4491E9A2830008F6380 /* NSDictionary+BFW.h in Headers */,
+				E220E44B1E9A2830008F6380 /* NSInvocation+BFW.h in Headers */,
+				E220E44F1E9A2830008F6380 /* NSString+BFW.h in Headers */,
+				E220E4471E9A2830008F6380 /* BFWDLog.h in Headers */,
+				E220E4551E9A2830008F6380 /* UIImage+BFW.h in Headers */,
+				E220E44D1E9A2830008F6380 /* NSObject+BFWStyleKit.h in Headers */,
+				E220E40C1E9A2748008F6380 /* BFWDrawView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		E211056A1A7E003A0025BDA0 /* BFWDrawView */ = {
+		E220E4061E9A2748008F6380 /* BFWDrawView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E211058E1A7E003A0025BDA0 /* Build configuration list for PBXNativeTarget "BFWDrawView" */;
+			buildConfigurationList = E220E40F1E9A2748008F6380 /* Build configuration list for PBXNativeTarget "BFWDrawView" */;
 			buildPhases = (
-				E21105671A7E003A0025BDA0 /* Sources */,
-				E21105681A7E003A0025BDA0 /* Frameworks */,
-				E21105691A7E003A0025BDA0 /* Resources */,
+				E220E4021E9A2748008F6380 /* Sources */,
+				E220E4031E9A2748008F6380 /* Frameworks */,
+				E220E4041E9A2748008F6380 /* Headers */,
+				E220E4051E9A2748008F6380 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -372,49 +376,47 @@
 			);
 			name = BFWDrawView;
 			productName = BFWDrawView;
-			productReference = E211056B1A7E003A0025BDA0 /* BFWDrawView.app */;
-			productType = "com.apple.product-type.application";
+			productReference = E220E4071E9A2748008F6380 /* BFWDrawView.framework */;
+			productType = "com.apple.product-type.framework";
 		};
-		E21105831A7E003A0025BDA0 /* BFWDrawViewTests */ = {
+		E220E4651E9A29DA008F6380 /* BFWDrawView Demo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E21105911A7E003A0025BDA0 /* Build configuration list for PBXNativeTarget "BFWDrawViewTests" */;
+			buildConfigurationList = E220E4751E9A29DA008F6380 /* Build configuration list for PBXNativeTarget "BFWDrawView Demo" */;
 			buildPhases = (
-				E21105801A7E003A0025BDA0 /* Sources */,
-				E21105811A7E003A0025BDA0 /* Frameworks */,
-				E21105821A7E003A0025BDA0 /* Resources */,
+				E220E4621E9A29DA008F6380 /* Sources */,
+				E220E4631E9A29DA008F6380 /* Frameworks */,
+				E220E4641E9A29DA008F6380 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				E21105861A7E003A0025BDA0 /* PBXTargetDependency */,
 			);
-			name = BFWDrawViewTests;
-			productName = BFWDrawViewTests;
-			productReference = E21105841A7E003A0025BDA0 /* BFWDrawViewTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
+			name = "BFWDrawView Demo";
+			productName = "BFWDrawView Demo";
+			productReference = E220E4661E9A29DA008F6380 /* BFWDrawView Demo.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		E21105631A7E003A0025BDA0 /* Project object */ = {
+		E220E3FE1E9A2748008F6380 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0800;
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = BareFeetWare;
 				TargetAttributes = {
-					E211056A1A7E003A0025BDA0 = {
-						CreatedOnToolsVersion = 6.1.1;
-						LastSwiftMigration = 0810;
+					E220E4061E9A2748008F6380 = {
+						CreatedOnToolsVersion = 8.3.1;
+						ProvisioningStyle = Automatic;
 					};
-					E21105831A7E003A0025BDA0 = {
-						CreatedOnToolsVersion = 6.1.1;
-						LastSwiftMigration = 0810;
-						TestTargetID = E211056A1A7E003A0025BDA0;
+					E220E4651E9A29DA008F6380 = {
+						CreatedOnToolsVersion = 8.3.1;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = E21105661A7E003A0025BDA0 /* Build configuration list for PBXProject "BFWDrawView" */;
+			buildConfigurationList = E220E4011E9A2748008F6380 /* Build configuration list for PBXProject "BFWDrawView" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -422,102 +424,92 @@
 				en,
 				Base,
 			);
-			mainGroup = E21105621A7E003A0025BDA0;
-			productRefGroup = E211056C1A7E003A0025BDA0 /* Products */;
+			mainGroup = E220E3FD1E9A2748008F6380;
+			productRefGroup = E220E4081E9A2748008F6380 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E211056A1A7E003A0025BDA0 /* BFWDrawView */,
-				E21105831A7E003A0025BDA0 /* BFWDrawViewTests */,
+				E220E4061E9A2748008F6380 /* BFWDrawView */,
+				E220E4651E9A29DA008F6380 /* BFWDrawView Demo */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		E21105691A7E003A0025BDA0 /* Resources */ = {
+		E220E4051E9A2748008F6380 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E24FE2271C9FAFDD00B8F268 /* ExporterDefaults.plist in Resources */,
-				E20FADB51C5B3F5700C78BDC /* StyleKitsBrowser.storyboard in Resources */,
-				E221178E1AF4FE40007B515F /* LaunchScreen.xib in Resources */,
-				E29917051AF4FEE500F0DEDE /* SampleStyleKit.plist in Resources */,
-				E20FADBD1C5C724700C78BDC /* Exporter.storyboard in Resources */,
-				E24CAA7F1BF44F7300BDBE59 /* Sample.storyboard in Resources */,
-				E221178C1AF4FE40007B515F /* Images.xcassets in Resources */,
+				E220E4411E9A2830008F6380 /* StyleKitsBrowser.storyboard in Resources */,
+				E220E45C1E9A2830008F6380 /* Exporter.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E21105821A7E003A0025BDA0 /* Resources */ = {
+		E220E4641E9A29DA008F6380 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E20ED11F1A9FC43D0045FA69 /* NSString_BFW_Tests.plist in Resources */,
+				E220E4881E9A2A4D008F6380 /* SampleStyleKit.plist in Resources */,
+				E220E4851E9A2A4D008F6380 /* Sample.storyboard in Resources */,
+				E220E48F1E9A2A8D008F6380 /* Assets.xcassets in Resources */,
+				E220E4861E9A2A4D008F6380 /* ExporterDefaults.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		E21105671A7E003A0025BDA0 /* Sources */ = {
+		E220E4021E9A2748008F6380 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E20FADB31C5B3F5700C78BDC /* StyleKitsViewController.swift in Sources */,
-				E2DAEEEA1C6ACB4D0017671F /* DrawingCell.swift in Sources */,
-				E20FADC51C5C73D300C78BDC /* ExportersViewController.swift in Sources */,
-				E2A9E5F81CD47AAE00B2641E /* DrawingView.swift in Sources */,
-				E20FADB41C5B3F5700C78BDC /* StyleKitViewController.swift in Sources */,
-				E29478011C6183CD001F78DA /* DrawingExport.swift in Sources */,
-				E2E6D8401D095E0700C0A87D /* AnimationView.swift in Sources */,
-				E26B1DB01B02B0FB005EACDE /* SampleDrawingButton.swift in Sources */,
-				E20AA0C31C677A5200B8EEF7 /* Drawing.swift in Sources */,
-				E20FADB01C5B3F5700C78BDC /* AnimationCountViewController.swift in Sources */,
-				E22117921AF4FE92007B515F /* AppDelegate.m in Sources */,
-				E20AA0C51C677A5200B8EEF7 /* NSDictionary+BFW.m in Sources */,
-				E2D2174F1C5ECA0400E28B4B /* Exporter.swift in Sources */,
-				E20AA0CA1C677A5200B8EEF7 /* UIImage+BFW.m in Sources */,
-				E20FADC81C5D862000C78BDC /* ExportersRoot.swift in Sources */,
-				E20AA0C21C677A5200B8EEF7 /* StyleKit.swift in Sources */,
-				E20AA0C61C677A5200B8EEF7 /* NSInvocation+BFW.m in Sources */,
-				E20FADB21C5B3F5700C78BDC /* DrawingViewController.swift in Sources */,
-				E2CD964B1DED20EF00600B09 /* SampleStyleKit.swift in Sources */,
-				E20AA0C71C677A5200B8EEF7 /* NSObject+BFWStyleKit.m in Sources */,
-				E2D2174D1C5EC9A900E28B4B /* UIViewCellExtension.swift in Sources */,
-				E221178F1AF4FE40007B515F /* main.m in Sources */,
-				E20FADC01C5C729700C78BDC /* ExporterViewController.swift in Sources */,
-				E27F0E931DDAE0BF00640D6F /* DrawingButton.swift in Sources */,
-				E20AA0C91C677A5200B8EEF7 /* UIColor+BFW.m in Sources */,
-				E20FADB81C5B45E900C78BDC /* SwitchCell.swift in Sources */,
-				E29478371C6402A9001F78DA /* ChoicesViewController.swift in Sources */,
-				E20AA0C81C677A5200B8EEF7 /* NSString+BFW.m in Sources */,
+				E220E45E1E9A2830008F6380 /* ExporterViewController.swift in Sources */,
+				E220E4611E9A2830008F6380 /* ExportersRoot.swift in Sources */,
+				E220E4521E9A2830008F6380 /* StyleKit.swift in Sources */,
+				E220E43F1E9A2830008F6380 /* AnimationCountViewController.swift in Sources */,
+				E220E45F1E9A2830008F6380 /* DrawingExport.swift in Sources */,
+				E220E4461E9A2830008F6380 /* UIViewCellExtension.swift in Sources */,
+				E220E4561E9A2830008F6380 /* UIImage+BFW.m in Sources */,
+				E220E4601E9A2830008F6380 /* Exporter.swift in Sources */,
+				E220E4581E9A2830008F6380 /* DrawingButton.swift in Sources */,
+				E220E4421E9A2830008F6380 /* StyleKitsViewController.swift in Sources */,
+				E220E45A1E9A2830008F6380 /* DrawingView.swift in Sources */,
+				E220E45B1E9A2830008F6380 /* ChoicesViewController.swift in Sources */,
+				E220E4501E9A2830008F6380 /* NSString+BFW.m in Sources */,
+				E220E4401E9A2830008F6380 /* DrawingViewController.swift in Sources */,
+				E220E4571E9A2830008F6380 /* AnimationView.swift in Sources */,
+				E220E4481E9A2830008F6380 /* Drawing.swift in Sources */,
+				E220E4441E9A2830008F6380 /* DrawingCell.swift in Sources */,
+				E220E4431E9A2830008F6380 /* StyleKitViewController.swift in Sources */,
+				E220E44A1E9A2830008F6380 /* NSDictionary+BFW.m in Sources */,
+				E220E44C1E9A2830008F6380 /* NSInvocation+BFW.m in Sources */,
+				E220E4511E9A2830008F6380 /* String+Paintcode.swift in Sources */,
+				E220E4451E9A2830008F6380 /* SwitchCell.swift in Sources */,
+				E220E4541E9A2830008F6380 /* UIColor+BFW.m in Sources */,
+				E220E44E1E9A2830008F6380 /* NSObject+BFWStyleKit.m in Sources */,
+				E220E45D1E9A2830008F6380 /* ExportersViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E21105801A7E003A0025BDA0 /* Sources */ = {
+		E220E4621E9A29DA008F6380 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E211058B1A7E003A0025BDA0 /* NSString+BFW_Tests.m in Sources */,
-				2023CEEA1AFE2BAE00BBA2FA /* UIColor+BFW_Tests.m in Sources */,
+				E220E48E1E9A2A8D008F6380 /* AppDelegate.swift in Sources */,
+				E220E4871E9A2A4D008F6380 /* SampleDrawingButton.swift in Sources */,
+				E220E4891E9A2A4D008F6380 /* SampleStyleKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		E21105861A7E003A0025BDA0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E211056A1A7E003A0025BDA0 /* BFWDrawView */;
-			targetProxy = E21105851A7E003A0025BDA0 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		E211058C1A7E003A0025BDA0 /* Debug */ = {
+		E220E40D1E9A2748008F6380 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -525,6 +517,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -535,6 +528,8 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -545,25 +540,30 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		E211058D1A7E003A0025BDA0 /* Release */ = {
+		E220E40E1E9A2748008F6380 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -571,6 +571,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -580,7 +581,9 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -591,107 +594,108 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		E211058F1A7E003A0025BDA0 /* Debug */ = {
+		E220E4101E9A2748008F6380 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = BFWDrawView/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.barefeetware.$(PRODUCT_NAME:rfc1034identifier)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.barefeetware.BFWDrawView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "BFWDrawView/Launch/BFWDrawView-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
-		E21105901A7E003A0025BDA0 /* Release */ = {
+		E220E4111E9A2748008F6380 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = BFWDrawView/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.barefeetware.$(PRODUCT_NAME:rfc1034identifier)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.barefeetware.BFWDrawView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "BFWDrawView/Launch/BFWDrawView-Bridging-Header.h";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
-		E21105921A7E003A0025BDA0 /* Debug */ = {
+		E220E4761E9A29DA008F6380 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = BFWDrawViewTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.barefeetware.$(PRODUCT_NAME:rfc1034identifier)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "BFWDrawView Demo/Launch/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.barefeetware.BFWDrawView-Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BFWDrawView.app/BFWDrawView";
 			};
 			name = Debug;
 		};
-		E21105931A7E003A0025BDA0 /* Release */ = {
+		E220E4771E9A29DA008F6380 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = BFWDrawViewTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.barefeetware.$(PRODUCT_NAME:rfc1034identifier)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "BFWDrawView Demo/Launch/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.barefeetware.BFWDrawView-Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BFWDrawView.app/BFWDrawView";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E21105661A7E003A0025BDA0 /* Build configuration list for PBXProject "BFWDrawView" */ = {
+		E220E4011E9A2748008F6380 /* Build configuration list for PBXProject "BFWDrawView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E211058C1A7E003A0025BDA0 /* Debug */,
-				E211058D1A7E003A0025BDA0 /* Release */,
+				E220E40D1E9A2748008F6380 /* Debug */,
+				E220E40E1E9A2748008F6380 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E211058E1A7E003A0025BDA0 /* Build configuration list for PBXNativeTarget "BFWDrawView" */ = {
+		E220E40F1E9A2748008F6380 /* Build configuration list for PBXNativeTarget "BFWDrawView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E211058F1A7E003A0025BDA0 /* Debug */,
-				E21105901A7E003A0025BDA0 /* Release */,
+				E220E4101E9A2748008F6380 /* Debug */,
+				E220E4111E9A2748008F6380 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
-		E21105911A7E003A0025BDA0 /* Build configuration list for PBXNativeTarget "BFWDrawViewTests" */ = {
+		E220E4751E9A29DA008F6380 /* Build configuration list for PBXNativeTarget "BFWDrawView Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E21105921A7E003A0025BDA0 /* Debug */,
-				E21105931A7E003A0025BDA0 /* Release */,
+				E220E4761E9A29DA008F6380 /* Debug */,
+				E220E4771E9A29DA008F6380 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = E21105631A7E003A0025BDA0 /* Project object */;
+	rootObject = E220E3FE1E9A2748008F6380 /* Project object */;
 }

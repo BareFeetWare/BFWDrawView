@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable class DrawingView: UIView {
+@IBDesignable open class DrawingView: UIView {
 
     // MARK: - Init
     
@@ -18,7 +18,7 @@ import UIKit
         contentMode = .redraw  // forces redraw when view is resized, eg when device is rotated
     }
     
-    required init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
 
@@ -186,24 +186,24 @@ import UIKit
     
     // MARK: - UIView
     
-    override var intrinsicContentSize: CGSize {
+    open override var intrinsicContentSize: CGSize {
         return drawing?.drawnSize ?? CGSize(width: UIViewNoIntrinsicMetric, height: UIViewNoIntrinsicMetric)
     }
     
-    override var tintColor: UIColor! {
+    open override var tintColor: UIColor! {
         didSet {
             setNeedsDraw()
         }
     }
     
-    override func layoutSubviews() {
+    open override func layoutSubviews() {
         // layoutSubviews is called when constraints change. Since new constraints might resize this view, we need to redraw.
         // TODO: only redraw if size actually changed
         setNeedsDraw()
         super.layoutSubviews()
     }
     
-    override func draw(_ rect: CGRect) {
+    open override func draw(_ rect: CGRect) {
         let _ = draw(parameters: parameters)
     }
     
