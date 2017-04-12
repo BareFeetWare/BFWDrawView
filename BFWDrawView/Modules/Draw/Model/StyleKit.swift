@@ -3,7 +3,7 @@
 //  BFWDrawView
 //
 //  Created by Tom Brodhurst-Hill on 19/07/2015.
-//  Copyright (c) 2015 BareFeetWare. All rights reserved.
+//  Free to use at your own risk, with acknowledgement to BareFeetWare.
 //
 
 import Foundation
@@ -23,25 +23,25 @@ class StyleKit: NSObject {
     // MARK: - Computed variables
 
     var paintCodeClass: AnyClass? { // class exported by PaintCode
-        guard let moduleStyleKitName = moduleStyleKitName
+        guard let className = className
             else { return nil }
-        return NSClassFromString(moduleStyleKitName)
+        return NSClassFromString(className)
     }
 
     lazy var classMethodNames: [String]? = {
         return self.paintCodeClass?.classMethodNames() as? [String]
     }()
     
-    var moduleStyleKitName: String? {
-        let moduleStyleKitName: String?
-        if let name = name,
-            let moduleName = type(of: self).moduleName
-        {
-            moduleStyleKitName = [moduleName, name].joined(separator: ".")
-        } else {
-            moduleStyleKitName = name
+    var className: String? {
+        let components = name.components(separatedBy: ".")
+        switch components.count {
+        case 2:
+            return name
+        default:
+            return StyleKit.styleKitNames.first { styleKitName in
+                name == styleKitName.components(separatedBy: ".").last!
+            }
         }
-        return moduleStyleKitName
     }
     
     // MARK: - Constants
@@ -61,7 +61,7 @@ class StyleKit: NSObject {
     static var styleKitNames: [String] = {
         var styleKitNames = [String]()
         for aClass in (NSObject.subclasses(of: NSObject.self) as! [AnyClass]) {
-            let className = NSStringFromClass(aClass).components(separatedBy: ".").last!
+            let className = NSStringFromClass(aClass)
             if className.hasSuffix(FileNameSuffix.styleKit),
                 aClass != StyleKit.self
             {
@@ -74,8 +74,17 @@ class StyleKit: NSObject {
 
     static func styleKit(for name: String) -> StyleKit? {
         var styleKit: StyleKit? = nil
-        // Remove the <ModuleName>. prefix that Swift adds:
-        if let className = name.components(separatedBy: ".").last {
+        let className: String?
+        let components = name.components(separatedBy: ".")
+        switch components.count {
+        case 2:
+            className = name
+        default:
+            className = styleKitNames.first { styleKitName in
+                name == styleKitName.components(separatedBy: ".").last!
+            }
+        }
+        if let className = className {
             if let existingStyleKit = styleKitForNameDict[className] {
                 styleKit = existingStyleKit
             } else {
@@ -90,19 +99,6 @@ class StyleKit: NSObject {
                         drawingName: String) -> Drawing?
     {
         return styleKit(for: styleKitName)?.drawing(for: drawingName)
-    }
-    
-    // TODO: Move moduleName to extension on NSObject?
-    
-    static var moduleName: String? {
-        let moduleName: String?
-        let components = NSStringFromClass(self).components(separatedBy: ".")
-        if components.count == 2 {
-            moduleName = components.first
-        } else {
-            moduleName = nil
-        }
-        return moduleName
     }
     
     // MARK: - Full list functions
