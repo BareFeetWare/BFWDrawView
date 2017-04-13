@@ -172,9 +172,13 @@ class StyleKit: NSObject {
     }
 
     lazy var parameterDict: [String: Any] = {
-        guard let path = self.bundle.path(forResource: self.name, ofType: "plist"),
+        guard let fileName = self.className?.components(separatedBy: ".").last,
+            let path = self.bundle.path(forResource: fileName, ofType: "plist"),
             var parameterDict = NSDictionary(contentsOfFile: path) as? [String: Any]
-            else { return [:] }
+            else {
+                debugPrint("failed to find plist for styleKit \"" + (self.className ?? "nil") + "\"")
+                return [:]
+        }
         //TODO: move filtering to another class with references to consts for keys
         for key in ["sizes", "sizesByPrefix", "derived"] {
             if let dictionary = parameterDict[key] as? [String: Any] {
