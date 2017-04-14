@@ -8,11 +8,11 @@
 
 import Foundation
 
-class StyleKit: NSObject {
+open class StyleKit: NSObject {
 
     // MARK: - Stored variables
     
-    var name: String!
+    open var name: String!
     
     // MARK: - Init
     
@@ -22,17 +22,17 @@ class StyleKit: NSObject {
     
     // MARK: - Computed variables
 
-    var paintCodeClass: AnyClass? { // class exported by PaintCode
+    internal var paintCodeClass: AnyClass? { // class exported by PaintCode
         guard let className = className
             else { return nil }
         return NSClassFromString(className)
     }
 
-    lazy var classMethodNames: [String]? = {
+    internal lazy var classMethodNames: [String]? = {
         return self.paintCodeClass?.classMethodNames() as? [String]
     }()
     
-    var className: String? {
+    fileprivate var className: String? {
         let components = name.components(separatedBy: ".")
         switch components.count {
         case 2:
@@ -46,19 +46,19 @@ class StyleKit: NSObject {
     
     // MARK: - Constants
     
-    struct FileNameSuffix {
+    fileprivate struct FileNameSuffix {
         static let styleKit = "StyleKit"
     }
     
-    enum Key: String {
+    fileprivate enum Key: String {
         case styleKitByPrefix
     }
     
     // MARK: - Class variables & functions
     
-    static var styleKitForNameDict = [String: StyleKit]()
+    fileprivate static var styleKitForNameDict = [String: StyleKit]()
     
-    static var styleKitNames: [String] = {
+    open static var styleKitNames: [String] = {
         var styleKitNames = [String]()
         for aClass in (NSObject.subclasses(of: NSObject.self) as! [AnyClass]) {
             let className = NSStringFromClass(aClass)
@@ -72,7 +72,7 @@ class StyleKit: NSObject {
         return styleKitNames
     }()
 
-    static func styleKit(for name: String) -> StyleKit? {
+    open static func styleKit(for name: String) -> StyleKit? {
         var styleKit: StyleKit? = nil
         let className: String?
         let components = name.components(separatedBy: ".")
@@ -95,7 +95,7 @@ class StyleKit: NSObject {
         return styleKit
     }
 
-    static func drawing(forStyleKitName styleKitName: String,
+    open static func drawing(forStyleKitName styleKitName: String,
                         drawingName: String) -> Drawing?
     {
         return styleKit(for: styleKitName)?.drawing(for: drawingName)
@@ -105,7 +105,7 @@ class StyleKit: NSObject {
     
     // Calling any of these methods is expensive, since it executes every method and caches the returnValue. Use only for discovery, eg showing a browser of all drawings.
     
-    lazy var returnValueForClassMethodNameDict: [String: Any]? = {
+    fileprivate lazy var returnValueForClassMethodNameDict: [String: Any]? = {
         debugPrint("**** warning: calling returnValueForClassMethodNameDict for BFWStyleKit name [\(self.name ?? "nil")], which has a large up front caching hit for the app. Only call this if you want to browse the entire list of drawings and colors available from the styleKit")
         return self.paintCodeClass?.returnValueForClassMethodNameDict() as? [String: Any]
     }()
@@ -123,11 +123,11 @@ class StyleKit: NSObject {
         return colorsDict
     }()
     
-    lazy var colorNames: [String] = {
+    open lazy var colorNames: [String] = {
         return Array(self.colorsDict.keys)
     }()
     
-    lazy var drawingNames: [String] = {
+    open lazy var drawingNames: [String] = {
         var drawingNames = [String]()
         if let methodValueDict = self.returnValueForClassMethodNameDict {
             for (methodName, returnValue) in methodValueDict {
@@ -143,7 +143,7 @@ class StyleKit: NSObject {
 
     // MARK: - Use cache if already created.
 
-    func returnValue(forClassMethodName methodName: String) -> Any? {
+    fileprivate func returnValue(forClassMethodName methodName: String) -> Any? {
         let returnValue: Any?
         if let returnValueForClassMethodNameDict = self.returnValueForClassMethodNameDict {
             returnValue = returnValueForClassMethodNameDict[methodName]
@@ -155,7 +155,7 @@ class StyleKit: NSObject {
 
     // MARK: - Plist
 
-    var bundle: Bundle {
+    fileprivate var bundle: Bundle {
         #if TARGET_INTERFACE_BUILDER // rendering in storyboard using IBDesignable
             let isInterfaceBuilder = true
         #else
@@ -171,7 +171,7 @@ class StyleKit: NSObject {
         return bundle;
     }
 
-    lazy var parameterDict: [String: Any] = {
+    internal lazy var parameterDict: [String: Any] = {
         guard let fileName = self.className?.components(separatedBy: ".").last,
             let path = self.bundle.path(forResource: fileName, ofType: "plist"),
             var parameterDict = NSDictionary(contentsOfFile: path) as? [String: Any]
@@ -195,9 +195,9 @@ class StyleKit: NSObject {
 
     // MARK: - Colors
 
-    var colorForNameDict = [String: UIColor]()
+    fileprivate var colorForNameDict = [String: UIColor]()
 
-    func color(for colorName: String) -> UIColor? {
+    open func color(for colorName: String) -> UIColor? {
         let color: UIColor?
         if let existingColor = (colorForNameDict as NSDictionary).object(forWordsKey: colorName) as? UIColor {
             color = existingColor
@@ -219,14 +219,14 @@ class StyleKit: NSObject {
 
     // MARK: - Drawings
 
-    var drawingForNameDict = [String: Drawing]()
+    fileprivate var drawingForNameDict = [String: Drawing]()
     
-    func drawingName(forMethodName methodName: String) -> String? {
+    fileprivate func drawingName(forMethodName methodName: String) -> String? {
         return methodName.methodNameComponents?
             .first?.substring(from: Drawing.FileName.drawPrefix.endIndex).lowercaseFirstCharacter
     }
     
-    func classMethodName(forDrawingName drawingName: String) -> String? {
+    internal func classMethodName(forDrawingName drawingName: String) -> String? {
         var methodName: String? = nil
         let drawingWords = Drawing.FileName.drawPrefix + " " + drawingName.lowercaseWords
         if let classMethodNames = classMethodNames {
@@ -242,7 +242,7 @@ class StyleKit: NSObject {
         return methodName
     }
 
-    func drawing(for drawingName: String) -> Drawing? {
+    open func drawing(for drawingName: String) -> Drawing? {
         let drawing: Drawing?
         if let prefixDict = parameterDict[Key.styleKitByPrefix.rawValue] as? [String: Any],
             let redirectStyleKitName = (prefixDict as NSDictionary)

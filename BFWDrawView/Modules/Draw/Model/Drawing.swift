@@ -8,17 +8,17 @@
 
 import Foundation
 
-class Drawing {
+open class Drawing {
 
-    struct FileName {
+    internal struct FileName {
         static let drawPrefix = "draw"
     }
 
-    var styleKit: StyleKit
-    var name: String
+    open var styleKit: StyleKit
+    open var name: String
     fileprivate var didSetDrawnSize = false
 
-    enum Key: String {
+    fileprivate enum Key: String {
         case sizes, sizesByPrefix
     }
     
@@ -31,7 +31,7 @@ class Drawing {
     
     // MARK: Variables
 
-    lazy var methodName: String? = {
+    internal lazy var methodName: String? = {
         return self.styleKit.classMethodName(forDrawingName: self.name)
     }()
 

@@ -19,13 +19,13 @@ import UIKit
     private var needsUpdateShadow = true
     private var backgroundSize = CGSize.zero
     
-    @IBInspectable var iconName: String? {
+    @IBInspectable open var iconName: String? {
         didSet {
             setNeedsUpdateView()
         }
     }
     
-    @IBInspectable var iconStyleKit: String? {
+    @IBInspectable open var iconStyleKit: String? {
         didSet {
             setNeedsUpdateView()
         }
@@ -33,7 +33,7 @@ import UIKit
     
     // MARK: - Init
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
@@ -78,23 +78,23 @@ import UIKit
         setNeedsUpdateShadow()
     }
     
-    func setNeedsUpdateShadow() {
+    fileprivate func setNeedsUpdateShadow() {
         needsUpdateShadow = true
         setNeedsDisplay()
     }
     
-    func setNeedsUpdateBackgrounds() {
+    fileprivate func setNeedsUpdateBackgrounds() {
         backgroundSize = CGSize.zero
         setNeedsLayout()
     }
     
-    var needsUpdateBackgrounds: Bool {
+    fileprivate var needsUpdateBackgrounds: Bool {
         return backgroundSize != bounds.size
     }
     
     // MARK: - Updates
     
-    func updateBackgrounds() {
+    fileprivate func updateBackgrounds() {
         for state: UIControlState in [.normal, .disabled, .selected, .highlighted] {
             if let background = backgroundDrawViewForStateDict[state.rawValue] {
                 background.frame = bounds
@@ -103,14 +103,14 @@ import UIKit
         }
     }
     
-    func updateBackgroundsIfNeeded() {
+    fileprivate func updateBackgroundsIfNeeded() {
         if needsUpdateBackgrounds {
             backgroundSize = bounds.size
             updateBackgrounds()
         }
     }
     
-    func updateShadowIfNeeded() {
+    fileprivate func updateShadowIfNeeded() {
         if needsUpdateShadow {
             needsUpdateShadow = false
             let shadow = self.shadow(for: state) ?? self.shadow(for: .normal)
@@ -177,7 +177,6 @@ import UIKit
         }
     }
     
-    
     open func makeIconDrawViews(from stateNameDict: [UInt: String],
                                 styleKit: String)
     {
@@ -212,12 +211,12 @@ import UIKit
     
     // MARK: - UpdateView
     
-    private func setNeedsUpdateView() {
+    fileprivate func setNeedsUpdateView() {
         needsUpdateView = true
         setNeedsLayout()
     }
     
-    private var needsUpdateView = true
+    fileprivate var needsUpdateView = true
     
     open func updateView() {
         if let iconName = iconName,
@@ -228,7 +227,7 @@ import UIKit
         }
     }
     
-    private func updateViewIfNeeded() {
+    fileprivate func updateViewIfNeeded() {
         if needsUpdateView {
             needsUpdateView = false
             updateView()

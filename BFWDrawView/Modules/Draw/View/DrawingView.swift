@@ -24,9 +24,9 @@ import UIKit
 
     // MARK: - Variables
     
-    var drawing: Drawing? { didSet { setNeedsDraw() }}
-    @IBInspectable var name: String? { didSet { updateDrawing() }}
-    @IBInspectable var styleKit: String? { didSet { updateDrawing() }}
+    open var drawing: Drawing? { didSet { setNeedsDraw() }}
+    @IBInspectable open var name: String? { didSet { updateDrawing() }}
+    @IBInspectable open var styleKit: String? { didSet { updateDrawing() }}
     
     var styleKitClass: AnyClass? {
         return drawing?.styleKit.paintCodeClass
@@ -34,7 +34,7 @@ import UIKit
     
     // MARK: - Frame calculations
     
-    var drawnSize: CGSize {
+    open var drawnSize: CGSize {
         return drawInFrameSize
     }
     
@@ -137,13 +137,13 @@ import UIKit
         return image
     }
     
-    var image: UIImage? {
+    open var image: UIImage? {
         return imageFromView
     }
     
-    func writeImage(at scale: CGFloat,
-                    isOpaque: Bool,
-                    to file: URL) -> Bool
+    open func writeImage(at scale: CGFloat,
+                         isOpaque: Bool,
+                         to file: URL) -> Bool
     {
         var success = false
         let directory = file.deletingLastPathComponent()
@@ -168,7 +168,9 @@ import UIKit
         return success
     }
     
-    func image(at scale: CGFloat, isOpaque: Bool) -> UIImage? {
+    open func image(at scale: CGFloat,
+                    isOpaque: Bool) -> UIImage?
+    {
         let image: UIImage?
         if canDraw {
             let savedContentsScale = contentScaleFactor
