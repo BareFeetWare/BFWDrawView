@@ -8,9 +8,9 @@
 
 import UIKit
 
-@IBDesignable class AnimationView: DrawingView {
+@IBDesignable open class AnimationView: DrawingView {
 
-    enum Curve: Int {
+    public enum Curve: Int {
         
         case linear = 0
         case easeInOut = 1
@@ -42,7 +42,7 @@ import UIKit
     // MARK: - Variables
     
     /// Fraction 0.0 to 1.0. Set internally but exposed for storyboard preview.
-    @IBInspectable dynamic var animation = 0.0 {
+    @IBInspectable open dynamic var animation = 0.0 {
         didSet {
 //            updateArgument(forParameter: "animation")
             setNeedsDraw()
@@ -50,17 +50,17 @@ import UIKit
     }
     
     /// Fraction 0.0 to 1.0. Start of animation.
-    @IBInspectable var start = 0.0
+    @IBInspectable open var start = 0.0
     
     /// Fraction 0.0 to 1.0. End of animation.
-    @IBInspectable var end = 1.0
+    @IBInspectable open var end = 1.0
     
-    @IBInspectable var duration: TimeInterval = 3.0
+    @IBInspectable open var duration: TimeInterval = 3.0
     
     /// Default 0 = infinite cycles (repetitions).
-    @IBInspectable var cycles = 0.0
+    @IBInspectable open var cycles = 0.0
     
-    @IBInspectable var isPaused: Bool {
+    @IBInspectable open var isPaused: Bool {
         get {
             return pausedDate != nil
         }
@@ -84,11 +84,11 @@ import UIKit
         }
     }
     
-    var framesPerSecond = 30.0
+    open var framesPerSecond = 30.0
 
-    var curve: Curve = .linear
+    open var curve: Curve = .linear
     
-    @IBInspectable var curve_: Int {
+    @IBInspectable open var curve_: Int {
         get {
             return curve.rawValue
         }
@@ -99,7 +99,7 @@ import UIKit
     
     // MARK: Public diagnostic variables
 
-    var drawnFramesPerSecond: Double {
+    open var drawnFramesPerSecond: Double {
         var framesPerSecond = 0.0
         if let startDate = startDate {
             let interval = Date().timeIntervalSince(startDate)
@@ -119,7 +119,7 @@ import UIKit
     fileprivate var finished = false
     fileprivate var drawnFrameCount: UInt = 0 // to count actual frames drawn
     
-    var animationBetweenStartAndEnd: CGFloat {
+    open var animationBetweenStartAndEnd: CGFloat {
         var curved = curve.function(animation)
         if start != 0.0 || end != 0.0 {
             curved = start + curved * (end - start)
@@ -133,7 +133,7 @@ import UIKit
     
     // MARK: - Animation
     
-    func restart() {
+    open func restart() {
         pausedDate = nil
         timer?.invalidate()
         timer = nil
@@ -156,7 +156,7 @@ import UIKit
         }
     }
     
-    func tick(timer: Timer) {
+    open func tick(timer: Timer) {
         let elapsed = Date().timeIntervalSince(startDate!) - pausedTimeInterval
         let complete = elapsed / duration
         finished = cycles > 0.0 && complete > cycles
@@ -172,7 +172,7 @@ import UIKit
         }
     }
     
-    func writeImages(at scale: CGFloat,
+    open func writeImages(at scale: CGFloat,
                      isOpaque: Bool,
                      to fileURL: URL) -> Bool
     {
@@ -203,13 +203,13 @@ import UIKit
     
     // MARK: - UIView
     
-    override func draw(_ rect: CGRect) {
+    open override func draw(_ rect: CGRect) {
         startTimerIfNeeded()
         drawnFrameCount += 1
         super.draw(rect)
     }
     
-    override var isHidden: Bool {
+    open override var isHidden: Bool {
         get {
             return super.isHidden
         }
