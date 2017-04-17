@@ -22,10 +22,9 @@ open class StyleKit: NSObject {
     
     // MARK: - Computed variables
 
-    internal var paintCodeClass: AnyClass? { // class exported by PaintCode
-        guard let className = className
-            else { return nil }
-        return NSClassFromString(className)
+    /// Class exported by PaintCode
+    internal var paintCodeClass: AnyClass? {
+        return self.className.flatMap(NSClassFromString)
     }
 
     internal lazy var classMethodNames: [String]? = {
@@ -73,7 +72,7 @@ open class StyleKit: NSObject {
     }()
 
     open static func styleKit(for name: String) -> StyleKit? {
-        var styleKit: StyleKit? = nil
+        var styleKit: StyleKit?
         let className: String?
         let components = name.components(separatedBy: ".")
         switch components.count {
@@ -96,7 +95,7 @@ open class StyleKit: NSObject {
     }
 
     open static func drawing(forStyleKitName styleKitName: String,
-                        drawingName: String) -> Drawing?
+                             drawingName: String) -> Drawing?
     {
         return styleKit(for: styleKitName)?.drawing(for: drawingName)
     }
@@ -227,17 +226,14 @@ open class StyleKit: NSObject {
     }
     
     internal func classMethodName(forDrawingName drawingName: String) -> String? {
-        var methodName: String? = nil
+        guard let classMethodNames = classMethodNames
+            else { return nil }
         let drawingWords = Drawing.FileName.drawPrefix + " " + drawingName.lowercaseWords
-        if let classMethodNames = classMethodNames {
-            for searchMethodName in classMethodNames {
-                if let baseName = searchMethodName.methodNameComponents?.first,
-                    baseName.lowercaseWords == drawingWords
-                {
-                    methodName = searchMethodName
-                    break
-                }
-            }
+        let methodName = classMethodNames.first { methodName in
+            guard let baseName = methodName.methodNameComponents?.first,
+                baseName.lowercaseWords == drawingWords
+                else { return false }
+            return true
         }
         return methodName
     }
