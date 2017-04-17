@@ -154,25 +154,14 @@ open class StyleKit: NSObject {
 
     // MARK: - Plist
 
-    fileprivate var bundle: Bundle {
-        #if TARGET_INTERFACE_BUILDER // rendering in storyboard using IBDesignable
-            let isInterfaceBuilder = true
-        #else
-            let isInterfaceBuilder = false
-        #endif
-        return StyleKit.bundle(isInterfaceBuilder: isInterfaceBuilder)
+    fileprivate var bundle: Bundle? {
+        return paintCodeClass.map { Bundle(for: $0) }
     }
     
-    fileprivate static func bundle(isInterfaceBuilder: Bool) -> Bundle {
-        let bundle = isInterfaceBuilder
-            ? Bundle(for: self)
-            : Bundle.main
-        return bundle;
-    }
-
     internal lazy var parameterDict: [String: Any] = {
         guard let fileName = self.className?.components(separatedBy: ".").last,
-            let path = self.bundle.path(forResource: fileName, ofType: "plist"),
+            let bundle = self.bundle,
+            let path = bundle.path(forResource: fileName, ofType: "plist"),
             var parameterDict = NSDictionary(contentsOfFile: path) as? [String: Any]
             else {
                 debugPrint("failed to find plist for styleKit \"" + (self.className ?? "nil") + "\"")
