@@ -24,7 +24,12 @@ open class StyleKit: NSObject {
 
     /// Class exported by PaintCode
     internal var paintCodeClass: AnyClass? {
-        return self.className.flatMap(NSClassFromString)
+        guard let paintCodeClass = self.className.flatMap(NSClassFromString)
+            else {
+                debugPrint("failed to get paintCodeClass for class name \"" + (self.className ?? "nil") + "\"")
+                return nil
+        }
+        return paintCodeClass
     }
 
     internal lazy var classMethodNames: [String]? = {
