@@ -94,12 +94,11 @@ import UIKit
     
     fileprivate func updateDrawing() {
         // TODO: Call this only once for each stylekit and drawing name pair change.
-        if let styleKitName = styleKit,
+        guard let styleKitName = styleKit,
             let name = name
-        {
-            drawing = StyleKit.drawing(forStyleKitName: styleKitName,
-                                       drawingName: name)
-        }
+            else { return }
+        drawing = StyleKit.drawing(forStyleKitName: styleKitName,
+                                   drawingName: name)
     }
     
     func setNeedsDraw() {
@@ -219,7 +218,7 @@ extension DrawingView {
     }
     
     var drawingSelector: Selector? {
-        guard let drawing = drawing,
+        guard let drawing = self.drawing,
             let methodName = drawing.methodName
             else { return nil }
         return NSSelectorFromString(methodName)
@@ -250,28 +249,26 @@ extension DrawingView {
     }
     
     func draw(parameters: [String]) -> Bool {
-        var success = false
-        if let drawingSelector = drawingSelector,
+        guard let drawingSelector = drawingSelector,
             let styleKitClass = styleKitClass
-        {
-            success = true
-            if parameters == [] {
-                if let drawFunction = drawFunction(from: styleKitClass, selector: drawingSelector) {
-                    drawFunction()
-                }
-            } else if parameters == ["frame"] {
-                if let drawFunction = drawRectFunction(from: styleKitClass, selector: drawingSelector) {
-                    drawFunction(drawFrame)
-                }
-            } else if parameters == ["frame", "tintColor"] {
-                if let drawFunction = drawRectColorFunction(from: styleKitClass, selector: drawingSelector) {
-                    drawFunction(drawFrame, tintColor)
-                }
-            } else {
-                debugPrint("**** error: Failed to find a drawing for " + NSStringFromSelector(drawingSelector)
-                    + " with parameters [" + parameters.joined(separator: ", ") + "]")
-                success = false
+            else { return false }
+        var success = true
+        if parameters == [] {
+            if let drawFunction = drawFunction(from: styleKitClass, selector: drawingSelector) {
+                drawFunction()
             }
+        } else if parameters == ["frame"] {
+            if let drawFunction = drawRectFunction(from: styleKitClass, selector: drawingSelector) {
+                drawFunction(drawFrame)
+            }
+        } else if parameters == ["frame", "tintColor"] {
+            if let drawFunction = drawRectColorFunction(from: styleKitClass, selector: drawingSelector) {
+                drawFunction(drawFrame, tintColor)
+            }
+        } else {
+            debugPrint("**** error: Failed to find a drawing for " + NSStringFromSelector(drawingSelector)
+                + " with parameters [" + parameters.joined(separator: ", ") + "]")
+            success = false
         }
         return success
     }

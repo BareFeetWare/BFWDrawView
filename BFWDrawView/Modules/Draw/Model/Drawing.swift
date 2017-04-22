@@ -43,6 +43,7 @@ open class Drawing {
             methodParameters = Array(methodNameComponents.suffix(from: 1)) 
         } else {
             methodParameters = []
+            debugPrint("found no method parameters for drawing \"\(self.name)\"")
         }
         return methodParameters
     }()
