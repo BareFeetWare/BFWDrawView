@@ -63,16 +63,11 @@ open class StyleKit: NSObject {
     fileprivate static var styleKitForNameDict = [String: StyleKit]()
     
     open static var styleKitNames: [String] = {
-        var styleKitNames = [String]()
-        for aClass in (NSObject.subclasses(of: NSObject.self) as! [AnyClass]) {
-            let className = NSStringFromClass(aClass)
-            if className.hasSuffix(FileNameSuffix.styleKit),
-                aClass != StyleKit.self
-            {
-                // TODO: implement a more robust filter than suffix when PaintCode offers it
-                styleKitNames += [className]
-            }
-        }
+        let bundles = Bundle.allFrameworks
+        let styleKitNames: [String] = bundles
+            .map { bundle in bundle.bundleURL.deletingPathExtension().lastPathComponent }
+            .filter { name in name.hasSuffix(FileNameSuffix.styleKit) }
+            .map { name in [name, name].joined(separator: ".") }
         return styleKitNames
     }()
 

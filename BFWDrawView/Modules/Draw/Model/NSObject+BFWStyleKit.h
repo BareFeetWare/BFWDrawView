@@ -14,6 +14,5 @@
 + (NSArray * _Nonnull)classMethodNames;
 + (id _Nullable)returnValueForClassMethodName:(NSString * _Nonnull)methodName;
 + (NSDictionary * _Nonnull)returnValueForClassMethodNameDict;
-+ (NSArray * _Nonnull)subclassesOf:(Class _Nonnull)parentClass;
 
 @end
