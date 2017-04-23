@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="F6D-yj-l5n">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="F6D-yj-l5n">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -64,8 +64,28 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Samples" id="emR-hw-D8u">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="QgS-Ny-Q3e" style="IBUITableViewCellStyleDefault" id="o6C-KY-rpz">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="amy-Je-uDF" style="IBUITableViewCellStyleDefault" id="FY7-Dl-z97">
                                         <rect key="frame" x="0.0" y="132" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FY7-Dl-z97" id="jte-SV-kTZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Drawing Sample" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="amy-Je-uDF">
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="u5n-aH-dYK" kind="show" id="vzp-5c-0Q1"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="QgS-Ny-Q3e" style="IBUITableViewCellStyleDefault" id="o6C-KY-rpz">
+                                        <rect key="frame" x="0.0" y="176" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o6C-KY-rpz" id="zhn-bR-vPt">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
@@ -104,7 +124,7 @@
                 <viewControllerPlaceholder storyboardName="StyleKitsBrowser" bundleIdentifier="com.barefeetware.BFWDrawView" id="Z9c-po-7rQ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rOj-43-cSU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1335" y="-468"/>
+            <point key="canvasLocation" x="1434" y="-624"/>
         </scene>
         <!--Button Sample-->
         <scene sceneID="jMz-rQ-V6A">
@@ -119,7 +139,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Qv-YC-KnK" customClass="SampleDrawingButton" customModule="BFWDrawView_Demo" customModuleProvider="target">
-                                <rect key="frame" x="160.5" y="316.5" width="54" height="34"/>
+                                <rect key="frame" x="147.5" y="311.5" width="80" height="44"/>
                                 <state key="normal" title="Button">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -135,7 +155,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="diE-JQ-Dd0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1524" y="553"/>
+            <point key="canvasLocation" x="1625" y="645"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fuP-4O-HwW">
@@ -159,7 +179,40 @@
                 <viewControllerPlaceholder storyboardName="Exporter" bundleIdentifier="com.barefeetware.BFWDrawView" id="5ql-dm-UXd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3FF-7A-o5p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1292" y="-306"/>
+            <point key="canvasLocation" x="1393" y="-581"/>
+        </scene>
+        <!--Drawing Sample-->
+        <scene sceneID="EPC-P1-ZU6">
+            <objects>
+                <viewController id="u5n-aH-dYK" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Uq6-YF-d5m"/>
+                        <viewControllerLayoutGuide type="bottom" id="nwt-tq-TXC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0NO-Uz-qgY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ii-oT-yxO" customClass="DrawingView" customModule="BFWDrawView">
+                                <rect key="frame" x="154" y="316" width="66" height="34"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="styleKit" value="SampleStyleKit"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="name" value="bathroom"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="7ii-oT-yxO" firstAttribute="centerX" secondItem="0NO-Uz-qgY" secondAttribute="centerX" id="aVL-dZ-5hb"/>
+                            <constraint firstItem="7ii-oT-yxO" firstAttribute="centerY" secondItem="0NO-Uz-qgY" secondAttribute="centerY" id="v93-tq-W19"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Drawing Sample" id="tBy-cO-veb"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aZ9-Al-0VV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1625" y="-144"/>
         </scene>
     </scenes>
 </document>
