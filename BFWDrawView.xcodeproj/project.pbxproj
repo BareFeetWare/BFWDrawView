@@ -53,6 +53,9 @@
 		E220E4891E9A2A4D008F6380 /* SampleStyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E4841E9A2A4D008F6380 /* SampleStyleKit.swift */; };
 		E220E48E1E9A2A8D008F6380 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E48B1E9A2A8D008F6380 /* AppDelegate.swift */; };
 		E220E48F1E9A2A8D008F6380 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E220E48C1E9A2A8D008F6380 /* Assets.xcassets */; };
+		E2775FBE1EAC782500A48A23 /* NSObject+Introspection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2775FBD1EAC782500A48A23 /* NSObject+Introspection.swift */; };
+		E2775FC01EAC7DC200A48A23 /* SampleStyleKit+StyleKitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2775FBF1EAC7DC200A48A23 /* SampleStyleKit+StyleKitType.swift */; };
+		E2775FC21EAC7DDB00A48A23 /* StyleKitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2775FC11EAC7DDB00A48A23 /* StyleKitType.swift */; };
 		E2A91A381EA1850F00E26C63 /* BFWDrawNibView.h in Headers */ = {isa = PBXBuildFile; fileRef = E2A91A361EA1850F00E26C63 /* BFWDrawNibView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2A91A4B1EA185D400E26C63 /* BFWDrawView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E220E4071E9A2748008F6380 /* BFWDrawView.framework */; };
 		E2A91A4E1EA185D500E26C63 /* BFWControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2A91A4D1EA185D500E26C63 /* BFWControls.framework */; };
@@ -108,6 +111,9 @@
 		E220E48B1E9A2A8D008F6380 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E220E48C1E9A2A8D008F6380 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E220E48D1E9A2A8D008F6380 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2775FBD1EAC782500A48A23 /* NSObject+Introspection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Introspection.swift"; sourceTree = "<group>"; };
+		E2775FBF1EAC7DC200A48A23 /* SampleStyleKit+StyleKitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SampleStyleKit+StyleKitType.swift"; sourceTree = "<group>"; };
+		E2775FC11EAC7DDB00A48A23 /* StyleKitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKitType.swift; sourceTree = "<group>"; };
 		E2A91A341EA1850F00E26C63 /* BFWDrawNibView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BFWDrawNibView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2A91A361EA1850F00E26C63 /* BFWDrawNibView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFWDrawNibView.h; sourceTree = "<group>"; };
 		E2A91A371EA1850F00E26C63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -235,10 +241,12 @@
 				E220E4251E9A2830008F6380 /* NSInvocation+BFW.m */,
 				E220E4261E9A2830008F6380 /* NSObject+BFWStyleKit.h */,
 				E220E4271E9A2830008F6380 /* NSObject+BFWStyleKit.m */,
+				E2775FBD1EAC782500A48A23 /* NSObject+Introspection.swift */,
 				E220E4281E9A2830008F6380 /* NSString+BFW.h */,
 				E220E4291E9A2830008F6380 /* NSString+BFW.m */,
 				E220E42A1E9A2830008F6380 /* String+Paintcode.swift */,
 				E220E42B1E9A2830008F6380 /* StyleKit.swift */,
+				E2775FC11EAC7DDB00A48A23 /* StyleKitType.swift */,
 				E220E42C1E9A2830008F6380 /* UIColor+BFW.h */,
 				E220E42D1E9A2830008F6380 /* UIColor+BFW.m */,
 				E220E42E1E9A2830008F6380 /* UIImage+BFW.h */,
@@ -352,6 +360,7 @@
 			children = (
 				E220E4831E9A2A4D008F6380 /* SampleStyleKit.plist */,
 				E220E4841E9A2A4D008F6380 /* SampleStyleKit.swift */,
+				E2775FBF1EAC7DC200A48A23 /* SampleStyleKit+StyleKitType.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -581,8 +590,10 @@
 				E220E4461E9A2830008F6380 /* UIViewCellExtension.swift in Sources */,
 				E220E4561E9A2830008F6380 /* UIImage+BFW.m in Sources */,
 				E220E4601E9A2830008F6380 /* Exporter.swift in Sources */,
+				E2775FBE1EAC782500A48A23 /* NSObject+Introspection.swift in Sources */,
 				E220E4581E9A2830008F6380 /* DrawingButton.swift in Sources */,
 				E220E4421E9A2830008F6380 /* StyleKitsViewController.swift in Sources */,
+				E2775FC21EAC7DDB00A48A23 /* StyleKitType.swift in Sources */,
 				E220E45A1E9A2830008F6380 /* DrawingView.swift in Sources */,
 				E220E45B1E9A2830008F6380 /* ChoicesViewController.swift in Sources */,
 				E220E4501E9A2830008F6380 /* NSString+BFW.m in Sources */,
@@ -608,6 +619,7 @@
 				E220E48E1E9A2A8D008F6380 /* AppDelegate.swift in Sources */,
 				E220E4871E9A2A4D008F6380 /* SampleDrawingButton.swift in Sources */,
 				E220E4891E9A2A4D008F6380 /* SampleStyleKit.swift in Sources */,
+				E2775FC01EAC7DC200A48A23 /* SampleStyleKit+StyleKitType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -50,10 +50,6 @@ open class StyleKit: NSObject {
     
     // MARK: - Constants
     
-    fileprivate struct FileNameSuffix {
-        static let styleKit = "StyleKit"
-    }
-    
     fileprivate enum Key: String {
         case styleKitByPrefix
     }
@@ -63,12 +59,8 @@ open class StyleKit: NSObject {
     fileprivate static var styleKitForNameDict = [String: StyleKit]()
     
     open static var styleKitNames: [String] = {
-        let bundles = Bundle.allFrameworks
-        let styleKitNames: [String] = bundles
-            .map { bundle in bundle.bundleURL.deletingPathExtension().lastPathComponent }
-            .filter { name in name.hasSuffix(FileNameSuffix.styleKit) }
-            .map { name in [name, name].joined(separator: ".") }
-        return styleKitNames
+        let styleKitClasses = NSObject.classes(implementingProtocol: StyleKitType.self)
+        return styleKitClasses.map(NSStringFromClass)
     }()
 
     open static func styleKit(for name: String) -> StyleKit? {
