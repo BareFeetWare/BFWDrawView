@@ -60,7 +60,8 @@ open class StyleKit: NSObject {
     
     open static var styleKitNames: [String] = {
         let styleKitClasses = NSObject.classes(implementingProtocol: StyleKitType.self)
-        return styleKitClasses.map(NSStringFromClass)
+        let names = styleKitClasses.map(NSStringFromClass)
+        return names
     }()
 
     open static func styleKit(for name: String) -> StyleKit? {
