@@ -65,7 +65,6 @@ open class StyleKit: NSObject {
     }()
 
     open static func styleKit(for name: String) -> StyleKit? {
-        var styleKit: StyleKit?
         let className: String?
         let components = name.components(separatedBy: ".")
         switch components.count {
@@ -76,13 +75,17 @@ open class StyleKit: NSObject {
                 name == styleKitName.components(separatedBy: ".").last!
             }
         }
-        if let className = className {
-            if let existingStyleKit = styleKitForNameDict[className] {
-                styleKit = existingStyleKit
-            } else {
-                styleKit = StyleKit(name: className)
-                styleKitForNameDict[className] = styleKit
-            }
+        guard let moduleClassName = className
+            else {
+                debugPrint("Failed to get styleKit(for: \(name))")
+                return nil
+        }
+        let styleKit: StyleKit
+        if let existingStyleKit = styleKitForNameDict[moduleClassName] {
+            styleKit = existingStyleKit
+        } else {
+            styleKit = StyleKit(name: moduleClassName)
+            styleKitForNameDict[moduleClassName] = styleKit
         }
         return styleKit
     }
