@@ -273,19 +273,27 @@ extension DrawingView {
         return success
     }
     
-    func implementation(for owner: AnyObject, selector: Selector) -> IMP {
-        let method: Method
+    // Similar to: http://codelle.com/blog/2016/2/calling-methods-from-strings-in-swift/
+    
+    func implementation(for owner: AnyObject, selector: Selector) -> IMP? {
+        let method: Method?
         if owner is AnyClass {
             method = class_getClassMethod(owner as! AnyClass, selector)
         } else {
             method = class_getInstanceMethod(type(of: owner), selector)
         }
+        guard method != nil
+            else {
+                debugPrint("Failed to get implementation for selector " + selector.description)
+                return nil
+        }
         return method_getImplementation(method)
     }
     
     func imageFunction(from owner: AnyObject, selector: Selector) -> ((Bool) -> UIImage)? {
+        guard let implementation = self.implementation(for: owner, selector: selector)
+            else { return nil }
         typealias CFunction = @convention(c) (AnyObject, Selector, Bool) -> Unmanaged<UIImage>
-        let implementation = self.implementation(for: owner, selector: selector)
         let cFunction = unsafeBitCast(implementation, to: CFunction.self)
         return { bool in
             cFunction(owner, selector, bool).takeUnretainedValue()
@@ -293,8 +301,9 @@ extension DrawingView {
     }
     
     func drawFunction(from owner: AnyObject, selector: Selector) -> (() -> Void)? {
+        guard let implementation = self.implementation(for: owner, selector: selector)
+            else { return nil }
         typealias CFunction = @convention(c) (AnyObject, Selector) -> Void
-        let implementation = self.implementation(for: owner, selector: selector)
         let cFunction = unsafeBitCast(implementation, to: CFunction.self)
         return {
             cFunction(owner, selector)
@@ -302,8 +311,9 @@ extension DrawingView {
     }
     
     func drawRectFunction(from owner: AnyObject, selector: Selector) -> ((CGRect) -> Void)? {
+        guard let implementation = self.implementation(for: owner, selector: selector)
+            else { return nil }
         typealias CFunction = @convention(c) (AnyObject, Selector, CGRect) -> Void
-        let implementation = self.implementation(for: owner, selector: selector)
         let cFunction = unsafeBitCast(implementation, to: CFunction.self)
         return { rect in
             cFunction(owner, selector, rect)
@@ -311,8 +321,9 @@ extension DrawingView {
     }
 
     func drawRectColorFunction(from owner: AnyObject, selector: Selector) -> ((CGRect, UIColor) -> Void)? {
+        guard let implementation = self.implementation(for: owner, selector: selector)
+            else { return nil }
         typealias CFunction = @convention(c) (AnyObject, Selector, CGRect, UIColor) -> Void
-        let implementation = self.implementation(for: owner, selector: selector)
         let cFunction = unsafeBitCast(implementation, to: CFunction.self)
         return { rect, tintColor in
             cFunction(owner, selector, rect, tintColor)
