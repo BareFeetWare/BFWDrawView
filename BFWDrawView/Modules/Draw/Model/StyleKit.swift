@@ -24,7 +24,8 @@ open class StyleKit: NSObject {
 
     /// Class exported by PaintCode
     internal var paintCodeClass: AnyClass? {
-        guard let paintCodeClass = self.className.flatMap(NSClassFromString)
+        guard let className = className,
+            let paintCodeClass = NSClassFromString(className)
             else {
                 debugPrint("failed to get paintCodeClass for class name \"" + (self.className ?? "nil") + "\"")
                 return nil
