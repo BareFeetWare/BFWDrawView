@@ -42,7 +42,7 @@ import UIKit
     // MARK: - Variables
     
     /// Fraction 0.0 to 1.0. Set internally but exposed for storyboard preview.
-    @IBInspectable open dynamic var animation = 0.0 {
+    @IBInspectable open dynamic var animation: Double = 0.0 {
         didSet {
 //            updateArgument(forParameter: "animation")
             setNeedsDraw()
@@ -50,15 +50,15 @@ import UIKit
     }
     
     /// Fraction 0.0 to 1.0. Start of animation.
-    @IBInspectable open var start = 0.0
+    @IBInspectable open var start: Double = 0.0
     
     /// Fraction 0.0 to 1.0. End of animation.
-    @IBInspectable open var end = 1.0
+    @IBInspectable open var end: Double = 1.0
     
-    @IBInspectable open var duration: TimeInterval = 3.0
+    @IBInspectable open var duration: Double = 3.0
     
     /// Default 0 = infinite cycles (repetitions).
-    @IBInspectable open var cycles = 0.0
+    @IBInspectable open var cycles: Double = 0.0
     
     @IBInspectable open var isPaused: Bool {
         get {
