@@ -55,7 +55,7 @@ import UIKit
     /// Fraction 0.0 to 1.0. End of animation.
     @IBInspectable var end: Double = 1.0
     
-    @IBInspectable var duration: TimeInterval = 3.0
+    @IBInspectable var duration: Double = 3.0
     
     /// Default 0 = infinite cycles (repetitions).
     @IBInspectable var cycles: Double = 0.0
