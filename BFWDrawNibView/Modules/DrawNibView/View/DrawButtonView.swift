@@ -11,8 +11,8 @@ import BFWControls
 import BFWDrawView
 
 @IBDesignable open class DrawButtonView: NibView {
-
+    
     @IBOutlet open weak var iconView: DrawingView?
     @IBOutlet open weak var titleLabel: UILabel?
-
+    
 }

@@ -14,28 +14,28 @@
 /// Adapted from http://iphonedevelopertips.com/cocoa/how-to-mask-an-image.html
 - (UIImage *)maskWithImage:(UIImage *)maskImage
 {
-	CGImageRef maskRef = maskImage.CGImage; 
-	CGImageRef mask = CGImageMaskCreate(CGImageGetWidth(maskRef),
-										CGImageGetHeight(maskRef),
-										CGImageGetBitsPerComponent(maskRef),
-										CGImageGetBitsPerPixel(maskRef),
-										CGImageGetBytesPerRow(maskRef),
-										CGImageGetDataProvider(maskRef), NULL, false);
-	
-	CGImageRef masked = CGImageCreateWithMask([self CGImage], mask);
-	return [UIImage imageWithCGImage:masked];
+    CGImageRef maskRef = maskImage.CGImage;
+    CGImageRef mask = CGImageMaskCreate(CGImageGetWidth(maskRef),
+                                        CGImageGetHeight(maskRef),
+                                        CGImageGetBitsPerComponent(maskRef),
+                                        CGImageGetBitsPerPixel(maskRef),
+                                        CGImageGetBytesPerRow(maskRef),
+                                        CGImageGetDataProvider(maskRef), NULL, false);
+    
+    CGImageRef masked = CGImageCreateWithMask([self CGImage], mask);
+    return [UIImage imageWithCGImage:masked];
 }
 
 + (UIImage *)imageOfView:(UIView *)view
-                   size:(CGSize)size
+                    size:(CGSize)size
 {
-	BOOL isOpaque = NO;
-	CGFloat scale = [[UIScreen mainScreen] scale];
-	UIGraphicsBeginImageContextWithOptions(size, isOpaque, scale);
-	[view.layer renderInContext:UIGraphicsGetCurrentContext()];
-	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-	UIGraphicsEndImageContext();
-	return image;
+    BOOL isOpaque = NO;
+    CGFloat scale = [[UIScreen mainScreen] scale];
+    UIGraphicsBeginImageContextWithOptions(size, isOpaque, scale);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
 }
 
 @end
