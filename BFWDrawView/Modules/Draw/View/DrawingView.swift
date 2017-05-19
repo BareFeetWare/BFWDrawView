@@ -12,7 +12,7 @@ import UIKit
 
     // MARK: - Init
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.clear
         contentMode = .redraw  // forces redraw when view is resized, eg when device is rotated
