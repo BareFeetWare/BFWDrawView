@@ -21,8 +21,7 @@
 		E220E4461E9A2830008F6380 /* UIViewCellExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E41D1E9A2830008F6380 /* UIViewCellExtension.swift */; };
 		E220E4471E9A2830008F6380 /* BFWDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = E220E4201E9A2830008F6380 /* BFWDLog.h */; };
 		E220E4481E9A2830008F6380 /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E4211E9A2830008F6380 /* Drawing.swift */; };
-		E220E4491E9A2830008F6380 /* NSDictionary+BFW.h in Headers */ = {isa = PBXBuildFile; fileRef = E220E4221E9A2830008F6380 /* NSDictionary+BFW.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E220E44A1E9A2830008F6380 /* NSDictionary+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E220E4231E9A2830008F6380 /* NSDictionary+BFW.m */; };
+		E220E44A1E9A2830008F6380 /* Dictionary+Words.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E4231E9A2830008F6380 /* Dictionary+Words.swift */; };
 		E220E44B1E9A2830008F6380 /* NSInvocation+BFW.h in Headers */ = {isa = PBXBuildFile; fileRef = E220E4241E9A2830008F6380 /* NSInvocation+BFW.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E220E44C1E9A2830008F6380 /* NSInvocation+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E220E4251E9A2830008F6380 /* NSInvocation+BFW.m */; };
 		E220E44D1E9A2830008F6380 /* NSObject+BFWStyleKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E220E4261E9A2830008F6380 /* NSObject+BFWStyleKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -78,8 +77,7 @@
 		E220E41D1E9A2830008F6380 /* UIViewCellExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewCellExtension.swift; sourceTree = "<group>"; };
 		E220E4201E9A2830008F6380 /* BFWDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDLog.h; sourceTree = "<group>"; };
 		E220E4211E9A2830008F6380 /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
-		E220E4221E9A2830008F6380 /* NSDictionary+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+BFW.h"; sourceTree = "<group>"; };
-		E220E4231E9A2830008F6380 /* NSDictionary+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+BFW.m"; sourceTree = "<group>"; };
+		E220E4231E9A2830008F6380 /* Dictionary+Words.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Words.swift"; sourceTree = "<group>"; };
 		E220E4241E9A2830008F6380 /* NSInvocation+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSInvocation+BFW.h"; sourceTree = "<group>"; };
 		E220E4251E9A2830008F6380 /* NSInvocation+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSInvocation+BFW.m"; sourceTree = "<group>"; };
 		E220E4261E9A2830008F6380 /* NSObject+BFWStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+BFWStyleKit.h"; sourceTree = "<group>"; };
@@ -234,9 +232,8 @@
 			isa = PBXGroup;
 			children = (
 				E220E4201E9A2830008F6380 /* BFWDLog.h */,
+				E220E4231E9A2830008F6380 /* Dictionary+Words.swift */,
 				E220E4211E9A2830008F6380 /* Drawing.swift */,
-				E220E4221E9A2830008F6380 /* NSDictionary+BFW.h */,
-				E220E4231E9A2830008F6380 /* NSDictionary+BFW.m */,
 				E220E4241E9A2830008F6380 /* NSInvocation+BFW.h */,
 				E220E4251E9A2830008F6380 /* NSInvocation+BFW.m */,
 				E220E4261E9A2830008F6380 /* NSObject+BFWStyleKit.h */,
@@ -428,7 +425,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E220E4531E9A2830008F6380 /* UIColor+BFW.h in Headers */,
-				E220E4491E9A2830008F6380 /* NSDictionary+BFW.h in Headers */,
 				E220E44B1E9A2830008F6380 /* NSInvocation+BFW.h in Headers */,
 				E220E44F1E9A2830008F6380 /* NSString+BFW.h in Headers */,
 				E220E4471E9A2830008F6380 /* BFWDLog.h in Headers */,
@@ -602,7 +598,7 @@
 				E220E4481E9A2830008F6380 /* Drawing.swift in Sources */,
 				E220E4441E9A2830008F6380 /* DrawingCell.swift in Sources */,
 				E220E4431E9A2830008F6380 /* StyleKitViewController.swift in Sources */,
-				E220E44A1E9A2830008F6380 /* NSDictionary+BFW.m in Sources */,
+				E220E44A1E9A2830008F6380 /* Dictionary+Words.swift in Sources */,
 				E220E44C1E9A2830008F6380 /* NSInvocation+BFW.m in Sources */,
 				E220E4511E9A2830008F6380 /* String+Paintcode.swift in Sources */,
 				E220E4451E9A2830008F6380 /* SwitchCell.swift in Sources */,
