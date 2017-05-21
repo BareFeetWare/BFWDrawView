@@ -49,7 +49,7 @@ open class Drawing {
     }()
     
     lazy var lookupName: String = {
-        return self.name.lowercaseWords
+        return self.name.lowercasedWords
     }()
 
     lazy var drawnSize: CGSize? = {

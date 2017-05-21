@@ -1,5 +1,5 @@
 //
-//  String+Paintcode.swift
+//  String+PaintCode.swift
 //
 //  Created by Tom Brodhurst-Hill on 26/9/16.
 //  Copyright (c) 2016 BareFeetWare. All rights reserved.
@@ -64,19 +64,16 @@ extension String {
         return wordsFromCamelCase.lowercased()
     }
     
-    func longestWordsMatch(inPrefixes prefixes: [String]) -> String {
-        return prefixes.reduce("") { (longest, prefix) in
-            return prefix.characters.count > longest.characters.count
-                && self.lowercasedWords.hasPrefix(prefix.lowercasedWords)
+    func longestWordsMatch(inPrefixes prefixes: [String]) -> String? {
+        return prefixes.reduce(nil) { (longest: String?, prefix) in
+            return prefix.characters.count > (longest?.characters.count ?? 0)
+                && lowercasedWords.hasPrefix(prefix.lowercasedWords)
                 ? prefix : longest
         }
     }
 
     func words(matching wordsArray: [String]) -> String? {
-        let lowercasedWords = self.lowercasedWords
-        return wordsArray.filter { words in
-            return lowercasedWords == words.lowercasedWords
-        }.first
+        return wordsArray.first { self.lowercasedWords == $0.lowercasedWords }
     }
 
     var methodNameComponents: [String]? {

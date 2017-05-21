@@ -8,7 +8,7 @@
 extension Dictionary where Key == String {
     
     func object(forLongestPrefixKeyMatchingWordsIn wordsString: String) -> Value? {
-        guard let prefix = wordsString.longestWordsMatch(inPrefixArray: Array(keys))
+        guard let prefix = wordsString.longestWordsMatch(inPrefixes: Array(keys))
             else { return nil }
         return self[prefix]
     }
@@ -18,8 +18,8 @@ extension Dictionary where Key == String {
         if let exactMatchObject = self[wordsKey] {
             object = exactMatchObject
         } else {
-            let searchKey = wordsKey.lowercaseWords
-            if let key = Array(keys).first(where: { searchKey == $0.lowercaseWords } ) {
+            let searchKey = wordsKey.lowercasedWords
+            if let key = Array(keys).first(where: { searchKey == $0.lowercasedWords } ) {
                 object = self[key]
             } else {
                 object = nil

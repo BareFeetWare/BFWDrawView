@@ -24,7 +24,7 @@ class StyleKitViewController: UITableViewController {
     // MARK: - Private variables
     
     lazy fileprivate var drawingNames: [String] = {
-        return self.styleKit?.drawingNames.map { $0.lowercaseWords }.sorted(by: <) ?? []
+        return self.styleKit?.drawingNames.map { $0.lowercasedWords }.sorted(by: <) ?? []
     }()
 
     // MARK: - UIViewController

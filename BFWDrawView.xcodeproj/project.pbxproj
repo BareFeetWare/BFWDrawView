@@ -26,9 +26,7 @@
 		E220E44C1E9A2830008F6380 /* NSInvocation+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E220E4251E9A2830008F6380 /* NSInvocation+BFW.m */; };
 		E220E44D1E9A2830008F6380 /* NSObject+BFWStyleKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E220E4261E9A2830008F6380 /* NSObject+BFWStyleKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E220E44E1E9A2830008F6380 /* NSObject+BFWStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E220E4271E9A2830008F6380 /* NSObject+BFWStyleKit.m */; };
-		E220E44F1E9A2830008F6380 /* NSString+BFW.h in Headers */ = {isa = PBXBuildFile; fileRef = E220E4281E9A2830008F6380 /* NSString+BFW.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E220E4501E9A2830008F6380 /* NSString+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E220E4291E9A2830008F6380 /* NSString+BFW.m */; };
-		E220E4511E9A2830008F6380 /* String+Paintcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E42A1E9A2830008F6380 /* String+Paintcode.swift */; };
+		E220E4511E9A2830008F6380 /* String+PaintCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E42A1E9A2830008F6380 /* String+PaintCode.swift */; };
 		E220E4521E9A2830008F6380 /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E42B1E9A2830008F6380 /* StyleKit.swift */; };
 		E220E4531E9A2830008F6380 /* UIColor+BFW.h in Headers */ = {isa = PBXBuildFile; fileRef = E220E42C1E9A2830008F6380 /* UIColor+BFW.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E220E4541E9A2830008F6380 /* UIColor+BFW.m in Sources */ = {isa = PBXBuildFile; fileRef = E220E42D1E9A2830008F6380 /* UIColor+BFW.m */; };
@@ -82,9 +80,7 @@
 		E220E4251E9A2830008F6380 /* NSInvocation+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSInvocation+BFW.m"; sourceTree = "<group>"; };
 		E220E4261E9A2830008F6380 /* NSObject+BFWStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+BFWStyleKit.h"; sourceTree = "<group>"; };
 		E220E4271E9A2830008F6380 /* NSObject+BFWStyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+BFWStyleKit.m"; sourceTree = "<group>"; };
-		E220E4281E9A2830008F6380 /* NSString+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BFW.h"; sourceTree = "<group>"; };
-		E220E4291E9A2830008F6380 /* NSString+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BFW.m"; sourceTree = "<group>"; };
-		E220E42A1E9A2830008F6380 /* String+Paintcode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Paintcode.swift"; sourceTree = "<group>"; };
+		E220E42A1E9A2830008F6380 /* String+PaintCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+PaintCode.swift"; sourceTree = "<group>"; };
 		E220E42B1E9A2830008F6380 /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
 		E220E42C1E9A2830008F6380 /* UIColor+BFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+BFW.h"; sourceTree = "<group>"; };
 		E220E42D1E9A2830008F6380 /* UIColor+BFW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BFW.m"; sourceTree = "<group>"; };
@@ -239,9 +235,7 @@
 				E220E4261E9A2830008F6380 /* NSObject+BFWStyleKit.h */,
 				E220E4271E9A2830008F6380 /* NSObject+BFWStyleKit.m */,
 				E2775FBD1EAC782500A48A23 /* NSObject+Introspection.swift */,
-				E220E4281E9A2830008F6380 /* NSString+BFW.h */,
-				E220E4291E9A2830008F6380 /* NSString+BFW.m */,
-				E220E42A1E9A2830008F6380 /* String+Paintcode.swift */,
+				E220E42A1E9A2830008F6380 /* String+PaintCode.swift */,
 				E220E42B1E9A2830008F6380 /* StyleKit.swift */,
 				E2775FC11EAC7DDB00A48A23 /* StyleKitType.swift */,
 				E220E42C1E9A2830008F6380 /* UIColor+BFW.h */,
@@ -426,7 +420,6 @@
 			files = (
 				E220E4531E9A2830008F6380 /* UIColor+BFW.h in Headers */,
 				E220E44B1E9A2830008F6380 /* NSInvocation+BFW.h in Headers */,
-				E220E44F1E9A2830008F6380 /* NSString+BFW.h in Headers */,
 				E220E4471E9A2830008F6380 /* BFWDLog.h in Headers */,
 				E220E4551E9A2830008F6380 /* UIImage+BFW.h in Headers */,
 				E220E44D1E9A2830008F6380 /* NSObject+BFWStyleKit.h in Headers */,
@@ -592,7 +585,6 @@
 				E2775FC21EAC7DDB00A48A23 /* StyleKitType.swift in Sources */,
 				E220E45A1E9A2830008F6380 /* DrawingView.swift in Sources */,
 				E220E45B1E9A2830008F6380 /* ChoicesViewController.swift in Sources */,
-				E220E4501E9A2830008F6380 /* NSString+BFW.m in Sources */,
 				E220E4401E9A2830008F6380 /* DrawingViewController.swift in Sources */,
 				E220E4571E9A2830008F6380 /* AnimationView.swift in Sources */,
 				E220E4481E9A2830008F6380 /* Drawing.swift in Sources */,
@@ -600,7 +592,7 @@
 				E220E4431E9A2830008F6380 /* StyleKitViewController.swift in Sources */,
 				E220E44A1E9A2830008F6380 /* Dictionary+Words.swift in Sources */,
 				E220E44C1E9A2830008F6380 /* NSInvocation+BFW.m in Sources */,
-				E220E4511E9A2830008F6380 /* String+Paintcode.swift in Sources */,
+				E220E4511E9A2830008F6380 /* String+PaintCode.swift in Sources */,
 				E220E4451E9A2830008F6380 /* SwitchCell.swift in Sources */,
 				E220E4541E9A2830008F6380 /* UIColor+BFW.m in Sources */,
 				E220E44E1E9A2830008F6380 /* NSObject+BFWStyleKit.m in Sources */,

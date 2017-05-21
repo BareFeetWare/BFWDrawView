@@ -15,7 +15,7 @@ fileprivate extension String {
             "button": "btn",
             "icon": "ic"
         ]
-        let words = self.camelCaseToWords.components(separatedBy: " ")
+        let words = self.wordsFromCamelCase.components(separatedBy: " ")
         let fileNameWords: [String]
         if let firstWord = words.first,
             let replacementWord = replacePrefixDict[firstWord.lowercased()]
@@ -102,7 +102,7 @@ class DrawingExport {
             if let styleKit = StyleKit.styleKit(for: styleKitName) {
                 if let blacklist = styleKit.parameterDict[Key.exportBlacklist.rawValue] as? [String] {
                     for fileName in blacklist {
-                        excludeFileNames.insert(fileName.lowercaseWords)
+                        excludeFileNames.insert(fileName.lowercasedWords)
                     }
                 }
                 for drawingName in styleKit.drawingNames {
@@ -209,7 +209,7 @@ class DrawingExport {
                            excludeFileNames: inout Set<String>)
     {
         var excludeFileNames = excludeFileNames
-        let fileNameLowercaseWords = fileName.lowercaseWords
+        let fileNameLowercaseWords = fileName.lowercasedWords
         if excludeFileNames.contains(fileNameLowercaseWords) {
             debugPrint("skipping excluded or existing file: " + fileNameLowercaseWords)
             return
@@ -318,7 +318,7 @@ class DrawingExport {
         for colorName in colorsDict.keys {
             let color = colorsDict[colorName]!
             let colorHex = color.hexString()!
-            let wordsString = colorName.camelCaseToWords
+            let wordsString = colorName.wordsFromCamelCase
             let underscoreName = wordsString.replacingOccurrences(of: " ", with: "_")
             let androidColorName = underscoreName.lowercased()
             let colorString = "    <color name=\"" + androidColorName + "\">#" + colorHex + "</color>"

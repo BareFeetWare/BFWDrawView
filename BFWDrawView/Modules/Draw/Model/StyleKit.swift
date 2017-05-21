@@ -169,7 +169,7 @@ open class StyleKit: NSObject {
             if let dictionary = parameterDict[key] as? [String: Any] {
                 var mutableDict = [String: Any]()
                 for (oldKey, value) in dictionary {
-                    let newKey = oldKey.lowercaseWords
+                    let newKey = oldKey.lowercasedWords
                     mutableDict[newKey] = value
                 }
                 parameterDict[key] = mutableDict
@@ -186,18 +186,17 @@ open class StyleKit: NSObject {
         let color: UIColor?
         if let existingColor = colorForNameDict.object(forWordsKey: colorName) {
             color = existingColor
-        } else if let classMethodNames = classMethodNames {
-            let methodName = colorName.words(matchingWordsArray: classMethodNames)
-            if let existingColor = returnValue(forClassMethodName: methodName) as? UIColor {
-                // TODO: filter out non color methods
-                color = existingColor
-                colorForNameDict[methodName] = color
-            } else {
-                color = nil
-                debugPrint("**** error: failed to find color for name: %@", colorName)
-            }
         } else {
-            color = nil
+            guard let classMethodNames = classMethodNames,
+                let methodName = colorName.words(matching: classMethodNames),
+                let existingColor = returnValue(forClassMethodName: methodName) as? UIColor
+                else {
+                    debugPrint("**** error: failed to find color for name: %@", colorName)
+                    return nil
+            }
+            // TODO: filter out non color methods
+            color = existingColor
+            colorForNameDict[methodName] = color
         }
         return color
     }
@@ -208,16 +207,16 @@ open class StyleKit: NSObject {
     
     fileprivate func drawingName(forMethodName methodName: String) -> String? {
         return methodName.methodNameComponents?
-            .first?.substring(from: Drawing.FileName.drawPrefix.endIndex).lowercaseFirstCharacter
+            .first?.substring(from: Drawing.FileName.drawPrefix.endIndex).lowercasedFirstCharacter
     }
     
     internal func classMethodName(forDrawingName drawingName: String) -> String? {
         guard let classMethodNames = classMethodNames
             else { return nil }
-        let drawingWords = Drawing.FileName.drawPrefix + " " + drawingName.lowercaseWords
+        let drawingWords = Drawing.FileName.drawPrefix + " " + drawingName.lowercasedWords
         let methodName = classMethodNames.first { methodName in
             guard let baseName = methodName.methodNameComponents?.first,
-                baseName.lowercaseWords == drawingWords
+                baseName.lowercasedWords == drawingWords
                 else { return false }
             return true
         }
@@ -234,7 +233,7 @@ open class StyleKit: NSObject {
             let styleKit = StyleKit.styleKit(for: redirectStyleKitName)
             drawing = styleKit?.drawing(for: drawingName)
         } else {
-            let drawingKey = drawingName.lowercaseWords
+            let drawingKey = drawingName.lowercasedWords
             if let dictDrawing = drawingForNameDict[drawingKey] {
                 drawing = dictDrawing
             } else if let _ = classMethodName(forDrawingName: drawingName) {
