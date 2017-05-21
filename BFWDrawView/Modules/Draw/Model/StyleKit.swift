@@ -184,7 +184,7 @@ open class StyleKit: NSObject {
 
     open func color(for colorName: String) -> UIColor? {
         let color: UIColor?
-        if let existingColor = (colorForNameDict as NSDictionary).object(forWordsKey: colorName) as? UIColor {
+        if let existingColor = colorForNameDict.object(forWordsKey: colorName) {
             color = existingColor
         } else if let classMethodNames = classMethodNames {
             let methodName = colorName.words(matchingWordsArray: classMethodNames)
@@ -227,8 +227,8 @@ open class StyleKit: NSObject {
     open func drawing(for drawingName: String) -> Drawing? {
         let drawing: Drawing?
         if let prefixDict = parameterDict[Key.styleKitByPrefix.rawValue] as? [String: Any],
-            let redirectStyleKitName = (prefixDict as NSDictionary)
-                .objectForLongestPrefixKeyMatchingWords(in: drawingName) as? String,
+            let redirectStyleKitName = prefixDict
+                .object(forLongestPrefixKeyMatchingWordsIn: drawingName) as? String,
             redirectStyleKitName != name
         {
             let styleKit = StyleKit.styleKit(for: redirectStyleKitName)

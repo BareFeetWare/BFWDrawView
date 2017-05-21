@@ -3,7 +3,7 @@
 //  BFWDrawView
 //
 //  Created by Tom Brodhurst-Hill on 19/07/2015.
-//  Copyright (c) 2015 BareFeetWare. All rights reserved.
+//  Free to use at your own risk, with acknowledgement to BareFeetWare.
 //
 
 import Foundation
@@ -56,11 +56,11 @@ open class Drawing {
         let parameterDict = self.styleKit.parameterDict
         let sizeString: String?
         if let sizesDict = parameterDict[Key.sizes.rawValue] as? [String: Any],
-            let matchedSizeString = (sizesDict as NSDictionary).object(forWordsKey: self.lookupName) as? String
+            let matchedSizeString = sizesDict.object(forWordsKey: self.lookupName) as? String
         {
             sizeString = matchedSizeString
         } else if let sizesDict = parameterDict[Key.sizesByPrefix.rawValue] as? [String: Any] {
-            sizeString = (sizesDict as NSDictionary).objectForLongestPrefixKeyMatchingWords(in: self.lookupName) as? String
+            sizeString = sizesDict.object(forLongestPrefixKeyMatchingWordsIn: self.lookupName) as? String
         } else {
             sizeString = nil
         }

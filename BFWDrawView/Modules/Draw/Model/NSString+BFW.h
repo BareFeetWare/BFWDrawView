@@ -17,7 +17,7 @@
 @property (nonatomic, readonly, nonnull) NSString *wordsToPaintCodeCase; // convert separate words to the case that PaintCode uses for methods
 @property (nonatomic, readonly, nonnull) NSString *lowercaseWords;
 
-- (NSString * _Nonnull)longestWordsMatchInPrefixArray:(NSArray * _Nonnull)prefixArray;
+- (NSString * _Nullable)longestWordsMatchInPrefixArray:(NSArray * _Nonnull)prefixArray;
 - (NSString * _Nonnull)wordsMatchingWordsArray:(NSArray * _Nonnull)wordsArray;
 
 @end

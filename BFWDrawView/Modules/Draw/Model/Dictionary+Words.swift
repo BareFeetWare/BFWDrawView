@@ -1,38 +1,31 @@
 //
-//  NSDictionary+BFW.m
+//  Dictionary+Words.swift
 //
 //  Created by Tom Brodhurst-Hill on 9/05/2015.
-//  Copyright (c) 2015 BareFeetWare. All rights reserved.
+//  Free to use at your own risk, with acknowledgement to BareFeetWare.
 //
 
-#import "NSDictionary+BFW.h"
-#import "NSString+BFW.h"
-
-@implementation NSDictionary (BFW)
-
-- (id)objectForLongestPrefixKeyMatchingWordsInString:(NSString *)inString
-{
-    id object = nil;
-    NSString *prefix = [inString longestWordsMatchInPrefixArray:self.allKeys];
-    if (prefix) {
-        object = self[prefix];
+extension Dictionary where Key == String {
+    
+    func object(forLongestPrefixKeyMatchingWordsIn wordsString: String) -> Value? {
+        guard let prefix = wordsString.longestWordsMatch(inPrefixArray: Array(keys))
+            else { return nil }
+        return self[prefix]
     }
-    return object;
-}
-
-- (id)objectForWordsKey:(NSString *)wordsKey
-{
-    id object = self[wordsKey];
-    if (!object) {
-        NSString *searchKey = [wordsKey lowercaseWords];
-        for (NSString *key in self.allKeys) {
-            if ([searchKey isEqualToString:[key lowercaseWords]]) {
-                object = self[key];
-                break;
+    
+    func object(forWordsKey wordsKey: String) -> Value? {
+        let object: Value?
+        if let exactMatchObject = self[wordsKey] {
+            object = exactMatchObject
+        } else {
+            let searchKey = wordsKey.lowercaseWords
+            if let key = Array(keys).first(where: { searchKey == $0.lowercaseWords } ) {
+                object = self[key]
+            } else {
+                object = nil
             }
         }
+        return object
     }
-    return object;
+    
 }
-
-@end
