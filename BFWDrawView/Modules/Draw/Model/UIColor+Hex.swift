@@ -1,10 +1,11 @@
 //
-//  UIColor+BFW.m
+//  UIColor+Hex.swift
 //  BFWDrawView
 //
 //  Created by Tom Brodhurst-Hill on 18/05/2015.
 //  Triggered by refactoring by Tom Jowett on 9/05/2015.
 //  Copyright (c) 2015 BareFeetWare. All rights reserved.
+//  Free to use at your own risk, with acknowledgement to BareFeetWare.
 //
 
 #import "UIColor+BFW.h"
