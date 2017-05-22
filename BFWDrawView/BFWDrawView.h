@@ -16,7 +16,6 @@ FOUNDATION_EXPORT const unsigned char BFWDrawViewVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <BFWDrawView/PublicHeader.h>
 
-#import <BFWDrawView/UIColor+BFW.h>
 #import <BFWDrawView/UIImage+BFW.h>
 
 // For StyleKit.swift:

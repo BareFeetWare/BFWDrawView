@@ -317,7 +317,7 @@ class DrawingExport {
         var components = [String]()
         for colorName in colorsDict.keys {
             let color = colorsDict[colorName]!
-            let colorHex = color.hexString()!
+            let colorHex = color.hexString
             let wordsString = colorName.wordsFromCamelCase
             let underscoreName = wordsString.replacingOccurrences(of: " ", with: "_")
             let androidColorName = underscoreName.lowercased()

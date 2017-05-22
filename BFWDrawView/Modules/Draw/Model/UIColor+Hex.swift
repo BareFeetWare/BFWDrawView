@@ -8,55 +8,48 @@
 //  Free to use at your own risk, with acknowledgement to BareFeetWare.
 //
 
-#import "UIColor+BFW.h"
+import Foundation
 
-@implementation UIColor (BFW)
-
-- (NSString *)hexFromFraction:(CGFloat)fraction
-{
-    NSUInteger valueInt = round(fraction * 255.0);
-    NSString *hexString = [NSString stringWithFormat:@"%02lx", (unsigned long)valueInt];
-    return hexString;
-}
-
-- (NSString *)hexStringIncludingAlpha:(BOOL)includingAlpha
-{
-    CGFloat red;
-    CGFloat blue;
-    CGFloat green;
-    CGFloat alpha;
-    if (self == [UIColor whiteColor]) {
-        // Special case, as white doesn't fall into the RGB color space
-        red = 1.0;
-        green = 1.0;
-        blue = 1.0;
-        alpha = 1.0;
-    }
-    else {
-        [self getRed:&red green:&green blue:&blue alpha:&alpha];
+extension UIColor {
+    
+    func hex(fromFraction fraction: CGFloat) -> String {
+        let valueInt = round(fraction * 255.0)
+        let hexString = String(format: "%02lx", valueInt)
+        return hexString
     }
     
-    NSString *redHex = [self hexFromFraction:red];
-    NSString *blueHex = [self hexFromFraction:blue];
-    NSString *greenHex = [self hexFromFraction:green];
-    
-    NSArray *hexArray = @[redHex, greenHex, blueHex];
-    if (includingAlpha) {
-        NSString *alphaHex = [self hexFromFraction:alpha];
-        hexArray = [@[alphaHex] arrayByAddingObjectsFromArray:hexArray];
+    func hex(includingAlpha: Bool) -> String {
+        var red: CGFloat = 0.0
+        var blue: CGFloat = 0.0
+        var green: CGFloat = 0.0
+        var alpha: CGFloat = 0.0
+        if self == UIColor.white {
+            // Special case, as white doesn't fall into the RGB color space
+            red = 1.0
+            green = 1.0
+            blue = 1.0
+            alpha = 1.0
+        } else {
+            getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        }
+        let redHex = hex(fromFraction: red)
+        let blueHex = hex(fromFraction: blue)
+        let greenHex = hex(fromFraction: green)
+        var hexArray = [redHex, greenHex, blueHex]
+        if includingAlpha {
+            let alphaHex = hex(fromFraction: alpha)
+            hexArray = [alphaHex] + hexArray
+        }
+        let colorHex = hexArray.joined(separator: "")
+        return colorHex
     }
-    NSString *colorHex = [hexArray componentsJoinedByString:@""];
-    return colorHex;
+    
+    var hexString: String {
+        return hex(includingAlpha: true)
+    }
+    
+    var cssHexString: String {
+        return hex(includingAlpha: false)
+    }
+    
 }
-
-- (NSString *)hexString
-{
-    return [self hexStringIncludingAlpha:YES];
-}
-
-- (NSString *)cssHexString
-{
-    return [self hexStringIncludingAlpha:NO];
-}
-
-@end
