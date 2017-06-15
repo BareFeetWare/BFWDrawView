@@ -211,7 +211,7 @@ import UIKit
     
     // MARK: - UpdateView
     
-    fileprivate func setNeedsUpdateView() {
+    open func setNeedsUpdateView() {
         needsUpdateView = true
         setNeedsLayout()
     }
