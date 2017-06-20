@@ -241,8 +241,8 @@ open class StyleKit: NSObject {
                 drawing = Drawing(styleKit: self, name: drawingName)
                 drawingForNameDict[drawingKey] = drawing
             } else {
+                debugPrint("failed to find drawing name: \"\(drawingName)\"")
                 drawing = nil
-                debugPrint("failed to find drawing name: %@", drawingName)
             }
         }
         return drawing
