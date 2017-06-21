@@ -18,7 +18,7 @@
 		E220E4431E9A2830008F6380 /* StyleKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E4191E9A2830008F6380 /* StyleKitViewController.swift */; };
 		E220E4441E9A2830008F6380 /* DrawingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E41B1E9A2830008F6380 /* DrawingCell.swift */; };
 		E220E4451E9A2830008F6380 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E41C1E9A2830008F6380 /* SwitchCell.swift */; };
-		E220E4461E9A2830008F6380 /* UIViewCellExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E41D1E9A2830008F6380 /* UIViewCellExtension.swift */; };
+		E220E4461E9A2830008F6380 /* UIView+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E41D1E9A2830008F6380 /* UIView+Cell.swift */; };
 		E220E4471E9A2830008F6380 /* BFWDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = E220E4201E9A2830008F6380 /* BFWDLog.h */; };
 		E220E4481E9A2830008F6380 /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E4211E9A2830008F6380 /* Drawing.swift */; };
 		E220E44A1E9A2830008F6380 /* Dictionary+Words.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E4231E9A2830008F6380 /* Dictionary+Words.swift */; };
@@ -81,7 +81,7 @@
 		E220E4191E9A2830008F6380 /* StyleKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKitViewController.swift; sourceTree = "<group>"; };
 		E220E41B1E9A2830008F6380 /* DrawingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingCell.swift; sourceTree = "<group>"; };
 		E220E41C1E9A2830008F6380 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
-		E220E41D1E9A2830008F6380 /* UIViewCellExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewCellExtension.swift; sourceTree = "<group>"; };
+		E220E41D1E9A2830008F6380 /* UIView+Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Cell.swift"; sourceTree = "<group>"; };
 		E220E4201E9A2830008F6380 /* BFWDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWDLog.h; sourceTree = "<group>"; };
 		E220E4211E9A2830008F6380 /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
 		E220E4231E9A2830008F6380 /* Dictionary+Words.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Words.swift"; sourceTree = "<group>"; };
@@ -218,7 +218,7 @@
 			children = (
 				E220E41B1E9A2830008F6380 /* DrawingCell.swift */,
 				E220E41C1E9A2830008F6380 /* SwitchCell.swift */,
-				E220E41D1E9A2830008F6380 /* UIViewCellExtension.swift */,
+				E220E41D1E9A2830008F6380 /* UIView+Cell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -583,7 +583,7 @@
 				E220E4521E9A2830008F6380 /* StyleKit.swift in Sources */,
 				E220E43F1E9A2830008F6380 /* AnimationCountViewController.swift in Sources */,
 				E220E45F1E9A2830008F6380 /* DrawingExport.swift in Sources */,
-				E220E4461E9A2830008F6380 /* UIViewCellExtension.swift in Sources */,
+				E220E4461E9A2830008F6380 /* UIView+Cell.swift in Sources */,
 				E220E4561E9A2830008F6380 /* UIImage+BFW.m in Sources */,
 				E220E4601E9A2830008F6380 /* Exporter.swift in Sources */,
 				E2775FBE1EAC782500A48A23 /* NSObject+Introspection.swift in Sources */,

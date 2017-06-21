@@ -1,5 +1,5 @@
 //
-//  UIViewCellExtension.swift
+//  UIView+Cell.swift
 //  BFWDrawView
 //
 //  Created by Tom Brodhurst-Hill on 1/02/2016.
