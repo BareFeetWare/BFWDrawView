@@ -14,7 +14,7 @@ import UIKit
     // MARK: - Variables
     
     private var iconDrawViewForStateDict = [UInt: DrawingView]()
-    private var backgroundDrawViewForStateDict = [UInt: DrawingView]()
+    private var backgroundDrawViewForStateDict = [UInt: DrawingView]() { didSet { setNeedsUpdateBackgrounds() }}
     private var shadowForStateDict = [UInt: NSShadow]()
     private var needsUpdateShadow = true
     private var backgroundSize = CGSize.zero
@@ -63,10 +63,9 @@ import UIKit
         setImage(drawView.image, for: state)
     }
     
-    open func setBackgroundDrawView(_ drawView: DrawingView, for state: UIControlState) {
-        backgroundDrawViewForStateDict.setValueOrRemoveNil(drawView.canDraw ? drawView : nil,
+    open func setBackgroundDrawView(_ drawView: DrawingView?, for state: UIControlState) {
+        backgroundDrawViewForStateDict.setValueOrRemoveNil((drawView?.canDraw ?? false) ? drawView : nil,
                                                            forKey: state.rawValue)
-        setNeedsUpdateBackgrounds()
     }
     
     open func shadow(for state: UIControlState) -> NSShadow? {
@@ -96,10 +95,9 @@ import UIKit
     
     fileprivate func updateBackgrounds() {
         for state: UIControlState in [.normal, .disabled, .selected, .highlighted] {
-            if let background = backgroundDrawViewForStateDict[state.rawValue] {
-                background.frame = bounds
-                setBackgroundImage(background.image, for: state)
-            }
+            let background = backgroundDrawViewForStateDict[state.rawValue]
+            background?.frame = bounds
+            setBackgroundImage(background?.image, for: state)
         }
     }
     
@@ -211,7 +209,7 @@ import UIKit
     
     // MARK: - UpdateView
     
-    fileprivate func setNeedsUpdateView() {
+    open func setNeedsUpdateView() {
         needsUpdateView = true
         setNeedsLayout()
     }

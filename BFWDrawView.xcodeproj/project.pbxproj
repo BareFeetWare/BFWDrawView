@@ -57,6 +57,16 @@
 		E2A91A4E1EA185D500E26C63 /* BFWControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2A91A4D1EA185D500E26C63 /* BFWControls.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E256DF031EE0EB1200110FC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E220E3FE1E9A2748008F6380 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E220E4061E9A2748008F6380;
+			remoteInfo = BFWDrawView;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		E211E8611EA18AC20072202F /* DrawButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawButtonView.swift; sourceTree = "<group>"; };
 		E211E8621EA18AC20072202F /* DrawNibButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawNibButton.swift; sourceTree = "<group>"; };
@@ -481,6 +491,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				E256DF041EE0EB1200110FC9 /* PBXTargetDependency */,
 			);
 			name = BFWDrawNibView;
 			productName = BFWDrawNibView;
@@ -618,6 +629,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E256DF041EE0EB1200110FC9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E220E4061E9A2748008F6380 /* BFWDrawView */;
+			targetProxy = E256DF031EE0EB1200110FC9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		E220E40D1E9A2748008F6380 /* Debug */ = {
