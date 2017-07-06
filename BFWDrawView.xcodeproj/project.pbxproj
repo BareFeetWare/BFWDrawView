@@ -55,6 +55,8 @@
 		E220E48F1E9A2A8D008F6380 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E220E48C1E9A2A8D008F6380 /* Assets.xcassets */; };
 		E268039C1F0CD34500CFEB21 /* DrawingTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268039B1F0CD34500CFEB21 /* DrawingTabBarItem.swift */; };
 		E268039E1F0CD4AD00CFEB21 /* Updatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268039D1F0CD4AD00CFEB21 /* Updatable.swift */; };
+		E26803A21F0E2FBB00CFEB21 /* DrawingBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26803A11F0E2FBB00CFEB21 /* DrawingBarButtonItem.swift */; };
+		E26803A41F0E32C000CFEB21 /* UIImage+Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26803A31F0E32C000CFEB21 /* UIImage+Drawing.swift */; };
 		E2775FBE1EAC782500A48A23 /* NSObject+Introspection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2775FBD1EAC782500A48A23 /* NSObject+Introspection.swift */; };
 		E2775FC01EAC7DC200A48A23 /* SampleStyleKit+StyleKitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2775FBF1EAC7DC200A48A23 /* SampleStyleKit+StyleKitType.swift */; };
 		E2775FC21EAC7DDB00A48A23 /* StyleKitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2775FC11EAC7DDB00A48A23 /* StyleKitType.swift */; };
@@ -125,6 +127,8 @@
 		E220E48D1E9A2A8D008F6380 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E268039B1F0CD34500CFEB21 /* DrawingTabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingTabBarItem.swift; sourceTree = "<group>"; };
 		E268039D1F0CD4AD00CFEB21 /* Updatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Updatable.swift; sourceTree = "<group>"; };
+		E26803A11F0E2FBB00CFEB21 /* DrawingBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingBarButtonItem.swift; sourceTree = "<group>"; };
+		E26803A31F0E32C000CFEB21 /* UIImage+Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Drawing.swift"; sourceTree = "<group>"; };
 		E2775FBD1EAC782500A48A23 /* NSObject+Introspection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Introspection.swift"; sourceTree = "<group>"; };
 		E2775FBF1EAC7DC200A48A23 /* SampleStyleKit+StyleKitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SampleStyleKit+StyleKitType.swift"; sourceTree = "<group>"; };
 		E2775FC11EAC7DDB00A48A23 /* StyleKitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKitType.swift; sourceTree = "<group>"; };
@@ -265,6 +269,7 @@
 				E220E42D1E9A2830008F6380 /* UIColor+BFW.m */,
 				E220E42E1E9A2830008F6380 /* UIImage+BFW.h */,
 				E220E42F1E9A2830008F6380 /* UIImage+BFW.m */,
+				E26803A31F0E32C000CFEB21 /* UIImage+Drawing.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -273,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				E220E4311E9A2830008F6380 /* AnimationView.swift */,
+				E26803A11F0E2FBB00CFEB21 /* DrawingBarButtonItem.swift */,
 				E220E4321E9A2830008F6380 /* DrawingButton.swift */,
 				E268039B1F0CD34500CFEB21 /* DrawingTabBarItem.swift */,
 				E220E4341E9A2830008F6380 /* DrawingView.swift */,
@@ -604,6 +610,7 @@
 				E220E4521E9A2830008F6380 /* StyleKit.swift in Sources */,
 				E220E43F1E9A2830008F6380 /* AnimationCountViewController.swift in Sources */,
 				E220E45F1E9A2830008F6380 /* DrawingExport.swift in Sources */,
+				E26803A21F0E2FBB00CFEB21 /* DrawingBarButtonItem.swift in Sources */,
 				E220E4461E9A2830008F6380 /* UIViewCellExtension.swift in Sources */,
 				E220E4561E9A2830008F6380 /* UIImage+BFW.m in Sources */,
 				E220E4601E9A2830008F6380 /* Exporter.swift in Sources */,
@@ -622,6 +629,7 @@
 				E220E4441E9A2830008F6380 /* DrawingCell.swift in Sources */,
 				E220E4431E9A2830008F6380 /* StyleKitViewController.swift in Sources */,
 				E220E44A1E9A2830008F6380 /* NSDictionary+BFW.m in Sources */,
+				E26803A41F0E32C000CFEB21 /* UIImage+Drawing.swift in Sources */,
 				E220E44C1E9A2830008F6380 /* NSInvocation+BFW.m in Sources */,
 				E220E4511E9A2830008F6380 /* String+Paintcode.swift in Sources */,
 				E220E4451E9A2830008F6380 /* SwitchCell.swift in Sources */,

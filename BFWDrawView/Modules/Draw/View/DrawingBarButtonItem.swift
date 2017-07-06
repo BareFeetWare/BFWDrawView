@@ -1,16 +1,16 @@
 //
-//  DrawingTabBarItem.swift
+//  DrawingBarButtonItem.swift
 //  BFWDrawView
 //
-//  Created by Tom Brodhurst-Hill on 5/7/17.
+//  Created by Tom Brodhurst-Hill on 6/7/17.
 //  Copyright © 2017 BareFeetWare. All rights reserved.
 //  Free to use at your own risk, with acknowledgement to BareFeetWare.
 //
 
 import UIKit
 
-@IBDesignable class DrawingTabBarItem: UITabBarItem {
-    
+@IBDesignable class DrawingBarButtonItem: UIBarButtonItem {
+
     @IBInspectable var drawingName: String? { didSet { updateImage() }}
     @IBInspectable var styleKit: String? { didSet { updateImage() }}
     
@@ -21,9 +21,8 @@ import UIKit
                                             drawingName: drawingName,
                                             size: defaultSize)
         {
-            // TODO: Maybe delay creating the image until image get, so it's not possibly created twice for each change to drawingName and styleKitName.
             image = drawingImage
         }
     }
-    
+
 }
