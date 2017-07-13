@@ -9,20 +9,11 @@
 
 import UIKit
 
-@IBDesignable class DrawingBarButtonItem: UIBarButtonItem {
+@IBDesignable open class DrawingBarButtonItem: UIBarButtonItem, Drawable {
 
-    @IBInspectable var drawingName: String? { didSet { updateImage() }}
-    @IBInspectable var styleKit: String? { didSet { updateImage() }}
+    @IBInspectable open var drawingName: String? { didSet { updateDrawing() }}
+    @IBInspectable open var styleKit: String? { didSet { updateDrawing() }}
     
-    var defaultSize = CGSize(width: 32, height: 32)
+    open var drawing: Drawing?
     
-    private func updateImage() {
-        if let drawingImage = UIImage.image(styleKitName: styleKit,
-                                            drawingName: drawingName,
-                                            size: defaultSize)
-        {
-            image = drawingImage
-        }
-    }
-
 }
