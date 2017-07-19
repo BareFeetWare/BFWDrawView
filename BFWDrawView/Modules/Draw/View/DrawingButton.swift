@@ -57,13 +57,13 @@ import UIKit
         return backgroundDrawViewForStateDict[state.rawValue]
     }
     
-    open func setIconDrawingView(_ drawingView: DrawingView?, for state: UIControlState) {
+    open func setIconDrawView(_ drawingView: DrawingView?, for state: UIControlState) {
         iconDrawViewForStateDict.setValueOrRemoveNil(drawingView,
                                                      forKey: state.rawValue)
         setImage(drawingView?.image, for: state)
     }
     
-    open func setBackgroundDrawingView(_ drawingView: DrawingView?, for state: UIControlState) {
+    open func setBackgroundDrawView(_ drawingView: DrawingView?, for state: UIControlState) {
         backgroundDrawViewForStateDict.setValueOrRemoveNil((drawingView?.canDraw ?? false) ? drawingView : nil,
                                                            forKey: state.rawValue)
     }
@@ -170,7 +170,7 @@ import UIKit
                 icon.drawing = drawing
                 icon.tintColor = tintColor
                 icon.contentMode = .redraw
-                setIconDrawingView(icon, for: state)
+                setIconDrawView(icon, for: state)
             }
         }
     }
@@ -188,7 +188,7 @@ import UIKit
                 icon.drawing = drawing
                 icon.tintColor = tintColor
                 icon.contentMode = .redraw
-                setIconDrawingView(icon, for: UIControlState(rawValue: stateInt))
+                setIconDrawView(icon, for: UIControlState(rawValue: stateInt))
             }
         }
     }
@@ -202,8 +202,8 @@ import UIKit
             background.drawing = StyleKit.drawing(forStyleKitName: styleKit,
                                                   drawingName: drawingName)
             background.contentMode = .redraw
-            setBackgroundDrawingView(background,
-                                     for: UIControlState(rawValue: stateInt))
+            setBackgroundDrawView(background,
+                                  for: UIControlState(rawValue: stateInt))
         }
     }
     
