@@ -57,14 +57,14 @@ import UIKit
         return backgroundDrawViewForStateDict[state.rawValue]
     }
     
-    open func setIconDrawView(_ drawView: DrawingView, for state: UIControlState) {
-        iconDrawViewForStateDict.setValueOrRemoveNil(drawView,
+    open func setIconDrawingView(_ drawingView: DrawingView?, for state: UIControlState) {
+        iconDrawViewForStateDict.setValueOrRemoveNil(drawingView,
                                                      forKey: state.rawValue)
-        setImage(drawView.image, for: state)
+        setImage(drawingView?.image, for: state)
     }
     
-    open func setBackgroundDrawView(_ drawView: DrawingView?, for state: UIControlState) {
-        backgroundDrawViewForStateDict.setValueOrRemoveNil((drawView?.canDraw ?? false) ? drawView : nil,
+    open func setBackgroundDrawingView(_ drawingView: DrawingView?, for state: UIControlState) {
+        backgroundDrawViewForStateDict.setValueOrRemoveNil((drawingView?.canDraw ?? false) ? drawingView : nil,
                                                            forKey: state.rawValue)
     }
     
@@ -72,7 +72,7 @@ import UIKit
         return shadowForStateDict[state.rawValue]
     }
     
-    open func setShadow(_ shadow: NSShadow, for state: UIControlState) {
+    open func setShadow(_ shadow: NSShadow?, for state: UIControlState) {
         shadowForStateDict.setValueOrRemoveNil(shadow, forKey: state.rawValue)
         setNeedsUpdateShadow()
     }
@@ -170,7 +170,7 @@ import UIKit
                 icon.drawing = drawing
                 icon.tintColor = tintColor
                 icon.contentMode = .redraw
-                setIconDrawView(icon, for: state)
+                setIconDrawingView(icon, for: state)
             }
         }
     }
@@ -188,7 +188,7 @@ import UIKit
                 icon.drawing = drawing
                 icon.tintColor = tintColor
                 icon.contentMode = .redraw
-                setIconDrawView(icon, for: UIControlState(rawValue: stateInt))
+                setIconDrawingView(icon, for: UIControlState(rawValue: stateInt))
             }
         }
     }
@@ -202,8 +202,8 @@ import UIKit
             background.drawing = StyleKit.drawing(forStyleKitName: styleKit,
                                                   drawingName: drawingName)
             background.contentMode = .redraw
-            setBackgroundDrawView(background,
-                                  for: UIControlState(rawValue: stateInt))
+            setBackgroundDrawingView(background,
+                                     for: UIControlState(rawValue: stateInt))
         }
     }
     
