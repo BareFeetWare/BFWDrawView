@@ -57,14 +57,14 @@ import UIKit
         return backgroundDrawViewForStateDict[state.rawValue]
     }
     
-    open func setIconDrawView(_ drawView: DrawingView, for state: UIControlState) {
-        iconDrawViewForStateDict.setValueOrRemoveNil(drawView,
+    open func setIconDrawView(_ drawingView: DrawingView?, for state: UIControlState) {
+        iconDrawViewForStateDict.setValueOrRemoveNil(drawingView,
                                                      forKey: state.rawValue)
-        setImage(drawView.image, for: state)
+        setImage(drawingView?.image, for: state)
     }
     
-    open func setBackgroundDrawView(_ drawView: DrawingView?, for state: UIControlState) {
-        backgroundDrawViewForStateDict.setValueOrRemoveNil((drawView?.canDraw ?? false) ? drawView : nil,
+    open func setBackgroundDrawView(_ drawingView: DrawingView?, for state: UIControlState) {
+        backgroundDrawViewForStateDict.setValueOrRemoveNil((drawingView?.canDraw ?? false) ? drawingView : nil,
                                                            forKey: state.rawValue)
     }
     
@@ -72,7 +72,7 @@ import UIKit
         return shadowForStateDict[state.rawValue]
     }
     
-    open func setShadow(_ shadow: NSShadow, for state: UIControlState) {
+    open func setShadow(_ shadow: NSShadow?, for state: UIControlState) {
         shadowForStateDict.setValueOrRemoveNil(shadow, forKey: state.rawValue)
         setNeedsUpdateShadow()
     }
