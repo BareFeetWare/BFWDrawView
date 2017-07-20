@@ -10,6 +10,7 @@
 		E211E8641EA18AC20072202F /* DrawButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E211E8611EA18AC20072202F /* DrawButtonView.swift */; };
 		E211E8651EA18AC20072202F /* DrawNibButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E211E8621EA18AC20072202F /* DrawNibButton.swift */; };
 		E211E8661EA18AC20072202F /* DrawNibCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E211E8631EA18AC20072202F /* DrawNibCellView.swift */; };
+		E219DEE01F1FDD88000C14F7 /* DrawingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E219DEDF1F1FDD88000C14F7 /* DrawingTableViewCell.swift */; };
 		E220E40C1E9A2748008F6380 /* BFWDrawView.h in Headers */ = {isa = PBXBuildFile; fileRef = E220E40A1E9A2748008F6380 /* BFWDrawView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E220E43F1E9A2830008F6380 /* AnimationCountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E4151E9A2830008F6380 /* AnimationCountViewController.swift */; };
 		E220E4401E9A2830008F6380 /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E4161E9A2830008F6380 /* DrawingViewController.swift */; };
@@ -80,6 +81,7 @@
 		E211E8611EA18AC20072202F /* DrawButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawButtonView.swift; sourceTree = "<group>"; };
 		E211E8621EA18AC20072202F /* DrawNibButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawNibButton.swift; sourceTree = "<group>"; };
 		E211E8631EA18AC20072202F /* DrawNibCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawNibCellView.swift; sourceTree = "<group>"; };
+		E219DEDF1F1FDD88000C14F7 /* DrawingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingTableViewCell.swift; sourceTree = "<group>"; };
 		E220E4071E9A2748008F6380 /* BFWDrawView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BFWDrawView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E220E40A1E9A2748008F6380 /* BFWDrawView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFWDrawView.h; sourceTree = "<group>"; };
 		E220E40B1E9A2748008F6380 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				E26803A11F0E2FBB00CFEB21 /* DrawingBarButtonItem.swift */,
 				E220E4321E9A2830008F6380 /* DrawingButton.swift */,
 				E268039B1F0CD34500CFEB21 /* DrawingTabBarItem.swift */,
+				E219DEDF1F1FDD88000C14F7 /* DrawingTableViewCell.swift */,
 				E220E4341E9A2830008F6380 /* DrawingView.swift */,
 				E268039D1F0CD4AD00CFEB21 /* Updatable.swift */,
 			);
@@ -629,6 +632,7 @@
 				E268039E1F0CD4AD00CFEB21 /* Updatable.swift in Sources */,
 				E220E4571E9A2830008F6380 /* AnimationView.swift in Sources */,
 				E268039C1F0CD34500CFEB21 /* DrawingTabBarItem.swift in Sources */,
+				E219DEE01F1FDD88000C14F7 /* DrawingTableViewCell.swift in Sources */,
 				E220E4481E9A2830008F6380 /* Drawing.swift in Sources */,
 				E220E4441E9A2830008F6380 /* DrawingCell.swift in Sources */,
 				E220E4431E9A2830008F6380 /* StyleKitViewController.swift in Sources */,

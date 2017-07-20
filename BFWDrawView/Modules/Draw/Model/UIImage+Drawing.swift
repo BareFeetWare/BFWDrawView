@@ -23,12 +23,13 @@ public extension UIImage {
                      size: size)
     }
     
-    class func image(drawing: Drawing,
+    class func image(drawing: Drawing?,
                      size: CGSize? = nil,
                      tintColor: UIColor? = nil
         ) -> UIImage?
     {
-        guard let size = size ?? drawing.drawnSize
+        guard let drawing = drawing,
+            let size = size ?? drawing.drawnSize
             else { return nil }
         let frame = CGRect(origin: .zero, size: size)
         // TODO: Get image from drawing (for size), without need for DrawingView.
