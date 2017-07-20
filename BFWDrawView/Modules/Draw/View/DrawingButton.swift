@@ -150,11 +150,11 @@ import UIKit
     
     // MARK: - Functions
     
-    open func makeIconWithSize(size: CGSize?,
-                               name: String,
-                               styleKit: String,
-                               state: UIControlState,
-                               tintColor: UIColor)
+    open func makeIcon(name: String,
+                       styleKit: String,
+                       state: UIControlState,
+                       tintColor: UIColor,
+                       size: CGSize?)
     {
         if let drawing = StyleKit.drawing(forStyleKitName: styleKit,
                                           drawingName: name)
