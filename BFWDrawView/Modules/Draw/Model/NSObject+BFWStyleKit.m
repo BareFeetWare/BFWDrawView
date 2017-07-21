@@ -14,20 +14,6 @@
 
 #pragma mark - Introspection
 
-+ (NSArray *)classMethodNames
-{
-    NSMutableArray *methodNames = [[NSMutableArray alloc] init];
-    int unsigned methodCount;
-    Method *methods = class_copyMethodList(objc_getMetaClass([NSStringFromClass([self class]) UTF8String]), &methodCount);
-    for (int i = 0; i < methodCount; i++) {
-        Method method = methods[i];
-        NSString *methodName = NSStringFromSelector(method_getName(method));
-        [methodNames addObject:methodName];
-    }
-    free(methods);
-    return [methodNames copy];
-}
-
 + (id)returnValueForClassMethodName:(NSString *)methodName
 {
     static NSString * const classType = @"@";
@@ -57,16 +43,16 @@
     return returnValue;
 }
 
-+ (NSDictionary *)returnValueForClassMethodNameDict
-{
-    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] init];
-    for (NSString *methodName in [self classMethodNames]) {
-        id returnValue = [self returnValueForClassMethodName:methodName];
-        if (returnValue) {
-            mutableDictionary[methodName] = returnValue;
-        }
-    }
-    return [mutableDictionary copy];
-}
+//+ (NSDictionary *)returnValueForClassMethodNameDict
+//{
+//    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] init];
+//    for (NSString *methodName in [self classMethodNames]) {
+//        id returnValue = [self returnValueForClassMethodName:methodName];
+//        if (returnValue) {
+//            mutableDictionary[methodName] = returnValue;
+//        }
+//    }
+//    return [mutableDictionary copy];
+//}
 
 @end

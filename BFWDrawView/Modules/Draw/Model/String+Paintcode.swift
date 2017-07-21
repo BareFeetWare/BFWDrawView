@@ -84,12 +84,23 @@ extension String {
         var parameters: [String]?
         if hasSuffix(":") {
             let parameterComponents = components(separatedBy: ":")
-            if let withComponents = parameterComponents.first?.components(separatedBy: withString), !withComponents.isEmpty
+            if let withComponents = parameterComponents.first?.components(separatedBy: withString),
+                withComponents.count == 2
             {
                 let methodBaseName = withComponents.dropLast().joined(separator: withString)
                 let firstParameter = withComponents.last!.lowercasedFirstCharacter
                 parameters = [methodBaseName, firstParameter]
                 parameters?.append(contentsOf: parameterComponents.dropFirst().dropLast())
+            } else if let firstParameterComponent = parameterComponents.first {
+                let words = firstParameterComponent.wordsFromCamelCase.components(separatedBy: " ")
+                let firstParameter = words.last!.lowercasedFirstCharacter
+                let index = firstParameterComponent.index(firstParameterComponent.endIndex,
+                                                          offsetBy: -firstParameter.characters.count)
+                let methodBaseName = firstParameterComponent.substring(to: index)
+                parameters = [methodBaseName, firstParameter]
+                parameters?.append(contentsOf: parameterComponents.dropFirst().dropLast())
+            } else {
+                debugPrint("methodNameComponents: Failed to parse parameters in method name: " + self)
             }
         } else {
             parameters = [self]

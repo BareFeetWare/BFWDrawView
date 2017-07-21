@@ -34,7 +34,7 @@ open class StyleKit: NSObject {
     }
 
     internal lazy var classMethodNames: [String]? = {
-        return self.paintCodeClass?.classMethodNames() as? [String]
+        return self.paintCodeClass?.classMethodNames
     }()
     
     fileprivate var className: String? {
