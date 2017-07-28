@@ -84,17 +84,33 @@ extension String {
         var parameters: [String]?
         if hasSuffix(":") {
             let parameterComponents = components(separatedBy: ":")
-            if let withComponents = parameterComponents.first?.components(separatedBy: withString), !withComponents.isEmpty
+            if var withComponents = parameterComponents.first?.components(separatedBy: withString)
             {
+                // TODO: Dynamic, less magic:
+                if withComponents.count == 1 {
+                    let firstComponent = withComponents.first!
+                    if firstComponent.hasSuffix("InFrame") {
+                        let drawAndName = firstComponent.deletedLast(count: "Frame".characters.count)
+                        withComponents = [drawAndName, "Frame"]
+                    } else {
+                        fatalError("Can't parse \"\(self)\"")
+                    }
+                }
                 let methodBaseName = withComponents.dropLast().joined(separator: withString)
                 let firstParameter = withComponents.last!.lowercasedFirstCharacter
                 parameters = [methodBaseName, firstParameter]
                 parameters?.append(contentsOf: parameterComponents.dropFirst().dropLast())
+            } else {
+                debugPrint("Failed to find '\(withString)' in \(parameterComponents.first ?? "nil")")
             }
         } else {
             parameters = [self]
         }
         return parameters
+    }
+    
+    func deletedLast(count: Int) -> String {
+        return self[startIndex ..< characters.index(endIndex, offsetBy: -count)]
     }
     
 }
