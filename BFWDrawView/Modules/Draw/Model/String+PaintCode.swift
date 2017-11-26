@@ -86,7 +86,10 @@ extension String {
                 // TODO: Dynamic, less magic:
                 if withComponents.count == 1 {
                     let firstComponent = withComponents.first!
-                    if firstComponent.hasSuffix("InFrame") {
+                    if firstComponent.hasSuffix("InFrame")
+                        || firstComponent.hasSuffix("OnFrame")
+                        || firstComponent.hasSuffix("ToFrame")
+                    {
                         let drawAndName = firstComponent.deletedLast(count: "Frame".characters.count)
                         withComponents = [drawAndName, "Frame"]
                     } else {
