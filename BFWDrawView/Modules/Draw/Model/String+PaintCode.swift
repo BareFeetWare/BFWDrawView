@@ -10,13 +10,8 @@ import Foundation
 
 extension String {
     
-    var uppercasedFirstCharacter: String {
-        let index = characters.index(startIndex, offsetBy: 1)
-        return substring(to: index).uppercased() + substring(from: index)
-    }
-
     var lowercasedFirstCharacter: String {
-        let index = characters.index(startIndex, offsetBy: 1)
+        let index = self.index(startIndex, offsetBy: 1)
         return substring(to: index).lowercased() + substring(from: index)
     }
 
@@ -25,14 +20,14 @@ extension String {
     }
     
     var paintcodeCaseFromWords: String {
-        let casedString = words.reduce ("") { $0 + $1.uppercasedFirstCharacter }
+        let casedString = words.reduce ("") { $0 + $1.capitalized }
         return casedString
     }
     
     var camelCaseFromWords: String {
         var remainder = words
         remainder.removeFirst()
-        let casedString = remainder.reduce (words.first!) { $0 + $1.uppercasedFirstCharacter }
+        let casedString = remainder.reduce (words.first!) { $0 + $1.capitalized }
         return casedString
     }
     
@@ -43,9 +38,11 @@ extension String {
     var wordsFromCamelCase: String {
         var wordString = ""
         var previousChar: String? = nil
-        for charN in 0 ..< characters.count {
-            let thisChar = String(characters[characters.index(startIndex, offsetBy: charN)])
-            let nextChar: String? = charN + 1 < characters.count ? String(characters[characters.index(startIndex, offsetBy: charN + 1)]) : nil
+        for charN in 0 ..< count {
+            let thisChar = String(self[index(startIndex, offsetBy: charN)])
+            let nextChar: String? = charN + 1 < count
+                ? String(self[index(at: charN + 1)])
+                : nil
             if charN > 0
                 && previousChar != " "
                 && thisChar != " "
@@ -66,7 +63,7 @@ extension String {
     
     func longestWordsMatch(inPrefixes prefixes: [String]) -> String? {
         return prefixes.reduce(nil) { (longest: String?, prefix) in
-            return prefix.characters.count > (longest?.characters.count ?? 0)
+            return prefix.count > (longest?.count ?? 0)
                 && lowercasedWords.hasPrefix(prefix.lowercasedWords)
                 ? prefix : longest
         }
@@ -86,11 +83,11 @@ extension String {
                 // TODO: Dynamic, less magic:
                 if withComponents.count == 1 {
                     let firstComponent = withComponents.first!
-                    if firstComponent.hasSuffix("InFrame")
+                    if let drawAndName = firstComponent.substring(beforeSuffix: "Frame"),
+                        firstComponent.hasSuffix("InFrame")
                         || firstComponent.hasSuffix("OnFrame")
                         || firstComponent.hasSuffix("ToFrame")
                     {
-                        let drawAndName = firstComponent.deletedLast(count: "Frame".characters.count)
                         withComponents = [drawAndName, "Frame"]
                     } else {
                         fatalError("Can't parse \"\(self)\"")
@@ -107,10 +104,6 @@ extension String {
             parameters = [self]
         }
         return parameters
-    }
-    
-    func deletedLast(count: Int) -> String {
-        return self[startIndex ..< characters.index(endIndex, offsetBy: -count)]
     }
     
 }
