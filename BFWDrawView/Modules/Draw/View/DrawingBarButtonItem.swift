@@ -14,6 +14,6 @@ import UIKit
     @IBInspectable open var drawingName: String? { didSet { updateDrawing() }}
     @IBInspectable open var styleKit: String? { didSet { updateDrawing() }}
     
-    open var drawing: Drawing?
+    open var drawing: Drawing? { didSet { updateImage() }}
     
 }

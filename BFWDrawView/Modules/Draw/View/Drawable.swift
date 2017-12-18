@@ -30,21 +30,21 @@ internal extension Drawable {
     }
 
     func updateDrawing() {
-        guard let drawingName = drawingName, !drawingName.isEmpty,
+        if let drawingName = drawingName, !drawingName.isEmpty,
             let styleKit = styleKit, !styleKit.isEmpty
-            else { return }
-        drawing = StyleKit(name: styleKit).drawing(for: drawingName)
+        {
+            drawing = StyleKit(name: styleKit).drawing(for: drawingName)
+        } else {
+            drawing = nil
+        }
         updateImage()
     }
     
-    private func updateImage() {
-        guard let drawing = drawing
-            else { return }
-        if let drawingImage = UIImage.image(drawing: drawing,
-                                            size: defaultSize)
-        {
-            // TODO: Maybe delay creating the image until image get, so it's not possibly created twice for each change to drawingName and styleKitName.
-            image = drawingImage
+    func updateImage() {
+        // TODO: Maybe delay creating the image until image get, so it's not possibly created twice for each change to drawingName and styleKitName.
+        image = drawing.flatMap {
+            UIImage.image(drawing: $0,
+                          size: defaultSize)
         }
     }
 
