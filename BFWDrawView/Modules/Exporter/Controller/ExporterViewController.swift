@@ -94,7 +94,7 @@ class ExporterViewController: UITableViewController {
     fileprivate func shortString(of styleKitNames: [String]) -> String {
         let suffix = "StyleKit"
         let shortNames: [String] = styleKitNames.map { name -> String in
-            name.hasSuffix(suffix) ? name[name.startIndex ..< name.characters.index(name.endIndex, offsetBy: -suffix.characters.count)] : name
+            name.substring(beforeSuffix: suffix) ?? name
         }
         return shortNames.joined(separator: ", ")
     }

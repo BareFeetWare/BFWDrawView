@@ -50,6 +50,7 @@
 		E220E4891E9A2A4D008F6380 /* SampleStyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E4841E9A2A4D008F6380 /* SampleStyleKit.swift */; };
 		E220E48E1E9A2A8D008F6380 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E220E48B1E9A2A8D008F6380 /* AppDelegate.swift */; };
 		E220E48F1E9A2A8D008F6380 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E220E48C1E9A2A8D008F6380 /* Assets.xcassets */; };
+		E24513601FD8AB5100245E5D /* String+Parts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E245135F1FD8AB5100245E5D /* String+Parts.swift */; };
 		E268039C1F0CD34500CFEB21 /* DrawingTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268039B1F0CD34500CFEB21 /* DrawingTabBarItem.swift */; };
 		E268039E1F0CD4AD00CFEB21 /* Updatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268039D1F0CD4AD00CFEB21 /* Updatable.swift */; };
 		E26803A21F0E2FBB00CFEB21 /* DrawingBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26803A11F0E2FBB00CFEB21 /* DrawingBarButtonItem.swift */; };
@@ -121,6 +122,7 @@
 		E220E48B1E9A2A8D008F6380 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E220E48C1E9A2A8D008F6380 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E220E48D1E9A2A8D008F6380 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E245135F1FD8AB5100245E5D /* String+Parts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Parts.swift"; sourceTree = "<group>"; };
 		E268039B1F0CD34500CFEB21 /* DrawingTabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingTabBarItem.swift; sourceTree = "<group>"; };
 		E268039D1F0CD4AD00CFEB21 /* Updatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Updatable.swift; sourceTree = "<group>"; };
 		E26803A11F0E2FBB00CFEB21 /* DrawingBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingBarButtonItem.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 				E220E4271E9A2830008F6380 /* NSObject+BFWStyleKit.m */,
 				E2775FBD1EAC782500A48A23 /* NSObject+Introspection.swift */,
 				E220E42A1E9A2830008F6380 /* String+PaintCode.swift */,
+				E245135F1FD8AB5100245E5D /* String+Parts.swift */,
 				E220E42B1E9A2830008F6380 /* StyleKit.swift */,
 				E2775FC11EAC7DDB00A48A23 /* StyleKitType.swift */,
 				E220E42D1E9A2830008F6380 /* UIColor+Hex.swift */,
@@ -602,6 +605,7 @@
 				E220E45E1E9A2830008F6380 /* ExporterViewController.swift in Sources */,
 				E220E4611E9A2830008F6380 /* ExportersRoot.swift in Sources */,
 				E220E4521E9A2830008F6380 /* StyleKit.swift in Sources */,
+				E24513601FD8AB5100245E5D /* String+Parts.swift in Sources */,
 				E220E43F1E9A2830008F6380 /* AnimationCountViewController.swift in Sources */,
 				E220E45F1E9A2830008F6380 /* DrawingExport.swift in Sources */,
 				E220E4461E9A2830008F6380 /* UIView+Cell.swift in Sources */,
