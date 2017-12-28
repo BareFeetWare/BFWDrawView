@@ -11,8 +11,6 @@
 
 #pragma mark - Introspection for NSObject subclasses
 
-+ (NSArray * _Nonnull)classMethodNames;
 + (id _Nullable)returnValueForClassMethodName:(NSString * _Nonnull)methodName;
-+ (NSDictionary * _Nonnull)returnValueForClassMethodNameDict;
 
 @end

@@ -34,7 +34,7 @@ open class StyleKit: NSObject {
     }
 
     internal lazy var classMethodNames: [String]? = {
-        return self.paintCodeClass?.classMethodNames() as? [String]
+        return self.paintCodeClass?.classMethodNames
     }()
     
     fileprivate var className: String? {
@@ -103,7 +103,7 @@ open class StyleKit: NSObject {
     
     fileprivate lazy var returnValueForClassMethodNameDict: [String: Any]? = {
         debugPrint("**** warning: calling returnValueForClassMethodNameDict for BFWStyleKit name [\(self.name ?? "nil")], which has a large up front caching hit for the app. Only call this if you want to browse the entire list of drawings and colors available from the styleKit")
-        return self.paintCodeClass?.returnValueForClassMethodNameDict() as? [String: Any]
+        return self.paintCodeClass?.returnValueForClassMethodNameDict
     }()
     
     fileprivate lazy var colorsDict: [String: UIColor] = {

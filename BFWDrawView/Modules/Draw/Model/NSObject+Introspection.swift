@@ -29,4 +29,41 @@ extension NSObject {
         return allClasses.filter { class_conformsToProtocol($0, theProtocol) }
     }
     
+    static var classMethodNames: [String] {
+        var methodCount: UInt32 = 0
+        let classString = NSStringFromClass(self)
+        guard let metaClass = objc_getMetaClass(classString) as? AnyClass,
+            let methods = class_copyMethodList(metaClass, &methodCount)
+            else { return [] }
+        var names = [String]()
+        for index in 0 ..< numericCast(methodCount) {
+            let method = methods[index]
+            if let selector: Selector = method_getName(method) {
+                names += [String(_sel: selector)]
+            }
+        }
+        return names
+    }
+
+    static var returnValueForClassMethodNameDict: [String: Any] {
+        var mutableDictionary = [String: Any]()
+        for methodName in classMethodNames {
+            if let returnValue = returnValue(forClassMethodName: methodName) {
+                mutableDictionary[methodName] = returnValue
+            }
+        }
+        return mutableDictionary
+    }
+    
+    static func classFunctionName(forDrawingName drawingName: String) -> String? {
+        let drawingWords = "draw " + drawingName.lowercasedWords
+        let methodName = classMethodNames.first { methodName in
+            guard let baseName = methodName.methodNameComponents?.first,
+                baseName.lowercasedWords == drawingWords
+                else { return false }
+            return true
+        }
+        return methodName
+    }
+
 }
