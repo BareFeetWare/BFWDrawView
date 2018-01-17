@@ -1,5 +1,5 @@
 //
-//  DrawNibButton.swift
+//  DrawNibContainerButton.swift
 //
 //  Created by Tom Brodhurst-Hill on 3/03/2016.
 //  Copyright © 2016 BareFeetWare.
@@ -10,13 +10,12 @@ import UIKit
 import BFWControls
 import BFWDrawView
 
-open class DrawNibButton: NibButton {
+open class DrawNibContainerButton: NibContainerButton {
 
     // MARK: - Variables
     
-    // Override in subclass
-    open var buttonView: DrawButtonView? {
-        return nil
+    private var cellView: DrawNibCellView? {
+        return nibView as? DrawNibCellView
     }
     
     @IBInspectable open var iconStyleKit: String? {
@@ -39,23 +38,11 @@ open class DrawNibButton: NibButton {
     
     open var iconView: DrawingView? {
         get {
-            return buttonView?.iconView
+            return cellView?.iconDrawView
         }
         set {
-            buttonView?.iconView = newValue
+            cellView?.iconView = newValue
         }
     }
     
-    // MARK: - NibButton
-    
-    open override var contentView: NibView? {
-        return buttonView
-    }
-    
-    // MARK: - UIButton
-    
-    open override var titleLabel: UILabel? {
-        return buttonView?.titleLabel
-    }
-
 }
