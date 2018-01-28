@@ -14,7 +14,7 @@ extension String {
         let index = self.index(startIndex, offsetBy: 1)
         return substring(to: index).lowercased() + substring(from: index)
     }
-
+    
     var words: [String] {
         return components(separatedBy: CharacterSet.whitespaces).filter { !$0.isEmpty }
     }
@@ -68,11 +68,11 @@ extension String {
                 ? prefix : longest
         }
     }
-
+    
     func words(matching wordsArray: [String]) -> String? {
         return wordsArray.first { self.lowercasedWords == $0.lowercasedWords }
     }
-
+    
     var methodNameComponents: [String]? {
         let withString = "With"
         var parameters: [String]?
@@ -85,8 +85,10 @@ extension String {
                     let firstComponent = withComponents.first!
                     if let drawAndName = firstComponent.substring(beforeSuffix: "Frame"),
                         firstComponent.hasSuffix("InFrame")
-                        || firstComponent.hasSuffix("OnFrame")
-                        || firstComponent.hasSuffix("ToFrame")
+                            || firstComponent.hasSuffix("OnFrame")
+                            || firstComponent.hasSuffix("ToFrame")
+                            || firstComponent.hasSuffix("BeforeFrame")
+                            || firstComponent.hasSuffix("AfterFrame")
                     {
                         withComponents = [drawAndName, "Frame"]
                     } else {
