@@ -15,7 +15,7 @@ open class DrawNibTableViewCell: NibTableViewCell {
 
     // MARK - Variables
     
-    @IBInspectable open var iconName: String? {
+    @IBInspectable open var name: String? {
         get {
             return (cellView as? DrawNibCellView)?.iconDrawView?.name
         }
