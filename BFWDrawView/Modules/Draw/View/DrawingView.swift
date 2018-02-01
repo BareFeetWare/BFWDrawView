@@ -96,12 +96,42 @@ import UIKit
         return drawFrame
     }
     
-    // MARK: - Functions
+    // MARK: - Module
+    
+    static var classNameComponents: [String] {
+        let fullClassName = NSStringFromClass(self) // Note: String(describing: self) does not include the moduleName prefix.
+        return fullClassName.components(separatedBy: ".")
+    }
+    
+    static var moduleName: String? {
+        let components = classNameComponents
+        return components.count > 1
+            ? components.first!
+            : nil
+    }
+    
+    static var isSubclass: Bool {
+        // TODO: Dynamic
+        return moduleName != "BFWDrawView"
+    }
+    
+    static var styleKitNameFromModule: String? {
+        // TODO: More robust getting of the framework name.
+        guard isSubclass,
+            let styleKitName = Bundle(for: self)
+                .bundleIdentifier?
+                .components(separatedBy: ".")
+                .last
+            else { return nil }
+        return styleKitName
+    }
+    
+    // MARK: - Update drawing
     
     fileprivate func updateDrawing() {
         // TODO: Call this only once for each stylekit and drawing name pair change.
-        guard let styleKitName = styleKit,
-            let name = name
+        guard let name = name,
+            let styleKitName = styleKit ?? type(of: self).styleKitNameFromModule
             else { return }
         drawing = StyleKit.drawing(forStyleKitName: styleKitName,
                                    drawingName: name)
@@ -115,7 +145,7 @@ import UIKit
     
     static var imageCache = [String: UIImage]()
     
-    fileprivate  var cacheKey: String {
+    fileprivate var cacheKey: String {
         let components: [String] = [drawing!.name, drawing!.styleKit.name, NSStringFromCGSize(frame.size), tintColor.description]
         let key = components.joined(separator:".")
         return key
