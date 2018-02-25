@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable open class AnimationView: DrawingView {
-
+    
     public enum Curve: Int {
         
         case linear = 0
@@ -60,6 +60,8 @@ import UIKit
     /// Default 0 = infinite cycles (repetitions).
     @IBInspectable open var cycles: Double = 0.0
     
+    @IBInspectable open var cycleDelay: Double = 0.0
+    
     @IBInspectable open var isPaused: Bool {
         get {
             return pausedDate != nil
@@ -78,14 +80,14 @@ import UIKit
                         pausedTimeInterval += morePausedTimeInterval
                     }
                     pausedDate = nil
-                    startTimerIfNeeded()
+                    startAnimationTimerIfNeeded()
                 }
             }
         }
     }
     
     open var framesPerSecond = 30.0
-
+    
     open var curve: Curve = .linear
     
     @IBInspectable open var curve_: Int {
@@ -98,7 +100,7 @@ import UIKit
     }
     
     // MARK: Public diagnostic variables
-
+    
     open var drawnFramesPerSecond: Double {
         var framesPerSecond = 0.0
         if let startDate = startDate {
@@ -116,7 +118,8 @@ import UIKit
     fileprivate var startDate: Date?
     fileprivate var pausedDate: Date?
     fileprivate var pausedTimeInterval: TimeInterval = 0.0
-    fileprivate var finished = false
+    fileprivate var completedCycles: Double = 0
+    fileprivate var isFinished = false
     fileprivate var drawnFrameCount: UInt = 0 // to count actual frames drawn
     
     open var animationBetweenStartAndEnd: CGFloat {
@@ -137,44 +140,67 @@ import UIKit
         pausedDate = nil
         timer?.invalidate()
         timer = nil
-        finished = false
+        isFinished = false
         startDate = nil
-        startTimerIfNeeded()
+        startAnimationTimerIfNeeded()
     }
     
-    fileprivate func startTimerIfNeeded() {
-        if timer == nil && !isPaused && !finished && isAnimation {
+    fileprivate func startAnimationTimerIfNeeded() {
+        if timer == nil && !isPaused && !isFinished && isAnimation {
             if startDate == nil {
                 startDate = Date()
                 drawnFrameCount = 0
+                completedCycles = 0
             }
             timer = Timer.scheduledTimer(timeInterval: 1.0 / Double(framesPerSecond),
                                          target: self,
-                                         selector: #selector(tick(timer:)),
+                                         selector: #selector(animate(timer:)),
                                          userInfo: nil,
                                          repeats: true)
         }
     }
     
-    open func tick(timer: Timer) {
-        let elapsed = Date().timeIntervalSince(startDate!) - pausedTimeInterval
-        let complete = elapsed / duration
-        finished = cycles > 0.0 && complete > cycles
-        if isPaused || finished || superview == nil {
+    fileprivate func startDelayTimer() {
+        timer = Timer.scheduledTimer(timeInterval: cycleDelay,
+                                     target: self,
+                                     selector: #selector(startNextAnimation(timer:)),
+                                     userInfo: nil,
+                                     repeats: false)
+    }
+    
+    open func startNextAnimation(timer: Timer) {
+        self.timer = Timer.scheduledTimer(timeInterval: 1.0 / Double(framesPerSecond),
+                                          target: self,
+                                          selector: #selector(animate(timer:)),
+                                          userInfo: nil,
+                                          repeats: true)
+    }
+    
+    open func animate(timer: Timer) {
+        if isPaused || superview == nil {
             timer.invalidate()
             self.timer = nil
-            if finished {
-                animation = 1.0 // Ensure it draws final frame
-            }
         } else {
-            // Get the fractional part of the current time (ensures 0..1 interval)
-            animation = complete - floor(complete)
+            let animatedTimeInterval = Date().timeIntervalSince(startDate!) - pausedTimeInterval - completedCycles * cycleDelay
+            let completedAnimation = animatedTimeInterval / duration - completedCycles
+            if completedAnimation >= 1.0 {
+                animation = 1.0 // Ensure that it draws the final frame.
+                completedCycles += 1
+                isFinished = cycles > 0.0 && completedCycles >= cycles
+                timer.invalidate()
+                self.timer = nil
+                if !isFinished {
+                    startDelayTimer()
+                }
+            } else {
+                animation = completedAnimation
+            }
         }
     }
     
     open func writeImages(at scale: CGFloat,
-                     isOpaque: Bool,
-                     to fileURL: URL) -> Bool
+                          isOpaque: Bool,
+                          to fileURL: URL) -> Bool
     {
         var success = false
         if isPaused {
@@ -204,7 +230,7 @@ import UIKit
     // MARK: - UIView
     
     open override func draw(_ rect: CGRect) {
-        startTimerIfNeeded()
+        startAnimationTimerIfNeeded()
         drawnFrameCount += 1
         super.draw(rect)
     }
@@ -220,7 +246,7 @@ import UIKit
                 if newValue {
                     timer?.invalidate()
                 } else {
-                    startTimerIfNeeded()
+                    startAnimationTimerIfNeeded()
                 }
             }
         }
@@ -274,5 +300,5 @@ extension AnimationView {
             cFunction(owner, selector, rect, tintColor, animation)
         }
     }
-
+    
 }
