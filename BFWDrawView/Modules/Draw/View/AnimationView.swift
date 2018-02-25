@@ -152,23 +152,19 @@ import UIKit
                 drawnFrameCount = 0
                 completedCycles = 0
             }
-            timer = Timer.scheduledTimer(timeInterval: 1.0 / Double(framesPerSecond),
-                                         target: self,
-                                         selector: #selector(animate(timer:)),
-                                         userInfo: nil,
-                                         repeats: true)
+            startNextAnimation()
         }
     }
     
     fileprivate func startDelayTimer() {
         timer = Timer.scheduledTimer(timeInterval: cycleDelay,
                                      target: self,
-                                     selector: #selector(startNextAnimation(timer:)),
+                                     selector: #selector(startNextAnimation),
                                      userInfo: nil,
                                      repeats: false)
     }
     
-    open func startNextAnimation(timer: Timer) {
+    open func startNextAnimation() {
         self.timer = Timer.scheduledTimer(timeInterval: 1.0 / Double(framesPerSecond),
                                           target: self,
                                           selector: #selector(animate(timer:)),
