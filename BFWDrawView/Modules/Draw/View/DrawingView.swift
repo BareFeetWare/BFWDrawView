@@ -14,6 +14,8 @@ import UIKit
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = UIColor.clear
+        contentMode = .redraw  // forces redraw when view is resized, eg when device is rotated
         commonInit()
     }
     
@@ -24,8 +26,6 @@ import UIKit
     
     /// Called by init(frame:) and init(coder:), after super.init. Implement in subclass if required, and call super.
     open func commonInit() {
-        backgroundColor = UIColor.clear
-        contentMode = .redraw  // forces redraw when view is resized, eg when device is rotated
     }
     
     // MARK: - Variables
