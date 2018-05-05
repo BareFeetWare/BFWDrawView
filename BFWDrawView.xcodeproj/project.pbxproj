@@ -64,6 +64,7 @@
 		E2A91A4E1EA185D500E26C63 /* BFWControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2A91A4D1EA185D500E26C63 /* BFWControls.framework */; };
 		E2B8B43B202F175F00651BAA /* AnimationNibTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B8B43A202F175F00651BAA /* AnimationNibTableViewCell.swift */; };
 		E2E344041F77E62F002A5809 /* DrawingView+Morphable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E344031F77E62F002A5809 /* DrawingView+Morphable.swift */; };
+		E2FADE782099A738004ACDA3 /* DrawingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FADE772099A738004ACDA3 /* DrawingImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +140,7 @@
 		E2A91A4D1EA185D500E26C63 /* BFWControls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BFWControls.framework; path = "../../../../../../../Library/Developer/Xcode/DerivedData/HomeExperience-hdfmwrzdtbpfkpekilanqmmfizih/Build/Products/Debug-iphonesimulator/BFWControls.framework"; sourceTree = "<group>"; };
 		E2B8B43A202F175F00651BAA /* AnimationNibTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationNibTableViewCell.swift; sourceTree = "<group>"; };
 		E2E344031F77E62F002A5809 /* DrawingView+Morphable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawingView+Morphable.swift"; sourceTree = "<group>"; };
+		E2FADE772099A738004ACDA3 /* DrawingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +282,7 @@
 				E286B7F21F17292A00E0F00E /* Drawable.swift */,
 				E26803A11F0E2FBB00CFEB21 /* DrawingBarButtonItem.swift */,
 				E220E4321E9A2830008F6380 /* DrawingButton.swift */,
+				E2FADE772099A738004ACDA3 /* DrawingImageView.swift */,
 				E268039B1F0CD34500CFEB21 /* DrawingTabBarItem.swift */,
 				E219DEDF1F1FDD88000C14F7 /* DrawingTableViewCell.swift */,
 				E220E4341E9A2830008F6380 /* DrawingView.swift */,
@@ -608,6 +611,7 @@
 				E220E45E1E9A2830008F6380 /* ExporterViewController.swift in Sources */,
 				E220E4611E9A2830008F6380 /* ExportersRoot.swift in Sources */,
 				E220E4521E9A2830008F6380 /* StyleKit.swift in Sources */,
+				E2FADE782099A738004ACDA3 /* DrawingImageView.swift in Sources */,
 				E24513601FD8AB5100245E5D /* String+Parts.swift in Sources */,
 				E220E43F1E9A2830008F6380 /* AnimationCountViewController.swift in Sources */,
 				E220E45F1E9A2830008F6380 /* DrawingExport.swift in Sources */,
