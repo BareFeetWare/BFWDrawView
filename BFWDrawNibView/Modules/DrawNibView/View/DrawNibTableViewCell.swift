@@ -15,25 +15,25 @@ open class DrawNibTableViewCell: NibTableViewCell {
 
     // MARK - Variables
     
-    open var drawingView: DrawingView? {
-        return (cellView as? DrawNibCellView)?.iconDrawView
+    open var drawingImageView: DrawingImageView? {
+        return imageView as? DrawingImageView
     }
 
     @IBInspectable open var name: String? {
         get {
-            return (cellView as? DrawNibCellView)?.iconDrawView?.name
+            return drawingImageView?.name
         }
         set {
-            (cellView as? DrawNibCellView)?.iconDrawView?.name = newValue
+            drawingImageView?.name = newValue
         }
     }
     
     @IBInspectable open var styleKit: String? {
         get {
-            return (cellView as? DrawNibCellView)?.iconDrawView?.styleKit
+            return drawingImageView?.styleKit
         }
         set {
-            (cellView as? DrawNibCellView)?.iconDrawView?.styleKit = newValue
+            drawingImageView?.styleKit = newValue
         }
     }
 

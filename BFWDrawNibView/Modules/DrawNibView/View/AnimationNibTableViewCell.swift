@@ -12,8 +12,12 @@ import BFWDrawView
 
 @IBDesignable open class AnimationNibTableViewCell: DrawNibTableViewCell {
 
+    // TODO: Migrate to DrawingImageView
+    
+    @IBOutlet open var iconView: DrawingView?
+
     open var animationView: AnimationView? {
-        return drawingView as? AnimationView
+        return iconView as? AnimationView
     }
     
     @IBInspectable open var animation: Double {
