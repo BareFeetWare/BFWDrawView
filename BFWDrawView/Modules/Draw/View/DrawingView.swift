@@ -274,7 +274,7 @@ extension DrawingView {
         ]
     }
     
-    var handledParametersArray: [[String]] {
+    @objc var handledParametersArray: [[String]] {
         return [[], ["frame"], ["frame", "tintColor"]]
     }
 
@@ -284,7 +284,7 @@ extension DrawingView {
         })
     }
     
-    func draw(parameters: [String]) -> Bool {
+    @objc func draw(parameters: [String]) -> Bool {
         guard let drawingSelector = drawingSelector,
             let styleKitClass = styleKitClass
             else { return false }
