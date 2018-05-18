@@ -186,6 +186,7 @@ import UIKit
         if !FileManager.default.fileExists(atPath: directoryPath) {
             do {
                 try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
+                success = true
             } catch {
                 success = false
             }
