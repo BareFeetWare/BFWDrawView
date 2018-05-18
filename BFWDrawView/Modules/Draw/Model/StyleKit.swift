@@ -206,8 +206,10 @@ open class StyleKit: NSObject {
     fileprivate var drawingForNameDict = [String: Drawing]()
     
     fileprivate func drawingName(forMethodName methodName: String) -> String? {
-        return methodName.methodNameComponents?
-            .first?.substring(from: Drawing.FileName.drawPrefix.endIndex).lowercasedFirstCharacter
+        guard let firstComponent = methodName.methodNameComponents?.first
+            else { return nil }
+        return String(firstComponent[Drawing.FileName.drawPrefix.endIndex...])
+            .lowercasedFirstCharacter
     }
     
     internal func classMethodName(forDrawingName drawingName: String) -> String? {

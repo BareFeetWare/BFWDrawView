@@ -164,7 +164,7 @@ import UIKit
                                      repeats: false)
     }
     
-    open func startNextAnimation() {
+    @objc open func startNextAnimation() {
         self.timer = Timer.scheduledTimer(timeInterval: 1.0 / Double(framesPerSecond),
                                           target: self,
                                           selector: #selector(animate(timer:)),
@@ -172,7 +172,7 @@ import UIKit
                                           repeats: true)
     }
     
-    open func animate(timer: Timer) {
+    @objc open func animate(timer: Timer) {
         if isPaused || superview == nil {
             timer.invalidate()
             self.timer = nil

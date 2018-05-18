@@ -275,7 +275,7 @@ class DrawingExport {
                        duration: duration,
                        framesPerSecond: framesPerSecond)
         if isAndroid {
-            let styleKits = colorsStyleKitNames.flatMap { styleKitName in
+            let styleKits = colorsStyleKitNames.compactMap { styleKitName in
                 return StyleKit.styleKit(for: styleKitName)
             }
             let colorsXmlString = colorsXml(for: styleKits)

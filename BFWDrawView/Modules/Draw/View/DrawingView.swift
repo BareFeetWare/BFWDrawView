@@ -274,7 +274,7 @@ extension DrawingView {
         ]
     }
     
-    var handledParametersArray: [[String]] {
+    @objc var handledParametersArray: [[String]] {
         return [[], ["frame"], ["frame", "tintColor"]]
     }
 
@@ -284,7 +284,7 @@ extension DrawingView {
         })
     }
     
-    func draw(parameters: [String]) -> Bool {
+    @objc func draw(parameters: [String]) -> Bool {
         guard let drawingSelector = drawingSelector,
             let styleKitClass = styleKitClass
             else { return false }
@@ -313,17 +313,12 @@ extension DrawingView {
     
     func implementation(for owner: AnyObject, selector: Selector) -> IMP? {
         let method: Method?
-        if owner is AnyClass {
-            method = class_getClassMethod(owner as! AnyClass, selector)
+        if let ownerClass = owner as? AnyClass {
+            method = class_getClassMethod(ownerClass, selector)
         } else {
             method = class_getInstanceMethod(type(of: owner), selector)
         }
-        guard method != nil
-            else {
-                debugPrint("Failed to get implementation for selector " + selector.description)
-                return nil
-        }
-        return method_getImplementation(method)
+        return method_getImplementation(method!)
     }
     
     func imageFunction(from owner: AnyObject, selector: Selector) -> ((Bool) -> UIImage)? {
