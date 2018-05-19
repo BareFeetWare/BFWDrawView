@@ -12,7 +12,7 @@ extension String {
     
     var lowercasedFirstCharacter: String {
         let index = self.index(startIndex, offsetBy: 1)
-        return substring(to: index).lowercased() + substring(from: index)
+        return String(self[..<index]).lowercased() + String(self[index...])
     }
     
     var words: [String] {
