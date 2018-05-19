@@ -13,8 +13,8 @@ import Foundation
 extension UIColor {
     
     func hex(fromFraction fraction: CGFloat) -> String {
-        let valueInt = round(fraction * 255.0)
-        let hexString = String(format: "%02lx", valueInt)
+        let decimalInt = Int(round(fraction * 255.0))
+        let hexString = String(format: "%02lx", decimalInt)
         return hexString
     }
     

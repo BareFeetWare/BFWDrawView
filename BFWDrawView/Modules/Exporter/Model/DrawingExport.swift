@@ -228,11 +228,14 @@ class DrawingExport {
             if let animationView = drawingView as? AnimationView {
                 if duration > 0 {
                     animationView.duration = duration
+                    animationView.framesPerSecond = framesPerSecond
+                    success = animationView.writeImages(at: scale,
+                                                        isOpaque: isOpaque,
+                                                        to: fileUrl)
+                } else {
+                    // Skip because duration = 0 means no export of the animation.
+                    success = true
                 }
-                animationView.framesPerSecond = framesPerSecond
-                success = animationView.writeImages(at: scale,
-                                                    isOpaque: isOpaque,
-                                                    to: fileUrl)
             } else {
                 success = drawingView.writeImage(at: scale,
                                                  isOpaque: isOpaque,

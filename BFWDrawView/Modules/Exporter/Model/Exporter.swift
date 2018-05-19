@@ -131,7 +131,9 @@ class Exporter {
             colorsStyleKitNames: colorsStyleKitNames ?? StyleKit.styleKitNames,
             pathScaleDict: pathScaleDict,
             tintColor: UIColor.black, // TODO: get color from UI
-            duration: duration ?? 0.0,
+            duration: includeAnimations ?? false
+                ? duration ?? 0.0
+                : 0.0,
             framesPerSecond: framesPerSecond ?? 0.0
         )
     }
