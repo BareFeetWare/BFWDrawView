@@ -54,6 +54,10 @@ open class DrawingImageView: UIImageView {
     
     // MARK: - UIView
     
+    open override var intrinsicContentSize: CGSize {
+        return drawing?.drawnSize ?? super.intrinsicContentSize
+    }
+    
     open override func tintColorDidChange() {
         super.tintColorDidChange()
         setNeedsUpdateImage()
