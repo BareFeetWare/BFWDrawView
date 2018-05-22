@@ -131,7 +131,8 @@ import UIKit
     fileprivate func updateDrawing() {
         // TODO: Call this only once for each stylekit and drawing name pair change.
         guard let name = name,
-            let styleKitName = styleKit ?? type(of: self).styleKitNameFromModule
+            let styleKitName = styleKit
+            // TODO: If the view exists in a subclass of the stylekit, perhaps default to: ?? type(of: self).styleKitNameFromModule
             else { return }
         drawing = StyleKit.drawing(forStyleKitName: styleKitName,
                                    drawingName: name)
