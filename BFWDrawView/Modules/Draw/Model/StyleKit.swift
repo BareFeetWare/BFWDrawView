@@ -59,13 +59,13 @@ open class StyleKit: NSObject {
     
     fileprivate static var styleKitForNameDict = [String: StyleKit]()
     
-    open static var styleKitNames: [String] = {
+    public static var styleKitNames: [String] = {
         let styleKitClasses = NSObject.classes(implementingProtocol: StyleKitType.self)
         let names = styleKitClasses.map(NSStringFromClass)
         return names
     }()
 
-    open static func styleKit(for name: String) -> StyleKit? {
+    public static func styleKit(for name: String) -> StyleKit? {
         let className: String?
         let components = name.components(separatedBy: ".")
         switch components.count {
@@ -91,7 +91,7 @@ open class StyleKit: NSObject {
         return styleKit
     }
 
-    open static func drawing(forStyleKitName styleKitName: String,
+    public static func drawing(forStyleKitName styleKitName: String,
                              drawingName: String) -> Drawing?
     {
         return styleKit(for: styleKitName)?.drawing(for: drawingName)
