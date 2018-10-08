@@ -147,7 +147,7 @@ import UIKit
     static var imageCache = [String: UIImage]()
     
     fileprivate var cacheKey: String {
-        let components: [String] = [drawing!.name, drawing!.styleKit.name, NSStringFromCGSize(frame.size), tintColor.description]
+        let components: [String] = [drawing!.name, drawing!.styleKit.name, NSCoder.string(for: frame.size), tintColor.description]
         let key = components.joined(separator:".")
         return key
     }
@@ -196,7 +196,7 @@ import UIKit
         }
         if success, let image = image(at: scale, isOpaque: isOpaque) {
             do {
-                try UIImagePNGRepresentation(image)?.write(to: file, options: Data.WritingOptions.atomic)
+                try image.pngData()?.write(to: file, options: Data.WritingOptions.atomic)
                 success = true
             } catch {
                 success = false
@@ -226,7 +226,7 @@ import UIKit
     // MARK: - UIView
     
     open override var intrinsicContentSize: CGSize {
-        return drawing?.drawnSize ?? CGSize(width: UIViewNoIntrinsicMetric, height: UIViewNoIntrinsicMetric)
+        return drawing?.drawnSize ?? CGSize(width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric)
     }
     
     open override var tintColor: UIColor! {

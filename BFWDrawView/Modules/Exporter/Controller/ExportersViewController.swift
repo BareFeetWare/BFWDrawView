@@ -104,8 +104,8 @@ class ExportersViewController: UITableViewController {
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        var style: UITableViewCellEditingStyle = .none
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        var style: UITableViewCell.EditingStyle = .none
         if let section = Section(rawValue: indexPath.section) {
             switch section {
             case .exporter:
@@ -119,7 +119,7 @@ class ExportersViewController: UITableViewController {
     
     override func tableView(
         _ tableView: UITableView,
-        commit editingStyle: UITableViewCellEditingStyle,
+        commit editingStyle: UITableViewCell.EditingStyle,
         forRowAt indexPath: IndexPath)
     {
         if editingStyle == .delete {

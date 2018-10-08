@@ -540,7 +540,7 @@
 				TargetAttributes = {
 					E220E4061E9A2748008F6380 = {
 						CreatedOnToolsVersion = 8.3.1;
-						LastSwiftMigration = 0930;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 					E220E4651E9A29DA008F6380 = {
@@ -549,7 +549,7 @@
 					};
 					E2A91A331EA1850F00E26C63 = {
 						CreatedOnToolsVersion = 8.3.1;
-						LastSwiftMigration = 0930;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -810,7 +810,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.barefeetware.BFWDrawView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -829,7 +829,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.barefeetware.BFWDrawView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -874,7 +874,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -894,7 +894,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.barefeetware.BFWDrawNibView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

@@ -76,7 +76,7 @@ class DrawingExport {
             drawingView.tintColor = styleKit.color(for: tintColorString)
         }
         if let sizeString = derivedDict[Key.size.rawValue] as? String {
-            let size = CGSizeFromString(sizeString)
+            let size = NSCoder.cgSize(for: sizeString)
             if size != .zero {
                 drawingView.frame = CGRect(origin: .zero, size: size)
             }

@@ -49,30 +49,30 @@ import UIKit
     
     // MARK: - Accessors for state
     
-    open func iconDrawView(for state: UIControlState) -> DrawingView? {
+    open func iconDrawView(for state: UIControl.State) -> DrawingView? {
         return iconDrawViewForStateDict[state.rawValue]
     }
     
-    open func backgroundDrawView(for state: UIControlState) -> DrawingView? {
+    open func backgroundDrawView(for state: UIControl.State) -> DrawingView? {
         return backgroundDrawViewForStateDict[state.rawValue]
     }
     
-    open func setIconDrawView(_ drawingView: DrawingView?, for state: UIControlState) {
+    open func setIconDrawView(_ drawingView: DrawingView?, for state: UIControl.State) {
         iconDrawViewForStateDict.setValueOrRemoveNil(drawingView,
                                                      forKey: state.rawValue)
         setImage(drawingView?.image, for: state)
     }
     
-    open func setBackgroundDrawView(_ drawingView: DrawingView?, for state: UIControlState) {
+    open func setBackgroundDrawView(_ drawingView: DrawingView?, for state: UIControl.State) {
         backgroundDrawViewForStateDict.setValueOrRemoveNil((drawingView?.canDraw ?? false) ? drawingView : nil,
                                                            forKey: state.rawValue)
     }
     
-    open func shadow(for state: UIControlState) -> NSShadow? {
+    open func shadow(for state: UIControl.State) -> NSShadow? {
         return shadowForStateDict[state.rawValue]
     }
     
-    open func setShadow(_ shadow: NSShadow?, for state: UIControlState) {
+    open func setShadow(_ shadow: NSShadow?, for state: UIControl.State) {
         shadowForStateDict.setValueOrRemoveNil(shadow, forKey: state.rawValue)
         setNeedsUpdateShadow()
     }
@@ -94,7 +94,7 @@ import UIKit
     // MARK: - Updates
     
     fileprivate func updateBackgrounds() {
-        for state: UIControlState in [.normal, .disabled, .selected, .highlighted] {
+        for state: UIControl.State in [.normal, .disabled, .selected, .highlighted] {
             let background = backgroundDrawViewForStateDict[state.rawValue]
             background?.frame = bounds
             setBackgroundImage(background?.image, for: state)
@@ -152,7 +152,7 @@ import UIKit
     
     open func makeIcon(name: String,
                        styleKit: String,
-                       state: UIControlState,
+                       state: UIControl.State,
                        tintColor: UIColor,
                        size: CGSize?)
     {
@@ -188,7 +188,7 @@ import UIKit
                 icon.drawing = drawing
                 icon.tintColor = tintColor
                 icon.contentMode = .redraw
-                setIconDrawView(icon, for: UIControlState(rawValue: stateInt))
+                setIconDrawView(icon, for: UIControl.State(rawValue: stateInt))
             }
         }
     }
@@ -203,7 +203,7 @@ import UIKit
                                                   drawingName: drawingName)
             background.contentMode = .redraw
             setBackgroundDrawView(background,
-                                  for: UIControlState(rawValue: stateInt))
+                                  for: UIControl.State(rawValue: stateInt))
         }
     }
     
@@ -220,7 +220,7 @@ import UIKit
         if let iconName = iconName,
             let iconStyleKit = iconStyleKit
         {
-            makeIconDrawViews(from: [UIControlState.normal.rawValue: iconName],
+            makeIconDrawViews(from: [UIControl.State.normal.rawValue: iconName],
                               styleKit: iconStyleKit)
         }
     }

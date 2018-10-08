@@ -64,7 +64,7 @@ open class Drawing {
         } else {
             sizeString = nil
         }
-        return sizeString.flatMap { CGSizeFromString($0) }
+        return sizeString.flatMap { NSCoder.cgSize(for: $0) }
     }()
 
     var intrinsicFrame: CGRect? {
