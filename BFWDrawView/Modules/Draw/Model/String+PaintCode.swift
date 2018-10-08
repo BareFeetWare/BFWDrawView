@@ -81,18 +81,20 @@ extension String {
             if var withComponents = parameterComponents.first?.components(separatedBy: withString)
             {
                 // TODO: Dynamic, less magic:
+                // Usually, a drawing <name> created in PaintCode will create a function draw<name>WithFrame, but if the <name> ends in a preposition, like `In`, `On`, `To`, then the `With` will be dropped. That makes it difficult to parse. We have to look for those specific prepositions.
                 if withComponents.count == 1 {
                     let firstComponent = withComponents.first!
                     if let drawAndName = firstComponent.substring(beforeSuffix: "Frame"),
                         firstComponent.hasSuffix("InFrame")
+                            || firstComponent.hasSuffix("AfterFrame")
+                            || firstComponent.hasSuffix("AsFrame")
+                            || firstComponent.hasSuffix("BeforeFrame")
                             || firstComponent.hasSuffix("OnFrame")
                             || firstComponent.hasSuffix("ToFrame")
-                            || firstComponent.hasSuffix("BeforeFrame")
-                            || firstComponent.hasSuffix("AfterFrame")
                     {
                         withComponents = [drawAndName, "Frame"]
                     } else {
-                        fatalError("Can't parse \"\(self)\"")
+                        fatalError("Can't parse the function name `\(self)` to determine the drawing name")
                     }
                 }
                 let methodBaseName = withComponents.dropLast().joined(separator: withString)
