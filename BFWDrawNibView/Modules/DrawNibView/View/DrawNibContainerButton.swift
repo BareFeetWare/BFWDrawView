@@ -10,6 +10,7 @@ import UIKit
 import BFWControls
 import BFWDrawView
 
+@available(*, deprecated, message: "Use DrawNibButton instead.")
 open class DrawNibContainerButton: NibContainerButton {
 
     // MARK: - Variables

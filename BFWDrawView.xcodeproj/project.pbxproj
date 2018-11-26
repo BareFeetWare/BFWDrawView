@@ -59,6 +59,7 @@
 		E2775FC01EAC7DC200A48A23 /* SampleStyleKit+StyleKitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2775FBF1EAC7DC200A48A23 /* SampleStyleKit+StyleKitType.swift */; };
 		E2775FC21EAC7DDB00A48A23 /* StyleKitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2775FC11EAC7DDB00A48A23 /* StyleKitType.swift */; };
 		E286B7F31F17292A00E0F00E /* Drawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E286B7F21F17292A00E0F00E /* Drawable.swift */; };
+		E2A55E7C21AAB41500812DC6 /* DrawNibButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A55E7B21AAB41500812DC6 /* DrawNibButton.swift */; };
 		E2A91A381EA1850F00E26C63 /* BFWDrawNibView.h in Headers */ = {isa = PBXBuildFile; fileRef = E2A91A361EA1850F00E26C63 /* BFWDrawNibView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2A91A4B1EA185D400E26C63 /* BFWDrawView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E220E4071E9A2748008F6380 /* BFWDrawView.framework */; };
 		E2A91A4E1EA185D500E26C63 /* BFWControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2A91A4D1EA185D500E26C63 /* BFWControls.framework */; };
@@ -133,6 +134,7 @@
 		E2775FBF1EAC7DC200A48A23 /* SampleStyleKit+StyleKitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SampleStyleKit+StyleKitType.swift"; sourceTree = "<group>"; };
 		E2775FC11EAC7DDB00A48A23 /* StyleKitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKitType.swift; sourceTree = "<group>"; };
 		E286B7F21F17292A00E0F00E /* Drawable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawable.swift; sourceTree = "<group>"; };
+		E2A55E7B21AAB41500812DC6 /* DrawNibButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawNibButton.swift; sourceTree = "<group>"; };
 		E2A91A341EA1850F00E26C63 /* BFWDrawNibView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BFWDrawNibView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2A91A361EA1850F00E26C63 /* BFWDrawNibView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFWDrawNibView.h; sourceTree = "<group>"; };
 		E2A91A371EA1850F00E26C63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -433,6 +435,7 @@
 			children = (
 				E2B8B43A202F175F00651BAA /* AnimationNibTableViewCell.swift */,
 				E2E344031F77E62F002A5809 /* DrawingView+Morphable.swift */,
+				E2A55E7B21AAB41500812DC6 /* DrawNibButton.swift */,
 				E211E8631EA18AC20072202F /* DrawNibCellView.swift */,
 				E211E8621EA18AC20072202F /* DrawNibContainerButton.swift */,
 				E21341CF201F46C400F43F18 /* DrawNibTableViewCell.swift */,
@@ -666,6 +669,7 @@
 				E2E344041F77E62F002A5809 /* DrawingView+Morphable.swift in Sources */,
 				E211E8651EA18AC20072202F /* DrawNibContainerButton.swift in Sources */,
 				E21341D0201F46C400F43F18 /* DrawNibTableViewCell.swift in Sources */,
+				E2A55E7C21AAB41500812DC6 /* DrawNibButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
