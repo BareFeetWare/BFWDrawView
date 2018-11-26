@@ -11,6 +11,8 @@ import UIKit
 import BFWControls
 import BFWDrawView
 
+// TODO: Facilitate different drawing images for each state.
+
 open class DrawNibButton: NibButton {
     
     open var drawingImageView: DrawingImageView? {
